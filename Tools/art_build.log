@@ -1,0 +1,373 @@
+Checkpoint: PixelartSpritesheet_V.1.ckpt
+
+51 mục trong catalog
+
+[1/51] hero_ember_knight (character, 512×512)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/character/hero_ember_knight_v1.png
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/character/hero_ember_knight_v2.png
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/character/hero_ember_knight_v3.png
+[2/51] hero_shadow_fang (character, 512×512)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/character/hero_shadow_fang_v1.png
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/character/hero_shadow_fang_v2.png
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/character/hero_shadow_fang_v3.png
+[3/51] hero_frost_sage (character, 512×512)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/character/hero_frost_sage_v1.png
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/character/hero_frost_sage_v2.png
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/character/hero_frost_sage_v3.png
+[4/51] hero_dawn_cleric (character, 512×512)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/character/hero_dawn_cleric_v1.png
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/character/hero_dawn_cleric_v2.png
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/character/hero_dawn_cleric_v3.png
+[5/51] hero_gale_thief (character, 512×512)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/character/hero_gale_thief_v1.png
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/character/hero_gale_thief_v2.png
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/character/hero_gale_thief_v3.png
+[6/51] hero_bone_caller (character, 512×512)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/character/hero_bone_caller_v1.png
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/character/hero_bone_caller_v2.png
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/character/hero_bone_caller_v3.png
+[7/51] enemy_goblin (monster, 512×512)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/monster/enemy_goblin_v1.png
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/monster/enemy_goblin_v2.png
+[8/51] enemy_goblin_archer (monster, 512×512)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/monster/enemy_goblin_archer_v1.png
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/monster/enemy_goblin_archer_v2.png
+[9/51] enemy_goblin_shaman (monster, 512×512)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/monster/enemy_goblin_shaman_v1.png
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/monster/enemy_goblin_shaman_v2.png
+[10/51] enemy_slime (monster, 512×512)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/monster/enemy_slime_v1.png
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/monster/enemy_slime_v2.png
+[11/51] enemy_wolf (monster, 512×512)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/monster/enemy_wolf_v1.png
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/monster/enemy_wolf_v2.png
+[12/51] enemy_bat (monster, 512×512)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/monster/enemy_bat_v1.png
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/monster/enemy_bat_v2.png
+[13/51] enemy_ogre_brute (monster, 512×512)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/monster/enemy_ogre_brute_v1.png
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/monster/enemy_ogre_brute_v2.png
+[14/51] enemy_skeleton (monster, 512×512)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/monster/enemy_skeleton_v1.png
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/monster/enemy_skeleton_v2.png
+[15/51] enemy_bomb_slime (monster, 512×512)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/monster/enemy_bomb_slime_v1.png
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/monster/enemy_bomb_slime_v2.png
+[16/51] enemy_shield_bearer (monster, 512×512)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/monster/enemy_shield_bearer_v1.png
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/monster/enemy_shield_bearer_v2.png
+[17/51] boss_alpha_wolf (boss, 640×640)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/boss/boss_alpha_wolf_v1.png
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/boss/boss_alpha_wolf_v2.png
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/boss/boss_alpha_wolf_v3.png
+[18/51] boss_goblin_king (boss, 640×640)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/boss/boss_goblin_king_v1.png
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/boss/boss_goblin_king_v2.png
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/boss/boss_goblin_king_v3.png
+[19/51] boss_lich (boss, 640×640)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/boss/boss_lich_v1.png
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/boss/boss_lich_v2.png
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/boss/boss_lich_v3.png
+[20/51] boss_magma_drake (boss, 640×640)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/boss/boss_magma_drake_v1.png
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/boss/boss_magma_drake_v2.png
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/boss/boss_magma_drake_v3.png
+[21/51] bg_meadow_far (background, 1024×512)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/background/bg_meadow_far.png
+[22/51] bg_meadow_mid (background, 1024×512)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/background/bg_meadow_mid.png
+[23/51] bg_meadow_near (background, 1024×512)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/background/bg_meadow_near.png
+[24/51] bg_swamp_far (background, 1024×512)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/background/bg_swamp_far.png
+[25/51] bg_swamp_mid (background, 1024×512)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/background/bg_swamp_mid.png
+[26/51] bg_crypt_far (background, 1024×512)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/background/bg_crypt_far.png
+[27/51] bg_volcano_far (background, 1024×512)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/background/bg_volcano_far.png
+[28/51] vfx_fire_burst (vfx, 512×512)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/vfx/vfx_fire_burst.png
+[29/51] vfx_ice_shatter (vfx, 512×512)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/vfx/vfx_ice_shatter.png
+[30/51] vfx_lightning (vfx, 512×512)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/vfx/vfx_lightning.png
+[31/51] vfx_slash_arc (vfx, 512×512)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/vfx/vfx_slash_arc.png
+[32/51] vfx_heal_sparkle (vfx, 512×512)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/vfx/vfx_heal_sparkle.png
+[33/51] vfx_dark_void (vfx, 512×512)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/vfx/vfx_dark_void.png
+[34/51] vfx_shield_barrier (vfx, 512×512)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/vfx/vfx_shield_barrier.png
+[35/51] vfx_poison_cloud (vfx, 512×512)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/vfx/vfx_poison_cloud.png
+[36/51] vfx_break_shatter (vfx, 512×512)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/vfx/vfx_break_shatter.png
+[37/51] vfx_earth_spike (vfx, 512×512)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/vfx/vfx_earth_spike.png
+[38/51] tile_grass (tile, 512×512)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/tile/tile_grass.png
+[39/51] tile_stone (tile, 512×512)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/tile/tile_stone.png
+[40/51] tile_dirt (tile, 512×512)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/tile/tile_dirt.png
+[41/51] tile_swamp (tile, 512×512)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/tile/tile_swamp.png
+[42/51] tile_lava_rock (tile, 512×512)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/tile/tile_lava_rock.png
+[43/51] tile_void (tile, 512×512)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/tile/tile_void.png
+[44/51] prop_potion_red (prop, 256×256)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/prop/prop_potion_red.png
+[45/51] prop_potion_blue (prop, 256×256)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/prop/prop_potion_blue.png
+[46/51] prop_sword (prop, 256×256)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/prop/prop_sword.png
+[47/51] prop_shield (prop, 256×256)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/prop/prop_shield.png
+[48/51] prop_chest (prop, 256×256)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/prop/prop_chest.png
+[49/51] prop_gem (prop, 256×256)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/prop/prop_gem.png
+[50/51] prop_coin (prop, 256×256)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/prop/prop_coin.png
+[51/51] prop_feather (prop, 256×256)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/prop/prop_feather.png
+
+Xong. Bước tiếp theo:
+  python3 post_process.py --in /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/ --out clean/ --key magenta
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Heroes/hero_bone_caller
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Heroes/hero_bone_caller
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Heroes/hero_bone_caller
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Heroes/hero_dawn_cleric
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Heroes/hero_dawn_cleric
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Heroes/hero_dawn_cleric
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Heroes/hero_ember_knight
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Heroes/hero_ember_knight
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Heroes/hero_ember_knight
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Heroes/hero_frost_sage
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Heroes/hero_frost_sage
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Heroes/hero_frost_sage
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Heroes/hero_gale_thief
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Heroes/hero_gale_thief
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Heroes/hero_gale_thief
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Heroes/hero_shadow_fang
+
+=== 1/3 SINH bằng ComfyUI ===
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/comfy_gen.py --catalog /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/art_catalog.json --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw
+
+=== 2/3 HẬU XỬ LÝ bằng Pillow ===
+
+-- character: 18 ảnh gốc → Assets/_Project/Art/Characters/Heroes
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/character/hero_bone_caller_v1.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Heroes/hero_bone_caller --target-height 30 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/character/hero_bone_caller_v2.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Heroes/hero_bone_caller --target-height 30 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/character/hero_bone_caller_v3.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Heroes/hero_bone_caller --target-height 30 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/character/hero_dawn_cleric_v1.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Heroes/hero_dawn_cleric --target-height 30 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/character/hero_dawn_cleric_v2.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Heroes/hero_dawn_cleric --target-height 30 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/character/hero_dawn_cleric_v3.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Heroes/hero_dawn_cleric --target-height 30 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/character/hero_ember_knight_v1.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Heroes/hero_ember_knight --target-height 30 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/character/hero_ember_knight_v2.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Heroes/hero_ember_knight --target-height 30 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/character/hero_ember_knight_v3.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Heroes/hero_ember_knight --target-height 30 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/character/hero_frost_sage_v1.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Heroes/hero_frost_sage --target-height 30 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/character/hero_frost_sage_v2.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Heroes/hero_frost_sage --target-height 30 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/character/hero_frost_sage_v3.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Heroes/hero_frost_sage --target-height 30 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/character/hero_gale_thief_v1.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Heroes/hero_gale_thief --target-height 30 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/character/hero_gale_thief_v2.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Heroes/hero_gale_thief --target-height 30 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/character/hero_gale_thief_v3.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Heroes/hero_gale_thief --target-height 30 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/character/hero_shadow_fang_v1.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Heroes/hero_shadow_fang --target-height 30 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/character/hero_shadow_fang_v2.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Heroes/hero_shadow_fang --target-height 30 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Heroes/hero_shadow_fang
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Heroes/hero_shadow_fang
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Enemies/enemy_bat
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Enemies/enemy_bat
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Enemies/enemy_bomb_slime
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Enemies/enemy_bomb_slime
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Enemies/enemy_goblin_archer
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Enemies/enemy_goblin_archer
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Enemies/enemy_goblin_shaman
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Enemies/enemy_goblin_shaman
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Enemies/enemy_goblin
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Enemies/enemy_goblin
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Enemies/enemy_ogre_brute
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Enemies/enemy_ogre_brute
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Enemies/enemy_shield_bearer
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Enemies/enemy_shield_bearer
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Enemies/enemy_skeleton
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Enemies/enemy_skeleton
+
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/character/hero_shadow_fang_v3.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Heroes/hero_shadow_fang --target-height 30 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+
+-- monster: 20 ảnh gốc → Assets/_Project/Art/Characters/Enemies
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/monster/enemy_bat_v1.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Enemies/enemy_bat --target-height 30 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/monster/enemy_bat_v2.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Enemies/enemy_bat --target-height 30 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/monster/enemy_bomb_slime_v1.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Enemies/enemy_bomb_slime --target-height 30 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/monster/enemy_bomb_slime_v2.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Enemies/enemy_bomb_slime --target-height 30 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/monster/enemy_goblin_archer_v1.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Enemies/enemy_goblin_archer --target-height 30 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/monster/enemy_goblin_archer_v2.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Enemies/enemy_goblin_archer --target-height 30 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/monster/enemy_goblin_shaman_v1.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Enemies/enemy_goblin_shaman --target-height 30 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/monster/enemy_goblin_shaman_v2.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Enemies/enemy_goblin_shaman --target-height 30 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/monster/enemy_goblin_v1.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Enemies/enemy_goblin --target-height 30 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/monster/enemy_goblin_v2.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Enemies/enemy_goblin --target-height 30 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/monster/enemy_ogre_brute_v1.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Enemies/enemy_ogre_brute --target-height 30 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/monster/enemy_ogre_brute_v2.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Enemies/enemy_ogre_brute --target-height 30 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/monster/enemy_shield_bearer_v1.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Enemies/enemy_shield_bearer --target-height 30 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/monster/enemy_shield_bearer_v2.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Enemies/enemy_shield_bearer --target-height 30 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/monster/enemy_skeleton_v1.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Enemies/enemy_skeleton --target-height 30 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/monster/enemy_skeleton_v2.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Enemies/enemy_skeleton --target-height 30 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/monster/enemy_slime_v1.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Enemies/enemy_slime --target-height 30 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Enemies/enemy_slime
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Enemies/enemy_slime
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Enemies/enemy_wolf
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Enemies/enemy_wolf
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Bosses/boss_alpha_wolf
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Bosses/boss_alpha_wolf
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Bosses/boss_alpha_wolf
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Bosses/boss_goblin_king
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Bosses/boss_goblin_king
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Bosses/boss_goblin_king
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Bosses/boss_lich
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Bosses/boss_lich
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Bosses/boss_lich
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Bosses/boss_magma_drake
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Bosses/boss_magma_drake
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Bosses/boss_magma_drake
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/VFX/vfx_break_shatter
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/VFX/vfx_dark
+
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/monster/enemy_slime_v2.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Enemies/enemy_slime --target-height 30 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/monster/enemy_wolf_v1.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Enemies/enemy_wolf --target-height 30 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/monster/enemy_wolf_v2.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Enemies/enemy_wolf --target-height 30 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+
+-- boss: 12 ảnh gốc → Assets/_Project/Art/Characters/Bosses
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/boss/boss_alpha_wolf_v1.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Bosses/boss_alpha_wolf --target-height 60 --canvas 64 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/boss/boss_alpha_wolf_v2.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Bosses/boss_alpha_wolf --target-height 60 --canvas 64 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/boss/boss_alpha_wolf_v3.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Bosses/boss_alpha_wolf --target-height 60 --canvas 64 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/boss/boss_goblin_king_v1.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Bosses/boss_goblin_king --target-height 60 --canvas 64 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/boss/boss_goblin_king_v2.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Bosses/boss_goblin_king --target-height 60 --canvas 64 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/boss/boss_goblin_king_v3.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Bosses/boss_goblin_king --target-height 60 --canvas 64 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/boss/boss_lich_v1.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Bosses/boss_lich --target-height 60 --canvas 64 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/boss/boss_lich_v2.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Bosses/boss_lich --target-height 60 --canvas 64 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/boss/boss_lich_v3.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Bosses/boss_lich --target-height 60 --canvas 64 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/boss/boss_magma_drake_v1.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Bosses/boss_magma_drake --target-height 60 --canvas 64 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/boss/boss_magma_drake_v2.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Bosses/boss_magma_drake --target-height 60 --canvas 64 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/boss/boss_magma_drake_v3.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Characters/Bosses/boss_magma_drake --target-height 60 --canvas 64 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+
+-- vfx: 10 ảnh gốc → Assets/_Project/Art/VFX
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/vfx/vfx_break_shatter.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/VFX/vfx_break_shatter --target-height 60 --canvas 64 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/vfx/vfx_dark_void.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/VFX/vfx_dark --target-height 60 --canvas 64 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/vfx/vfx_earth_spike.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/VFX/vfx_earth_spike --target-height 60 --canvas 64 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/VFX/vfx_earth_spike
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/VFX/vfx_fire_burst
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/VFX/vfx_heal_sparkle
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/VFX/vfx_ice_shatter
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/VFX/vfx_lightning
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/VFX/vfx_poison_cloud
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/VFX/vfx_shield_barrier
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/VFX/vfx_slash_arc
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Icons/Items/prop_chest
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Icons/Items/prop_coin
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Icons/Items/prop_feather
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Icons/Items/prop_gem
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Icons/Items/prop_potion_blue
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Icons/Items/prop_potion_red
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Icons/Items/prop_shield
+✓ Cắt 4/4 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Icons/Items/prop_sword
+✓ Cắt 1/1 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Environment/Tilesets/tile_dirt
+✓ Cắt 1/1 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Environment/Tilesets/tile_grass
+✓ Cắt 1/1 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Environment/Tilesets/tile_lava_rock
+
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/vfx/vfx_fire_burst.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/VFX/vfx_fire_burst --target-height 60 --canvas 64 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/vfx/vfx_heal_sparkle.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/VFX/vfx_heal_sparkle --target-height 60 --canvas 64 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/vfx/vfx_ice_shatter.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/VFX/vfx_ice_shatter --target-height 60 --canvas 64 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/vfx/vfx_lightning.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/VFX/vfx_lightning --target-height 60 --canvas 64 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/vfx/vfx_poison_cloud.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/VFX/vfx_poison_cloud --target-height 60 --canvas 64 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/vfx/vfx_shield_barrier.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/VFX/vfx_shield_barrier --target-height 60 --canvas 64 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/vfx/vfx_slash_arc.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/VFX/vfx_slash_arc --target-height 60 --canvas 64 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+
+-- prop: 8 ảnh gốc → Assets/_Project/Art/UI/Icons/Items
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/prop/prop_chest.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Icons/Items/prop_chest --target-height 28 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/prop/prop_coin.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Icons/Items/prop_coin --target-height 28 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/prop/prop_feather.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Icons/Items/prop_feather --target-height 28 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/prop/prop_gem.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Icons/Items/prop_gem --target-height 28 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/prop/prop_potion_blue.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Icons/Items/prop_potion_blue --target-height 28 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/prop/prop_potion_red.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Icons/Items/prop_potion_red --target-height 28 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/prop/prop_shield.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Icons/Items/prop_shield --target-height 28 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/prop/prop_sword.png --cols 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Icons/Items/prop_sword --target-height 28 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+
+-- tile: 6 ảnh gốc → Assets/_Project/Art/Environment/Tilesets
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/tile/tile_dirt.png --cols 1 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Environment/Tilesets/tile_dirt --target-height 32 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/tile/tile_grass.png --cols 1 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Environment/Tilesets/tile_grass --target-height 32 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/tile/tile_lava_rock.png --cols 1 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Environment/Tilesets/tile_lava_rock --target-height 32 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/tile/tile_stone.png --cols 1 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Environment/Tilesets/tile_stone --target-height 32 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom✓ Cắt 1/1 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Environment/Tilesets/tile_stone
+✓ Cắt 1/1 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Environment/Tilesets/tile_swamp
+✓ Cắt 1/1 frame → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Environment/Tilesets/tile
+  ✓ bg_crypt_far.png → 865×180
+
+Xong 1 ảnh → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Environment/Backgrounds
+  ✓ bg_meadow_far.png → 930×180
+
+Xong 1 ảnh → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Environment/Backgrounds
+  ✓ bg_meadow_mid.png → 948×180
+
+Xong 1 ảnh → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Environment/Backgrounds
+  ✓ bg_meadow_near.png → 893×180
+
+Xong 1 ảnh → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Environment/Backgrounds
+  ✓ bg_swamp_far.png → 905×180
+
+Xong 1 ảnh → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Environment/Backgrounds
+  ✓ bg_swamp_mid.png → 954×180
+
+Xong 1 ảnh → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Environment/Backgrounds
+  ✓ bg_volcano_far.png → 676×180
+
+Xong 1 ảnh → /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Environment/Backgrounds
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Frames/frame_panel.png (48×48)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Frames/frame_slot.png (40×40)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Frames/frame_tooltip.png (64×48)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Buttons/btn_primary.png (96×112)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Buttons/btn_secondary.png (72×96)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Buttons/btn_endturn.png (120×128)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Frames/bar_hp.png (96×30)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Frames/bar_sp.png (96×24)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Frames/bar_poise.png (64×15)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Frames/bar_exp.png (120×18)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Frames/bar_ultimate.png (140×36)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Frames/bar_unit_hp.png (32×12)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Frames/frame_rarity_common.png (40×40)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Frames/frame_rarity_rare.png (40×40)
+
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/tile/tile_swamp.png --cols 1 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Environment/Tilesets/tile_swamp --target-height 32 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --slice /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/tile/tile_void.png --cols 1 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Environment/Tilesets/tile --target-height 32 --canvas 32 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --anchor bottom
+
+-- background: 7 ảnh gốc → Assets/_Project/Art/Environment/Backgrounds
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --in /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/background/bg_crypt_far.png --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Environment/Backgrounds --target-height 180 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --key auto
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --in /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/background/bg_meadow_far.png --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Environment/Backgrounds --target-height 180 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --key auto
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --in /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/background/bg_meadow_mid.png --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Environment/Backgrounds --target-height 180 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --key auto
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --in /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/background/bg_meadow_near.png --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Environment/Backgrounds --target-height 180 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --key auto
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --in /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/background/bg_swamp_far.png --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Environment/Backgrounds --target-height 180 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --key auto
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --in /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/background/bg_swamp_mid.png --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Environment/Backgrounds --target-height 180 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --key auto
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/post_process.py --in /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/raw/background/bg_volcano_far.png --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/Environment/Backgrounds --target-height 180 --palette /Users/hainx/__Data/__Unity/__2D/TurnBase/Tools/palette.json --key auto
+
+=== 3/3 DỰNG UI bằng Pillow ===
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/compose.py frame --w 48 --h 48 --border 4 --color #F4A259 --fill #2B1B2E --inner #5A4A5E --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Frames/frame_panel.png
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/compose.py frame --w 40 --h 40 --border 3 --color #5A4A5E --fill #1A0F1C --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Frames/frame_slot.png
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/compose.py frame --w 64 --h 48 --border 3 --color #736377 --fill #3A2233 --corner double --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Frames/frame_tooltip.png
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/compose.py button --w 96 --h 28 --color #F4A259 --fill #5A3A2E --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Buttons/btn_primary.png
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/compose.py button --w 72 --h 24 --color #736377 --fill #3A2233 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Buttons/btn_secondary.png
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/compose.py button --w 120 --h 32 --color #FFD166 --fill #6B5210 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Buttons/btn_endturn.png
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/compose.py healthbar --w 96 --h 10 --fill #E63946 --bg #3A2233 --border #F4A259 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Frames/bar_hp.png
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/compose.py healthbar --w 96 --h 8 --fill #457B9D --bg #12304A --border #F4A259 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Frames/bar_sp.png
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/compose.py healthbar --w 64 --h 5 --fill #FFD166 --bg #6B5210 --border #B8901E --segments 4 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Frames/bar_poise.png
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/compose.py healthbar --w 120 --h 6 --fill #7BC950 --bg #1B3D1F --border #3D7A2E --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Frames/bar_exp.png
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/compose.py healthbar --w 140 --h 12 --fill #FFB703 --bg #6B5210 --border #FFD166 --style gloss --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Frames/bar_ultimate.png
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/compose.py healthbar --w 32 --h 4 --fill #E63946 --bg #1A0F1C --border #0D080E --style flat --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Frames/bar_unit_hp.png
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/compose.py icon-frame --rarity common --size 40 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Frames/frame_rarity_common.png
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/compose.py icon-frame --rarity rare --size 40 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Frames/frame_rarity_rare.png
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/compose.py icon-frame --rarity epic --size 40 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Frames/frame_rarity_epic.png  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Frames/frame_rarity_epic.png (40×40)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Frames/frame_rarity_legendary.png (40×40)
+  ✓ /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Frames/frame_rarity_mythic.png (40×40)
+
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/compose.py icon-frame --rarity legendary --size 40 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Frames/frame_rarity_legendary.png
+  $ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/hainx/.claude/skills/pixel-art-pipeline/scripts/compose.py icon-frame --rarity mythic --size 40 --out /Users/hainx/__Data/__Unity/__2D/TurnBase/Assets/_Project/Art/UI/Frames/frame_rarity_mythic.png
+
+Xong. Asset ở Assets/_Project/Art
+Bước tiếp: refresh Unity để import (Point filter, PPU 32).

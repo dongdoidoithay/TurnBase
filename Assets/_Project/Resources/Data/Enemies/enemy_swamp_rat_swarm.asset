@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5aca1918775c4d9ba93e1ccb09e01f9, type: 3}
+  m_Name: enemy_swamp_rat_swarm
+  m_EditorClassIdentifier: Game.Meta::Game.Meta.Content.EnemyDefinitionSO
+  DefId: enemy_swamp_rat_swarm
+  NameKey: enemy.swamp_rat_swarm.name
+  Element: 0
+  Archetype: 9
+  PoiseMax: 20
+  BasePrimary:
+    Str: 10
+    Con: 8
+    Int: 6
+    Dex: 20
+    Aur: 6
+    Luk: 10
+  SkillIds:
+  - skill_basic_attack
+  - skill_flurry_combo
+  AiProfileId: ai_special
+  Chapter: 2
+  SpriteFolder: enemy_swamp_rat_swarm

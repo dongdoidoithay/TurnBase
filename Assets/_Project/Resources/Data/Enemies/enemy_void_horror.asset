@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5aca1918775c4d9ba93e1ccb09e01f9, type: 3}
+  m_Name: enemy_void_horror
+  m_EditorClassIdentifier: Game.Meta::Game.Meta.Content.EnemyDefinitionSO
+  DefId: enemy_void_horror
+  NameKey: enemy.void_horror.name
+  Element: 6
+  Archetype: 10
+  PoiseMax: 34
+  BasePrimary:
+    Str: 11
+    Con: 15
+    Int: 16
+    Dex: 11
+    Aur: 11
+    Luk: 9
+  SkillIds:
+  - skill_basic_attack
+  - skill_abyss_wave
+  AiProfileId: ai_special
+  Chapter: 5
+  SpriteFolder: enemy_void_horror

@@ -1,0 +1,3978 @@
+fileFormatVersion: 2
+guid: b7b1d2c2ea66e42b9baffdbdaba5b09c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 414807978874076847
+    second: bg_swamp_mid_0
+  - first:
+      213: 9526820266720817
+    second: bg_swamp_mid_1
+  - first:
+      213: -344208864352404511
+    second: bg_swamp_mid_2
+  - first:
+      213: 3076479593929217169
+    second: bg_swamp_mid_3
+  - first:
+      213: 5162362774615874588
+    second: bg_swamp_mid_4
+  - first:
+      213: 4034696093025665058
+    second: bg_swamp_mid_5
+  - first:
+      213: 5708714415735759266
+    second: bg_swamp_mid_6
+  - first:
+      213: -2896828330246314099
+    second: bg_swamp_mid_7
+  - first:
+      213: -1846080094025165012
+    second: bg_swamp_mid_8
+  - first:
+      213: -254284285198028588
+    second: bg_swamp_mid_9
+  - first:
+      213: -639146624598508341
+    second: bg_swamp_mid_10
+  - first:
+      213: -3198712166424939070
+    second: bg_swamp_mid_11
+  - first:
+      213: 4178924350976895405
+    second: bg_swamp_mid_12
+  - first:
+      213: -7812767372641278196
+    second: bg_swamp_mid_13
+  - first:
+      213: 1076081464196095930
+    second: bg_swamp_mid_14
+  - first:
+      213: -4913692112802554247
+    second: bg_swamp_mid_15
+  - first:
+      213: 3771605778835125022
+    second: bg_swamp_mid_16
+  - first:
+      213: 8894228822240546870
+    second: bg_swamp_mid_17
+  - first:
+      213: -4687957294898371560
+    second: bg_swamp_mid_18
+  - first:
+      213: -614584237232699189
+    second: bg_swamp_mid_19
+  - first:
+      213: -2488227069439750279
+    second: bg_swamp_mid_20
+  - first:
+      213: -7786768131640424638
+    second: bg_swamp_mid_21
+  - first:
+      213: -8742943488639303864
+    second: bg_swamp_mid_22
+  - first:
+      213: -2254270230084678208
+    second: bg_swamp_mid_23
+  - first:
+      213: -6505238586366252257
+    second: bg_swamp_mid_24
+  - first:
+      213: 2803697169523946294
+    second: bg_swamp_mid_25
+  - first:
+      213: 3671496884791343679
+    second: bg_swamp_mid_26
+  - first:
+      213: 6705425917772394623
+    second: bg_swamp_mid_27
+  - first:
+      213: 5970156658388417845
+    second: bg_swamp_mid_28
+  - first:
+      213: -4492003585209645165
+    second: bg_swamp_mid_29
+  - first:
+      213: 5898938202754993757
+    second: bg_swamp_mid_30
+  - first:
+      213: 9210804636859855052
+    second: bg_swamp_mid_31
+  - first:
+      213: -7021923525648875234
+    second: bg_swamp_mid_32
+  - first:
+      213: 4987445717090035293
+    second: bg_swamp_mid_33
+  - first:
+      213: -7960687274349610293
+    second: bg_swamp_mid_34
+  - first:
+      213: -1431235250993479340
+    second: bg_swamp_mid_35
+  - first:
+      213: 2169269064916763809
+    second: bg_swamp_mid_36
+  - first:
+      213: -7374418348211725210
+    second: bg_swamp_mid_37
+  - first:
+      213: 5118195558719932612
+    second: bg_swamp_mid_38
+  - first:
+      213: -2600033840919683527
+    second: bg_swamp_mid_39
+  - first:
+      213: 62032193366589932
+    second: bg_swamp_mid_40
+  - first:
+      213: 7021544783974995199
+    second: bg_swamp_mid_41
+  - first:
+      213: -8332803136532910181
+    second: bg_swamp_mid_42
+  - first:
+      213: 708784949433320683
+    second: bg_swamp_mid_43
+  - first:
+      213: 7450200615759859907
+    second: bg_swamp_mid_44
+  - first:
+      213: 8751099268767320772
+    second: bg_swamp_mid_45
+  - first:
+      213: -6758942532664245987
+    second: bg_swamp_mid_46
+  - first:
+      213: -1667363891068394490
+    second: bg_swamp_mid_47
+  - first:
+      213: -5059421574620814068
+    second: bg_swamp_mid_48
+  - first:
+      213: -4830309445537080782
+    second: bg_swamp_mid_49
+  - first:
+      213: -6238247984748372632
+    second: bg_swamp_mid_50
+  - first:
+      213: 3092871968759048936
+    second: bg_swamp_mid_51
+  - first:
+      213: 3637908255387440742
+    second: bg_swamp_mid_52
+  - first:
+      213: -8395454508422599911
+    second: bg_swamp_mid_53
+  - first:
+      213: -2130468763120184834
+    second: bg_swamp_mid_54
+  - first:
+      213: 4216568914901114772
+    second: bg_swamp_mid_55
+  - first:
+      213: 3049126997777685979
+    second: bg_swamp_mid_56
+  - first:
+      213: 2741496342532357135
+    second: bg_swamp_mid_57
+  - first:
+      213: -2697961023592602181
+    second: bg_swamp_mid_58
+  - first:
+      213: -5830406084547522353
+    second: bg_swamp_mid_59
+  - first:
+      213: -507786533411199224
+    second: bg_swamp_mid_60
+  - first:
+      213: -6798608569282701147
+    second: bg_swamp_mid_61
+  - first:
+      213: 6170533843004168276
+    second: bg_swamp_mid_62
+  - first:
+      213: 5243387419478199191
+    second: bg_swamp_mid_63
+  - first:
+      213: -1281888580571435916
+    second: bg_swamp_mid_64
+  - first:
+      213: 2804610534549475579
+    second: bg_swamp_mid_65
+  - first:
+      213: 4067765391910849719
+    second: bg_swamp_mid_66
+  - first:
+      213: -5836169181449234171
+    second: bg_swamp_mid_67
+  - first:
+      213: -5185656474530209041
+    second: bg_swamp_mid_68
+  - first:
+      213: 7346375370280049974
+    second: bg_swamp_mid_69
+  - first:
+      213: 246563256899773688
+    second: bg_swamp_mid_70
+  - first:
+      213: 2146268679824061704
+    second: bg_swamp_mid_71
+  - first:
+      213: -6801401758822974186
+    second: bg_swamp_mid_72
+  - first:
+      213: 5471572288011383737
+    second: bg_swamp_mid_73
+  - first:
+      213: -1609243995144975763
+    second: bg_swamp_mid_74
+  - first:
+      213: -5745377119485507755
+    second: bg_swamp_mid_75
+  - first:
+      213: -4477175778846785173
+    second: bg_swamp_mid_76
+  - first:
+      213: -6726954115517361074
+    second: bg_swamp_mid_77
+  - first:
+      213: 5482009877029036184
+    second: bg_swamp_mid_78
+  - first:
+      213: 2933948478164789580
+    second: bg_swamp_mid_79
+  - first:
+      213: 3364128765754970135
+    second: bg_swamp_mid_80
+  - first:
+      213: 7547855404760807905
+    second: bg_swamp_mid_81
+  - first:
+      213: -2101117677239112664
+    second: bg_swamp_mid_82
+  - first:
+      213: 9146950095218401193
+    second: bg_swamp_mid_83
+  - first:
+      213: 532714682851440784
+    second: bg_swamp_mid_84
+  - first:
+      213: 9089769507573923611
+    second: bg_swamp_mid_85
+  - first:
+      213: -1118728219090484198
+    second: bg_swamp_mid_86
+  - first:
+      213: -3833098246969185692
+    second: bg_swamp_mid_87
+  - first:
+      213: -7041833968327842129
+    second: bg_swamp_mid_88
+  - first:
+      213: 4951879634763162370
+    second: bg_swamp_mid_89
+  - first:
+      213: -5035487161495469361
+    second: bg_swamp_mid_90
+  - first:
+      213: 7016565480394045060
+    second: bg_swamp_mid_91
+  - first:
+      213: -6046764688071852665
+    second: bg_swamp_mid_92
+  - first:
+      213: 7862525109691188529
+    second: bg_swamp_mid_93
+  - first:
+      213: -117672203719598395
+    second: bg_swamp_mid_94
+  - first:
+      213: -7003260007629242934
+    second: bg_swamp_mid_95
+  - first:
+      213: -4266284346033232263
+    second: bg_swamp_mid_96
+  - first:
+      213: 7763180625559822205
+    second: bg_swamp_mid_97
+  - first:
+      213: -2428986509580383920
+    second: bg_swamp_mid_98
+  - first:
+      213: -8568419274928615827
+    second: bg_swamp_mid_99
+  - first:
+      213: -2959905664173205718
+    second: bg_swamp_mid_100
+  - first:
+      213: 7766010644676936014
+    second: bg_swamp_mid_101
+  - first:
+      213: -5833090456914869055
+    second: bg_swamp_mid_102
+  - first:
+      213: -2638780580342383885
+    second: bg_swamp_mid_103
+  - first:
+      213: 1493069717174697901
+    second: bg_swamp_mid_104
+  - first:
+      213: -4257789494883528709
+    second: bg_swamp_mid_105
+  - first:
+      213: -6806624876030923662
+    second: bg_swamp_mid_106
+  - first:
+      213: -8942030342219375514
+    second: bg_swamp_mid_107
+  - first:
+      213: -847655384297643957
+    second: bg_swamp_mid_108
+  - first:
+      213: 8838211657386852364
+    second: bg_swamp_mid_109
+  - first:
+      213: -694283827671607472
+    second: bg_swamp_mid_110
+  - first:
+      213: -196777210400341155
+    second: bg_swamp_mid_111
+  - first:
+      213: -1680965897406743795
+    second: bg_swamp_mid_112
+  - first:
+      213: 8684476878119123921
+    second: bg_swamp_mid_113
+  - first:
+      213: 8253466458147855726
+    second: bg_swamp_mid_114
+  - first:
+      213: -1292891196101039220
+    second: bg_swamp_mid_115
+  - first:
+      213: 6598523568963496441
+    second: bg_swamp_mid_116
+  - first:
+      213: 7370850256121145357
+    second: bg_swamp_mid_117
+  - first:
+      213: -6649356266384970000
+    second: bg_swamp_mid_118
+  - first:
+      213: -7555096217245444672
+    second: bg_swamp_mid_119
+  - first:
+      213: 7412645068029455394
+    second: bg_swamp_mid_120
+  - first:
+      213: -525595212168971893
+    second: bg_swamp_mid_121
+  - first:
+      213: -3327960999216547884
+    second: bg_swamp_mid_122
+  - first:
+      213: 8223584066593058617
+    second: bg_swamp_mid_123
+  - first:
+      213: -3427673384632342725
+    second: bg_swamp_mid_124
+  - first:
+      213: 6700785474118910276
+    second: bg_swamp_mid_125
+  - first:
+      213: 2012683624209167016
+    second: bg_swamp_mid_126
+  - first:
+      213: 3619720798152903369
+    second: bg_swamp_mid_127
+  - first:
+      213: -3516079205257821835
+    second: bg_swamp_mid_128
+  - first:
+      213: -6941319228813555039
+    second: bg_swamp_mid_129
+  - first:
+      213: 1498044854527465878
+    second: bg_swamp_mid_130
+  - first:
+      213: -7076749438037616772
+    second: bg_swamp_mid_131
+  - first:
+      213: -4813786396627089728
+    second: bg_swamp_mid_132
+  - first:
+      213: 9034769060075878105
+    second: bg_swamp_mid_133
+  - first:
+      213: 1340455939834274706
+    second: bg_swamp_mid_134
+  - first:
+      213: 5075465252183995684
+    second: bg_swamp_mid_135
+  - first:
+      213: -3258844927305215126
+    second: bg_swamp_mid_136
+  - first:
+      213: -3452076294977052755
+    second: bg_swamp_mid_137
+  - first:
+      213: -4582857137300310859
+    second: bg_swamp_mid_138
+  - first:
+      213: -6552979801515467716
+    second: bg_swamp_mid_139
+  - first:
+      213: 7672185654236577329
+    second: bg_swamp_mid_140
+  - first:
+      213: 1862897535539486918
+    second: bg_swamp_mid_141
+  - first:
+      213: -449938068238289244
+    second: bg_swamp_mid_142
+  - first:
+      213: 5939950950245787991
+    second: bg_swamp_mid_143
+  - first:
+      213: -5909462025108851471
+    second: bg_swamp_mid_144
+  - first:
+      213: 7068145018288805562
+    second: bg_swamp_mid_145
+  - first:
+      213: -5781061402819973835
+    second: bg_swamp_mid_146
+  - first:
+      213: -8700304203826746992
+    second: bg_swamp_mid_147
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: bg_swamp_mid_0
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 163
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fae79c6b8a1b1c500800000000000000
+      internalID: 414807978874076847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_1
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 171
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13e36d1b798d12000800000000000000
+      internalID: 9526820266720817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_2
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 163
+        width: 25
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ebfbbf8cdf193bf0800000000000000
+      internalID: -344208864352404511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_3
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 148
+        width: 15
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19493ea04e9d1ba20800000000000000
+      internalID: 3076479593929217169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_4
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 163
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1cdda6979564a740800000000000000
+      internalID: 5162362774615874588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_5
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 156
+        width: 23
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 220837948be1ef730800000000000000
+      internalID: 4034696093025665058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_6
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 163
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a1e41ad38d693f40800000000000000
+      internalID: 5708714415735759266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_7
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 171
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8761605bf56cc7d0800000000000000
+      internalID: -2896828330246314099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_8
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 115
+        width: 41
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c27d5b87fe76166e0800000000000000
+      internalID: -1846080094025165012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_9
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 163
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d0bec43ac9987cf0800000000000000
+      internalID: -254284285198028588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_10
+      rect:
+        serializedVersion: 2
+        x: 407
+        y: 156
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bcc7a61088b4127f0800000000000000
+      internalID: -639146624598508341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_11
+      rect:
+        serializedVersion: 2
+        x: 523
+        y: 163
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c5758d6b34eb93d0800000000000000
+      internalID: -3198712166424939070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_12
+      rect:
+        serializedVersion: 2
+        x: 532
+        y: 156
+        width: 24
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da9253b6e858ef930800000000000000
+      internalID: 4178924350976895405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_13
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 163
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0764f8e779739390800000000000000
+      internalID: -7812767372641278196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_14
+      rect:
+        serializedVersion: 2
+        x: 658
+        y: 156
+        width: 23
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abf5acee3620fee00800000000000000
+      internalID: 1076081464196095930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_15
+      rect:
+        serializedVersion: 2
+        x: 766
+        y: 163
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97ed3c8ae0f0fcbb0800000000000000
+      internalID: -4913692112802554247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_16
+      rect:
+        serializedVersion: 2
+        x: 774
+        y: 171
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e133748197f675430800000000000000
+      internalID: 3771605778835125022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_17
+      rect:
+        serializedVersion: 2
+        x: 783
+        y: 163
+        width: 24
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63050bc7df5ae6b70800000000000000
+      internalID: 8894228822240546870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_18
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 148
+        width: 17
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 814a16b9da701feb0800000000000000
+      internalID: -4687957294898371560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_19
+      rect:
+        serializedVersion: 2
+        x: 899
+        y: 163
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc8c03774ee8877f0800000000000000
+      internalID: -614584237232699189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_20
+      rect:
+        serializedVersion: 2
+        x: 907
+        y: 108
+        width: 40
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97f488dd9aa087dd0800000000000000
+      internalID: -2488227069439750279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_21
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 148
+        width: 9
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2478d3de3a7dfe390800000000000000
+      internalID: -7786768131640424638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_22
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 123
+        width: 17
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84ff65c1833daa680800000000000000
+      internalID: -8742943488639303864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_23
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 115
+        width: 21
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0cd801c5b2937b0e0800000000000000
+      internalID: -2254270230084678208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_24
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 115
+        width: 25
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1ba970d8ffb8b5a0800000000000000
+      internalID: -6505238586366252257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_25
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 156
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6333e3798bbb8e620800000000000000
+      internalID: 2803697169523946294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_26
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 108
+        width: 22
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3af0fbd6f6c3f230800000000000000
+      internalID: 3671496884791343679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_27
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 141
+        width: 17
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f70758868557e0d50800000000000000
+      internalID: 6705425917772394623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_28
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 148
+        width: 10
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53dbcac79d14ad250800000000000000
+      internalID: 5970156658388417845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_29
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 142
+        width: 10
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3974cc5f98239a1c0800000000000000
+      internalID: -4492003585209645165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_30
+      rect:
+        serializedVersion: 2
+        x: 383
+        y: 115
+        width: 25
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5e413f9a0d3dd150800000000000000
+      internalID: 5898938202754993757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_31
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 156
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc07d8b240a53df70800000000000000
+      internalID: 9210804636859855052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_32
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 100
+        width: 27
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e118db5d1cd1d8e90800000000000000
+      internalID: -7021923525648875234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_33
+      rect:
+        serializedVersion: 2
+        x: 431
+        y: 141
+        width: 15
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d56e1bf7477f63540800000000000000
+      internalID: 4987445717090035293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_34
+      rect:
+        serializedVersion: 2
+        x: 508
+        y: 132
+        width: 17
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bca3b6cf915f58190800000000000000
+      internalID: -7960687274349610293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_35
+      rect:
+        serializedVersion: 2
+        x: 517
+        y: 155
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 451448a4f1b332ce0800000000000000
+      internalID: -1431235250993479340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_36
+      rect:
+        serializedVersion: 2
+        x: 523
+        y: 115
+        width: 10
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a48b94a8baca1e10800000000000000
+      internalID: 2169269064916763809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_37
+      rect:
+        serializedVersion: 2
+        x: 539
+        y: 108
+        width: 18
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66c97b9659dc8a990800000000000000
+      internalID: -7374418348211725210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_38
+      rect:
+        serializedVersion: 2
+        x: 555
+        y: 141
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c8cb784ebb770740800000000000000
+      internalID: 5118195558719932612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_39
+      rect:
+        serializedVersion: 2
+        x: 634
+        y: 116
+        width: 25
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93edcfb4ff2daebd0800000000000000
+      internalID: -2600033840919683527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_40
+      rect:
+        serializedVersion: 2
+        x: 642
+        y: 156
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce1014283f16cd000800000000000000
+      internalID: 62032193366589932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_41
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 108
+        width: 22
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff4935f77c9817160800000000000000
+      internalID: 7021544783974995199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_42
+      rect:
+        serializedVersion: 2
+        x: 681
+        y: 141
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9fe1b742bfeb5c80800000000000000
+      internalID: -8332803136532910181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_43
+      rect:
+        serializedVersion: 2
+        x: 759
+        y: 123
+        width: 25
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be4cd1df72c16d900800000000000000
+      internalID: 708784949433320683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_44
+      rect:
+        serializedVersion: 2
+        x: 781
+        y: 108
+        width: 26
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c053c7bcfd646760800000000000000
+      internalID: 7450200615759859907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_45
+      rect:
+        serializedVersion: 2
+        x: 885
+        y: 140
+        width: 8
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ca8e0d6b66227970800000000000000
+      internalID: 8751099268767320772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_46
+      rect:
+        serializedVersion: 2
+        x: 892
+        y: 156
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d11c443b3996332a0800000000000000
+      internalID: -6758942532664245987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_47
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 62
+        width: 17
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6042e8900655cd8e0800000000000000
+      internalID: -1667363891068394490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_48
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 107
+        width: 10
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0567c342e259c9b0800000000000000
+      internalID: -5059421574620814068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_49
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 63
+        width: 18
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23a5c8fb62b47fcb0800000000000000
+      internalID: -4830309445537080782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_50
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 97
+        width: 10
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86dd640728a4d69a0800000000000000
+      internalID: -6238247984748372632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_51
+      rect:
+        serializedVersion: 2
+        x: 249
+        y: 62
+        width: 18
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ea65a93ba61cea20800000000000000
+      internalID: 3092871968759048936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_52
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 140
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66654d7a8427c7230800000000000000
+      internalID: 3637908255387440742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_53
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 123
+        width: 10
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91be4890b9a5d7b80800000000000000
+      internalID: -8395454508422599911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_54
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 106
+        width: 10
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef1d72992fd0f62e0800000000000000
+      internalID: -2130468763120184834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_55
+      rect:
+        serializedVersion: 2
+        x: 376
+        y: 97
+        width: 16
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49f92a77613448a30800000000000000
+      internalID: 4216568914901114772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_56
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 61
+        width: 47
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bdd979979dca05a20800000000000000
+      internalID: 3049126997777685979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_57
+      rect:
+        serializedVersion: 2
+        x: 501
+        y: 55
+        width: 18
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0c7ca10660cb0620800000000000000
+      internalID: 2741496342532357135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_58
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 54
+        width: 43
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb5e9e25ebaee8ad0800000000000000
+      internalID: -2697961023592602181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_59
+      rect:
+        serializedVersion: 2
+        x: 626
+        y: 62
+        width: 21
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc0d4429e8c361fa0800000000000000
+      internalID: -5830406084547522353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_60
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 77
+        width: 10
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8076c4696daf3f8f0800000000000000
+      internalID: -507786533411199224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_61
+      rect:
+        serializedVersion: 2
+        x: 751
+        y: 69
+        width: 17
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a85afcd68d76a1a0800000000000000
+      internalID: -6798608569282701147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_62
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 62
+        width: 47
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4581aca56d322a550800000000000000
+      internalID: 6170533843004168276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_63
+      rect:
+        serializedVersion: 2
+        x: 876
+        y: 96
+        width: 17
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79b00cdc31144c840800000000000000
+      internalID: 5243387419478199191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_64
+      rect:
+        serializedVersion: 2
+        x: 891
+        y: 115
+        width: 18
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47ce861b021d53ee0800000000000000
+      internalID: -1281888580571435916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_65
+      rect:
+        serializedVersion: 2
+        x: 892
+        y: 54
+        width: 48
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf0d325fb6afbe620800000000000000
+      internalID: 2804610534549475579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_66
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 118
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7bc497e621b937830800000000000000
+      internalID: 4067765391910849719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_67
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 100
+        width: 10
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 509d2a20d03c10fa0800000000000000
+      internalID: -5836169181449234171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_68
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 68
+        width: 16
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe22c6449e8d808b0800000000000000
+      internalID: -5185656474530209041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_69
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 99
+        width: 9
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63d983cf97193f560800000000000000
+      internalID: 7346375370280049974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_70
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 100
+        width: 10
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f4ac2ec9f7fb6300800000000000000
+      internalID: 246563256899773688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_71
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 69
+        width: 10
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 805b57d2ef319cd10800000000000000
+      internalID: 2146268679824061704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_72
+      rect:
+        serializedVersion: 2
+        x: 656
+        y: 100
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61db3aeb2219c91a0800000000000000
+      internalID: -6801401758822974186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_73
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 39
+        width: 26
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b33acd910eeeeb40800000000000000
+      internalID: 5471572288011383737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_74
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 63
+        width: 47
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6a0470dc11daa9e0800000000000000
+      internalID: -1609243995144975763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_75
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 63
+        width: 29
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 557c86c33f15440b0800000000000000
+      internalID: -5745377119485507755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_76
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 78
+        width: 8
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b61cad8a950edd1c0800000000000000
+      internalID: -4477175778846785173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_77
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 62
+        width: 8
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e445c347fde05a2a0800000000000000
+      internalID: -6726954115517361074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_78
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 77
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 890af7f20f2041c40800000000000000
+      internalID: 5482009877029036184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_79
+      rect:
+        serializedVersion: 2
+        x: 517
+        y: 76
+        width: 7
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c496f4e989a77b820800000000000000
+      internalID: 2933948478164789580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_80
+      rect:
+        serializedVersion: 2
+        x: 642
+        y: 54
+        width: 46
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7109f7dd949cfae20800000000000000
+      internalID: 3364128765754970135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_81
+      rect:
+        serializedVersion: 2
+        x: 885
+        y: 71
+        width: 8
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e9b7c8108e5fb860800000000000000
+      internalID: 7547855404760807905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_82
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 55
+        width: 8
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82c6ed0da9457d2e0800000000000000
+      internalID: -2101117677239112664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_83
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 55
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9afd7b326ae70fe70800000000000000
+      internalID: 9146950095218401193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_84
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 54
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 098befd7e25946700800000000000000
+      internalID: 532714682851440784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_85
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 49
+        width: 8
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1ffe1d1539552e70800000000000000
+      internalID: 9089769507573923611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_86
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 51
+        width: 14
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1408ecac9a7970f0800000000000000
+      internalID: -1118728219090484198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_87
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 54
+        width: 9
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46aaa38f3791ecac0800000000000000
+      internalID: -3833098246969185692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_88
+      rect:
+        serializedVersion: 2
+        x: 406
+        y: 54
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa62a86a051664e90800000000000000
+      internalID: -7041833968327842129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_89
+      rect:
+        serializedVersion: 2
+        x: 564
+        y: 55
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 203ac88aa4c98b440800000000000000
+      internalID: 4951879634763162370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_90
+      rect:
+        serializedVersion: 2
+        x: 688
+        y: 54
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc2c5041b1b5e1ab0800000000000000
+      internalID: -5035487161495469361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_91
+      rect:
+        serializedVersion: 2
+        x: 751
+        y: 63
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 486b72a0129df5160800000000000000
+      internalID: 7016565480394045060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_92
+      rect:
+        serializedVersion: 2
+        x: 774
+        y: 55
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78df917ad83951ca0800000000000000
+      internalID: -6046764688071852665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_93
+      rect:
+        serializedVersion: 2
+        x: 797
+        y: 0
+        width: 25
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1358bb80eec4d1d60800000000000000
+      internalID: 7862525109691188529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_94
+      rect:
+        serializedVersion: 2
+        x: 876
+        y: 55
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ce1b5111c1fd5ef0800000000000000
+      internalID: -117672203719598395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_95
+      rect:
+        serializedVersion: 2
+        x: 938
+        y: 54
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: acd3f8fb02c6fce90800000000000000
+      internalID: -7003260007629242934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_96
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 39
+        width: 8
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97621e3bdfc1bc4c0800000000000000
+      internalID: -4266284346033232263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_97
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 22
+        width: 9
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7f10b9d5ab5cbb60800000000000000
+      internalID: 7763180625559822205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_98
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 31
+        width: 8
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 059ce3c83a18a4ed0800000000000000
+      internalID: -2428986509580383920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_99
+      rect:
+        serializedVersion: 2
+        x: 117
+        y: 39
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6e054f111cd61980800000000000000
+      internalID: -8568419274928615827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_100
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 46
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a271a4e0b7d4ce6d0800000000000000
+      internalID: -2959905664173205718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_101
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 32
+        width: 8
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e410fd5098966cb60800000000000000
+      internalID: 7766010644676936014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_102
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 0
+        width: 27
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c44edc6223bc0fa0800000000000000
+      internalID: -5833090456914869055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_103
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 31
+        width: 9
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3fa3e740b0b216bd0800000000000000
+      internalID: -2638780580342383885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_104
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 30
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: daf37154ff278b410800000000000000
+      internalID: 1493069717174697901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_105
+      rect:
+        serializedVersion: 2
+        x: 367
+        y: 31
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bffc31d530b49e4c0800000000000000
+      internalID: -4257789494883528709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_106
+      rect:
+        serializedVersion: 2
+        x: 406
+        y: 39
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27ce6d00db20a81a0800000000000000
+      internalID: -6806624876030923662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_107
+      rect:
+        serializedVersion: 2
+        x: 431
+        y: 31
+        width: 15
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66cdf39d7c687e380800000000000000
+      internalID: -8942030342219375514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_108
+      rect:
+        serializedVersion: 2
+        x: 438
+        y: 48
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b40edf64be58c34f0800000000000000
+      internalID: -847655384297643957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_109
+      rect:
+        serializedVersion: 2
+        x: 492
+        y: 23
+        width: 26
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c008240fca2a7aa70800000000000000
+      internalID: 8838211657386852364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_110
+      rect:
+        serializedVersion: 2
+        x: 531
+        y: 38
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 057d55689886d56f0800000000000000
+      internalID: -694283827671607472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_111
+      rect:
+        serializedVersion: 2
+        x: 555
+        y: 22
+        width: 25
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5302327b28e44df0800000000000000
+      internalID: -196777210400341155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_112
+      rect:
+        serializedVersion: 2
+        x: 618
+        y: 39
+        width: 8
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0b76852c620ca8e0800000000000000
+      internalID: -1680965897406743795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_113
+      rect:
+        serializedVersion: 2
+        x: 625
+        y: 30
+        width: 14
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1db326455b5758870800000000000000
+      internalID: 8684476878119123921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_114
+      rect:
+        serializedVersion: 2
+        x: 661
+        y: 15
+        width: 43
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6d1183d3043a8270800000000000000
+      internalID: 8253466458147855726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_115
+      rect:
+        serializedVersion: 2
+        x: 673
+        y: 48
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8bea23ae4abe0ee0800000000000000
+      internalID: -1292891196101039220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_116
+      rect:
+        serializedVersion: 2
+        x: 696
+        y: 46
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f9ac1ab93aa29b50800000000000000
+      internalID: 6598523568963496441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_117
+      rect:
+        serializedVersion: 2
+        x: 750
+        y: 37
+        width: 18
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d08a2b861458a4660800000000000000
+      internalID: 7370850256121145357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_118
+      rect:
+        serializedVersion: 2
+        x: 766
+        y: 3
+        width: 9
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0fe2b1d94bdb8b3a0800000000000000
+      internalID: -6649356266384970000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_119
+      rect:
+        serializedVersion: 2
+        x: 782
+        y: 37
+        width: 10
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c5103fd408e62790800000000000000
+      internalID: -7555096217245444672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_120
+      rect:
+        serializedVersion: 2
+        x: 819
+        y: 37
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22c62fd5a610fd660800000000000000
+      internalID: 7412645068029455394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_121
+      rect:
+        serializedVersion: 2
+        x: 875
+        y: 30
+        width: 17
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b89b50370f5b4b8f0800000000000000
+      internalID: -525595212168971893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_122
+      rect:
+        serializedVersion: 2
+        x: 928
+        y: 23
+        width: 24
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d7f75f7a15b0d1d0800000000000000
+      internalID: -3327960999216547884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_123
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 17
+        width: 9
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93f67dd532a002270800000000000000
+      internalID: 8223584066593058617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_124
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 8
+        width: 33
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b37adee97357e60d0800000000000000
+      internalID: -3427673384632342725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_125
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 38
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44184fce2e8fdfc50800000000000000
+      internalID: 6700785474118910276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_126
+      rect:
+        serializedVersion: 2
+        x: 380
+        y: 9
+        width: 15
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a2bb32b71d7eeb10800000000000000
+      internalID: 2012683624209167016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_127
+      rect:
+        serializedVersion: 2
+        x: 421
+        y: 8
+        width: 11
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ca4ff743e4db3230800000000000000
+      internalID: 3619720798152903369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_128
+      rect:
+        serializedVersion: 2
+        x: 619
+        y: 31
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57148708790643fc0800000000000000
+      internalID: -3516079205257821835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_129
+      rect:
+        serializedVersion: 2
+        x: 642
+        y: 32
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1aacaf520fa7baf90800000000000000
+      internalID: -6941319228813555039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_130
+      rect:
+        serializedVersion: 2
+        x: 891
+        y: 30
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69916b3bbdf1ac410800000000000000
+      internalID: 1498044854527465878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_131
+      rect:
+        serializedVersion: 2
+        x: 907
+        y: 31
+        width: 10
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c77925d51e55acd90800000000000000
+      internalID: -7076749438037616772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_132
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 15
+        width: 11
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c64f6cd6cef13db0800000000000000
+      internalID: -4813786396627089728
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_133
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 22
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d633858792f16d70800000000000000
+      internalID: 9034769060075878105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_134
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 16
+        width: 10
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29362e243914a9210800000000000000
+      internalID: 1340455939834274706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_135
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 0
+        width: 12
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 425f34281ccaf6640800000000000000
+      internalID: 5075465252183995684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_136
+      rect:
+        serializedVersion: 2
+        x: 517
+        y: 15
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6393e10ec146c2d0800000000000000
+      internalID: -3258844927305215126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_137
+      rect:
+        serializedVersion: 2
+        x: 523
+        y: 0
+        width: 25
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: daf985c46e2c710d0800000000000000
+      internalID: -3452076294977052755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_138
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 0
+        width: 25
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b4f9d2f6bb6660c0800000000000000
+      internalID: -4582857137300310859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_139
+      rect:
+        serializedVersion: 2
+        x: 782
+        y: 15
+        width: 12
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3c5c56f6932f05a0800000000000000
+      internalID: -6552979801515467716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_140
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 0
+        width: 23
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13e7e9b1434197a60800000000000000
+      internalID: 7672185654236577329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_141
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 0
+        width: 12
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c028c240775ad910800000000000000
+      internalID: 1862897535539486918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_142
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 6
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a63bb7f5bf71c9f0800000000000000
+      internalID: -449938068238289244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_143
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 0
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 759e4a40be1fe6250800000000000000
+      internalID: 5939950950245787991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_144
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 0
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f4f9bb099f5dfda0800000000000000
+      internalID: -5909462025108851471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_145
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 7
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab61d0c0278171260800000000000000
+      internalID: 7068145018288805562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_146
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 0
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53da134984b85cfa0800000000000000
+      internalID: -5781061402819973835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_swamp_mid_147
+      rect:
+        serializedVersion: 2
+        x: 782
+        y: 0
+        width: 14
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 099a11d3c6f424780800000000000000
+      internalID: -8700304203826746992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      bg_swamp_mid_0: 414807978874076847
+      bg_swamp_mid_1: 9526820266720817
+      bg_swamp_mid_10: -639146624598508341
+      bg_swamp_mid_100: -2959905664173205718
+      bg_swamp_mid_101: 7766010644676936014
+      bg_swamp_mid_102: -5833090456914869055
+      bg_swamp_mid_103: -2638780580342383885
+      bg_swamp_mid_104: 1493069717174697901
+      bg_swamp_mid_105: -4257789494883528709
+      bg_swamp_mid_106: -6806624876030923662
+      bg_swamp_mid_107: -8942030342219375514
+      bg_swamp_mid_108: -847655384297643957
+      bg_swamp_mid_109: 8838211657386852364
+      bg_swamp_mid_11: -3198712166424939070
+      bg_swamp_mid_110: -694283827671607472
+      bg_swamp_mid_111: -196777210400341155
+      bg_swamp_mid_112: -1680965897406743795
+      bg_swamp_mid_113: 8684476878119123921
+      bg_swamp_mid_114: 8253466458147855726
+      bg_swamp_mid_115: -1292891196101039220
+      bg_swamp_mid_116: 6598523568963496441
+      bg_swamp_mid_117: 7370850256121145357
+      bg_swamp_mid_118: -6649356266384970000
+      bg_swamp_mid_119: -7555096217245444672
+      bg_swamp_mid_12: 4178924350976895405
+      bg_swamp_mid_120: 7412645068029455394
+      bg_swamp_mid_121: -525595212168971893
+      bg_swamp_mid_122: -3327960999216547884
+      bg_swamp_mid_123: 8223584066593058617
+      bg_swamp_mid_124: -3427673384632342725
+      bg_swamp_mid_125: 6700785474118910276
+      bg_swamp_mid_126: 2012683624209167016
+      bg_swamp_mid_127: 3619720798152903369
+      bg_swamp_mid_128: -3516079205257821835
+      bg_swamp_mid_129: -6941319228813555039
+      bg_swamp_mid_13: -7812767372641278196
+      bg_swamp_mid_130: 1498044854527465878
+      bg_swamp_mid_131: -7076749438037616772
+      bg_swamp_mid_132: -4813786396627089728
+      bg_swamp_mid_133: 9034769060075878105
+      bg_swamp_mid_134: 1340455939834274706
+      bg_swamp_mid_135: 5075465252183995684
+      bg_swamp_mid_136: -3258844927305215126
+      bg_swamp_mid_137: -3452076294977052755
+      bg_swamp_mid_138: -4582857137300310859
+      bg_swamp_mid_139: -6552979801515467716
+      bg_swamp_mid_14: 1076081464196095930
+      bg_swamp_mid_140: 7672185654236577329
+      bg_swamp_mid_141: 1862897535539486918
+      bg_swamp_mid_142: -449938068238289244
+      bg_swamp_mid_143: 5939950950245787991
+      bg_swamp_mid_144: -5909462025108851471
+      bg_swamp_mid_145: 7068145018288805562
+      bg_swamp_mid_146: -5781061402819973835
+      bg_swamp_mid_147: -8700304203826746992
+      bg_swamp_mid_15: -4913692112802554247
+      bg_swamp_mid_16: 3771605778835125022
+      bg_swamp_mid_17: 8894228822240546870
+      bg_swamp_mid_18: -4687957294898371560
+      bg_swamp_mid_19: -614584237232699189
+      bg_swamp_mid_2: -344208864352404511
+      bg_swamp_mid_20: -2488227069439750279
+      bg_swamp_mid_21: -7786768131640424638
+      bg_swamp_mid_22: -8742943488639303864
+      bg_swamp_mid_23: -2254270230084678208
+      bg_swamp_mid_24: -6505238586366252257
+      bg_swamp_mid_25: 2803697169523946294
+      bg_swamp_mid_26: 3671496884791343679
+      bg_swamp_mid_27: 6705425917772394623
+      bg_swamp_mid_28: 5970156658388417845
+      bg_swamp_mid_29: -4492003585209645165
+      bg_swamp_mid_3: 3076479593929217169
+      bg_swamp_mid_30: 5898938202754993757
+      bg_swamp_mid_31: 9210804636859855052
+      bg_swamp_mid_32: -7021923525648875234
+      bg_swamp_mid_33: 4987445717090035293
+      bg_swamp_mid_34: -7960687274349610293
+      bg_swamp_mid_35: -1431235250993479340
+      bg_swamp_mid_36: 2169269064916763809
+      bg_swamp_mid_37: -7374418348211725210
+      bg_swamp_mid_38: 5118195558719932612
+      bg_swamp_mid_39: -2600033840919683527
+      bg_swamp_mid_4: 5162362774615874588
+      bg_swamp_mid_40: 62032193366589932
+      bg_swamp_mid_41: 7021544783974995199
+      bg_swamp_mid_42: -8332803136532910181
+      bg_swamp_mid_43: 708784949433320683
+      bg_swamp_mid_44: 7450200615759859907
+      bg_swamp_mid_45: 8751099268767320772
+      bg_swamp_mid_46: -6758942532664245987
+      bg_swamp_mid_47: -1667363891068394490
+      bg_swamp_mid_48: -5059421574620814068
+      bg_swamp_mid_49: -4830309445537080782
+      bg_swamp_mid_5: 4034696093025665058
+      bg_swamp_mid_50: -6238247984748372632
+      bg_swamp_mid_51: 3092871968759048936
+      bg_swamp_mid_52: 3637908255387440742
+      bg_swamp_mid_53: -8395454508422599911
+      bg_swamp_mid_54: -2130468763120184834
+      bg_swamp_mid_55: 4216568914901114772
+      bg_swamp_mid_56: 3049126997777685979
+      bg_swamp_mid_57: 2741496342532357135
+      bg_swamp_mid_58: -2697961023592602181
+      bg_swamp_mid_59: -5830406084547522353
+      bg_swamp_mid_6: 5708714415735759266
+      bg_swamp_mid_60: -507786533411199224
+      bg_swamp_mid_61: -6798608569282701147
+      bg_swamp_mid_62: 6170533843004168276
+      bg_swamp_mid_63: 5243387419478199191
+      bg_swamp_mid_64: -1281888580571435916
+      bg_swamp_mid_65: 2804610534549475579
+      bg_swamp_mid_66: 4067765391910849719
+      bg_swamp_mid_67: -5836169181449234171
+      bg_swamp_mid_68: -5185656474530209041
+      bg_swamp_mid_69: 7346375370280049974
+      bg_swamp_mid_7: -2896828330246314099
+      bg_swamp_mid_70: 246563256899773688
+      bg_swamp_mid_71: 2146268679824061704
+      bg_swamp_mid_72: -6801401758822974186
+      bg_swamp_mid_73: 5471572288011383737
+      bg_swamp_mid_74: -1609243995144975763
+      bg_swamp_mid_75: -5745377119485507755
+      bg_swamp_mid_76: -4477175778846785173
+      bg_swamp_mid_77: -6726954115517361074
+      bg_swamp_mid_78: 5482009877029036184
+      bg_swamp_mid_79: 2933948478164789580
+      bg_swamp_mid_8: -1846080094025165012
+      bg_swamp_mid_80: 3364128765754970135
+      bg_swamp_mid_81: 7547855404760807905
+      bg_swamp_mid_82: -2101117677239112664
+      bg_swamp_mid_83: 9146950095218401193
+      bg_swamp_mid_84: 532714682851440784
+      bg_swamp_mid_85: 9089769507573923611
+      bg_swamp_mid_86: -1118728219090484198
+      bg_swamp_mid_87: -3833098246969185692
+      bg_swamp_mid_88: -7041833968327842129
+      bg_swamp_mid_89: 4951879634763162370
+      bg_swamp_mid_9: -254284285198028588
+      bg_swamp_mid_90: -5035487161495469361
+      bg_swamp_mid_91: 7016565480394045060
+      bg_swamp_mid_92: -6046764688071852665
+      bg_swamp_mid_93: 7862525109691188529
+      bg_swamp_mid_94: -117672203719598395
+      bg_swamp_mid_95: -7003260007629242934
+      bg_swamp_mid_96: -4266284346033232263
+      bg_swamp_mid_97: 7763180625559822205
+      bg_swamp_mid_98: -2428986509580383920
+      bg_swamp_mid_99: -8568419274928615827
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

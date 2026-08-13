@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5aca1918775c4d9ba93e1ccb09e01f9, type: 3}
+  m_Name: boss_lich
+  m_EditorClassIdentifier: Game.Meta::Game.Meta.Content.EnemyDefinitionSO
+  DefId: boss_lich
+  NameKey: boss.lich.name
+  Element: 6
+  Archetype: 12
+  PoiseMax: 145
+  BasePrimary:
+    Str: 10
+    Con: 42
+    Int: 30
+    Dex: 14
+    Aur: 20
+    Luk: 12
+  SkillIds:
+  - skill_basic_attack
+  - skill_lich_drain
+  - skill_lich_curse
+  AiProfileId: ai_boss
+  Chapter: 3
+  SpriteFolder: boss_lich

@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceacea117fa644ab8bce8b68e6c859e8, type: 3}
+  m_Name: loottable_boss_ch3
+  m_EditorClassIdentifier: Game.Meta::Game.Meta.Content.LootTableDefinitionSO
+  DefId: loottable_boss_ch3
+  Chapter: 3
+  NodeType: 3
+  GoldMin: 0
+  GoldMax: 0
+  Materials:
+  - Type: 11
+    MinAmount: 4
+    MaxAmount: 6
+    Chance: 1
+  - Type: 13
+    MinAmount: 1
+    MaxAmount: 2
+    Chance: 1
+  HeroShardChance: 0
+  HeroShardMin: 1
+  HeroShardMax: 1
+  EquipmentChance: 0
+  EquipmentMinRarity: 1
+  EquipmentAnySlot: 1
+  EquipmentSlot: 0

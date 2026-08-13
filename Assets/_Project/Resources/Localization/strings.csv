@@ -1,0 +1,166 @@
+key,vi,en
+title.label.name,AETHER LEGION,AETHER LEGION
+title.label.subtitle,{0} Tướng · {1} Vàng,{0} Heroes · {1} Gold
+title.button.start,BẮT ĐẦU,START
+settings.label.title,CÀI ĐẶT,SETTINGS
+settings.label.music,Nhạc,Music
+settings.label.sfx,Hiệu ứng,SFX
+settings.label.screen_shake,Rung màn hình,Screen Shake
+settings.label.action_command,Lệnh hành động,Action Command
+settings.label.language,Ngôn ngữ,Language
+settings.button.close,ĐÓNG,CLOSE
+hero.beast_tamer.name,Beast Tamer,Beast Tamer
+hero.blade_dancer.name,Blade Dancer,Blade Dancer
+hero.bone_caller.name,Bone Caller,Bone Caller
+hero.crimson_reaver.name,Crimson Reaver,Crimson Reaver
+hero.dawn_cleric.name,Dawn Cleric,Dawn Cleric
+hero.ember_knight.name,Ember Knight,Ember Knight
+hero.flame_binder.name,Flame Binder,Flame Binder
+hero.frost_sage.name,Frost Sage,Frost Sage
+hero.gale_thief.name,Gale Thief,Gale Thief
+hero.grove_keeper.name,Grove Keeper,Grove Keeper
+hero.iron_bastion.name,Iron Bastion,Iron Bastion
+hero.mirage_fox.name,Mirage Fox,Mirage Fox
+hero.moon_priestess.name,Moon Priestess,Moon Priestess
+hero.night_stalker.name,Night Stalker,Night Stalker
+hero.pyromancer.name,Pyromancer,Pyromancer
+hero.shadow_fang.name,Shadow Fang,Shadow Fang
+hero.spark_runner.name,Spark Runner,Spark Runner
+hero.spring_medic.name,Spring Medic,Spring Medic
+hero.star_weaver.name,Star Weaver,Star Weaver
+hero.stone_breaker.name,Stone Breaker,Stone Breaker
+hero.stormguard.name,Stormguard,Stormguard
+hero.terra_seer.name,Terra Seer,Terra Seer
+hero.tide_warden.name,Tide Warden,Tide Warden
+hero.void_scholar.name,Void Scholar,Void Scholar
+boss.alpha_wolf.name,Boss Alpha Wolf,Boss Alpha Wolf
+boss.goblin_king.name,Boss Goblin King,Boss Goblin King
+boss.lich.name,Boss Lich,Boss Lich
+boss.magma_drake.name,Boss Magma Drake,Boss Magma Drake
+boss.trial_champion.name,Boss Trial Champion,Boss Trial Champion
+boss.void_king.name,Boss Void King,Boss Void King
+enemy.abyss_stalker.name,Abyss Stalker,Abyss Stalker
+enemy.abyssal_wraith.name,Abyssal Wraith,Abyssal Wraith
+enemy.ash_wraith.name,Ash Wraith,Ash Wraith
+enemy.bat.name,Bat,Bat
+enemy.bog_witch.name,Bog Witch,Bog Witch
+enemy.bog_zombie.name,Bog Zombie,Bog Zombie
+enemy.bomb_slime.name,Bomb Slime,Bomb Slime
+enemy.bone_archer.name,Bone Archer,Bone Archer
+enemy.bone_swordsman.name,Bone Swordsman,Bone Swordsman
+enemy.chaos_spawn.name,Chaos Spawn,Chaos Spawn
+enemy.charred_zombie.name,Charred Zombie,Charred Zombie
+enemy.cinder_bat.name,Cinder Bat,Cinder Bat
+enemy.corrupted_golem.name,Corrupted Golem,Corrupted Golem
+enemy.crypt_spider.name,Crypt Spider,Crypt Spider
+enemy.crypt_wraith.name,Crypt Wraith,Crypt Wraith
+enemy.cursed_gargoyle.name,Cursed Gargoyle,Cursed Gargoyle
+enemy.dark_sentinel.name,Dark Sentinel,Dark Sentinel
+enemy.death_priest.name,Death Priest,Death Priest
+enemy.drowned_knight.name,Drowned Knight,Drowned Knight
+enemy.ember_knight_foe.name,Ember Knight,Ember Knight
+enemy.fire_imp.name,Fire Imp,Fire Imp
+enemy.flame_serpent.name,Flame Serpent,Flame Serpent
+enemy.flame_wisp.name,Flame Wisp,Flame Wisp
+enemy.fungal_horror.name,Fungal Horror,Fungal Horror
+enemy.giant_leech.name,Giant Leech,Giant Leech
+enemy.goblin.name,Goblin,Goblin
+enemy.goblin_archer.name,Goblin Archer,Goblin Archer
+enemy.goblin_shaman.name,Goblin Shaman,Goblin Shaman
+enemy.grave_golem.name,Grave Golem,Grave Golem
+enemy.lava_slime.name,Lava Slime,Lava Slime
+enemy.magma_hound.name,Magma Hound,Magma Hound
+enemy.mire_serpent.name,Mire Serpent,Mire Serpent
+enemy.molten_brute.name,Molten Brute,Molten Brute
+enemy.mud_crawler.name,Mud Crawler,Mud Crawler
+enemy.mummy_guardian.name,Mummy Guardian,Mummy Guardian
+enemy.necrotic_hound.name,Necrotic Hound,Necrotic Hound
+enemy.nether_hound.name,Nether Hound,Nether Hound
+enemy.nightmare_fiend.name,Nightmare Fiend,Nightmare Fiend
+enemy.obsidian_golem.name,Obsidian Golem,Obsidian Golem
+enemy.ogre_brute.name,Ogre Brute,Ogre Brute
+enemy.phantom_knight.name,Phantom Knight,Phantom Knight
+enemy.poison_toad.name,Poison Toad,Poison Toad
+enemy.pyroclast_mage.name,Pyroclast Mage,Pyroclast Mage
+enemy.shadow_knight.name,Shadow Knight,Shadow Knight
+enemy.shadow_stalker.name,Shadow Stalker,Shadow Stalker
+enemy.shield_bearer.name,Shield Bearer,Shield Bearer
+enemy.skeleton.name,Skeleton,Skeleton
+enemy.slime.name,Slime,Slime
+enemy.soul_reaper.name,Soul Reaper,Soul Reaper
+enemy.star_priest.name,Star Priest,Star Priest
+enemy.swamp_rat_swarm.name,Swamp Rat Swarm,Swamp Rat Swarm
+enemy.swamp_troll.name,Swamp Troll,Swamp Troll
+enemy.venomous_spider.name,Venomous Spider,Venomous Spider
+enemy.void_cultist.name,Void Cultist,Void Cultist
+enemy.void_horror.name,Void Horror,Void Horror
+enemy.void_reaver.name,Void Reaver,Void Reaver
+enemy.void_serpent.name,Void Serpent,Void Serpent
+enemy.volcanic_crab.name,Volcanic Crab,Volcanic Crab
+enemy.will_o_wisp.name,Will O Wisp,Will O Wisp
+enemy.wolf.name,Wolf,Wolf
+skill.abyss_wave.name,Abyss Wave,Abyss Wave
+skill.ash_blind.name,Ash Blind,Ash Blind
+skill.astral_convergence.name,Astral Convergence,Astral Convergence
+skill.basic_attack.name,Basic Attack,Basic Attack
+skill.bastion_upheaval.name,Bastion Upheaval,Bastion Upheaval
+skill.bog_curse.name,Bog Curse,Bog Curse
+skill.bone_volley.name,Bone Volley,Bone Volley
+skill.cleanse.name,Cleanse,Cleanse
+skill.cleave.name,Cleave,Cleave
+skill.crimson_harvest.name,Crimson Harvest,Crimson Harvest
+skill.dance_of_blades.name,Dance Of Blades,Dance Of Blades
+skill.dispel_strike.name,Dispel Strike,Dispel Strike
+skill.drake_flame_breath.name,Drake Flame Breath,Drake Flame Breath
+skill.drake_wing_buffet.name,Drake Wing Buffet,Drake Wing Buffet
+skill.elemental_strike.name,Elemental Strike,Elemental Strike
+skill.fire_slash.name,Fire Slash,Fire Slash
+skill.flame_guard.name,Flame Guard,Flame Guard
+skill.flurry_combo.name,Flurry Combo,Flurry Combo
+skill.frost_nova.name,Frost Nova,Frost Nova
+skill.gale_step.name,Gale Step,Gale Step
+skill.goblin_decree.name,Goblin Decree,Goblin Decree
+skill.goblin_smash.name,Goblin Smash,Goblin Smash
+skill.guard.name,Guard,Guard
+skill.hamstring.name,Hamstring,Hamstring
+skill.heal_light.name,Heal Light,Heal Light
+skill.infernal_summoning.name,Infernal Summoning,Infernal Summoning
+skill.inferno_bulwark.name,Inferno Bulwark,Inferno Bulwark
+skill.lava_burst.name,Lava Burst,Lava Burst
+skill.leech_drain.name,Leech Drain,Leech Drain
+skill.legion_of_bones.name,Legion Of Bones,Legion Of Bones
+skill.lich_curse.name,Lich Curse,Lich Curse
+skill.lich_drain.name,Lich Drain,Lich Drain
+skill.lunar_rebirth.name,Lunar Rebirth,Lunar Rebirth
+skill.mana_well.name,Mana Well,Mana Well
+skill.mirage_onslaught.name,Mirage Onslaught,Mirage Onslaught
+skill.poison_bite.name,Poison Bite,Poison Bite
+skill.power_strike.name,Power Strike,Power Strike
+skill.pyroclasm.name,Pyroclasm,Pyroclasm
+skill.quarry_smash.name,Quarry Smash,Quarry Smash
+skill.rebirth_dawn.name,Rebirth Dawn,Rebirth Dawn
+skill.revive_ally.name,Revive Ally,Revive Ally
+skill.sanctuary.name,Sanctuary,Sanctuary
+skill.silence_curse.name,Silence Curse,Silence Curse
+skill.soul_drain.name,Soul Drain,Soul Drain
+skill.spore_cloud.name,Spore Cloud,Spore Cloud
+skill.spring_revival.name,Spring Revival,Spring Revival
+skill.star_drain.name,Star Drain,Star Drain
+skill.static_barrage.name,Static Barrage,Static Barrage
+skill.storm_bulwark.name,Storm Bulwark,Storm Bulwark
+skill.tempest_dance.name,Tempest Dance,Tempest Dance
+skill.terra_wrath.name,Terra Wrath,Terra Wrath
+skill.thousand_fangs.name,Thousand Fangs,Thousand Fangs
+skill.tide_surge.name,Tide Surge,Tide Surge
+skill.toxic_spray.name,Toxic Spray,Toxic Spray
+skill.troll_regen.name,Troll Regen,Troll Regen
+skill.ultimate_nova.name,Ultimate Nova,Ultimate Nova
+skill.umbral_flurry.name,Umbral Flurry,Umbral Flurry
+skill.verdant_rebirth.name,Verdant Rebirth,Verdant Rebirth
+skill.void_cataclysm.name,Void Cataclysm,Void Cataclysm
+skill.void_rend.name,Void Rend,Void Rend
+skill.voidking_corrupt.name,Voidking Corrupt,Voidking Corrupt
+skill.voidking_judgment.name,Voidking Judgment,Voidking Judgment
+skill.wild_stampede.name,Wild Stampede,Wild Stampede
+skill.wolf_howl.name,Wolf Howl,Wolf Howl
+skill.wolf_pounce.name,Wolf Pounce,Wolf Pounce

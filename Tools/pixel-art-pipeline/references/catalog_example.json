@@ -1,0 +1,80 @@
+{
+  "_comment": "Catalog mẫu cho comfy_gen.py. category: character|monster|boss|background|vfx|prop|tile",
+  "_usage": "python3 comfy_gen.py --catalog catalog.json --out raw/",
+  "items": [
+    {
+      "id": "hero_ember_knight",
+      "category": "character",
+      "prompt": "armored fire knight, flaming greatsword, heavy shield, red orange armor, standing idle",
+      "size": [768, 768],
+      "seed": 20260807,
+      "variants": 4
+    },
+    {
+      "id": "hero_frost_sage",
+      "category": "character",
+      "prompt": "ice mage, long crystal staff, layered blue robes, casting stance arms raised",
+      "size": [768, 768],
+      "seed": 20268726,
+      "variants": 4
+    },
+    {
+      "id": "enemy_goblin",
+      "category": "monster",
+      "prompt": "small green goblin warrior, rusty club, angry expression",
+      "size": [512, 512],
+      "seed": 30000001,
+      "variants": 3
+    },
+    {
+      "id": "boss_alpha_wolf",
+      "category": "boss",
+      "prompt": "giant alpha dire wolf, scarred face, wind aura, howling, imposing",
+      "size": [1024, 1024],
+      "seed": 40000001,
+      "variants": 4
+    },
+    {
+      "id": "bg_meadow_far",
+      "category": "background",
+      "prompt": "distant mountain range silhouette, hazy atmosphere, muted green",
+      "size": [1024, 512],
+      "seed": 50000001
+    },
+    {
+      "id": "bg_meadow_mid",
+      "category": "background",
+      "prompt": "forest tree line, layered foliage, mid green tones",
+      "size": [1024, 512],
+      "seed": 50000002
+    },
+    {
+      "id": "bg_meadow_near",
+      "category": "background",
+      "prompt": "foreground grass and rocks, dark silhouette, high contrast",
+      "size": [1024, 512],
+      "seed": 50000003
+    },
+    {
+      "id": "vfx_fire_burst",
+      "category": "vfx",
+      "prompt": "fire explosion burst, orange yellow core, radial",
+      "size": [512, 512],
+      "seed": 60000001
+    },
+    {
+      "id": "tile_grass",
+      "category": "tile",
+      "prompt": "grass texture, top down, short blades, varied green",
+      "size": [512, 512],
+      "seed": 70000001
+    },
+    {
+      "id": "prop_potion_red",
+      "category": "prop",
+      "prompt": "red health potion bottle, cork stopper, glass shine",
+      "size": [256, 256],
+      "seed": 80000001
+    }
+  ]
+}

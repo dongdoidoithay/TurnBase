@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceacea117fa644ab8bce8b68e6c859e8, type: 3}
+  m_Name: loottable_treasure_ch4
+  m_EditorClassIdentifier: Game.Meta::Game.Meta.Content.LootTableDefinitionSO
+  DefId: loottable_treasure_ch4
+  Chapter: 4
+  NodeType: 6
+  GoldMin: 220
+  GoldMax: 360
+  Materials:
+  - Type: 11
+    MinAmount: 3
+    MaxAmount: 4
+    Chance: 0.5
+  - Type: 12
+    MinAmount: 1
+    MaxAmount: 2
+    Chance: 0.25
+  HeroShardChance: 0.6
+  HeroShardMin: 1
+  HeroShardMax: 1
+  EquipmentChance: 1
+  EquipmentMinRarity: 2
+  EquipmentAnySlot: 1
+  EquipmentSlot: 0

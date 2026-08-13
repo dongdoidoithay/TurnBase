@@ -1,0 +1,15 @@
+id,nameKey,slot,rarity,statType,statValue
+eq_sword_iron,equipment.sword_iron.name,Weapon,1,Str,6
+eq_sword_flame,equipment.sword_flame.name,Weapon,2,Str,11
+eq_tome_arcane,equipment.tome_arcane.name,Weapon,1,Int,6
+eq_tome_storm,equipment.tome_storm.name,Weapon,2,Int,11
+eq_armor_leather,equipment.armor_leather.name,Armor,1,Con,6
+eq_armor_plate,equipment.armor_plate.name,Armor,2,Con,11
+eq_helm_iron,equipment.helm_iron.name,Helm,1,Con,4
+eq_helm_mystic,equipment.helm_mystic.name,Helm,2,Aur,7
+eq_boots_swift,equipment.boots_swift.name,Boots,1,Dex,6
+eq_boots_wind,equipment.boots_wind.name,Boots,2,Dex,11
+eq_ring_luck,equipment.ring_luck.name,Ring,1,Luk,6
+eq_ring_focus,equipment.ring_focus.name,Ring,2,Aur,8
+eq_amulet_aura,equipment.amulet_aura.name,Amulet,1,Aur,6
+eq_amulet_fortune,equipment.amulet_fortune.name,Amulet,2,Luk,9

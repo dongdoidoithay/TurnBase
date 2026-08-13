@@ -1,0 +1,14 @@
+{
+  "states": [
+    "normal",
+    "hover",
+    "pressed",
+    "disabled"
+  ],
+  "frame_w": 120,
+  "frame_h": 32,
+  "left": 3,
+  "right": 3,
+  "top": 3,
+  "bottom": 3
+}

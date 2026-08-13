@@ -1,0 +1,41 @@
+fileFormatVersion: 2
+guid: c8ae8595925c42dab1cbf00964191898
+TextureImporter:
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    enableMipMap: 0
+    sRGBTexture: 1
+  alphaSource: 1
+  alphaIsTransparency: 1
+  spriteMode: 1
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  textureType: 8
+  filterMode: 0
+  compressionQuality: 50
+  textureFormat: -1
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 128
+    textureCompression: 2
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: vfx_light_radiant_00_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      spriteID: 45edbc0a6d074807894406ed5578cd29
+      internalID: 181484334233316384
+    spriteID: c74185bf78b94e318a9716e4a47456a6
+  userData:
+  assetBundleName:

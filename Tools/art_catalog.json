@@ -1,0 +1,875 @@
+{
+  "_comment": "Catalog art TurnBase — dùng với skill pixel-art-pipeline",
+  "_usage": "python3 ~/.claude/skills/pixel-art-pipeline/scripts/comfy_gen.py --catalog Tools/art_catalog.json --out Tools/raw/",
+  "items": [
+    {
+      "id": "hero_ember_knight",
+      "category": "character",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 20260807,
+      "variants": 3,
+      "prompt": "knight in heavy plate armor, red steel helmet with visor, flaming sword, round shield",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "hero_shadow_fang",
+      "category": "character",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 20268726,
+      "variants": 3,
+      "prompt": "rogue in dark leather armor, purple hood over face, two curved daggers, belt pouches",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "hero_frost_sage",
+      "category": "character",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 20276645,
+      "variants": 3,
+      "prompt": "wizard in long blue robe, pointed hat, wooden staff with cyan crystal, white beard",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "hero_dawn_cleric",
+      "category": "character",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 20284564,
+      "variants": 3,
+      "prompt": "priestess in white robe with gold trim, golden staff, blonde hair, halo ring",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "hero_gale_thief",
+      "category": "character",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 20292483,
+      "variants": 3,
+      "prompt": "young thief in green tunic, brown leather boots, short sword, green scarf",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "hero_bone_caller",
+      "category": "character",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 20300402,
+      "variants": 3,
+      "prompt": "necromancer in ragged purple robe, bone mask, staff topped with skull, dark aura",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "enemy_goblin",
+      "category": "monster",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 30000001,
+      "variants": 2,
+      "prompt": "small goblin, green skin, pointed ears, ragged brown loincloth, wooden club",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "enemy_goblin_archer",
+      "category": "monster",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 30007919,
+      "variants": 2,
+      "prompt": "goblin with green skin, leather cap, wooden shortbow, arrow quiver on back",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "enemy_goblin_shaman",
+      "category": "monster",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 30015838,
+      "variants": 2,
+      "prompt": "goblin in feathered headdress, green skin, bone staff, tribal paint",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "enemy_slime",
+      "category": "monster",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 30023757,
+      "variants": 2,
+      "prompt": "blue slime blob, round jelly body, two dot eyes, glossy highlight",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "enemy_wolf",
+      "category": "monster",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 30031676,
+      "variants": 2,
+      "prompt": "grey wolf, four legs, bared fangs, bushy tail, yellow eyes",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "enemy_bat",
+      "category": "monster",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 30039595,
+      "variants": 2,
+      "prompt": "purple bat, wide leathery wings, big ears, fangs",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "enemy_ogre_brute",
+      "category": "monster",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 30047514,
+      "variants": 2,
+      "prompt": "huge ogre, brown skin, big belly, tusks, wooden club, loincloth",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "enemy_skeleton",
+      "category": "monster",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 30055433,
+      "variants": 2,
+      "prompt": "skeleton warrior, white bones, empty eye sockets, rusty sword, small shield",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "enemy_bomb_slime",
+      "category": "monster",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 30063352,
+      "variants": 2,
+      "prompt": "orange slime blob, burning fuse on top, worried face",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "enemy_shield_bearer",
+      "category": "monster",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 30071271,
+      "variants": 2,
+      "prompt": "orc soldier in iron armor, large rectangular tower shield, helmet",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "boss_alpha_wolf",
+      "category": "boss",
+      "size": [
+        640,
+        640
+      ],
+      "seed": 40000001,
+      "variants": 3,
+      "prompt": "giant grey wolf, scarred muzzle, spiked collar, four legs, snarling, huge",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "boss_goblin_king",
+      "category": "boss",
+      "size": [
+        640,
+        640
+      ],
+      "seed": 40007919,
+      "variants": 3,
+      "prompt": "fat goblin king, golden crown, red royal cape, jagged sceptre, green skin",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "boss_lich",
+      "category": "boss",
+      "size": [
+        640,
+        640
+      ],
+      "seed": 40015838,
+      "variants": 3,
+      "prompt": "undead lich, skull face, tall crown, flowing black robe, green glowing eyes",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "boss_magma_drake",
+      "category": "boss",
+      "size": [
+        640,
+        640
+      ],
+      "seed": 40023757,
+      "variants": 3,
+      "prompt": "red dragon, spread wings, horned head, glowing orange cracks in scales, huge",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "bg_meadow_far",
+      "category": "background",
+      "size": [
+        1024,
+        512
+      ],
+      "seed": 50000001,
+      "prompt": "distant mountain range silhouette, hazy atmosphere, muted green",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "bg_meadow_mid",
+      "category": "background",
+      "size": [
+        1024,
+        512
+      ],
+      "seed": 50000002,
+      "prompt": "forest tree line, layered foliage, mid green tones",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "bg_meadow_near",
+      "category": "background",
+      "size": [
+        1024,
+        512
+      ],
+      "seed": 50000003,
+      "prompt": "foreground grass and rocks, dark silhouette, high contrast",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "bg_swamp_far",
+      "category": "background",
+      "size": [
+        1024,
+        512
+      ],
+      "seed": 50010001,
+      "prompt": "distant dead trees silhouette, thick fog, murky green purple",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "bg_swamp_mid",
+      "category": "background",
+      "size": [
+        1024,
+        512
+      ],
+      "seed": 50010002,
+      "prompt": "swamp water pools, twisted roots, mid dark green",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "bg_crypt_far",
+      "category": "background",
+      "size": [
+        1024,
+        512
+      ],
+      "seed": 50020001,
+      "prompt": "distant stone crypt arches, torch glow, cold grey purple",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "bg_volcano_far",
+      "category": "background",
+      "size": [
+        1024,
+        512
+      ],
+      "seed": 50030001,
+      "prompt": "distant volcano silhouette, ember sky, deep red orange",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "vfx_fire_burst",
+      "category": "vfx",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 60000001,
+      "prompt": "fire explosion burst, orange yellow core, radial",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "vfx_ice_shatter",
+      "category": "vfx",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 60000002,
+      "prompt": "ice shatter shards, cyan white, radial burst",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "vfx_lightning",
+      "category": "vfx",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 60000003,
+      "prompt": "lightning strike, jagged white blue bolt, vertical",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "vfx_slash_arc",
+      "category": "vfx",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 60000004,
+      "prompt": "slash arc, white crescent trail, diagonal",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "vfx_heal_sparkle",
+      "category": "vfx",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 60000005,
+      "prompt": "heal sparkle, green white particles, rising",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "vfx_dark_void",
+      "category": "vfx",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 60000006,
+      "prompt": "dark void implosion, purple black swirl",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "vfx_shield_barrier",
+      "category": "vfx",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 60000007,
+      "prompt": "shield hexagon barrier, blue glow, circular",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "vfx_poison_cloud",
+      "category": "vfx",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 60000008,
+      "prompt": "poison cloud, green bubbles, drifting",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "vfx_break_shatter",
+      "category": "vfx",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 60000009,
+      "prompt": "golden glass shatter burst, yellow white shards, radial",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "vfx_earth_spike",
+      "category": "vfx",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 60000010,
+      "prompt": "earth rock spikes erupting, brown stone shards, upward",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "tile_grass",
+      "category": "tile",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 70000001,
+      "prompt": "grass texture, top down, short blades, varied green",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "tile_stone",
+      "category": "tile",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 70000002,
+      "prompt": "stone floor, top down, cracked slabs, grey",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "tile_dirt",
+      "category": "tile",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 70000003,
+      "prompt": "dirt path, top down, small pebbles, brown",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "tile_swamp",
+      "category": "tile",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 70000004,
+      "prompt": "swamp mud, top down, murky green, ripples",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "tile_lava_rock",
+      "category": "tile",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 70000005,
+      "prompt": "lava rock, top down, glowing cracks, dark red",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "tile_void",
+      "category": "tile",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 70000006,
+      "prompt": "void floor, top down, purple black crystal, faint glow",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "prop_potion_red",
+      "category": "prop",
+      "size": [
+        256,
+        256
+      ],
+      "seed": 80000001,
+      "prompt": "red health potion bottle, cork stopper, glass shine",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "prop_potion_blue",
+      "category": "prop",
+      "size": [
+        256,
+        256
+      ],
+      "seed": 80000002,
+      "prompt": "blue mana potion bottle, cork stopper, glass shine",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "prop_sword",
+      "category": "prop",
+      "size": [
+        256,
+        256
+      ],
+      "seed": 80000003,
+      "prompt": "steel longsword, leather grip, simple crossguard",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "prop_shield",
+      "category": "prop",
+      "size": [
+        256,
+        256
+      ],
+      "seed": 80000004,
+      "prompt": "round wooden shield, iron rim, boss center",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "prop_chest",
+      "category": "prop",
+      "size": [
+        256,
+        256
+      ],
+      "seed": 80000005,
+      "prompt": "wooden treasure chest, iron bands, closed",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "prop_gem",
+      "category": "prop",
+      "size": [
+        256,
+        256
+      ],
+      "seed": 80000006,
+      "prompt": "purple hexagon gem crystal, faceted, glowing",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "prop_coin",
+      "category": "prop",
+      "size": [
+        256,
+        256
+      ],
+      "seed": 80000007,
+      "prompt": "gold coin, embossed star, shiny",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "prop_feather",
+      "category": "prop",
+      "size": [
+        256,
+        256
+      ],
+      "seed": 80000008,
+      "prompt": "white revive feather, soft glow",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "hero_iron_bastion",
+      "category": "character",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 30310001,
+      "variants": 3,
+      "prompt": "knight in heavy plate armor, brown and bronze earthen armor, massive stone hammer, tower shield with rock engravings",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "hero_tide_warden",
+      "category": "character",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 30310002,
+      "variants": 3,
+      "prompt": "knight in heavy plate armor, teal and silver sea-worn armor, trident spear, round shield with wave engravings",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "hero_stormguard",
+      "category": "character",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 30310003,
+      "variants": 3,
+      "prompt": "knight in ornate plate armor, white and gold storm-forged armor, lightning-etched greatsword, feathered pauldrons, glowing cape",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "hero_blade_dancer",
+      "category": "character",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 30310004,
+      "variants": 3,
+      "prompt": "swordsman in flowing green tunic, twin curved wind blades, feathered scarf, acrobatic stance",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "hero_crimson_reaver",
+      "category": "character",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 30310005,
+      "variants": 3,
+      "prompt": "warrior in red leather armor, twin flaming daggers, dark red hair, ember cloak",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "hero_stone_breaker",
+      "category": "character",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 30310006,
+      "variants": 3,
+      "prompt": "brawler in brown leather armor, twin stone gauntlet blades, rugged build, earthy tattoos",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "hero_pyromancer",
+      "category": "character",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 30310007,
+      "variants": 3,
+      "prompt": "wizard in long red robe, pointed hat, wooden staff with orange flame crystal, dark hair",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "hero_terra_seer",
+      "category": "character",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 30310008,
+      "variants": 3,
+      "prompt": "wizard in brown hooded robe, wooden staff with green gem, vines wrapped around staff, earthy tunic",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "hero_void_scholar",
+      "category": "character",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 30310009,
+      "variants": 3,
+      "prompt": "wizard in ornate black and purple robe, floating spellbook, staff with dark void crystal, glowing purple eyes",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "hero_grove_keeper",
+      "category": "character",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 30319202,
+      "variants": 4,
+      "prompt": "druid in brown and dark green leaf robe, wooden staff with glowing leaves, antler headpiece, standing on plain gray background, no forest, no foliage background",
+      "cfg": 9.0,
+      "steps": 34,
+      "negative": "green background, forest background, foliage background, plants in background",
+      "_note": "prompt gốc ra nền xanh lá trùng màu áo, flood-fill ăn mất 1 phần nhân vật — đổi prompt ép nền xám + negative — xem task-hero-roster.md"
+    },
+    {
+      "id": "hero_moon_priestess",
+      "category": "character",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 30310011,
+      "variants": 3,
+      "prompt": "priestess in flowing silver and white robe, crescent moon staff, long silver hair, glowing halo",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "hero_spring_medic",
+      "category": "character",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 30310012,
+      "variants": 3,
+      "prompt": "healer in light blue tunic, wooden staff with water vial, nurse satchel, short brown hair",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "hero_night_stalker",
+      "category": "character",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 30310013,
+      "variants": 3,
+      "prompt": "assassin in dark purple hooded cloak, twin shadow daggers, masked face, stealthy stance",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "hero_spark_runner",
+      "category": "character",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 30310014,
+      "variants": 3,
+      "prompt": "scout in light green tunic, small crossbow, goggles, short spiky hair",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "hero_mirage_fox",
+      "category": "character",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 30310015,
+      "variants": 3,
+      "prompt": "fox-eared trickster in shimmering white and gold outfit, twin light fans, fox tail, glowing markings",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "hero_beast_tamer",
+      "category": "character",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 30319101,
+      "variants": 4,
+      "prompt": "beastmaster warrior in brown leather vest, short spiky brown hair, wooden totem staff with animal skull, fur-trimmed shoulder pauldron, humanoid, visible arms and legs",
+      "cfg": 9.0,
+      "steps": 34,
+      "_note": "prompt gốc (fur cloak, wild hair) ra hình khối lông không rõ silhouette, đổi prompt + seed mới — xem task-hero-roster.md"
+    },
+    {
+      "id": "hero_flame_binder",
+      "category": "character",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 30310017,
+      "variants": 3,
+      "prompt": "summoner in red and black robe, staff topped with fire gem, chains wrapped around arms, ember particles",
+      "cfg": 9.0,
+      "steps": 34
+    },
+    {
+      "id": "hero_star_weaver",
+      "category": "character",
+      "size": [
+        512,
+        512
+      ],
+      "seed": 30310018,
+      "variants": 3,
+      "prompt": "astral summoner in white and gold robe, staff topped with glowing star, constellation patterns on cloak, celestial aura",
+      "cfg": 9.0,
+      "steps": 34
+    }
+  ]
+}

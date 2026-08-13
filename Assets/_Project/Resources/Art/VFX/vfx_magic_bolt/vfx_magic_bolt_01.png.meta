@@ -1,0 +1,41 @@
+fileFormatVersion: 2
+guid: 8c270283772240a2a46abeba47d31a58
+TextureImporter:
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    enableMipMap: 0
+    sRGBTexture: 1
+  alphaSource: 1
+  alphaIsTransparency: 1
+  spriteMode: 1
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  textureType: 8
+  filterMode: 0
+  compressionQuality: 50
+  textureFormat: -1
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 128
+    textureCompression: 2
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: vfx_magic_bolt_01_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      spriteID: 0d209dcdfd0448349379cccc1cdd275f
+      internalID: 2694775418099602023
+    spriteID: 45e97751501846d9ba69884425c32a8f
+  userData:
+  assetBundleName:

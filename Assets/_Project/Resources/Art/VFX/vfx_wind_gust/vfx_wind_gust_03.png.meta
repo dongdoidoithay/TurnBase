@@ -1,0 +1,41 @@
+fileFormatVersion: 2
+guid: 2d7f61c4b4a14ce8ad4748af06a6dbd3
+TextureImporter:
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    enableMipMap: 0
+    sRGBTexture: 1
+  alphaSource: 1
+  alphaIsTransparency: 1
+  spriteMode: 1
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  textureType: 8
+  filterMode: 0
+  compressionQuality: 50
+  textureFormat: -1
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 128
+    textureCompression: 2
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: vfx_wind_gust_03_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      spriteID: 272550b833f24fd9b54f8d9189f08627
+      internalID: 1383202828839676879
+    spriteID: 027f375072ca4fc7b485e95b11f68f3f
+  userData:
+  assetBundleName:

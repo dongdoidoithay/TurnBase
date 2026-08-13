@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 277f9f494c5cb42cfa89d63a81fc74f7, type: 3}
+  m_Name: hero_terra_seer
+  m_EditorClassIdentifier: Game.Meta::Game.Meta.Content.HeroDefinitionSO
+  DefId: hero_terra_seer
+  NameKey: hero.terra_seer.name
+  Class: 2
+  Rarity: 0
+  Element: 3
+  PoiseMax: 50
+  BasePrimary:
+    Str: 10
+    Con: 12
+    Int: 20
+    Dex: 12
+    Aur: 14
+    Luk: 10
+  SkillIds:
+  - skill_basic_attack
+  - skill_elemental_strike
+  - skill_frost_nova
+  - skill_mana_well
+  - skill_terra_wrath
+  SpriteFolder: hero_terra_seer

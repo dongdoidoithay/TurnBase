@@ -1,0 +1,15 @@
+{
+    "name": "Game.Meta",
+    "rootNamespace": "Game.Meta",
+    "references": ["Game.Core", "Game.Data", "Game.Combat", "Game.Services", "Unity.InputSystem", "Unity.2D.PixelPerfect", "Unity.Addressables", "Unity.ResourceManager"],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+    
+}

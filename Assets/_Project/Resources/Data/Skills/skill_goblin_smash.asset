@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 465e393d74bee4a3f98971549f71de97, type: 3}
+  m_Name: skill_goblin_smash
+  m_EditorClassIdentifier: Game.Meta::Game.Meta.Content.SkillDefinitionSO
+  Data:
+    Id: skill_goblin_smash
+    NameKey: skill.goblin_smash.name
+    DescKey: 
+    Type: 0
+    DamageType: 0
+    Element: 0
+    Target: 1
+    SpCost: 0
+    Cooldown: 2
+    ExtraAtbCost: 0
+    PowerMultiplier: 1
+    FlatDamage: 0
+    DefIgnore: 0
+    HitCount: 1
+    RandomTargetCount: 1
+    PoiseDamage: 8
+    IsBreaker: 0
+    IsAoe: 1
+    CommandType: 1
+    ComboBeats: 1
+    HealPower: 0
+    ShieldPower: 0
+    RevivePercent: 0
+    LifestealBonus: 0
+    SpRestore: 0
+    Applies: []
+    CleanseCount: 0
+    DispelCount: 0
+    StealsDispelled: 0
+    SummonId: 
+    SummonCount: 0
+    SummonDuration: 3
+    VfxKey: 
+    SfxKey: 
+    AnimTrigger: attack
+    IconKey: 

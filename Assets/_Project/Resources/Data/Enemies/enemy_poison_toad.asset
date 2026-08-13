@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5aca1918775c4d9ba93e1ccb09e01f9, type: 3}
+  m_Name: enemy_poison_toad
+  m_EditorClassIdentifier: Game.Meta::Game.Meta.Content.EnemyDefinitionSO
+  DefId: enemy_poison_toad
+  NameKey: enemy.poison_toad.name
+  Element: 2
+  Archetype: 3
+  PoiseMax: 26
+  BasePrimary:
+    Str: 10
+    Con: 10
+    Int: 10
+    Dex: 16
+    Aur: 8
+    Luk: 8
+  SkillIds:
+  - skill_basic_attack
+  - skill_toxic_spray
+  AiProfileId: ai_special
+  Chapter: 2
+  SpriteFolder: enemy_poison_toad

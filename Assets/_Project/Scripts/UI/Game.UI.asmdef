@@ -1,0 +1,15 @@
+{
+    "name": "Game.UI",
+    "rootNamespace": "Game.UI",
+    "references": ["Game.Core", "Game.Data", "Game.Combat", "Game.Meta", "Game.Services", "Unity.TextMeshPro"],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+    
+}

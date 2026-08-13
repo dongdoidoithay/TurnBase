@@ -1,0 +1,15 @@
+{
+    "name": "Game.CombatView",
+    "rootNamespace": "Game.CombatView",
+    "references": ["Game.Core", "Game.Data", "Game.Combat", "Game.Services", "Game.UI", "Game.Meta", "Unity.TextMeshPro", "Unity.InputSystem", "Unity.2D.PixelPerfect", "Unity.Addressables", "Unity.ResourceManager"],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+    
+}

@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5aca1918775c4d9ba93e1ccb09e01f9, type: 3}
+  m_Name: boss_alpha_wolf
+  m_EditorClassIdentifier: Game.Meta::Game.Meta.Content.EnemyDefinitionSO
+  DefId: boss_alpha_wolf
+  NameKey: boss.alpha_wolf.name
+  Element: 0
+  Archetype: 12
+  PoiseMax: 140
+  BasePrimary:
+    Str: 26
+    Con: 45
+    Int: 10
+    Dex: 20
+    Aur: 12
+    Luk: 10
+  SkillIds:
+  - skill_basic_attack
+  - skill_wolf_pounce
+  - skill_wolf_howl
+  AiProfileId: ai_boss
+  Chapter: 1
+  SpriteFolder: boss_alpha_wolf

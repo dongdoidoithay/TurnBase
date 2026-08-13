@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5aca1918775c4d9ba93e1ccb09e01f9, type: 3}
+  m_Name: enemy_ember_knight
+  m_EditorClassIdentifier: Game.Meta::Game.Meta.Content.EnemyDefinitionSO
+  DefId: enemy_ember_knight
+  NameKey: enemy.ember_knight_foe.name
+  Element: 1
+  Archetype: 1
+  PoiseMax: 58
+  BasePrimary:
+    Str: 25
+    Con: 26
+    Int: 8
+    Dex: 10
+    Aur: 10
+    Luk: 8
+  SkillIds:
+  - skill_basic_attack
+  - skill_power_strike
+  AiProfileId: ai_special
+  Chapter: 4
+  SpriteFolder: enemy_ember_knight

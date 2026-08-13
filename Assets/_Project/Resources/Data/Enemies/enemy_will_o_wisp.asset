@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5aca1918775c4d9ba93e1ccb09e01f9, type: 3}
+  m_Name: enemy_will_o_wisp
+  m_EditorClassIdentifier: Game.Meta::Game.Meta.Content.EnemyDefinitionSO
+  DefId: enemy_will_o_wisp
+  NameKey: enemy.will_o_wisp.name
+  Element: 6
+  Archetype: 7
+  PoiseMax: 28
+  BasePrimary:
+    Str: 8
+    Con: 10
+    Int: 18
+    Dex: 12
+    Aur: 12
+    Luk: 10
+  SkillIds:
+  - skill_basic_attack
+  - skill_elemental_strike
+  AiProfileId: ai_special
+  Chapter: 2
+  SpriteFolder: enemy_will_o_wisp

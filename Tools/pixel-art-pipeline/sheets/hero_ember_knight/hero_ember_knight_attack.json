@@ -1,0 +1,41 @@
+{
+  "frame_w": 32,
+  "frame_h": 32,
+  "cols": 4,
+  "rows": 1,
+  "count": 4,
+  "frames": [
+    {
+      "name": "hero_ember_knight_attack_00",
+      "index": 0,
+      "x": 0,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    {
+      "name": "hero_ember_knight_attack_01",
+      "index": 1,
+      "x": 32,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    {
+      "name": "hero_ember_knight_attack_02",
+      "index": 2,
+      "x": 64,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    {
+      "name": "hero_ember_knight_attack_03",
+      "index": 3,
+      "x": 96,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    }
+  ]
+}

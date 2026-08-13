@@ -1,0 +1,15 @@
+{
+  "layers": [
+    "frame",
+    "fill",
+    "trail"
+  ],
+  "frame_w": 32,
+  "frame_h": 4,
+  "fill_rect": [
+    1,
+    1,
+    30,
+    2
+  ]
+}

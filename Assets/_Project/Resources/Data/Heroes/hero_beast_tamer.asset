@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 277f9f494c5cb42cfa89d63a81fc74f7, type: 3}
+  m_Name: hero_beast_tamer
+  m_EditorClassIdentifier: Game.Meta::Game.Meta.Content.HeroDefinitionSO
+  DefId: hero_beast_tamer
+  NameKey: hero.beast_tamer.name
+  Class: 5
+  Rarity: 1
+  Element: 3
+  PoiseMax: 50
+  BasePrimary:
+    Str: 10
+    Con: 12
+    Int: 18
+    Dex: 10
+    Aur: 16
+    Luk: 14
+  SkillIds:
+  - skill_basic_attack
+  - skill_elemental_strike
+  - skill_soul_drain
+  - skill_mana_well
+  - skill_wild_stampede
+  SpriteFolder: hero_beast_tamer
