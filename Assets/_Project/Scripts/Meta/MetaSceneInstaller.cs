@@ -100,6 +100,7 @@ namespace Game.Meta
         private GameObject _toastPanel;
         private GameObject _mailBadge;
         private Text _mailBadgeLabel;
+        private Image _leaderPortrait;
 
         private readonly Dictionary<int, Button> _nodeButtons = new();
         private readonly Dictionary<int, Vector2> _nodePositions = new();
@@ -895,6 +896,9 @@ namespace Game.Meta
             // mặc định inactive, chỉ RefreshMailBadge() mới bật lên khi có mail thật chưa claim.
             _mailBadge = _mailButton.transform.Find("MailBadge").gameObject;
             _mailBadgeLabel = _mailBadge.transform.Find("BadgeLabel").GetComponent<Text>();
+            // Icon nhân vật (leader — hero đầu tiên trong roster) trên TopBar, dựng tĩnh trong
+            // Boot.unity cạnh TitleLabel — thuần hiển thị, không có hành động bấm.
+            _leaderPortrait = topBar.Find("LeaderPortrait/PortraitMask/PortraitSprite").GetComponent<Image>();
             _mapRoot = (RectTransform)_canvasRoot.Find("MapRoot");
             _toastPanel = _canvasRoot.Find("Toast").gameObject;
             _toastLabel = _toastPanel.transform.Find("ToastLabel").GetComponent<Text>();
@@ -919,8 +923,23 @@ namespace Game.Meta
             if (count > 0) _mailBadgeLabel.text = count > 9 ? "9+" : count.ToString();
         }
 
+        /// <summary>Icon leader trên TopBar — hero đầu tiên trong roster (không phải "hero mạnh
+        /// nhất" hay đội hình trận vừa rồi, chỉ là 1 đại diện cố định đơn giản để TopBar có point
+        /// of reference tới nhân vật, giống quy ước <c>_viewedHeroUid</c> mặc định của
+        /// TeamSelectScreen). Ẩn hẳn nếu chưa có hero nào (chưa xảy ra ở luồng thật — profile luôn
+        /// khởi tạo sẵn hero — nhưng vẫn thủ để không NRE nếu profile trống lúc debug).</summary>
+        private void RefreshLeaderPortrait()
+        {
+            if (_profile.Heroes.Count == 0) { _leaderPortrait.enabled = false; return; }
+            var defId = _profile.Heroes[0].DefId;
+            var sprite = Resources.Load<Sprite>($"Art/Characters/Heroes/{defId}/{defId}_v1_00");
+            _leaderPortrait.sprite = sprite;
+            _leaderPortrait.enabled = sprite != null;
+        }
+
         private void RefreshMap()
         {
+            RefreshLeaderPortrait();
             foreach (Transform child in _mapRoot) Destroy(child.gameObject);
             _nodeButtons.Clear();
             _nodePositions.Clear();

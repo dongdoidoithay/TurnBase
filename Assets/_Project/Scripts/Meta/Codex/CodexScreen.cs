@@ -24,6 +24,7 @@ namespace Game.Meta.Codex
         private GameObject[] _rows;
         private Text[] _nameLabels;
         private Text[] _progressLabels;
+        private Image[] _icons;
         private Button _switchTabButton;
         private Text _switchTabLabel;
         private Button _prevButton;
@@ -44,6 +45,18 @@ namespace Game.Meta.Codex
             _loc != null ? _loc.GetName(defId, LocalizedNameKind.Hero) : HeroDisplayUtil.FormatName(defId);
         private string EnemyName(string defId) =>
             _loc != null ? _loc.GetName(defId, LocalizedNameKind.Enemy) : HeroDisplayUtil.FormatEnemyName(defId);
+
+        /// <summary>Portrait tĩnh dùng chung quy ước với HeroDetailScreen — "{defId}/{defId}_v1_00"
+        /// (hero VÀ enemy đều có, xác nhận qua Resources thật, khác bộ animation frame trong
+        /// Animations/ chỉ dùng lúc chiến đấu). Ẩn icon khi CHƯA mở khoá — tránh lộ hình trước khi
+        /// người chơi thật sự gặp/sở hữu (khớp tinh thần "???" của tên).</summary>
+        private void SetIcon(Image icon, string folder, string defId, bool unlocked)
+        {
+            icon.enabled = unlocked;
+            if (!unlocked) return;
+            icon.sprite = Resources.Load<Sprite>($"Art/Characters/{folder}/{defId}/{defId}_v1_00");
+            icon.enabled = icon.sprite != null;
+        }
 
         public void Open(PlayerProfileDto profile, System.Action onClosed)
         {
@@ -71,12 +84,14 @@ namespace Game.Meta.Codex
             _rows = new GameObject[PAGE_SIZE];
             _nameLabels = new Text[PAGE_SIZE];
             _progressLabels = new Text[PAGE_SIZE];
+            _icons = new Image[PAGE_SIZE];
             for (int i = 0; i < PAGE_SIZE; i++)
             {
                 var row = list.Find($"Row_{i}");
                 _rows[i] = row.gameObject;
                 _nameLabels[i] = row.Find("NameLabel").GetComponent<Text>();
                 _progressLabels[i] = row.Find("ProgressLabel").GetComponent<Text>();
+                _icons[i] = row.Find("Icon").GetComponent<Image>();
                 // Codex không có hành động nào theo dòng (khác Quest/Mail có Claim) — ẩn hẳn.
                 row.Find("ClaimButton").gameObject.SetActive(false);
             }
@@ -145,6 +160,7 @@ namespace Game.Meta.Codex
                 _progressLabels[i].text = unlocked
                     ? $"{def.Class} · {def.Element} · {def.Rarity}"
                     : "LOCKED";
+                SetIcon(_icons[i], "Heroes", def.DefId, unlocked);
             }
 
             _prevButton.interactable = _page > 0;
@@ -171,6 +187,7 @@ namespace Game.Meta.Codex
                 _progressLabels[i].text = unlocked
                     ? $"{def.Archetype} · {def.Element} · Ch.{def.Chapter}"
                     : $"LOCKED — Ch.{def.Chapter}";
+                SetIcon(_icons[i], "Enemies", def.DefId, unlocked);
             }
 
             _prevButton.interactable = _page > 0;

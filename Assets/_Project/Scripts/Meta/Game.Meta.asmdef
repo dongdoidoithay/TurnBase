@@ -1,7 +1,7 @@
 {
     "name": "Game.Meta",
     "rootNamespace": "Game.Meta",
-    "references": ["Game.Core", "Game.Data", "Game.Combat", "Game.Services", "Unity.InputSystem", "Unity.2D.PixelPerfect", "Unity.Addressables", "Unity.ResourceManager"],
+    "references": ["Game.Core", "Game.Data", "Game.Combat", "Game.Services", "Unity.InputSystem", "Unity.2D.PixelPerfect", "Unity.Addressables", "Unity.ResourceManager", "Unity.TextMeshPro"],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

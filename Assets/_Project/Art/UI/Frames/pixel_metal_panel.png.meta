@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 1a1773ced7b134e169f5f45878ac0027
+guid: 7605cf3d70a804770854e1f77a274863
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5943619512662027576
-    second: ui_rounded_panel_0
+      213: 2215404736027103391
+    second: pixel_metal_panel_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ui_rounded_panel
+      name: pixel_metal_panel_0
       rect:
         serializedVersion: 2
         x: 0
@@ -121,15 +121,15 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 8, y: 8, z: 8, w: 8}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 
-      internalID: 0
+      spriteID: f901d94aed2bebe10800000000000000
+      internalID: 2215404736027103391
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ui_rounded_panel_0: 5943619512662027576
+      pixel_metal_panel_0: 2215404736027103391
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -333,6 +333,170 @@ tại (sống sót/dựng lại đúng tên) nhưng THIẾU component mà 1 tín
 thêm vào (không chỉ cấu trúc/tên object mới đáng ngờ — component thiếu trên object CŨ cũng đáng
 ngờ y hệt).
 
+### §3.6. Người dùng tự thiết kế UI_Inventory tay + đưa bộ texture pixel-art riêng làm chuẩn chung
+
+Phát hiện `UI_Inventory.prefab` đổi cấu trúc hoàn toàn (`CharacterBox`/`InventoryGridBg` (Grid 24 ô)/
+`StatsBg`, dùng TextMeshPro) — KHÔNG phải do tôi, mà người dùng tự sửa tay trong Editor dùng chung,
+kèm 1 script Editor riêng (`PixelArtUIGenerator.cs`, không nằm trong dự án — chỉ nhận qua chat) sinh
+3 texture pixel-art thật: `pixel_metal_panel.png` (32×32, border 8, xám kim loại), `pixel_bronze_frame.png`
+(16×16, border 6, khung đồng viền TRONG SUỐT ở giữa), `pixel_green_panel.png`/`pixel_blue_panel.png`
+(16×16, border 4). Đã HỎI TRƯỚC khi đụng gì (đúng bài học §3.4/§3.5 — không tự ý ghi đè việc người
+khác đang làm) — được xác nhận 2 việc:
+
+1. **Tôi sửa `InventoryScreen.cs` khớp cấu trúc mới** — viết lại hoàn toàn `BuildShell()`/`Refresh()`:
+   gộp ITEMS+MATERIALS thành 1 danh sách 11 mục (bỏ hẳn tab, `SwitchTabButton` không còn tồn tại
+   trong thiết kế mới); `StatsText` (TMP) hiện đủ tên+số lượng cả 11 mục (vì lưới icon CHƯA đủ ô có
+   con "Icon" để hiện nhãn riêng — chỉ vài ô đầu có, code tự bỏ qua an toàn ô nào thiếu, không
+   crash); tô màu phẳng phân biệt Item/Material tạm thay icon thật (CHƯA có asset icon riêng từng
+   loại). **Giới hạn còn lại, không tự ý thêm:** `UI_Inventory.prefab` hiện KHÔNG có `CloseButton`
+   nào — màn này chưa có cách người chơi tự đóng qua UI, cần người dùng tự thêm khi tiện.
+   Thêm `"Unity.TextMeshPro"` vào `Game.Meta.asmdef` (trước đó chưa có, cần cho `TextMeshProUGUI`).
+   Compile sạch, 632/632 xanh.
+2. **Dùng bộ texture người dùng làm chuẩn chung** — copy `pixel_metal_panel.png` đè lên
+   `ui_rounded_panel.png` (giữ nguyên GUID, chỉ đổi nội dung — cùng đòn bẩy §3.2/§3.3: MỌI Panel/
+   Fill/Button ở 10 màn + TopBar tự động đổi sang texture mới, 0 sửa prefab), cập nhật `.meta`
+   khớp ảnh mới (64×64→32×32, border 14→8, filterMode Bilinear→Point — đúng tinh thần pixel-art
+   cứng nét của script người dùng, không dùng Bilinear như bản gradient cũ của tôi nữa). Verify
+   `Sprite.rect`/`border`/`filterMode` qua `execute_code` đọc thật. 632/632 xanh.
+
+Chưa làm (để dành, chưa được yêu cầu): gán `pixel_bronze_frame.png` (khung viền overlay) hay
+`pixel_green_panel.png`/`pixel_blue_panel.png` (biến thể màu) vào vai trò riêng — hiện mọi nơi vẫn
+dùng chung 1 texture metal xám qua tint như trước, chưa phân vai 4 texture theo ngữ cảnh khác nhau.
+
+### §3.7. `UI_TeamSelect.prefab` bị thay cấu trúc LẦN NỮA (không phải người dùng cố ý) — dựng lại
+
+Người dùng báo "mất hết logic chọn character" — kiểm tra thấy `UI_TeamSelect.prefab` (vừa dựng lại
+scroll-view ở §3.4) giờ chỉ còn `CenterBox/InnerBlue/TitleText` (TMP) — khớp NGUYÊN VĂN kiểu đặt tên
+"CharacterBox/InnerBlue/PlaceholderText" ở §3.6 (UI_Inventory), nhiều khả năng do 1 công cụ generate
+chung bị chạy lại đè lên, không phải người dùng tự tay xoá (đã hỏi xác nhận). Dựng lại TOÀN BỘ
+`Panel/Content/HeroListViewport(RectMask2D+ScrollRect)/HeroListContainer/GearPanelContainer(GearTitle+
+SlotsContainer)/Footer(SelectedLabel+BackButton+StartButton/StartLabel)` qua `execute_code` (Unity
+API, không YAML tay) — verify đủ path `TeamSelectScreen.cs` cần, 632/632 xanh.
+
+**Rủi ro thật đang lộ rõ:** ít nhất 2 lần trong phiên này (`UI_Inventory`, `UI_TeamSelect`), 1 prefab
+bị GHI ĐÈ TOÀN BỘ ngoài ý muốn giữa lúc làm việc — nghi vấn hợp lý nhất: công cụ/generator riêng của
+người dùng (có `MenuItem` "Generate...") có thể đang tạo SCAFFOLD (CenterBox/InnerBlue placeholder)
+cho NHIỀU prefab cùng lúc khi chạy, kể cả những cái đã có nội dung thật. **Khuyến nghị mạnh: commit
+git sớm nhất có thể** — toàn bộ `Assets/_Project/Resources/Prefabs/UI/` hiện KHÔNG có lịch sử git
+nào (xem §3.4), nghĩa là MỌI lần ghi đè ngoài ý muốn tiếp theo (dù do ai/công cụ nào) đều không có gì
+để phục hồi ngoài dựng lại thủ công như 2 lần vừa qua.
+
+### §3.8. 10 màn bị reset đồng loạt về scaffold "CenterBox/InnerBlue" — XÁC NHẬN chủ ý, xây nội dung thật
+
+Ngay sau §3.7, phát hiện `UI_Shop.prefab` (và soát tiếp thấy CẢ 9 màn khác — Codex/Summon/Dungeon/
+HeroDetail/Quest/Mail/TrialBoss/NodeChoice/Tower) đều bị reset về CÙNG 1 scaffold tối giản 4 object
+(`CenterBox`[sprite `pixel_bronze_frame`, Sliced, neo stretch 5%-95%] > `InnerBlue`[sprite
+`pixel_blue_panel`, Sliced, lấp đầy trừ 16px viền] > `TitleText`[TMP, cỡ 48, đã tự set đúng tên màn]).
+Hỏi lại — người dùng XÁC NHẬN đây là bước RESET CHỦ Ý (tự tay hoặc qua tool) để bắt đầu build UI_02
+thật từ nền sạch, không phải sự cố.
+
+**Nhận ra scaffold này TỐT hơn hệ cũ của tôi:** `CenterBox` dùng `pixel_bronze_frame.png` làm khung
+9-slice THẬT qua neo stretch + `Image.type=Sliced` (không phải ghép bitmap tay như tôi thử compose
+Python trước đó — thử ghép tay bị lỗi viền đôi/rối, còn cách neo-stretch của Unity xử lý đúng, sạch).
+`InnerBlue` lồng bên trong làm nền nội dung. **Quyết định: GIỮ NGUYÊN 2 lớp này, chỉ THÊM nội dung
+mỗi màn cần vào bên trong** (không phá lại từ đầu theo hệ `ui_rounded_panel.png` cũ).
+
+**Vướng mắc kỹ thuật phát hiện:** mọi script cũ (`QuestScreen.cs`, `ShopScreen.cs`,...) đều gọi
+`_root.transform.Find("Panel")` — nhưng scaffold mới gọi lớp khung là `"CenterBox"`, không phải
+`"Panel"` → đổi tên `CenterBox` → `"Panel"` (1 dòng, giữ nguyên mọi con bên trong kể cả `InnerBlue`)
+ở TỪNG file — cách rẻ nhất khớp lại toàn bộ code cũ mà không phải sửa 10 script.
+
+**Dựng nội dung thật (Unity API qua `execute_code`, KHÔNG YAML tay — đúng kỷ luật §3.4/§3.5) cho
+đủ 10 màn, tái dùng bộ texture người dùng theo vai trò nhất quán:**
+- `pixel_green_panel.png` — nút CLAIM/reward-type (hành động nhận thưởng, tích cực).
+- `pixel_blue_panel.png` — nút BUY/CHOOSE/UPGRADE-type (hành động trung tính).
+- `pixel_metal_panel.png` — nút CLOSE/phụ + nền hàng skill.
+- `pixel_bronze_frame.png` — khung Portrait (HeroDetail), thêm 1 vai trò MỚI ngoài panel chính.
+- Legacy `UnityEngine.UI.Text` cho nội dung ĐỘNG (giữ nguyên, khớp code cũ không sửa) — TMP
+  `TitleText` gốc của scaffold giữ lại làm tiêu đề trang trí ở màn KHÔNG cần "Title" động qua code;
+  2 màn CẦN "Title" động (`NodeChoice`/`HeroDetail`) tắt TMP cũ, thêm `Text` legacy tên "Title" riêng.
+- Quest/Tower: 6 row. TrialBoss: 4 row (3 tier+1 attack). Dungeon: 4 row (KHÔNG cần WalletLabel —
+  `DungeonScreen.cs` không gọi). Mail: 6 row + `ClaimAllButton`. Shop: 10 row (`BuyButton`). Codex:
+  6 row (ẩn `ClaimButton`) + `SwitchTabButton`/`PrevButton`/`NextButton`. NodeChoice: 3 row + `Title`
+  riêng + `WalletLabel`=mô tả + `CloseButton` nhãn "CONTINUE". Summon: không row —
+  `PullOneButton`/`PullTenButton`/`ResultsText`. HeroDetail: đủ `Title`/`LevelLabel`/`ExpBar`
+  (Fill kiểu Filled dùng `pixel_green_panel`)/`PortraitFrame`(bronze)+Mask+Sprite/`StatsContainer`
+  (6 stat 2 cột)/`SkillListContainer`(5 dòng)/`AscendButton`/`CloseButton`.
+
+**Verify:** đối chiếu ĐẦY ĐỦ path từng script cần qua `execute_code` cho cả 10 màn (không chỉ
+`.Find()!=null` — cả đúng loại component, đúng bài học §3.4 vòng 3) — 100% khớp. Quét lại TOÀN BỘ
+14 file 1 lần cuối (transforms + Panel) xác nhận ổn định, không file nào bị đè lại giữa chừng.
+632/632 test xanh.
+
+**Nhắc lại khuyến nghị committg git** — vẫn CHƯA có commit nào cho `Assets/_Project/Resources/
+Prefabs/UI/` sau tất cả việc này; nếu có lần overwrite tiếp theo (dù chủ ý hay không), vẫn phải dựng
+lại thủ công như 3 lần vừa qua.
+
+### §3.9. Không phải UI_TeamSelect — 2 widget con (`UI_HeroCard`/`UI_GearSlotRow`) cũng bị reset
+
+Người dùng báo lại NRE tại `RefreshHeroList():262` tưởng là `UI_TeamSelect.prefab` "chưa được
+revert" — kiểm tra thấy `UI_TeamSelect.prefab` THẬT RA vẫn nguyên vẹn (15 transform, có `Panel`).
+Thủ phạm thật: `UI_HeroCard.prefab` (widget 1 dòng hero, `Instantiate` từ `TeamSelectScreen.cs`)
+cũng bị đợt reset ở §3.8 quét trúng — còn lại `UI_HeroCard > InnerBlue > NameText` (TMP), thiếu
+`Fill`/`PortraitRing`/`LevelLabel`/`GearLabel`/`Toggle`. Sửa: đổi `InnerBlue`→`"Fill"` (khớp tên code
+cần), tắt `NameText` TMP cũ, thêm đủ `PortraitRing`(bronze frame)+Mask+Sprite/`NameLabel`/
+`LevelLabel`/`GearLabel`/`Toggle`(green)+`ToggleLabel` (legacy Text, khớp code cũ).
+
+**Chủ động soát thêm** (đúng bài học §3.7 — 1 lần reset thường quét trúng NHIỀU file cùng lúc, không
+chỉ file bị báo lỗi): `UI_GearSlotRow.prefab` cũng bị đổi nội dung (thành `Slot_0..4` — mẫu lưới ô
+vuông không liên quan gì tới gear-row, có thể do tool áp nhầm 1 mẫu chung) — dù CHƯA kịp crash (nằm
+sau bước hero-list trong luồng) nhưng chắc chắn sẽ hỏng ngay khi người dùng chọn xong hero. Xoá
+`Slot_0..4`, dựng lại đúng `SlotNameLabel`/`ItemLabel`/`EquipButton`+`EquipLabel`/`EnhanceButton`+
+`EnhanceLabel`/`ReforgeButton`+`ReforgeLabel` (glue: blue=Equip/Reforge, metal nâu=Enhance).
+
+Verify đủ loại component (không chỉ tồn tại object) cho cả 2 widget, 632/632 xanh.
+
+### §3.10. TopBar đồng nhất màu + icon leader + icon nhân vật ở Codex
+
+Yêu cầu: "sửa lại cho ngay ngắn giống product hơn và bổ sung icon charactor. UIRoot -> Topbar cũng
+sửa lại cho đồng nhất". Hỏi rõ vị trí icon nhân vật qua AskUserQuestion — chọn CẢ HAI (Codex + TopBar).
+
+- [x] **TopBar đồng bộ màu/texture** — `Fill` trước đó `sprite=none` (màu phẳng, không khớp 10 màn
+      dùng texture pixel-art) → wire `pixel_metal_panel`. Nút điều hướng (Tower/TrialBoss/Dungeon/
+      Mail/Codex/Inventory/Quest) đổi từ tint vàng phẳng trên `ui_rounded_panel` → sprite
+      `pixel_blue_panel` trắng (khớp ngôn ngữ "hành động trung tính" đã dùng ở BuyButton/UpgradeButton
+      trong 10 màn). `SummonButton` (tím cũ) → `pixel_green_panel` (khớp "hành động tích cực/thưởng"
+      của ClaimButton). `SettingsButton` giữ `pixel_metal_panel` tint xám (phụ).
+- [x] **Icon leader trên TopBar** — `LeaderPortrait` mới (khung `pixel_bronze_frame` 36×36 + Mask +
+      Sprite), đặt ngay sau `TitleLabel` (x=150, vùng trống đo thật còn 107px trước cụm nút Tower).
+      `MetaSceneInstaller.cs`: field `_leaderPortrait`, bind trong `BindCanvasRefs()`, method mới
+      `RefreshLeaderPortrait()` (đọc `_profile.Heroes[0].DefId`, load portrait cùng quy ước
+      `HeroDetailScreen`) gọi trong `RefreshMap()` (chạy mỗi lần vào Meta/đổi map — đủ tần suất, hero
+      đầu roster hiếm khi đổi nên không cần hook vào mọi callback đổi profile).
+- [x] **Icon nhân vật trong Codex** — thêm `Icon` (Image) vào cả 6 `Row_i` (đẩy `NameLabel` sang phải
+      34px nhường chỗ). `CodexScreen.cs`: field `_icons[]`, bind trong `BuildShell()`, helper mới
+      `SetIcon(icon, folder, defId, unlocked)` — dùng ĐÚNG quy ước portrait tĩnh
+      `Art/Characters/{Heroes,Enemies}/{defId}/{defId}_v1_00` (xác nhận qua `find` thật: enemy CŨNG
+      có file này, không chỉ hero) — ẩn icon khi chưa mở khoá (khớp tinh thần "???" của tên, không lộ
+      hình trước khi gặp/sở hữu thật).
+- [x] Compile sạch, verify path/component thật qua `execute_code` (không đoán), 632/632 xanh.
+
+### §3.11. TopBar full-width + icon-only + phát hiện thêm 1 chỗ bị revert âm thầm
+
+Yêu cầu: "TopBar thay các text bằng các icon và thanh bar kéo full độ rộng màn hình". Kiểm tra
+trước khi sửa (đúng kỷ luật đã rút ra) — phát hiện các nút TopBar đã tự lặng lẽ quay về bản CHỮ +
+kích thước gốc to (90×44...), KHÔNG còn icon compact 42×40 đã làm ở §3.2 — do `git checkout` khôi
+phục Boot.unity ở §3.4 dùng số liệu ĐÃ ĐO TỪ ĐẦU (bản chữ gốc) để dựng lại phần bị mất, không phải
+áp lại bản icon (lúc đó ưu tiên sửa crash trước, chưa quay lại áp lại icon — nay làm luôn).
+
+- [x] `TopBar` chuyển từ neo cố định 780px → neo stretch 2 mép (`anchorMin={0,1}`, `anchorMax={1,1}`)
+      — tự co giãn theo màn hình thật thay vì để trống lề 2 bên (90px mỗi bên trước đó).
+- [x] Vẽ thêm 2 icon mới (`icon_gear.png`, `icon_summon.png`, cùng `Tools/pixel-art-pipeline/scripts/
+      nav_icons.py`) — đủ bộ 9 icon cho toàn bộ nút TopBar.
+- [x] Toàn bộ 9 nút (Tower/TrialBoss/Dungeon/Codex/Mail/Inventory/Quest/Settings/Summon) chuyển
+      hẳn icon-only — xoá `Label` chữ, `Icon` full khung trừ lề 7px. Tính lại vị trí tận dụng
+      chiều rộng dư ra (960 thay vì 780) — verify 0 chồng lấn qua code tính span tuyệt đối (như mọi
+      lần trước), không đoán.
+- [x] **Phát hiện thêm khi verify:** `TitleLabel` CŨNG đã âm thầm quay lại kiểu neo CENTER rộng
+      300px (đúng lỗi đã sửa 1 lần ở §3.2, bị `git checkout` cuốn theo) — nếu không bắt kịp sẽ đè
+      lên cả cụm icon trái lẫn `WalletLabel` khi bar full-width. Sửa lại y hệt lần trước (neo trái,
+      rộng 130px).
+- [x] Lưu `Boot.unity`, verify trên đĩa (đếm GUID icon mới + `anchorMin/anchorMax` TopBar), 632/632
+      xanh.
+
+Chưa làm (nhỏ, để dành nếu cần): `WalletLabel` vẫn thuần chữ số (Gold/Gem) — chưa có icon đồng
+tiền/gem riêng đặt trước số, do chưa có asset icon currency.
+
 ## §4. Giai đoạn 3 — layout 11 màn (yêu cầu MỚI, mở rộng phạm vi) — ĐANG LÀM
 
 Qua AskUserQuestion, người dùng chọn làm CẢ 11 màn (không chỉ vài màn ưu tiên), thứ tự đề xuất:
@@ -350,3 +514,66 @@ asset icon/khung mới cho từng loại nội dung — CHƯA bắt đầu, cầ
 + thiết kế bố cục mới trước khi sửa prefab hàng loạt. Ghi tiến độ tại đây khi bắt đầu — nhóm theo độ
 ưu tiên (Battle HUD trước, vì đó là nơi VFX cũng đang sửa cùng lúc > TeamSelect/HeroDetail > Shop/
 Inventory > còn lại), cập nhật checklist mỗi lượt, không đợi xong hết 11 màn mới cập nhật 1 lần.
+
+### §4.1. `UI_TeamSelect` — 2 lỗi CÓ THẬT người dùng báo ("thiếu icon hero", "gear bị xô lệch") — ĐÃ SỬA
+
+Người dùng báo 2 việc, cả hai xác nhận là bug thật qua `execute_code` đọc/dựng `TeamSelectScreen`
+thật với `LocalPlayerRepository.CreateNew()` và cả save file thật trên đĩa (24 hero, DefId khớp
+100% art folder — loại trừ giả thuyết thiếu asset), KHÔNG đoán:
+
+1. **`UI_GearSlotRow.prefab` root có sẵn 1 `HorizontalLayoutGroup`** (`childControlWidth/Height=True,
+   childForceExpandWidth/Height=True, spacing=10`) — KHÔNG do tôi hay lịch sử task này thêm (không
+   khớp bất kỳ note nào ở §3.9). Component này CHỈ tác động sau 1 lần layout pass thật (không thấy
+   ngay lúc `Instantiate` — phải gọi `Canvas.ForceUpdateCanvases()` mới lộ), nên các lần verify
+   trước bằng cách đọc `RectTransform` ngay sau dựng đều "xanh" giả. Verify thật: dựng `SlotsContainer`
+   sống rồi ép layout — 5 phần tử (`SlotNameLabel/ItemLabel/EquipButton/EnhanceButton/ReforgeButton`)
+   bị ép co giãn ngang thành 1 dải chồng khít nhau, hoàn toàn khác bố cục 2 tầng đã thiết kế — đúng
+   "xô lệch" người dùng thấy. Sửa: xoá hẳn `HorizontalLayoutGroup` qua `PrefabUtility.LoadPrefabContents`
+   (không sửa YAML tay, đúng kỷ luật §3.4).
+2. **Lỗi thứ 2, nặng hơn, PHÁT HIỆN THÊM khi đo (không phải người dùng báo riêng)**: dù không có
+   `HorizontalLayoutGroup`, 6 dòng gear × `rowH=60` (giá trị đã "chốt" ở task-phase-5-gaps.md) vẫn
+   ĐÈ vào `FormationRow` runtime — đo qua `GetWorldCorners()` sau khi dựng màn thật: dòng cuối kết
+   thúc ở content-top offset 392, `FormationRow` bắt đầu ở 374 → chồng 18px. Nguyên nhân: `Content`
+   SỐNG hiện tại cao 456px, khác con số 480px dùng để chốt `rowH=60` trước đây (lệch do các lần
+   scaffold-reset §3.7-3.9 dựng lại `UI_TeamSelect.prefab` không đo lại ràng buộc `FormationRow` —
+   component này được TẠO Ở RUNTIME bởi script, không nằm trong prefab nên ai dựng lại prefab cũng
+   không thấy được để tránh). Sửa đồng bộ: `rowH` 60→52 (cả hằng số trong
+   `TeamSelectScreen.RefreshGearPanel()` lẫn `sizeDelta` gốc của `UI_GearSlotRow.prefab`), co lại
+   `EquipButton/EnhanceButton/ReforgeButton` (26px→20px cao) + dịch `ReforgeButton` lên khớp. Verify
+   lại bằng đúng phép đo trên: dòng cuối kết thúc ở 368, `FormationRow` bắt đầu 374 → cách 6px, hết
+   chồng lấn. **Rủi ro tương tự đã xảy ra 1 lần trước (task-teamselect-start-button-fix.md) — lần
+   này khác chỗ (gear panel thay vì footer) nhưng CÙNG 1 nguyên nhân gốc: `FormationRow` không nằm
+   trong prefab nên mọi lần dựng/sửa prefab UI_TeamSelect cần đo lại ràng buộc này bằng
+   `execute_code`, không suy diễn từ số cũ.**
+3. **"Thiếu icon hero"** — hỏi lại người dùng qua `AskUserQuestion` (icon nhỏ 52px trong danh sách
+   hero bên trái ĐÃ hoạt động đúng, verify bằng dựng màn thật với save file thật) — xác nhận ý người
+   dùng là **bảng Gear bên phải hoàn toàn KHÔNG có chân dung hero nào**, chỉ có chữ tiêu đề. Thêm
+   `GearPortrait` (44×44, tái dùng đúng mẫu `PortraitRing/PortraitMask/PortraitSprite` của
+   `UI_HeroCard` — khung `pixel_bronze_frame`, `Mask` ẩn `showMaskGraphic`) vào đầu `GearPanelContainer`,
+   dịch `GearTitle` sang phải + cao lên khớp dải header 52px mới. `TeamSelectScreen.cs`: field
+   `_gearPortraitImg`, bind trong `BuildShell()`, set `sprite`/`enabled` trong `RefreshGearPanel()`
+   theo hero đang xem (tắt khi không có hero nào được chọn). **Bắt lỗi tay 1 lần khi làm**: đặt sai
+   dấu `anchoredPosition.y` của `SlotsContainer` (dùng `+56` thay vì `-56` — pivot/anchor TOP nghĩa
+   là Y càng ÂM càng xuống thấp) khiến dòng gear đầu tiên đè lên header mới — bắt được NGAY nhờ đo
+   lại bằng `execute_code` sau mỗi bước thay vì tin theo logic tay, sửa lại đúng.
+4. **Phát hiện thêm khi verify text**: đo `Text.cachedTextGeneratorForLayout.GetPreferredHeight`
+   thật cho `ItemLabel` (2 dòng: rarity+tên, main+sub-stat) — dòng 2 dòng chuẩn (1-2 sub-stat, phổ
+   biến nhất) cần ~34px chiều cao, trong khi bản gốc TỪ TRƯỚC (60px-row, `ItemLabel` cao 32) đã THIẾU
+   2px, và bản đầu tôi thử co (30px) thiếu tới 4px. Chỉnh lại `SlotNameLabel`/`ItemLabel` để
+   `ItemLabel` được 33px (chỉ thiếu ~1px so với nhu cầu — mức chấp nhận được, tốt hơn bản gốc). Món
+   đồ Mythic tối đa 4 sub-stat (hiếm, không phải ca thường gặp) cần tới 51px — không đủ chỗ ngay
+   cả ở thiết kế GỐC, đây là giới hạn tồn tại từ trước, KHÔNG phải regression của lần sửa này, ghi
+   nhận lại nhưng không mở rộng phạm vi sửa thêm (chưa được yêu cầu, cần 1 thiết kế row khác hẳn để
+   xử lý — ví dụ chữ nhỏ hơn hoặc rút gọn hiển thị sub-stat — để dành).
+
+**Verify:** dựng `TeamSelectScreen` thật qua reflection (cả với `LocalPlayerRepository.CreateNew()`
+lẫn dữ liệu chính xác từ save file thật trên đĩa), đo `RectTransform`/`GetWorldCorners()` sau
+`Canvas.ForceUpdateCanvases()` (không tin số liệu TRƯỚC khi layout chạy — bài học từ lỗi #1), đo
+`Text.cachedTextGeneratorForLayout` cho `ItemLabel` ở cả 4 rarity. `refresh_unity` compile sạch,
+0 lỗi console. **632/632 test xanh** (không đổi khỏi baseline — thay đổi thuần UI/prefab, không đụng
+logic có test).
+
+Chưa làm (để dành, chưa được yêu cầu thêm): rút gọn hiển thị `ItemLabel` cho món Mythic nhiều
+sub-stat nhất (xem mục 4 trên); các phần còn lại của "chuyên nghiệp như UI_01/UI_02" (bố cục tổng
+thể TeamSelect, không chỉ 2 lỗi này) vẫn CHƯA làm — đây chỉ là sửa 2 bug cụ thể người dùng báo,
+không phải làm hết Giai đoạn 3 cho màn này.

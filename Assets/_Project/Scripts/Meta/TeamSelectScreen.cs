@@ -62,6 +62,7 @@ namespace Game.Meta
         private RectTransform _heroListContainer, _gearSlotsContainer;
         private Text _gearTitleLabel, _selectedLabel, _startLabel;
         private Button _backButton, _startButton;
+        private Image _gearPortraitImg;
 
         private PlayerProfileDto _profile;
         private MapNodeDto _node;
@@ -129,6 +130,9 @@ namespace Game.Meta
             var gearPanel = content.Find("GearPanelContainer");
             _gearTitleLabel = gearPanel.Find("GearTitle").GetComponent<Text>();
             _gearSlotsContainer = gearPanel.Find("SlotsContainer").GetComponent<RectTransform>();
+            // GearPortrait — chân dung lớn của hero đang xem trang bị, thêm cùng lượt sửa lỗi
+            // "thiếu icon hero" người dùng báo (bảng Gear trước đây chỉ có chữ tiêu đề).
+            _gearPortraitImg = gearPanel.Find("GearPortrait/PortraitMask/PortraitSprite").GetComponent<Image>();
 
             var footer = content.Find("Footer");
             _selectedLabel = footer.Find("SelectedLabel").GetComponent<Text>();
@@ -313,22 +317,24 @@ namespace Game.Meta
             if (hero == null)
             {
                 _gearTitleLabel.text = "No hero selected.";
+                _gearPortraitImg.enabled = false;
                 return;
             }
 
             string heroName = HeroName(hero.DefId);
             _gearTitleLabel.text = $"{heroName} — GEAR";
+            _gearPortraitImg.sprite = Resources.Load<Sprite>($"Art/Characters/Heroes/{hero.DefId}/{hero.DefId}_v1_00");
+            _gearPortraitImg.enabled = _gearPortraitImg.sprite != null;
 
             var rowPrefab = Resources.Load<GameObject>(GearSlotRowPrefabPath);
-            // 60 (không phải 44 = chiều cao gốc prefab) — chừa chỗ cho dòng rarity+sub-stat thứ 2
-            // ở ItemLabel (task-equipment.md follow-up) + ReforgeButton mới (task-phase-5-gaps.md
-            // Phần C). Trước là 66 — GIẢM xuống 60 vì phát hiện lúc thêm ReforgeButton: 6 dòng ×
-            // 66 khiến dòng CUỐI (slot 5) chồng lên `FormationRow` (band content-bottom [46,82],
-            // vẽ SAU nên đè + chặn raycast — cùng loại lỗi task-teamselect-start-button-fix.md,
-            // chỉ khác chưa ai bấm trúng chỗ đó để báo). 60 giữ đúng khoảng cách 6px giữa các dòng
-            // (không đổi bố cục nội bộ 1 dòng) và đẩy đáy dòng cuối lên content-bottom=92, cách
-            // FormationRow(82) 10px — xác nhận qua execute_code đọc RectTransform sống.
-            const float rowH = 60f;
+            // 52 — đo lại thật qua execute_code (task-ui-vfx-polish.md, người dùng báo "gear bị xô
+            // lệch"): ở kích thước Content SỐNG hiện tại (856×456, đã đổi so với lúc chốt 60 trước
+            // đây), 6 dòng × 60 đã ĐÈ vào FormationRow tạo runtime 18px (content-top 392 > 374) —
+            // lỗi thật, không phải cảm tính, xác nhận bằng GetWorldCorners() sau khi dựng màn thật.
+            // 52 (khớp chiều cao mới của prefab UI_GearSlotRow, nút Equip/Enhance/Reforge co 26→20)
+            // đẩy đáy dòng cuối lên content-top 368, cách FormationRow(374) 6px — xác nhận lại bằng
+            // execute_code sau khi sửa. Cũng là chiều cao dải header GearTitle+GearPortrait mới.
+            const float rowH = 52f;
 
             for (int i = 0; i < SLOTS.Length; i++)
             {

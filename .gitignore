@@ -31,6 +31,11 @@ Thumbs.db
 # Crashlytics
 crashlytics-build.properties
 
+# Editor crash artifacts
+mono_crash.*.json
+/Assets/_Recovery/
+/Assets/_Recovery.meta
+
 # Asset import overrides
 ExportedObj/
 *.apk
