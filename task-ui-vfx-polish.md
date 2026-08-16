@@ -606,3 +606,37 @@ côi):** `CharacterBox` (nửa trái màn, ~47% bề rộng) hiện chỉ có `P
 "INVENTORY" — không có chân dung/stat hero nào dù không gian đủ lớn; `Grid` 24 ô nhưng chỉ 5 ô đầu
 (`Slot_0..4`) có con `Icon` thật, 19 ô còn lại là placeholder trống vô hại (không phải bug — do
 `GridLayoutGroup` tự xếp lúc runtime, không phải chồng lấn).
+
+### §4.3. `UI_Shop` — chuyển từ list phẳng 10 dòng sang lưới thẻ (card grid) 2×5 — XONG
+
+Bố cục cũ: `RowListContainer` xếp dọc 10 `Row_i` (chỉ `NameLabel`+`BuyButton`, không nền, không
+icon) — đúng kiểu "danh sách" bị chê trong §4 (yêu cầu người dùng: bố cục chuyên nghiệp như
+UI_01/UI_02, không phải danh sách phẳng).
+
+- [x] Đo hình học thật bằng `execute_code` trước khi sửa (đúng kỷ luật đã rút ra nhiều lần) —
+      phát hiện `WalletLabel`/`RowListContainer`/`CloseButton` là con của `Panel`, KHÔNG phải con
+      của `InnerBlue` như đoán ban đầu (gây 1 lần NRE khi thử `innerBlue.Find("RowListContainer")`
+      — sửa lại đúng cha `panel.Find(...)`).
+- [x] Tính lại toàn bộ layout bằng số (không đoán): `InnerBlue` 848×470 (Panel 864×486 trừ viền
+      16px, Panel = 90% của Canvas 960×540 cố định) → Title chiếm 15% trên cùng, `WalletLabel`
+      giữ nguyên vị trí cũ (đã đủ cách Title), lưới thẻ 2 cột × 5 hàng bắt đầu ngay dưới Wallet
+      (gap 12px) và kết thúc trên `CloseButton` (gap 16px) — verify không chồng lấn bằng cộng trừ
+      tay trên toạ độ local `InnerBlue` (tâm 0, nửa cao 235), không cần đoán qua `GetWorldCorners`
+      vì không có `LayoutGroup` nào can thiệp (đã kiểm `GetComponents<Component>()` trên cả
+      `RowListContainer` lẫn `Row_0` — chỉ có `RectTransform`/`Image`, an toàn hơn hẳn trường hợp
+      từng gây lỗi ở TeamSelect gear row).
+- [x] Mỗi `Row_i` (380×46) nay là 1 THẺ thật: nền `pixel_metal_panel` tint tối bán trong suốt
+      (tách khỏi nền `InnerBlue`), `IconSlot` mới (34×34, `pixel_blue_panel`) tint theo loại —
+      4 dòng đầu (Essence/Core, giá Gem) tím `MATERIAL_TINT`, 6 dòng sau (vật phẩm tiêu hao, giá
+      Gold) xanh dương `ITEM_TINT` — dùng ĐÚNG 2 màu đã chốt ở `InventoryScreen` cho nhất quán
+      toàn game (ánh xạ tĩnh theo thứ tự `CATALOG` cố định trong `ShopScreen.cs`, không cần đổi
+      code vì thứ tự không đổi runtime). `NameLabel`/`BuyButton` co lại vừa khung thẻ hẹp hơn
+      (fontSize 12→10, `NameLabel` bật `Wrap` phòng tên dài "Elemental Bomb").
+      Không cần sửa `ShopScreen.cs` — mọi path `Find()` cũ (`NameLabel`/`BuyButton/Label`/
+      `CloseButton`) không đổi tên/cấp cha.
+- [~] Verify bằng mắt: thử `open_prefab_stage` + `manage_camera screenshot` — gặp lại ĐÚNG giới
+      hạn môi trường đã ghi ở §3 (trả về `BattleCamera`/nền Battle scene thay vì Canvas prefab
+      đang mở isolation) — không phải lỗi mới. Verify thay thế bằng số liệu hình học thật (trên) +
+      xác nhận không có `LayoutGroup` gây bất ngờ.
+- [x] `validate_script` 0 lỗi (không đụng code), `refresh_unity` force+compile 0 lỗi console,
+      **632/632 test xanh**.
