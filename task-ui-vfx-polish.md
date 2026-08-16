@@ -805,3 +805,35 @@ Event/Rest) — xác nhận là **`UI_NodeChoice.prefab`** (đúng màn kế ti�
       (Image/NameLabel/BuyButton+Label) — 100% khớp. `refresh_unity` force+compile 0 lỗi console,
       **632/632 test xanh**. Không cần sửa `NodeChoiceScreen.cs` (tint bake tĩnh theo index, đúng
       điều kiện thứ tự option cố định).
+
+### §4.11. `UI_Tower`/`UI_Dungeon`/`UI_TrialBoss` — card hoá + tint theo trạng thái — XONG (11/11 MÀN)
+
+Cả 3 dùng chung khuôn Quest, đã sạch hình học từ §3.1 (đo lại xác nhận: `CloseButton` cả 3 đều
+trung tính sẵn, không dính bug đỏ). Việc còn lại thuần là card hoá + tín hiệu trạng thái, không có
+bug vị trí nào cần sửa.
+
+- [x] Card hoá toàn bộ hàng ở cả 3 prefab (`pixel_metal_panel`, tint nền `(0.15,0.13,0.12,0.55)`
+      đồng nhất với Mail/Quest/Codex).
+- [x] **Tower/TrialBoss** (2 màn có cấu trúc "N hàng trạng thái tier + 1 hàng hành động cuối"):
+      hàng hành động (CLIMB/ATTACK, luôn là hàng CUỐI cố định — `TIER_ROW_COUNT`/`Row_{TIER_ROW_COUNT}`)
+      nhận tint vàng ấm riêng `(0.85,0.65,0.25,0.35)` để nổi bật là CTA chính, tách khỏi các hàng
+      tier chỉ hiển thị trạng thái. `TowerScreen.cs`/`TrialBossScreen.cs`: field `_rowCards` mới,
+      `Refresh()` set màu mờ hơn khi tier đã `CLAIMED` (bug y hệt kỹ thuật đã dùng ở
+      `MailScreen.CARD_CLAIMED`/`CARD_UNCLAIMED`, duplicate hằng số cục bộ — 3 class độc lập, không
+      đáng tách chung 1 helper cho 2 hằng Color).
+- [x] **Dungeon** (4 hàng ĐỀU là hành động ENTER, không có hàng trạng thái riêng như Tower/TrialBoss)
+      — không bake tint hành động tĩnh (không có hàng nào "đặc biệt hơn" 3 hàng còn lại), thay vào
+      đó `DungeonScreen.cs` mờ hàng nào KHÔNG khả dụng hôm nay (`!IsAvailableToday`, đúng field đã
+      dùng để khoá nút) — cùng tinh thần "phân biệt trạng thái bằng thẻ mờ" nhưng điều kiện khác
+      (theo ngày, không theo đã-nhận).
+- [x] Verify: đối chiếu path+component (Image/NameLabel/ProgressLabel/ClaimButton mỗi hàng +
+      CloseButton) cho cả 6+4+4=14 hàng của 3 prefab — 100% khớp. `validate_script` 0 lỗi cả 3 file
+      (1 warning chung, không mới), `refresh_unity` force+compile 0 lỗi console, **632/632 test
+      xanh**.
+
+**TOÀN BỘ 11/11 MÀN của Giai đoạn 3 (task §4) đã xong**: TeamSelect(§4.1) → Shop(§4.3) →
+Inventory(§4.4) → HeroDetail(§4.5) → Summon(§4.6) → Mail(§4.7) → Quest(§4.8) → Codex(§4.9) →
+NodeChoice(§4.10) → Tower/Dungeon/TrialBoss(§4.11). Còn lại của toàn task (chưa yêu cầu thêm, ghi
+lại để dành): mở rộng `LayoutProfileSwitcher` Landscape cho cả 11 màn (hiện chỉ pilot 3 màn, xem
+roadmap.md §0.1 P6); Battle HUD (`BattleHudScreen`) — màn code-dựng DUY NHẤT chưa nằm trong danh
+sách 11, chưa polish theo cùng ngôn ngữ texture kit này.

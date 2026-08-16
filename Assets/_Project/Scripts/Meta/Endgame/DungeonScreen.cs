@@ -19,10 +19,13 @@ namespace Game.Meta.Endgame
 
         private static readonly DungeonKind[] KINDS =
             { DungeonKind.Gold, DungeonKind.Exp, DungeonKind.Material, DungeonKind.Stone };
+        private static readonly Color CARD_UNAVAILABLE = new(0.15f, 0.13f, 0.12f, 0.25f);
+        private static readonly Color CARD_AVAILABLE = new(0.15f, 0.13f, 0.12f, 0.55f);
 
         private GameObject _root;
         private Text[] _nameLabels;
         private Text[] _progressLabels;
+        private Image[] _rowCards;
         private Button[] _enterButtons;
         private Button _closeButton;
 
@@ -53,12 +56,14 @@ namespace Game.Meta.Endgame
             var list = panel.Find("RowListContainer");
             _nameLabels = new Text[KINDS.Length];
             _progressLabels = new Text[KINDS.Length];
+            _rowCards = new Image[KINDS.Length];
             _enterButtons = new Button[KINDS.Length];
             for (int i = 0; i < KINDS.Length; i++)
             {
                 var row = list.Find($"Row_{i}");
                 _nameLabels[i] = row.Find("NameLabel").GetComponent<Text>();
                 _progressLabels[i] = row.Find("ProgressLabel").GetComponent<Text>();
+                _rowCards[i] = row.GetComponent<Image>();
                 var btn = row.Find("ClaimButton");
                 _enterButtons[i] = btn.GetComponent<Button>();
                 btn.Find("Label").GetComponent<Text>().text = "ENTER";
@@ -102,6 +107,7 @@ namespace Game.Meta.Endgame
                     ? "Not today"
                     : floor >= DungeonSystem.MAX_FLOOR ? "Cleared today" : $"{floor}/{DungeonSystem.MAX_FLOOR} cleared";
                 _enterButtons[i].interactable = DungeonSystem.CanEnter(_profile, kind, now);
+                _rowCards[i].color = availableToday ? CARD_AVAILABLE : CARD_UNAVAILABLE;
             }
         }
     }

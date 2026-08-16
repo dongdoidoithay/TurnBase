@@ -17,11 +17,14 @@ namespace Game.Meta.Endgame
     {
         private const string PrefabPath = "Prefabs/UI/Screens/UI_Tower";
         private static readonly int TIER_ROW_COUNT = TowerSystem.Tiers.Count;
+        private static readonly Color CARD_CLAIMED = new(0.15f, 0.13f, 0.12f, 0.25f);
+        private static readonly Color CARD_LOCKED = new(0.15f, 0.13f, 0.12f, 0.55f);
 
         private GameObject _root;
         private Text _walletLabel;
         private Text[] _nameLabels;
         private Text[] _progressLabels;
+        private Image[] _rowCards;
         private Button _climbButton;
         private Button _closeButton;
 
@@ -54,11 +57,13 @@ namespace Game.Meta.Endgame
             var list = panel.Find("RowListContainer");
             _nameLabels = new Text[TIER_ROW_COUNT];
             _progressLabels = new Text[TIER_ROW_COUNT];
+            _rowCards = new Image[TIER_ROW_COUNT];
             for (int i = 0; i < TIER_ROW_COUNT; i++)
             {
                 var row = list.Find($"Row_{i}");
                 _nameLabels[i] = row.Find("NameLabel").GetComponent<Text>();
                 _progressLabels[i] = row.Find("ProgressLabel").GetComponent<Text>();
+                _rowCards[i] = row.GetComponent<Image>();
                 row.Find("ClaimButton").gameObject.SetActive(false);
 
                 // Box gốc (150×26/90×26) đủ cho text ngắn của QuestScreen nhưng không đủ cho câu
@@ -112,6 +117,7 @@ namespace Game.Meta.Endgame
                     : t.Core > 0 ? $"{t.Gem:N0} Gem · {t.Core} Core" : $"{t.Gem:N0} Gem";
                 _nameLabels[i].text = $"Floor {t.FloorThreshold} — {reward}";
                 _progressLabels[i].text = claimed ? "CLAIMED" : "LOCKED";
+                _rowCards[i].color = claimed ? CARD_CLAIMED : CARD_LOCKED;
             }
         }
     }

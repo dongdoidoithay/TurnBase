@@ -17,11 +17,14 @@ namespace Game.Meta.Endgame
     {
         private const string PrefabPath = "Prefabs/UI/Screens/UI_TrialBoss";
         private const int TIER_ROW_COUNT = 3;
+        private static readonly Color CARD_CLAIMED = new(0.15f, 0.13f, 0.12f, 0.25f);
+        private static readonly Color CARD_LOCKED = new(0.15f, 0.13f, 0.12f, 0.55f);
 
         private GameObject _root;
         private Text _walletLabel;
         private Text[] _nameLabels;
         private Text[] _progressLabels;
+        private Image[] _rowCards;
         private Button _attackButton;
         private Button _closeButton;
 
@@ -57,11 +60,13 @@ namespace Game.Meta.Endgame
             var list = panel.Find("RowListContainer");
             _nameLabels = new Text[TIER_ROW_COUNT];
             _progressLabels = new Text[TIER_ROW_COUNT];
+            _rowCards = new Image[TIER_ROW_COUNT];
             for (int i = 0; i < TIER_ROW_COUNT; i++)
             {
                 var row = list.Find($"Row_{i}");
                 _nameLabels[i] = row.Find("NameLabel").GetComponent<Text>();
                 _progressLabels[i] = row.Find("ProgressLabel").GetComponent<Text>();
+                _rowCards[i] = row.GetComponent<Image>();
                 // Bậc thưởng chỉ hiển thị trạng thái — không có hành động thủ công (tự nhận
                 // thưởng ngay sau trận), ẩn nút để tránh gây hiểu nhầm là bấm được.
                 var claimBtn = row.Find("ClaimButton");
@@ -119,6 +124,7 @@ namespace Game.Meta.Endgame
                 bool claimed = _profile.TrialBoss.ClaimedTier > i;
                 _nameLabels[i].text = $"Tier {i + 1} — {t.DamageThreshold:N0} dmg · {t.Gem} Gem + {t.Shards} Shards";
                 _progressLabels[i].text = claimed ? "CLAIMED" : "LOCKED";
+                _rowCards[i].color = claimed ? CARD_CLAIMED : CARD_LOCKED;
             }
         }
     }
