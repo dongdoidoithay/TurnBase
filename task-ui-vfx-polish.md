@@ -738,3 +738,19 @@ không phải sửa lỗi vị trí.
       ClaimButton) + `ClaimAllButton`/`CloseButton` — 100% khớp. `validate_script` 0 lỗi (1 warning
       chung "null-check GetComponent" — cùng mẫu chấp nhận được ở mọi màn khác, không phải lỗi
       mới), `refresh_unity` force+compile 0 lỗi console, **632/632 test xanh**.
+
+### §4.8. `UI_Quest` — card hoá 6 dòng + tint phân biệt Daily/Achievement — XONG
+
+Cấu trúc gốc giống hệt Mail trước khi sửa (Mail vốn clone từ chính prefab này) — không có bug
+chồng lấn, `CloseButton` đã trung tính sẵn (không dính lỗi đỏ như HeroDetail/Summon).
+
+- [x] Card hoá 6 `Row_i` như Mail (`pixel_metal_panel`), nhưng KHÔNG dùng 1 tint đồng nhất — tận
+      dụng đặc điểm riêng của Quest: `ROW_COUNT=6` cố định V1 gồm ĐÚNG 3 Daily (`Row_0..2`) + 3
+      Achievement (`Row_3..5`), thứ tự không đổi runtime (`QuestScreen.cs` comment "cố định V1") —
+      cùng điều kiện đã cho phép bake tint tĩnh ở Shop (thứ tự `CATALOG` cố định). Daily nhận tint
+      xanh dương nhạt, Achievement nhận tint tím nhạt — ĐÚNG 2 gia đình màu
+      `ITEM_TINT`/`MATERIAL_TINT` đã dùng ở `InventoryScreen` cho ý nghĩa tương đồng (thường
+      xuyên/reset vs đặc biệt/vĩnh viễn), pha loãng alpha 0.28 để chỉ là lớp phủ nhẹ, không lấn chữ.
+      Không cần sửa `QuestScreen.cs` — tint bake tĩnh trong prefab, code không đụng màu row.
+- [x] Verify: đối chiếu path+component cả 6 `Row_i` + `CloseButton` — 100% khớp. `refresh_unity`
+      force+compile 0 lỗi console, **632/632 test xanh**.
