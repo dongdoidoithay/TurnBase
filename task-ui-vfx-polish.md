@@ -888,3 +888,43 @@ cho ra `Panel.rect=(0,0,0,0)` — GIỐNG NHƯ LO NGẠI. Nhưng test THẬT SÁ
 **Phạm vi:** 10/11 màn modal + TeamSelect = 11/12 màn đã có Landscape pilot (Inventory để dành).
 Vẫn là PILOT — số liệu Landscape tự thiết kế dựa trên tính toán CanvasScaler thật, chưa qua playtest
 màn hình ngang thật (giới hạn môi trường: không chụp được ảnh Play-mode overlay UI, xem §3).
+
+## §6. Battle HUD — chuyển từ texture procedural (bilinear) sang cùng ngôn ngữ pixel-art 11 màn Meta
+
+`BattleHudScreen.cs` là màn code-dựng DUY NHẤT chưa theo bộ texture kit `pixel_*.png` (đã ghi ở
+cuối §4.11) — tự vẽ `RoundedSprite()` (texture 32×32 procedural, radius 9, BILINEAR mượt) cho MỌI
+panel/thanh máu/nút tactic, khác hẳn Point-filter cứng nét của mọi màn Meta khác. Đây là lệch duy
+nhất còn lại so với nguyên tắc đã chốt ở §0: "giữ nền tảng pixel-art, KHÔNG chuyển sang smooth-shaded".
+
+- [x] **Vướng kỹ thuật phát hiện ngay khi bắt tay vào**: `Resources.Load<Sprite>("Art/UI/Frames/
+      pixel_metal_panel")` trả `null` — file gốc `Assets/_Project/Art/UI/Frames/*.png` KHÔNG nằm
+      trong thư mục `Resources/` (11 màn Meta dùng qua tham chiếu serialize trực tiếp trong prefab,
+      không qua `Resources.Load`, nên trước giờ không ai cần đường dẫn Resources cho các file này).
+      `BattleHudScreen` dựng 100% bằng code (không prefab) nên bắt buộc cần `Resources.Load`.
+      Giải pháp: COPY (không move — giữ nguyên bản gốc + GUID cũ cho 11 prefab, bản copy nhận GUID
+      mới) `pixel_metal_panel.png`/`pixel_bronze_frame.png` sang `Resources/Art/UI/Frames/`, cấu
+      hình `TextureImporter` khớp CHÍNH XÁC bản gốc (đọc thật rồi copy số: Point filter, border 8/6,
+      PPU 100, Uncompressed, alphaIsTransparency) qua `execute_code`, không đoán.
+- [x] `MetalPanelSprite()`/`BronzeFrameSprite()` mới (cache tĩnh, cùng mẫu `RoundedSprite`/
+      `CircleSprite` cũ) — thay `RoundedSprite()` ở ĐỦ 3 nơi dùng: `Panel()` (5 panel chính: Hero/
+      Enemy/DamageMeter/Analyze/SkillGrid — border=`pixel_bronze_frame` tint theo accent màu từng
+      khối, fill=`pixel_metal_panel` tint `PANEL_BG` tối — ĐÚNG cấu trúc "khung màu ngoài + nền tối
+      trong" đã dùng suốt 11 màn Meta), `BuildTacticRow` (5 nút GUARD/ESC/SWAP/FOCUS/ANALYZE), `Bar()`
+      (nền HP/SP/ULT — phần fill vẫn giữ nguyên `Image.Type.Filled` màu phẳng, đúng bắt buộc kỹ
+      thuật của progress bar, không đổi).
+- [x] **Xoá hẳn `RoundedSprite()`** (không giữ code chết) sau khi xác nhận 0 nơi gọi còn lại —
+      `CircleSprite()` (avatar tròn hero/enemy) giữ nguyên, CHỦ Ý không đổi sang khung vuông
+      `pixel_bronze_frame` như Portrait ở Meta screens — avatar tròn là quy ước HUD chiến đấu hợp lý
+      riêng (không có gì sai/lệch để sửa), đổi sẽ là thay đổi hình dạng chứ không phải đồng bộ màu.
+- [x] Verify: dựng `BattleHudScreen` thật qua reflection (gọi `BuildLayout()` private trực tiếp,
+      không cần `CombatSimulation` vì hàm này không đụng `_sim`) — đọc thẳng `Image.sprite.name` sau
+      khi dựng: `HeroPanel` border=`pixel_bronze_frame` (tint xanh lá HERO_ACCENT đúng), fill=
+      `pixel_metal_panel` (tint tối đúng); thanh máu đầu tiên (`BarBg`)=`pixel_metal_panel`; nút
+      `TacticBtn_GUARD`=`pixel_metal_panel` — 4/4 điểm kiểm không null, đúng sprite mong đợi.
+      `validate_script` 0 lỗi (1 warning chung không mới), `refresh_unity` force+compile 0 lỗi
+      console, **632/632 test xanh** (1 lần gặp lỗi kết nối MCP tạm thời "No Unity Editor instances
+      found" — chạy lại thành công ngay).
+
+Chưa làm (chưa yêu cầu thêm, ghi lại để dành): avatar tròn vẫn dùng `CircleSprite()` riêng (quyết
+định giữ nguyên, không phải thiếu sót); Landscape cho HUD trận mới pilot 1 panel (`HeroPanel`, có
+từ trước task này) — chưa mở rộng cho Enemy/DamageMeter/Analyze/SkillGrid panel.

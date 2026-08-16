@@ -36,6 +36,9 @@ mono_crash.*.json
 /Assets/_Recovery/
 /Assets/_Recovery.meta
 
+# MCP-tool debug screenshots (manage_camera screenshot output)
+/Assets/Screenshots/
+
 # Asset import overrides
 ExportedObj/
 *.apk

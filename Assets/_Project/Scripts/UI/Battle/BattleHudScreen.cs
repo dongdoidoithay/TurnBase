@@ -423,7 +423,7 @@ namespace Game.UI.Battle
                 rt.sizeDelta = new Vector2(cell, cell);
 
                 var bg = go.AddComponent<Image>();
-                bg.sprite = RoundedSprite();
+                bg.sprite = MetalPanelSprite();
                 bg.type = Image.Type.Sliced;
                 bg.color = new Color(colors[col].r * 0.25f, colors[col].g * 0.25f,
                                      colors[col].b * 0.25f, 0.92f);
@@ -757,43 +757,28 @@ namespace Game.UI.Battle
         // Helper dựng UI — panel bo góc + viền màu (thay hình chữ nhật phẳng cũ)
         // =====================================================================
 
-        private static Sprite _roundedSprite;
+        private static Sprite _metalPanelSprite;
 
-        /// <summary>Sprite bo góc dựng ở runtime, dùng chung cho mọi panel (9-slice) —
-        /// không cần asset ngoài, cạnh mượt (bilinear) khác hẳn nhân vật pixel-art (point).</summary>
-        private static Sprite RoundedSprite()
+        /// <summary>task-ui-vfx-polish.md §6 — texture pixel-art dùng chung với 11 màn Meta (Point
+        /// filter, cứng nét) thay cho <see cref="RoundedSprite"/> (procedural bilinear, mượt) —
+        /// trước đây HUD trận là màn DUY NHẤT không theo ngôn ngữ hình ảnh chung của game. File gốc
+        /// ở <c>Art/UI/Frames/</c> (dùng qua tham chiếu serialize trong 11 prefab, không cần
+        /// Resources) — copy 1 bản sang <c>Resources/Art/UI/Frames/</c> (GUID mới, không đụng bản
+        /// gốc) vì màn này dựng code thuần, cần <see cref="Resources.Load"/>.</summary>
+        private static Sprite MetalPanelSprite()
         {
-            if (_roundedSprite != null) return _roundedSprite;
+            if (_metalPanelSprite == null)
+                _metalPanelSprite = Resources.Load<Sprite>("Art/UI/Frames/pixel_metal_panel");
+            return _metalPanelSprite;
+        }
 
-            const int size = 32;
-            const float radius = 9f;
-            const float aa = 1.5f;
-            var tex = new Texture2D(size, size, TextureFormat.RGBA32, false)
-            {
-                filterMode = FilterMode.Bilinear,
-                wrapMode = TextureWrapMode.Clamp
-            };
+        private static Sprite _bronzeFrameSprite;
 
-            var pixels = new Color32[size * size];
-            for (int y = 0; y < size; y++)
-            {
-                for (int x = 0; x < size; x++)
-                {
-                    float px = x + 0.5f, py = y + 0.5f;
-                    float nx = Mathf.Clamp(px, radius, size - radius);
-                    float ny = Mathf.Clamp(py, radius, size - radius);
-                    float dist = Vector2.Distance(new Vector2(px, py), new Vector2(nx, ny));
-                    float alpha = Mathf.Clamp01((radius - dist) / aa + 0.5f);
-                    pixels[y * size + x] = new Color32(255, 255, 255, (byte)(alpha * 255));
-                }
-            }
-            tex.SetPixels32(pixels);
-            tex.Apply();
-
-            int b = Mathf.CeilToInt(radius);
-            _roundedSprite = Sprite.Create(tex, new Rect(0, 0, size, size), new Vector2(0.5f, 0.5f),
-                                           100f, 0, SpriteMeshType.FullRect, new Vector4(b, b, b, b));
-            return _roundedSprite;
+        private static Sprite BronzeFrameSprite()
+        {
+            if (_bronzeFrameSprite == null)
+                _bronzeFrameSprite = Resources.Load<Sprite>("Art/UI/Frames/pixel_bronze_frame");
+            return _bronzeFrameSprite;
         }
 
         private static Sprite _circleSprite;
@@ -842,7 +827,7 @@ namespace Game.UI.Battle
             rt.sizeDelta = size;
 
             var border = go.AddComponent<Image>();
-            border.sprite = RoundedSprite();
+            border.sprite = BronzeFrameSprite();
             border.type = Image.Type.Sliced;
             border.color = accent;
 
@@ -852,7 +837,7 @@ namespace Game.UI.Battle
             frt.anchorMin = Vector2.zero; frt.anchorMax = Vector2.one;
             frt.offsetMin = new Vector2(3, 3); frt.offsetMax = new Vector2(-3, -3);
             var fill = fillGo.AddComponent<Image>();
-            fill.sprite = RoundedSprite();
+            fill.sprite = MetalPanelSprite();
             fill.type = Image.Type.Sliced;
             fill.color = PANEL_BG;
             fill.raycastTarget = false;
@@ -951,7 +936,7 @@ namespace Game.UI.Battle
             brt.anchoredPosition = pos;
             brt.sizeDelta = size;
             var bimg = bg.AddComponent<Image>();
-            bimg.sprite = RoundedSprite();
+            bimg.sprite = MetalPanelSprite();
             bimg.type = Image.Type.Sliced;
             bimg.color = new Color(0.08f, 0.06f, 0.09f, 0.95f);
             bimg.raycastTarget = false;
