@@ -672,3 +672,26 @@ gian đủ lớn.
 
 Chưa làm (để dành, chưa yêu cầu thêm): 19/24 ô lưới vẫn chưa có `Icon` con (đã ghi ở §4.2, không
 phải regression của lượt này); icon thật theo từng loại vật phẩm (vẫn tô màu phẳng tạm).
+
+### §4.5. `UI_HeroDetail` — bố cục vốn đã tốt, chỉ 1 bug chồng lấn thật + đồng bộ màu — XONG
+
+Khác Shop/Inventory, màn này bố cục CHÍNH đã hợp lý từ trước (portrait+level+exp+stat cột trái,
+skill list card-style cột phải, đúng tinh thần UI_02 2 cột) — đo tay `execute_code` toàn bộ 8 khối
+con của `Panel` trước khi kết luận cần sửa gì, tránh sửa mù chỉ vì "làm cho đẹp hơn":
+
+- [x] Phát hiện 1 bug hình học THẬT: `StatsContainer` (đáy tính ra `y=-167`) chồng lên
+      `AscendButton` (đỉnh `y=-163`) đúng 4px — do `sizeDelta.y=110` khai báo dư so với nội dung
+      thật (3 hàng × 30 spacing + 26 cao hàng cuối = 86). Các `Row_STR..LUK` định vị theo
+      `anchoredPosition` riêng của từng hàng (không phụ thuộc `sizeDelta` container) nên hạ
+      `sizeDelta.y` 110→90 KHÔNG dịch hàng nào, chỉ kéo đáy box lên đúng chỗ — gap sau sửa = 16px
+      (verify lại bằng đúng phép cộng trừ toạ độ Panel-local, không đoán).
+- [x] Thêm nền thẻ (`pixel_metal_panel`, tint `(0.25,0.25,0.3,0.55)`) cho `StatsContainer` — khớp
+      ĐÚNG tint đã dùng sẵn cho mỗi `Row_i` của `SkillListContainer` (màn này vốn đã "card hoá"
+      skill list từ trước, chỉ khối stat bên trái bị bỏ sót), cho 2 khối cân xứng thị giác.
+- [x] Đồng bộ màu `CloseButton`: trước đó đỏ `(0.5,0.2,0.2)` — khác quy ước trung tính
+      `(0.42,0.40,0.38)` đã dùng cho đúng vai trò CLOSE ở `UI_Shop`/`UI_Inventory` (phát hiện qua
+      soát tính nhất quán, đúng tinh thần câu hỏi "TopBar phải đồng nhất" trước đó).
+- [x] Verify: đối chiếu ĐỦ 35 path+loại component (`Title`/`LevelLabel`/`ExpBar`/`Portrait`/6 dòng
+      Stat/5 dòng Skill×4 phần tử/`AscendButton`×3/`CloseButton`) mà `HeroDetailScreen.cs` cần —
+      35/35 khớp. Không sửa `HeroDetailScreen.cs` (thuần đổi số liệu/màu tĩnh trong prefab).
+      `refresh_unity` force+compile 0 lỗi console, **632/632 test xanh**.
