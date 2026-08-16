@@ -719,3 +719,22 @@ không phải sửa lỗi vị trí.
       `PullOneButton`/`PullTenButton`/`CloseButton` — 6/6 khớp. `validate_script` 0 lỗi cả
       `SummonScreen.cs` lẫn `TeamSelectScreen.cs`, `refresh_unity` force+compile 0 lỗi console
       (chứng minh `internal` đủ quyền truy cập xuyên 2 file cùng assembly), **632/632 test xanh**.
+
+### §4.7. `UI_Mail` — card hoá 6 dòng + phân biệt trực quan đã nhận/chưa nhận — XONG
+
+Đo hình học trước: KHÔNG có bug chồng lấn (giống Summon, khác Shop/Inventory) — nhưng
+`WalletLabel`/`RowListContainer`/`CloseButton`/`ClaimAllButton` là con TRỰC TIẾP của `Panel`
+(không phải `InnerBlue`) — đúng mẫu đã xác nhận ở Shop, tính lại mốc theo `Panel` (864×486, nửa
+243) thay vì `InnerBlue` (nhắc lại để không lặp lại nhầm lẫn ban đầu ở §4.3).
+
+- [x] 6 `Row_i` trước đó KHÔNG có nền (chữ trôi nổi trực tiếp, đúng kiểu "danh sách phẳng" như Shop
+      trước khi sửa) — thêm `Image` nền `pixel_metal_panel` tint card giống Shop
+      `(0.15,0.13,0.12,0.55)`.
+- [x] Thêm phân biệt **đã nhận/chưa nhận bằng mắt**: `MailScreen.cs` field `_rowCards` mới (bind
+      trong `BuildShell()`), `Refresh()` set màu thẻ mờ hơn hẳn khi `m.Claimed`
+      (`CARD_CLAIMED` alpha 0.25 so với `CARD_UNCLAIMED` alpha 0.55) — trước đó chỉ phân biệt qua
+      chữ "CLAIMED" nhỏ trong `ProgressLabel` + nút Claim bị khoá, dễ bỏ sót khi liếc nhanh 6 dòng.
+- [x] Verify: đối chiếu đủ path+component cho cả 6 `Row_i` (Image/NameLabel/ProgressLabel/
+      ClaimButton) + `ClaimAllButton`/`CloseButton` — 100% khớp. `validate_script` 0 lỗi (1 warning
+      chung "null-check GetComponent" — cùng mẫu chấp nhận được ở mọi màn khác, không phải lỗi
+      mới), `refresh_unity` force+compile 0 lỗi console, **632/632 test xanh**.

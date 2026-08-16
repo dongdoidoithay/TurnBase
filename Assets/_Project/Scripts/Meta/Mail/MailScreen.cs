@@ -20,9 +20,13 @@ namespace Game.Meta.Mail
         private const string PrefabPath = "Prefabs/UI/Screens/UI_Mail";
         private const int ROW_COUNT = 6;
 
+        private static readonly Color CARD_UNCLAIMED = new(0.15f, 0.13f, 0.12f, 0.55f);
+        private static readonly Color CARD_CLAIMED = new(0.15f, 0.13f, 0.12f, 0.25f);
+
         private GameObject _root;
         private Text _walletLabel;
         private GameObject[] _rows;
+        private Image[] _rowCards;
         private Text[] _nameLabels;
         private Text[] _progressLabels;
         private Button[] _claimButtons;
@@ -68,6 +72,7 @@ namespace Game.Meta.Mail
 
             var list = panel.Find("RowListContainer");
             _rows = new GameObject[ROW_COUNT];
+            _rowCards = new Image[ROW_COUNT];
             _nameLabels = new Text[ROW_COUNT];
             _progressLabels = new Text[ROW_COUNT];
             _claimButtons = new Button[ROW_COUNT];
@@ -75,6 +80,7 @@ namespace Game.Meta.Mail
             {
                 var row = list.Find($"Row_{i}");
                 _rows[i] = row.gameObject;
+                _rowCards[i] = row.GetComponent<Image>();
                 _nameLabels[i] = row.Find("NameLabel").GetComponent<Text>();
                 _progressLabels[i] = row.Find("ProgressLabel").GetComponent<Text>();
                 var btn = row.Find("ClaimButton");
@@ -140,6 +146,9 @@ namespace Game.Meta.Mail
                 _nameLabels[i].text = m.Title;
                 _progressLabels[i].text = m.Claimed ? "CLAIMED" : FormatRewardLine(m);
                 _claimButtons[i].interactable = !m.Claimed;
+                // Thẻ mờ hơn khi đã nhận — phân biệt đã-đọc/chưa-đọc bằng mắt, không chỉ đọc chữ
+                // "CLAIMED" nhỏ trong ProgressLabel.
+                _rowCards[i].color = m.Claimed ? CARD_CLAIMED : CARD_UNCLAIMED;
             }
 
             _claimAllButton.interactable = mail.Any(m => !m.Claimed);
