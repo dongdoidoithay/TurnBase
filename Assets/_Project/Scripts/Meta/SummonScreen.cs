@@ -1,6 +1,7 @@
 using System.Text;
 using Game.Core;
 using Game.Core.Random;
+using Game.Core.UI;
 using Game.Data;
 using Game.Data.Dto;
 using Game.Meta.Gacha;
@@ -61,6 +62,7 @@ namespace Game.Meta
             _root = Instantiate(prefab, transform);
 
             var panel = _root.transform.Find("Panel");
+            LayoutProfileSwitcher.ApplyStretchPanelLandscape(panel.gameObject, "SummonPanel");
             _walletLabel = panel.Find("WalletLabel").GetComponent<Text>();
             _resultsLabel = panel.Find("ResultsPanel/ResultsText").GetComponent<Text>();
 

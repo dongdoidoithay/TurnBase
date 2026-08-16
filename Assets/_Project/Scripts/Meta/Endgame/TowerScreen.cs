@@ -1,4 +1,5 @@
 using Game.Core;
+using Game.Core.UI;
 using Game.Data.Dto;
 using Game.Services.Audio;
 using UnityEngine;
@@ -52,6 +53,7 @@ namespace Game.Meta.Endgame
             _root = Instantiate(prefab, transform);
 
             var panel = _root.transform.Find("Panel");
+            LayoutProfileSwitcher.ApplyStretchPanelLandscape(panel.gameObject, "TowerPanel");
             _walletLabel = panel.Find("WalletLabel").GetComponent<Text>();
 
             var list = panel.Find("RowListContainer");

@@ -1,4 +1,5 @@
 using Game.Core;
+using Game.Core.UI;
 using Game.Data;
 using Game.Data.Dto;
 using Game.Services.Audio;
@@ -53,6 +54,7 @@ namespace Game.Meta.Endgame
             _root = Instantiate(prefab, transform);
 
             var panel = _root.transform.Find("Panel");
+            LayoutProfileSwitcher.ApplyStretchPanelLandscape(panel.gameObject, "DungeonPanel");
             var list = panel.Find("RowListContainer");
             _nameLabels = new Text[KINDS.Length];
             _progressLabels = new Text[KINDS.Length];

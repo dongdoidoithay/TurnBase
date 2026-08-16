@@ -837,3 +837,54 @@ NodeChoice(§4.10) → Tower/Dungeon/TrialBoss(§4.11). Còn lại của toàn t
 lại để dành): mở rộng `LayoutProfileSwitcher` Landscape cho cả 11 màn (hiện chỉ pilot 3 màn, xem
 roadmap.md §0.1 P6); Battle HUD (`BattleHudScreen`) — màn code-dựng DUY NHẤT chưa nằm trong danh
 sách 11, chưa polish theo cùng ngôn ngữ texture kit này.
+
+## §5. Mở rộng Landscape ra 11 màn (theo yêu cầu, tiếp sau khi 11/11 màn layout xong)
+
+**Điều tra quan trọng TRƯỚC khi làm** — nghi vấn bug nghiêm trọng, đã bác bỏ bằng đo thật: mọi
+prefab root (`UI_Shop` v.v.) có `anchorMin=anchorMax=(0,0)`, `sizeDelta=(0,0)` — trông như "kích
+thước 0, mọi thứ bên trong vô hình". Test trực tiếp dưới 1 Canvas thật (`CanvasScaler` 960×540)
+cho ra `Panel.rect=(0,0,0,0)` — GIỐNG NHƯ LO NGẠI. Nhưng test THẬT SÁT với production (dựng
+`ShopScreen` trên 1 GameObject CHỈ có `Transform` thường — đúng như `MetaSceneInstaller` thật sự là
+(xác nhận qua `Meta.unity` YAML: `m_Father: {fileID: 0}`, KHÔNG nằm dưới bất kỳ Canvas nào, và
+`SceneManager.LoadScene("Meta")` không hề `SetParent` reparent gì) — cho ra `Panel.rect=(864, 486)`
+ĐÚNG tỷ lệ mong đợi. Kết luận: Unity có fallback hợp lý cho RectTransform không có Canvas tổ tiên
+(không phải bug) — các màn hoạt động đúng thật. Ghi lại đầy đủ để không ai lặp lại điều tra này.
+
+- [x] Thêm `LayoutProfileSwitcher.ApplyStretchPanelLandscape(panelGo, namePrefix)` — helper dùng
+      chung cho khuôn Panel stretch-anchor (0.05-0.95 cả 2 trục) của 10/11 màn: Portrait = chụp
+      nguyên trạng (không đổi hành vi), Landscape = CHỈ nới biên DỌC 0.05→0.02 mỗi bên (+6% chiều
+      cao) — tính toán thật với `CanvasScaler` (referenceResolution 960×540, matchWidthOrHeight
+      0.5): màn hình ngang thật rộng hơn 16:9 (phổ biến ~19.5:9-21:9) khiến chiều cao canvas theo
+      đơn vị canvas CO LẠI so với 540 (ví dụ ~489 với màn 2340×1080, tính tay bằng công thức
+      geometric-mean của CanvasScaler) — nới biên bù lại phần hụt đó, tránh nội dung đã đo tay
+      (thường cần gần hết 470px chiều cao Panel) bị chồng lấn. KHÔNG đổi biên ngang (dư bề rộng,
+      không phải rủi ro tràn — chỉ tạo thêm khoảng trống 2 bên, chấp nhận được).
+- [x] Nối vào 10 màn: `ShopScreen`/`HeroDetailScreen`/`SummonScreen`/`MailScreen`/`QuestScreen`/
+      `CodexScreen`/`NodeChoiceScreen`/`TowerScreen`/`DungeonScreen`/`TrialBossScreen` — mỗi màn
+      chỉ thêm 1 dòng gọi `LayoutProfileSwitcher.ApplyStretchPanelLandscape(panel.gameObject, "Xxx")`
+      ngay sau `panel = _root.transform.Find("Panel")`.
+- [x] `TeamSelectScreen` dùng KỸ THUẬT KHÁC (giống pattern gốc của `SettingsScreen`, không dùng
+      helper trên) vì `Panel` của màn này là cỡ CỐ ĐỊNH (880×480, neo giữa), không phải
+      stretch-anchor. CHỦ Ý không đổi chiều CAO — nội bộ `Content`/`HeroListViewport`/
+      `GearPanelContainer`/`Footer` đo pixel cố định, màn này đã dính ≥3 lần bug chồng lấn thật
+      trong lịch sử (`task-teamselect-start-button-fix.md`, §4.1 của task này) — đổi chiều cao sẽ
+      đụng lại đúng rủi ro đó. Chỉ nới rộng ngang 880→920 (tận dụng khoảng trống ngang thật).
+- [x] `UI_Inventory` **CHỦ Ý BỎ QUA** — không dùng khuôn 1 Panel duy nhất như 10 màn kia mà có 3
+      khối `CharacterBox`/`InventoryGridBg`/`StatsBg` là 3 fraction ĐỘC LẬP của root (không lồng
+      trong 1 Panel chung), với `InventoryGridBg` (0.35-0.95) và `StatsBg` (0.05-0.32) chia sẻ 1
+      biên chung (khoảng cách 0.03) — áp công thức nới-biên-đều risk làm 2 khối này CHỒNG LẤN nhau
+      nếu không tính lại quan hệ 3 khối cẩn thận. Để dành, không đoán liều — cần 1 lượt riêng thiết
+      kế lại quan hệ 3 khối trước khi làm Landscape cho màn này.
+- [x] Verify: dựng `ShopScreen` VÀ `TeamSelectScreen` thật qua reflection (không mock), đọc field
+      `_portrait`/`_landscape` của chính `LayoutProfileSwitcher` instance đã gắn — xác nhận đúng số
+      cho cả 2 (`ShopPanel`: Portrait anchorMin/Max=(0.05,0.05)-(0.95,0.95), Landscape=
+      (0.05,0.02)-(0.95,0.98); `TeamSelectPanel`: Portrait sizeDelta=880×480, Landscape=920×480),
+      và xác nhận switcher THẬT SỰ tự áp Landscape khi `Screen.width>height` (Editor Game View đang
+      ở tỉ lệ ngang lúc test — quan sát trực tiếp field `_root` panel đã áp đúng profile Landscape
+      trước khi tôi gọi tay). `validate_script` 0 lỗi cả 12 file, `refresh_unity` force+compile 0
+      lỗi console, **632/632 test xanh** (test job đầu tiên gặp lỗi kết nối MCP tạm thời "No Unity
+      Editor instances found" — chạy lại thành công ngay, không phải lỗi code).
+
+**Phạm vi:** 10/11 màn modal + TeamSelect = 11/12 màn đã có Landscape pilot (Inventory để dành).
+Vẫn là PILOT — số liệu Landscape tự thiết kế dựa trên tính toán CanvasScaler thật, chưa qua playtest
+màn hình ngang thật (giới hạn môi trường: không chụp được ảnh Play-mode overlay UI, xem §3).

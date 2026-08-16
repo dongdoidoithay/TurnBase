@@ -1,4 +1,5 @@
 using Game.Core;
+using Game.Core.UI;
 using Game.Data.Dto;
 using Game.Meta.Hero;
 using Game.Services.Audio;
@@ -78,6 +79,7 @@ namespace Game.Meta.Codex
             _root = Instantiate(prefab, transform);
 
             var panel = _root.transform.Find("Panel");
+            LayoutProfileSwitcher.ApplyStretchPanelLandscape(panel.gameObject, "CodexPanel");
             _statusLabel = panel.Find("WalletLabel").GetComponent<Text>();
 
             var list = panel.Find("RowListContainer");

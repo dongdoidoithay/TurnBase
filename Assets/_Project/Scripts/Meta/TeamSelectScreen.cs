@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Game.Core;
 using Game.Core.Random;
+using Game.Core.UI;
 using Game.Data;
 using Game.Data.Dto;
 using Game.Meta.Battle;
@@ -120,6 +121,23 @@ namespace Game.Meta
             _root = Instantiate(prefab, transform);
 
             var panel = _root.transform.Find("Panel");
+
+            // task-ui-vfx-polish.md §5 — Landscape pilot mở rộng: Panel dùng cỡ CỐ ĐỊNH (880×480,
+            // neo giữa) khác hẳn khuôn stretch-anchor của 10 màn modal kia (xem
+            // LayoutProfileSwitcher.ApplyStretchPanelLandscape) — CHỦ Ý không đổi chiều CAO cho
+            // Landscape (nội bộ Content/HeroListViewport/GearPanelContainer/Footer đo pixel cố định,
+            // đã dính ≥3 lần bug chồng lấn thật trong lịch sử màn này — task-teamselect-start-button-
+            // fix.md, task-ui-vfx-polish.md §4.1 — đổi chiều cao sẽ đụng lại đúng rủi ro đó). Chỉ nới
+            // rộng ngang (880→920) tận dụng khoảng trống thật khi màn hình ngang, không đụng bố cục
+            // dọc bên trong.
+            var panelRt = (RectTransform)panel;
+            var teamSelectPortrait = LayoutProfile.CaptureFrom(panelRt, "TeamSelectPanel_Portrait");
+            var teamSelectLandscape = teamSelectPortrait;
+            teamSelectLandscape.Name = "TeamSelectPanel_Landscape";
+            teamSelectLandscape.SizeDelta = new Vector2(teamSelectPortrait.SizeDelta.x + 40f, teamSelectPortrait.SizeDelta.y);
+            var teamSelectSwitcher = panel.gameObject.AddComponent<LayoutProfileSwitcher>();
+            teamSelectSwitcher.SetProfiles(panelRt, teamSelectPortrait, teamSelectLandscape);
+
             var content = panel.Find("Content");
 
             // HeroListContainer nay nằm trong HeroListViewport (RectMask2D + ScrollRect) —

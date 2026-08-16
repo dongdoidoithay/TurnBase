@@ -1,5 +1,6 @@
 using Game.Core;
 using Game.Core.Random;
+using Game.Core.UI;
 using Game.Data.Dto;
 using Game.Meta.Dungeon;
 using Game.Services.Audio;
@@ -62,6 +63,7 @@ namespace Game.Meta
             _root = Instantiate(prefab, transform);
 
             var panel = _root.transform.Find("Panel");
+            LayoutProfileSwitcher.ApplyStretchPanelLandscape(panel.gameObject, "NodeChoicePanel");
             _titleLabel = panel.Find("Title").GetComponent<Text>();
             _descriptionLabel = panel.Find("WalletLabel").GetComponent<Text>();
 

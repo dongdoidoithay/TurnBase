@@ -61,5 +61,31 @@ namespace Game.Core.UI
         /// <summary>Hàm thuần theo đúng chữ ký task-phase-5-gaps.md §E1.</summary>
         public static LayoutProfile PickProfile(int width, int height, LayoutProfile portrait, LayoutProfile landscape)
             => IsLandscape(width, height) ? landscape : portrait;
+
+        /// <summary>
+        /// task-ui-vfx-polish.md §5 — mở rộng Landscape ra 11 màn modal dùng chung khuôn Panel
+        /// stretch-anchor (anchorMin≈(0.05,0.05), anchorMax≈(0.95,0.95), sizeDelta=0 — xem mọi
+        /// <c>UI_*.prefab</c> ở <c>Resources/Prefabs/UI/Screens/</c> trừ <c>UI_TeamSelect</c>).
+        /// Portrait = chụp lại đúng số liệu hiện có (không đổi hành vi). Landscape = CHỈ nới lỏng
+        /// biên DỌC (0.05→0.02 mỗi bên, +6% chiều cao) — theo tính toán thật với
+        /// <c>CanvasScaler</c> (referenceResolution 960×540, matchWidthOrHeight 0.5): trên màn hình
+        /// ngang thật rộng hơn 16:9 (phổ biến ở điện thoại, ~19.5:9-21:9), chiều cao canvas theo đơn
+        /// vị canvas CO LẠI so với 540 (vd ~489 với màn 2340×1080) — nới biên dọc bù lại phần hụt
+        /// đó để nội dung đã đo tay (thường cần gần hết chiều cao 470px của panel) không bị chồng
+        /// lấn. KHÔNG đổi biên NGANG — màn hình ngang dư bề rộng, không phải rủi ro tràn, chỉ tạo
+        /// thêm khoảng trống 2 bên (chấp nhận được, đúng tinh thần pilot).
+        /// </summary>
+        public static LayoutProfileSwitcher ApplyStretchPanelLandscape(GameObject panelGo, string namePrefix)
+        {
+            var rt = (RectTransform)panelGo.transform;
+            var portrait = LayoutProfile.CaptureFrom(rt, namePrefix + "_Portrait");
+            var landscape = portrait;
+            landscape.Name = namePrefix + "_Landscape";
+            landscape.AnchorMin = new Vector2(portrait.AnchorMin.x, 0.02f);
+            landscape.AnchorMax = new Vector2(portrait.AnchorMax.x, 0.98f);
+            var switcher = panelGo.AddComponent<LayoutProfileSwitcher>();
+            switcher.SetProfiles(rt, portrait, landscape);
+            return switcher;
+        }
     }
 }

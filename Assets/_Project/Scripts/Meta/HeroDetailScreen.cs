@@ -1,4 +1,5 @@
 using Game.Core;
+using Game.Core.UI;
 using Game.Data.Dto;
 using Game.Meta.Content;
 using Game.Meta.Hero;
@@ -67,6 +68,7 @@ namespace Game.Meta
             _root = Instantiate(prefab, transform);
 
             var panel = _root.transform.Find("Panel");
+            LayoutProfileSwitcher.ApplyStretchPanelLandscape(panel.gameObject, "HeroDetailPanel");
             _title = panel.Find("Title").GetComponent<Text>();
             _levelLabel = panel.Find("LevelLabel").GetComponent<Text>();
             _expLabel = panel.Find("ExpBar/ExpLabel").GetComponent<Text>();

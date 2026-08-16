@@ -1,4 +1,5 @@
 using Game.Core;
+using Game.Core.UI;
 using Game.Data;
 using Game.Data.Dto;
 using Game.Meta.Items;
@@ -93,6 +94,7 @@ namespace Game.Meta
             _root = Instantiate(prefab, transform);
 
             var panel = _root.transform.Find("Panel");
+            LayoutProfileSwitcher.ApplyStretchPanelLandscape(panel.gameObject, "ShopPanel");
             _walletLabel = panel.Find("WalletLabel").GetComponent<Text>();
 
             var list = panel.Find("RowListContainer");

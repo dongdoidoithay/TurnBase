@@ -1,5 +1,6 @@
 using System.Linq;
 using Game.Core;
+using Game.Core.UI;
 using Game.Data;
 using Game.Data.Dto;
 using Game.Services.Audio;
@@ -68,6 +69,7 @@ namespace Game.Meta.Mail
             _root = Instantiate(prefab, transform);
 
             var panel = _root.transform.Find("Panel");
+            LayoutProfileSwitcher.ApplyStretchPanelLandscape(panel.gameObject, "MailPanel");
             _walletLabel = panel.Find("WalletLabel").GetComponent<Text>();
 
             var list = panel.Find("RowListContainer");

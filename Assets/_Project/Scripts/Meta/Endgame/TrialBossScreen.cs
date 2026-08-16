@@ -1,4 +1,5 @@
 using Game.Core;
+using Game.Core.UI;
 using Game.Data.Dto;
 using Game.Services.Audio;
 using UnityEngine;
@@ -52,6 +53,7 @@ namespace Game.Meta.Endgame
             _root = Instantiate(prefab, transform);
 
             var panel = _root.transform.Find("Panel");
+            LayoutProfileSwitcher.ApplyStretchPanelLandscape(panel.gameObject, "TrialBossPanel");
             _walletLabel = panel.Find("WalletLabel").GetComponent<Text>();
             // Box gốc (200×26, Wrap+Truncate) đủ cho "Gold 999999 Gem 999" của QuestScreen nhưng
             // không đủ cho "Best damage this week: N" — nới rộng để số không bị wrap-rồi-mất.
