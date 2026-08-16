@@ -754,3 +754,21 @@ chồng lấn, `CloseButton` đã trung tính sẵn (không dính lỗi đỏ nh
       Không cần sửa `QuestScreen.cs` — tint bake tĩnh trong prefab, code không đụng màu row.
 - [x] Verify: đối chiếu path+component cả 6 `Row_i` + `CloseButton` — 100% khớp. `refresh_unity`
       force+compile 0 lỗi console, **632/632 test xanh**.
+
+### §4.9. `UI_Codex` — card hoá 6 dòng + đồng bộ màu CloseButton (bug đỏ lần thứ 3) — XONG
+
+Cấu trúc gốc = clone `UI_Quest` + `Icon`/`SwitchTabButton`/`PrevButton`/`NextButton` (task-codex.md).
+Không có bug chồng lấn (8px gap giữa hàng nút dưới với `CloseButton`, đo tay xác nhận).
+
+- [x] Card hoá 6 `Row_i` — cùng tint `pixel_metal_panel (0.15,0.13,0.12,0.55)` đã dùng ở Mail/Quest
+      (Codex không có nhóm phụ như Daily/Achievement nên dùng 1 tint đồng nhất, không như Quest).
+- [x] `CloseButton` đỏ `(0.5,0.2,0.2)` → trung tính `(0.42,0.40,0.38)` — ĐÂY LÀ LẦN THỨ 3 gặp đúng
+      bug này (sau HeroDetail §4.5, Summon §4.6) — cả 3 màn đều clone/dựng cùng 1 giai đoạn scaffold
+      §3.8, cùng dính 1 lỗi màu mặc định. Chủ động soát luôn `UI_NodeChoice`/`UI_Tower`/`UI_Dungeon`/
+      `UI_TrialBoss` (chưa tới lượt sửa layout, chỉ đọc màu `CloseButton`) thay vì đợi phát hiện lại
+      từng cái — kết quả: `Tower`/`Dungeon`/`TrialBoss` ĐÃ trung tính sẵn `(0.42,0.40,0.38)` (không
+      dính bug này), riêng `NodeChoice` là trắng thuần `(1,1,1,1)` — khác 2 kiểu lỗi kia, để dành sửa
+      đúng lúc tới lượt màn đó (§4.10) thay vì sửa lạc phạm vi ở đây.
+- [x] Verify: đối chiếu path+component 6 `Row_i` (Image/Icon/NameLabel/ProgressLabel/ClaimButton) +
+      `SwitchTabButton`(+Label)/`PrevButton`/`NextButton`/`CloseButton` — 100% khớp. `refresh_unity`
+      force+compile 0 lỗi console, **632/632 test xanh**.
