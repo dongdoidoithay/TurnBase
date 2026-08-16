@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Game.Core;
+using Game.Core.UI;
 using Game.Data;
 using Game.Data.Dto;
 using Game.Meta.Hero;
@@ -77,6 +78,8 @@ namespace Game.Meta
             var prefab = Resources.Load<GameObject>(PrefabPath);
             _root = Instantiate(prefab, transform);
 
+            ApplyLandscapePilot();
+
             var titleLabel = _root.transform.Find("CharacterBox/InnerBlue/PlaceholderText")
                 ?.GetComponent<TextMeshProUGUI>();
             if (titleLabel != null) titleLabel.text = "INVENTORY";
@@ -102,6 +105,50 @@ namespace Game.Meta
 
             _closeButton = _root.transform.Find("InventoryGridBg/Inner/ActionBg/CloseButton").GetComponent<Button>();
             _closeButton.onClick.AddListener(Close);
+        }
+
+        /// <summary>
+        /// task-ui-vfx-polish.md §7 — Landscape cho màn duy nhất KHÔNG dùng 1 "Panel" chung
+        /// (§5 từng để dành vì rủi ro này): <c>CharacterBox</c>/<c>InventoryGridBg</c>/<c>StatsBg</c>
+        /// là 3 fraction ĐỘC LẬP của root, trong đó <c>InventoryGridBg</c> (đáy 0.35) và
+        /// <c>StatsBg</c> (đỉnh 0.32) chỉ cách nhau 0.03 — không thể áp công thức nới-biên-đều
+        /// (<see cref="LayoutProfileSwitcher.ApplyStretchPanelLandscape"/>) cho từng khối riêng lẻ
+        /// vì sẽ ăn hết/vượt quá khoảng cách 0.03 đó, gây chồng lấn. Thay vào đó tính tay: nới biên
+        /// trên/dưới TOÀN CỤM (0.05→0.02 mỗi bên, +6% chiều cao — cùng lý do CanvasScaler đã tính ở
+        /// §5) rồi CHIA LẠI khoảng trống dư đó theo ĐÚNG TỈ LỆ cũ giữa 3 phần (Grid 66.7% · gap
+        /// 3.3% · Stats 30% trên tổng biên dọc 0.90) thay vì giữ nguyên số tuyệt đối — giữ được
+        /// khoảng cách Grid/Stats tỉ lệ thuận với biên mới (0.03 → 0.03×0.96/0.90≈0.032, làm tròn
+        /// 0.03) thay vì cố định cứng có thể lệch tỉ lệ khi biên đổi.
+        /// </summary>
+        private void ApplyLandscapePilot()
+        {
+            var characterBox = (RectTransform)_root.transform.Find("CharacterBox");
+            var gridBg = (RectTransform)_root.transform.Find("InventoryGridBg");
+            var statsBg = (RectTransform)_root.transform.Find("StatsBg");
+
+            var cbPortrait = LayoutProfile.CaptureFrom(characterBox, "InvCharacterBox_Portrait");
+            var cbLandscape = cbPortrait;
+            cbLandscape.Name = "InvCharacterBox_Landscape";
+            cbLandscape.AnchorMin = new Vector2(cbPortrait.AnchorMin.x, 0.02f);
+            cbLandscape.AnchorMax = new Vector2(cbPortrait.AnchorMax.x, 0.98f);
+            characterBox.gameObject.AddComponent<LayoutProfileSwitcher>()
+                .SetProfiles(characterBox, cbPortrait, cbLandscape);
+
+            var gridPortrait = LayoutProfile.CaptureFrom(gridBg, "InvGridBg_Portrait");
+            var gridLandscape = gridPortrait;
+            gridLandscape.Name = "InvGridBg_Landscape";
+            gridLandscape.AnchorMin = new Vector2(gridPortrait.AnchorMin.x, 0.34f);
+            gridLandscape.AnchorMax = new Vector2(gridPortrait.AnchorMax.x, 0.98f);
+            gridBg.gameObject.AddComponent<LayoutProfileSwitcher>()
+                .SetProfiles(gridBg, gridPortrait, gridLandscape);
+
+            var statsPortrait = LayoutProfile.CaptureFrom(statsBg, "InvStatsBg_Portrait");
+            var statsLandscape = statsPortrait;
+            statsLandscape.Name = "InvStatsBg_Landscape";
+            statsLandscape.AnchorMin = new Vector2(statsPortrait.AnchorMin.x, 0.02f);
+            statsLandscape.AnchorMax = new Vector2(statsPortrait.AnchorMax.x, 0.31f);
+            statsBg.gameObject.AddComponent<LayoutProfileSwitcher>()
+                .SetProfiles(statsBg, statsPortrait, statsLandscape);
         }
 
         private void Close()

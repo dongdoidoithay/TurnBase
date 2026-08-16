@@ -212,6 +212,17 @@ namespace Game.UI.Battle
             var panel = Panel("EnemyPanel", new Vector2(1, 1), new Vector2(1, 1),
                               new Vector2(-12, -12), new Vector2(226, 158), ENEMY_ACCENT);
 
+            // task-ui-vfx-polish.md §7 — cùng kỹ thuật pilot đã có ở HeroPanel: Landscape = chụp
+            // đúng số liệu hiện có (canvas 960×540 vốn thiết kế cho landscape), Portrait = thu hẹp
+            // width ~19% (khớp tỉ lệ HeroPanel 248→200 đã chọn trước) — neo góc phải nên chỉ kéo
+            // cạnh trái vào gần tâm hơn, không bao giờ tạo chồng lấn mới (chỉ giảm diện tích chiếm).
+            var enemyLandscape = LayoutProfile.CaptureFrom(panel, "EnemyPanel_Landscape");
+            var enemyPortrait = enemyLandscape;
+            enemyPortrait.Name = "EnemyPanel_Portrait";
+            enemyPortrait.SizeDelta = new Vector2(182, 158);
+            panel.gameObject.AddComponent<LayoutProfileSwitcher>()
+                 .SetProfiles(panel, enemyPortrait, enemyLandscape);
+
             var title = Label(panel, "ENEMIES", 12, TextAlignmentOptions.TopLeft,
                               new Vector2(10, -8), new Vector2(140, 16));
             title.color = ENEMY_ACCENT;
@@ -275,6 +286,14 @@ namespace Game.UI.Battle
             var panel = Panel("DamageMeterPanel", new Vector2(0, 0), new Vector2(0, 0),
                               new Vector2(12, 14), new Vector2(150, 118), GRID_ACCENT);
 
+            // task-ui-vfx-polish.md §7 — cùng kỹ thuật HeroPanel/EnemyPanel.
+            var meterLandscape = LayoutProfile.CaptureFrom(panel, "DamageMeterPanel_Landscape");
+            var meterPortrait = meterLandscape;
+            meterPortrait.Name = "DamageMeterPanel_Portrait";
+            meterPortrait.SizeDelta = new Vector2(120, 118);
+            panel.gameObject.AddComponent<LayoutProfileSwitcher>()
+                 .SetProfiles(panel, meterPortrait, meterLandscape);
+
             var title = Label(panel, "DAMAGE", 12, TextAlignmentOptions.TopLeft,
                               new Vector2(10, -8), new Vector2(120, 16));
             title.color = GRID_ACCENT;
@@ -312,6 +331,14 @@ namespace Game.UI.Battle
             _analyzePanel = Panel("AnalyzePanel", new Vector2(1, 0), new Vector2(1, 0),
                                   new Vector2(-12, 56), new Vector2(210, 120), ENEMY_ACCENT);
             _analyzePanel.gameObject.SetActive(false);
+
+            // task-ui-vfx-polish.md §7 — cùng kỹ thuật HeroPanel/EnemyPanel/DamageMeterPanel.
+            var analyzeLandscape = LayoutProfile.CaptureFrom(_analyzePanel, "AnalyzePanel_Landscape");
+            var analyzePortrait = analyzeLandscape;
+            analyzePortrait.Name = "AnalyzePanel_Portrait";
+            analyzePortrait.SizeDelta = new Vector2(168, 120);
+            _analyzePanel.gameObject.AddComponent<LayoutProfileSwitcher>()
+                 .SetProfiles(_analyzePanel, analyzePortrait, analyzeLandscape);
 
             var title = Label(_analyzePanel, "ANALYZED:", 11, TextAlignmentOptions.TopLeft,
                               new Vector2(10, -8), new Vector2(190, 15));
@@ -367,6 +394,18 @@ namespace Game.UI.Battle
 
             var panel = Panel("SkillGrid", new Vector2(0.5f, 0), new Vector2(0.5f, 0),
                               new Vector2(0, 58), new Vector2(w, h), GRID_ACCENT);
+
+            // task-ui-vfx-polish.md §7 — CHỦ Ý identity (Portrait=Landscape=số liệu hiện có), khác
+            // HeroPanel/EnemyPanel/DamageMeterPanel/AnalyzePanel: kích thước lưới suy từ `cell`
+            // (52px, mục tiêu chạm thật của người chơi) — thu hẹp panel này đồng nghĩa thu hẹp Ô
+            // KỸ NĂNG, ảnh hưởng thao tác chạm, khác các panel kia chỉ hiện thông tin đọc. Vẫn gắn
+            // switcher (không bỏ qua hẳn) để nhất quán hạ tầng, sẵn sàng tinh chỉnh khi có số liệu
+            // portrait thật (cần giảm `cell`, không chỉ đổi `sizeDelta` panel).
+            var gridProfile = LayoutProfile.CaptureFrom(panel, "SkillGrid_Portrait");
+            var gridProfileLandscape = gridProfile;
+            gridProfileLandscape.Name = "SkillGrid_Landscape";
+            panel.gameObject.AddComponent<LayoutProfileSwitcher>()
+                 .SetProfiles(panel, gridProfile, gridProfileLandscape);
 
             // Hàng 0: skill của hero đang tới lượt.
             for (int c = 0; c < GRID_COLS; c++)

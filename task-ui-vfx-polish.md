@@ -928,3 +928,56 @@ nhất còn lại so với nguyên tắc đã chốt ở §0: "giữ nền tản
 Chưa làm (chưa yêu cầu thêm, ghi lại để dành): avatar tròn vẫn dùng `CircleSprite()` riêng (quyết
 định giữ nguyên, không phải thiếu sót); Landscape cho HUD trận mới pilot 1 panel (`HeroPanel`, có
 từ trước task này) — chưa mở rộng cho Enemy/DamageMeter/Analyze/SkillGrid panel.
+
+## §7. 2 phần còn để dành từ §5/§6 — Inventory Landscape + Battle HUD 4 panel còn lại — XONG
+
+### §7.1. `UI_Inventory` Landscape — tính tay quan hệ 3 khối, không dùng công thức chung
+
+`CharacterBox`/`InventoryGridBg`/`StatsBg` là 3 fraction ĐỘC LẬP của root — áp thẳng công thức
+`ApplyStretchPanelLandscape` (nới đều mỗi khối riêng) có nguy cơ ăn hết khoảng cách 0.03 giữa
+`InventoryGridBg` (đáy 0.35) và `StatsBg` (đỉnh 0.32). Sửa bằng tính tay: nới biên TOÀN CỤM
+(0.05→0.02 mỗi bên, +6% chiều cao — cùng công thức §5), rồi CHIA LẠI phần dư theo ĐÚNG TỈ LỆ cũ
+giữa 3 phần (Grid 66.7% · gap 3.3% · Stats 30% trên tổng biên dọc 0.90) — không giữ số tuyệt đối cố
+định để tránh lệch tỉ lệ khi biên đổi.
+
+- [x] `InventoryScreen.cs`: method `ApplyLandscapePilot()` mới, gọi ngay sau `Instantiate` trong
+      `BuildShell()` — 3 `LayoutProfileSwitcher` riêng cho `CharacterBox`/`InventoryGridBg`/`StatsBg`:
+      - `CharacterBox`: Portrait giữ nguyên (0.02,0.05)-(0.49,0.95); Landscape nới dọc
+        (0.02,0.02)-(0.49,0.98).
+      - `InventoryGridBg`: Portrait giữ nguyên (0.51,0.35)-(0.98,0.95); Landscape
+        (0.51,0.34)-(0.98,0.98).
+      - `StatsBg`: Portrait giữ nguyên (0.51,0.05)-(0.98,0.32); Landscape (0.51,0.02)-(0.98,0.31).
+- [x] Verify: dựng `InventoryScreen` thật qua reflection, áp landscape profile thật lên cả
+      `InventoryGridBg`/`StatsBg`, đo `gridBg.anchorMin.y - statsBg.anchorMax.y = 0.03` (dương, đúng
+      thiết kế, không chồng lấn). `validate_script` 0 lỗi, `refresh_unity` force+compile 0 lỗi
+      console, **632/632 test xanh**.
+
+### §7.2. Battle HUD — Landscape cho 4 panel còn lại (Enemy/DamageMeter/Analyze/SkillGrid)
+
+Cùng kỹ thuật `HeroPanel` đã pilot từ trước (task-phase-5-gaps.md Phần E) — LƯU Ý HƯỚNG NGƯỢC với
+11 màn Meta: canvas tham chiếu 960×540 CHÍNH LÀ hình dạng landscape (16:9), nên **Landscape = chụp
+nguyên số liệu hiện có (không đổi hành vi)**, **Portrait = số liệu MỚI thu hẹp** — đúng thứ tự
+`HeroPanel` đã làm (248→200), không phải "Portrait giữ nguyên" như 11 màn Meta (canvas Meta modal
+dùng khác kiểu anchor).
+
+- [x] `EnemyPanel` (neo góc phải-trên): Landscape=226×158 (hiện có), Portrait=182×158 (−19%, khớp
+      tỉ lệ đã chọn ở HeroPanel).
+- [x] `DamageMeterPanel` (neo góc trái-dưới): Landscape=150×118, Portrait=120×118.
+- [x] `AnalyzePanel` (neo góc phải-dưới): Landscape=210×120, Portrait=168×120.
+- [x] `SkillGrid` (neo giữa-dưới) — **CHỦ Ý identity** (Portrait=Landscape=số liệu hiện có, không
+      thu hẹp): kích thước suy từ `cell=52px` — đây là Ô KỸ NĂNG, mục tiêu CHẠM thật của người
+      chơi, không phải panel chỉ hiển thị đọc như 4 panel kia. Thu hẹp panel này cần giảm `cell`
+      (đổi kích thước nút thật), không chỉ đổi `sizeDelta` — để dành, không đoán liều số liệu ảnh
+      hưởng thao tác. Vẫn gắn `LayoutProfileSwitcher` (không bỏ qua hạ tầng) để nhất quán.
+      Cả 4 panel còn lại chỉ ĐỌC (tên/HP/damage/stat) — thu hẹp width an toàn, không ảnh hưởng
+      tương tác.
+- [x] Verify: dựng `BattleHudScreen` thật qua reflection (`BuildLayout()` trực tiếp) — cả 5 panel
+      (`HeroPanel`/`EnemyPanel`/`DamageMeterPanel`/`AnalyzePanel`/`SkillGrid`) đều có
+      `LayoutProfileSwitcher` gắn thật, `sizeDelta` hiện tại khớp giá trị Landscape mong đợi (switcher
+      tự áp đúng vì Editor Game View đang ở tỉ lệ ngang). `validate_script` 0 lỗi (1 warning chung
+      không mới), `refresh_unity` force+compile 0 lỗi console, **632/632 test xanh**.
+
+**Toàn bộ phạm vi Landscape đã định (§5+§7) nay đã xong: 11/12 màn Meta + Battle HUD đủ 5/5 panel
+chính.** Còn thiếu (chưa yêu cầu, để dành): số liệu Portrait/Landscape vẫn là PILOT tự thiết kế theo
+tính toán CanvasScaler, chưa qua playtest màn hình thật (giới hạn môi trường không chụp được
+Play-mode overlay UI); `SkillGrid` Portrait thật (cần giảm `cell`) vẫn để trống.
