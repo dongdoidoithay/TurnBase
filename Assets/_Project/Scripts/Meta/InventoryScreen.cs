@@ -23,9 +23,8 @@ namespace Game.Meta
     ///   crash), tự động hiện thêm khi prefab có thêm Icon.
     /// - Chưa có icon THẬT theo từng loại vật phẩm (chưa có asset) — tô màu phẳng phân biệt
     ///   Item/Material tạm thời thay icon thật.
-    /// - Prefab hiện KHÔNG có CloseButton nào — <see cref="Close"/> vẫn gọi được qua code
-    ///   (MetaSceneInstaller có thể wire nút khác gọi vào) nhưng chưa có nút bấm thật trên UI để
-    ///   người chơi tự đóng màn này.
+    /// - <see cref="Close"/> nay có CloseButton thật trong `ActionBg` (trước đó trống — người chơi
+    ///   không có cách nào tự đóng màn này, phát hiện qua audit "action không gắn chức năng nào").
     /// </summary>
     public sealed class InventoryScreen : MonoBehaviour
     {
@@ -43,6 +42,7 @@ namespace Game.Meta
 
         private GameObject _root;
         private TextMeshProUGUI _statsText;
+        private Button _closeButton;
         private readonly List<Image> _slotIcons = new(); // phần tử null = ô đó chưa có "Icon" con
 
         private IAudioService _audio;
@@ -81,6 +81,9 @@ namespace Game.Meta
                 var icon = slot.Find("Icon");
                 _slotIcons.Add(icon != null ? icon.GetComponent<Image>() : null);
             }
+
+            _closeButton = _root.transform.Find("InventoryGridBg/Inner/ActionBg/CloseButton").GetComponent<Button>();
+            _closeButton.onClick.AddListener(Close);
         }
 
         private void Close()

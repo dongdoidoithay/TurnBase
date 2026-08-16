@@ -577,3 +577,32 @@ Chưa làm (để dành, chưa được yêu cầu thêm): rút gọn hiển th�
 sub-stat nhất (xem mục 4 trên); các phần còn lại của "chuyên nghiệp như UI_01/UI_02" (bố cục tổng
 thể TeamSelect, không chỉ 2 lỗi này) vẫn CHƯA làm — đây chỉ là sửa 2 bug cụ thể người dùng báo,
 không phải làm hết Giai đoạn 3 cho màn này.
+
+### §4.2. Audit "action UI không gắn chức năng nào" (người dùng hỏi giữa lượt) — 1 lỗi thật, đã sửa
+
+Người dùng hỏi thẳng: "các action trên UI phải gắn với 1 chức năng cụ thể, nhiều chức năng trên UI
+đang không gắn với chức năng nào cả?" — audit thật (không đoán): grep mọi field `Button` +
+`onClick.AddListener` trong cả 13 script màn hình (`ShopScreen`/`InventoryScreen`/`HeroDetailScreen`/
+`SummonScreen`/`MailScreen`/`QuestScreen`/`CodexScreen`/`NodeChoiceScreen`/`TowerScreen`/
+`DungeonScreen`/`TrialBossScreen`/`TeamSelectScreen`/`SettingsScreen`) + `MetaSceneInstaller`
+(9 nút TopBar) + grep tên GameObject `*Button*` trong toàn bộ 14 prefab UI, đối chiếu 2 chiều.
+
+**Kết quả:** 12/13 màn — MỌI `Button` field đều có `onClick.AddListener` thật, không có nút nào
+"chết" (mồ côi) trong prefab lẫn code. **1 lỗi thật duy nhất: `UI_Inventory.prefab`** — hoàn toàn
+KHÔNG có `Button` nào (grep tên GameObject xác nhận 0 match), dù `InventoryScreen.cs` có sẵn
+`ActionBg` (dải nền dưới đáy `Grid`, rõ ràng dựng sẵn để chứa nút) nhưng **0 con bên trong** —
+`InventoryScreen.Close()` tồn tại nhưng KHÔNG có đường gọi nào (xác nhận thêm:
+`MetaSceneInstaller._inventoryButton` gọi `_inventoryScreen.Open(_profile, null)` — callback đóng
+cũng `null`) — người chơi mở Inventory ra thì KHÔNG có cách nào tự đóng qua UI.
+
+**Đã sửa:** thêm `CloseButton` thật vào `ActionBg` (`pixel_metal_panel` — đúng vai trò "CLOSE/phụ"
+đã định ở §3.8) qua `PrefabUtility.LoadPrefabContents`/`SaveAsPrefabAsset` (không sửa YAML tay).
+`InventoryScreen.cs`: field `_closeButton` mới, bind `ActionBg/CloseButton` trong `BuildShell()`,
+`onClick.AddListener(Close)`. Verify: `validate_script` 0 lỗi, `refresh_unity` force+compile 0 lỗi
+console, **632/632 test xanh**.
+
+**Ghi nhận thêm, CHƯA sửa (thuộc phạm vi redesign Inventory đầy đủ ở lượt sau, không phải action mồ
+côi):** `CharacterBox` (nửa trái màn, ~47% bề rộng) hiện chỉ có `PlaceholderText` hiện chữ
+"INVENTORY" — không có chân dung/stat hero nào dù không gian đủ lớn; `Grid` 24 ô nhưng chỉ 5 ô đầu
+(`Slot_0..4`) có con `Icon` thật, 19 ô còn lại là placeholder trống vô hại (không phải bug — do
+`GridLayoutGroup` tự xếp lúc runtime, không phải chồng lấn).
