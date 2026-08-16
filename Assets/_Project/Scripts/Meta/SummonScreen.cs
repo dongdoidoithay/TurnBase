@@ -62,7 +62,7 @@ namespace Game.Meta
 
             var panel = _root.transform.Find("Panel");
             _walletLabel = panel.Find("WalletLabel").GetComponent<Text>();
-            _resultsLabel = panel.Find("ResultsText").GetComponent<Text>();
+            _resultsLabel = panel.Find("ResultsPanel/ResultsText").GetComponent<Text>();
 
             _pullOneButton = panel.Find("PullOneButton").GetComponent<Button>();
             _pullTenButton = panel.Find("PullTenButton").GetComponent<Button>();
@@ -91,7 +91,10 @@ namespace Game.Meta
             {
                 string name = r.HeroDefId != null ? HeroName(r.HeroDefId) : "???";
                 string tag = r.IsNewHero ? "NEW" : r.ShardsGranted > 0 ? $"+{r.ShardsGranted} shard" : "";
-                sb.AppendLine($"{r.Rarity} · {name}  {tag}");
+                // Tô màu theo rarity — tái dùng ĐÚNG bảng màu TeamSelectScreen.RarityColor đã dùng
+                // cho nhãn độ hiếm trang bị, tránh 2 bảng màu rarity khác nhau trong cùng 1 game.
+                string hex = ColorUtility.ToHtmlStringRGB(TeamSelectScreen.RarityColor(r.Rarity));
+                sb.AppendLine($"<color=#{hex}>{r.Rarity} · {name}</color>  {tag}");
             }
             _resultsLabel.text = sb.ToString();
 

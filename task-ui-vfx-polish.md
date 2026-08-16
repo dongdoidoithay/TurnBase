@@ -695,3 +695,27 @@ con của `Panel` trước khi kết luận cần sửa gì, tránh sửa mù ch
       Stat/5 dòng Skill×4 phần tử/`AscendButton`×3/`CloseButton`) mà `HeroDetailScreen.cs` cần —
       35/35 khớp. Không sửa `HeroDetailScreen.cs` (thuần đổi số liệu/màu tĩnh trong prefab).
       `refresh_unity` force+compile 0 lỗi console, **632/632 test xanh**.
+
+### §4.6. `UI_Summon` — kết quả gacha tô màu theo rarity thật + khung nền cho kết quả — XONG
+
+Đo hình học trước (đúng kỷ luật): màn này KHÔNG có bug chồng lấn nào (`ResultsText`/`CloseButton`/
+2 nút Pull đều cách nhau ≥8px) — khác Shop/Inventory, việc cần làm ở đây là chất lượng trình bày,
+không phải sửa lỗi vị trí.
+
+- [x] Phát hiện: `TeamSelectScreen.cs:530` đã có sẵn `RarityColor(Rarity)` (bảng màu
+      Common/Rare/Epic/Legendary/Mythic dùng cho nhãn độ hiếm trang bị) — đổi `private`→`internal`
+      (cùng assembly `Game.Meta`, không cần lớp chia sẻ mới) để `SummonScreen` TÁI DÙNG đúng bảng
+      màu này cho kết quả pull, tránh bịa ra bảng màu rarity thứ 2 trong cùng 1 game.
+- [x] `SummonScreen.Pull()`: mỗi dòng kết quả nay bọc `<color=#RRGGBB>{Rarity} · {Name}</color>`
+      (rich text, `ColorUtility.ToHtmlStringRGB`) thay vì chữ trắng đồng loạt — người chơi phân biệt
+      ngay Legendary (cam vàng) khác Common (xám) mà không cần đọc chữ.
+- [x] Bọc `ResultsText` vào `ResultsPanel` mới (nền `pixel_metal_panel`, tint card giống Shop) —
+      trước đó chữ trôi nổi trực tiếp trên `InnerBlue`, không tách khối; `ResultsText` dời vào bên
+      trong, lấp đầy trừ padding 10px, `supportRichText=true`. Cập nhật path trong
+      `SummonScreen.cs`: `panel.Find("ResultsText")` → `panel.Find("ResultsPanel/ResultsText")`.
+- [x] Đồng bộ màu `CloseButton` (đỏ→trung tính `(0.42,0.40,0.38)`) — cùng bug đã thấy lặp lại ở
+      `UI_HeroDetail`.
+- [x] Verify: đối chiếu path+component `ResultsPanel`/`ResultsText`(`richText=True`)/`WalletLabel`/
+      `PullOneButton`/`PullTenButton`/`CloseButton` — 6/6 khớp. `validate_script` 0 lỗi cả
+      `SummonScreen.cs` lẫn `TeamSelectScreen.cs`, `refresh_unity` force+compile 0 lỗi console
+      (chứng minh `internal` đủ quyền truy cập xuyên 2 file cùng assembly), **632/632 test xanh**.

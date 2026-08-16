@@ -527,7 +527,9 @@ namespace Game.Meta
             _ => t.ToString().ToUpperInvariant(),
         };
 
-        private static Color RarityColor(Rarity r) => r switch
+        // internal (không private) — SummonScreen tái dùng đúng bảng màu này cho kết quả gacha,
+        // tránh bịa 1 bảng màu rarity thứ 2 (cùng assembly Game.Meta, không cần lớp chia sẻ riêng).
+        internal static Color RarityColor(Rarity r) => r switch
         {
             Rarity.Common => new Color(0.65f, 0.62f, 0.66f),
             Rarity.Rare => new Color(0.322f, 0.573f, 0.906f),
