@@ -772,3 +772,36 @@ Không có bug chồng lấn (8px gap giữa hàng nút dưới với `CloseButt
 - [x] Verify: đối chiếu path+component 6 `Row_i` (Image/Icon/NameLabel/ProgressLabel/ClaimButton) +
       `SwitchTabButton`(+Label)/`PrevButton`/`NextButton`/`CloseButton` — 100% khớp. `refresh_unity`
       force+compile 0 lỗi console, **632/632 test xanh**.
+
+### §4.10. `UI_NodeChoice` — thiết kế lại hẳn (người dùng báo "nhìn rất xấu") — XONG
+
+Người dùng chỉ đích danh layout hiện tại xấu — hỏi lại qua AskUserQuestion để phân biệt "node" là
+gì (dự án có 2 hệ trùng tên: bản đồ nhánh (`MetaSceneInstaller.CreateNodeButton`) và màn popup
+Event/Rest) — xác nhận là **`UI_NodeChoice.prefab`** (đúng màn kế tiếp trong danh sách 11).
+
+**Đo hình học TRƯỚC khi sửa, xác nhận bằng số chứ không chỉ cảm tính "xấu":**
+- 3 `Row_i` KHÔNG có nền (danh sách phẳng, đúng bệnh cũ).
+- Khoảng cách giữa hàng cuối và nút CONTINUE = **164px khoảng trắng chết** (tính:
+  `RowListContainer` chỉ cao 140 nhưng đặt cách quá xa `CloseButton`) — nguyên nhân chính khiến
+  layout trông "lơ lửng"/mất cân đối trong 1 panel lớn 848×470.
+- Nút chọn (`BuyButton`, hiện text = tên lựa chọn như "Play it safe") chỉ 100×28px, font 9 — quá
+  nhỏ so với vai trò là hành động CHÍNH của cả màn.
+
+**Thiết kế lại:**
+- [x] Card hoá 3 `Row_i`, cỡ lớn hẳn (34→72px cao) — khớp tỷ lệ panel lớn thay vì dải mảnh.
+- [x] **Tint theo mức độ rủi ro** (xanh lá→vàng→đỏ theo `Row_0..2`) — dựa trên phát hiện đọc
+      `NodeChoiceSystem.cs`: thứ tự option LUÔN từ AN TOÀN → LIỀU LĨNH cho cả 2 chế độ (`RestOptions`:
+      Recover→Train; `EventOptions`: Play it safe→Take a chance→All in) — tint theo INDEX áp dụng
+      đúng cho cả 2 chế độ mà không cần sửa code (Rest chỉ 2 option nên Row_2/đỏ tự ẩn theo
+      `_rows[i].SetActive(active)` có sẵn). Màu lấy từ palette đã chốt ở `plan.md §2.1`: đỏ HP
+      `#E63946`-family, vàng Poise `#FFD166`-family, xanh lá tự chọn thêm (game chưa có xanh lá
+      trong palette gốc, dùng family gần `pixel_green_panel` đã quen mắt).
+- [x] Nút chọn tăng lên 140×50 (font 9→13), `NameLabel` (dòng flavor) 240×60 (font→12, bật Wrap).
+- [x] **Sửa lỗi TỰ GÂY RA lúc làm**: tính `RowListContainer.anchoredPosition.y` sai đơn vị lúc đầu
+      (`-119` thay vì `-156`) khiến container CHỒNG LÊN `WalletLabel` (mô tả) 21px — phát hiện NGAY
+      qua bước verify bằng số (không tin nhẩm tay), sửa lại đúng, verify lại lần 2 xác nhận cả 3 gap
+      đều dương (title-desc=10, desc-container=16, container-close=22).
+- [x] Verify: đối chiếu path+component `Title`/`WalletLabel`/`CloseButton`(+Label) + 3 `Row_i`
+      (Image/NameLabel/BuyButton+Label) — 100% khớp. `refresh_unity` force+compile 0 lỗi console,
+      **632/632 test xanh**. Không cần sửa `NodeChoiceScreen.cs` (tint bake tĩnh theo index, đúng
+      điều kiện thứ tự option cố định).
