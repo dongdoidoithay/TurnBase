@@ -2,9 +2,11 @@ using System.Collections.Generic;
 using Game.Core;
 using Game.Data;
 using Game.Data.Dto;
+using Game.Meta.Hero;
 using Game.Meta.Items;
 using Game.Services.Audio;
 using Game.Services.Economy;
+using Game.Services.Localization;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,6 +27,9 @@ namespace Game.Meta
     ///   Item/Material tạm thời thay icon thật.
     /// - <see cref="Close"/> nay có CloseButton thật trong `ActionBg` (trước đó trống — người chơi
     ///   không có cách nào tự đóng màn này, phát hiện qua audit "action không gắn chức năng nào").
+    /// - `CharacterBox` nay hiện chân dung/tên/level hero đầu roster ("leader", cùng quy ước
+    ///   <c>profile.Heroes[0]</c> đã dùng ở TopBar) thay vì chỉ chữ "INVENTORY" phủ kín — xem
+    ///   <see cref="RefreshLeader"/>.
     /// </summary>
     public sealed class InventoryScreen : MonoBehaviour
     {
@@ -43,10 +48,14 @@ namespace Game.Meta
         private GameObject _root;
         private TextMeshProUGUI _statsText;
         private Button _closeButton;
+        private Image _leaderPortrait;
+        private Text _leaderNameLabel;
+        private Text _leaderLevelLabel;
         private readonly List<Image> _slotIcons = new(); // phần tử null = ô đó chưa có "Icon" con
 
         private IAudioService _audio;
         private IEconomyService _economy;
+        private ILocalizationService _loc;
         private PlayerProfileDto _profile;
         private System.Action _onClosed;
 
@@ -54,6 +63,7 @@ namespace Game.Meta
         {
             ServiceLocator.TryGet(out _audio);
             ServiceLocator.TryGet(out _economy);
+            ServiceLocator.TryGet(out _loc);
             if (_root == null) BuildShell();
 
             _profile = profile;
@@ -70,6 +80,14 @@ namespace Game.Meta
             var titleLabel = _root.transform.Find("CharacterBox/InnerBlue/PlaceholderText")
                 ?.GetComponent<TextMeshProUGUI>();
             if (titleLabel != null) titleLabel.text = "INVENTORY";
+
+            // Leader showcase — CharacterBox trước đây chỉ có chữ "INVENTORY" phủ kín, không có
+            // chân dung/thông tin nào dù chiếm gần nửa màn hình. Dùng đúng hero đầu roster
+            // (profile.Heroes[0]) — cùng quy ước "leader" đã dùng ở TopBar (RefreshLeaderPortrait).
+            var characterBox = _root.transform.Find("CharacterBox/InnerBlue");
+            _leaderPortrait = characterBox.Find("PortraitRing/PortraitMask/PortraitSprite").GetComponent<Image>();
+            _leaderNameLabel = characterBox.Find("LeaderNameLabel").GetComponent<Text>();
+            _leaderLevelLabel = characterBox.Find("LeaderLevelLabel").GetComponent<Text>();
 
             _statsText = _root.transform.Find("StatsBg/InnerGreen/StatsText").GetComponent<TextMeshProUGUI>();
 
@@ -93,8 +111,30 @@ namespace Game.Meta
             _onClosed?.Invoke();
         }
 
+        private void RefreshLeader()
+        {
+            if (_profile.Heroes.Count == 0)
+            {
+                _leaderPortrait.enabled = false;
+                _leaderNameLabel.text = "";
+                _leaderLevelLabel.text = "";
+                return;
+            }
+
+            var leader = _profile.Heroes[0];
+            var sprite = Resources.Load<Sprite>($"Art/Characters/Heroes/{leader.DefId}/{leader.DefId}_v1_00");
+            _leaderPortrait.sprite = sprite;
+            _leaderPortrait.enabled = sprite != null;
+            _leaderNameLabel.text = _loc != null
+                ? _loc.GetName(leader.DefId, LocalizedNameKind.Hero)
+                : HeroDisplayUtil.FormatName(leader.DefId);
+            _leaderLevelLabel.text = $"Lv.{leader.Level}";
+        }
+
         private void Refresh()
         {
+            RefreshLeader();
+
             var entries = new List<(string name, long count, Color tint)>();
             foreach (var def in ItemCatalog.ALL)
             {

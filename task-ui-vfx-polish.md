@@ -640,3 +640,35 @@ UI_01/UI_02, không phải danh sách phẳng).
       xác nhận không có `LayoutGroup` gây bất ngờ.
 - [x] `validate_script` 0 lỗi (không đụng code), `refresh_unity` force+compile 0 lỗi console,
       **632/632 test xanh**.
+
+### §4.4. `UI_Inventory` — `CharacterBox` từ chữ phủ kín sang leader showcase thật — XONG
+
+Tiếp nối §4.2 (đã sửa `CloseButton`) — phần còn lại đã ghi nhận nhưng chưa sửa: `CharacterBox`
+(gần nửa màn) trước đó chỉ có `PlaceholderText` với `anchorMin=(0,0)/anchorMax=(1,1)` (phủ KÍN cả
+box) hiện đúng 1 chữ "INVENTORY" khổng lồ giữa màn, không có chân dung/thông tin gì khác dù không
+gian đủ lớn.
+
+- [x] Thu `PlaceholderText` về dải 15% trên cùng (đúng quy ước `TitleText` mọi màn khác — trước đó
+      là ngoại lệ duy nhất phủ kín 100%).
+- [x] Thêm **leader showcase**: `PortraitRing/PortraitMask/PortraitSprite` (160×160, mirror ĐÚNG
+      cấu trúc `PortraitRing` đã có sẵn ở `UI_HeroCard.prefab` — bronze frame + `Mask` ẩn
+      `showMaskGraphic`, không phát minh lại) + `LeaderNameLabel`/`LeaderLevelLabel` bên dưới, dữ
+      liệu lấy từ `profile.Heroes[0]` — ĐÚNG khái niệm "leader" đã dùng ở TopBar
+      (`MetaSceneInstaller.RefreshLeaderPortrait`), không phải khái niệm mới.
+- [x] `InventoryScreen.cs`: field `_leaderPortrait`/`_leaderNameLabel`/`_leaderLevelLabel` +
+      `ILocalizationService _loc` mới, bind trong `BuildShell()`, method `RefreshLeader()` mới gọi
+      đầu `Refresh()` — tên hero qua `_loc.GetName(defId, LocalizedNameKind.Hero)` với fallback
+      `HeroDisplayUtil.FormatName` (ĐÚNG pattern đã chốt ở `CodexScreen`, không tự nghĩ cách khác),
+      sprite qua `Resources.Load<Sprite>($"Art/Characters/Heroes/{defId}/{defId}_v1_00")` (ĐÚNG
+      path đã dùng ở `RefreshLeaderPortrait`).
+- [x] Tính hình học tay xác nhận không chồng lấn: Portrait/Name/Level đều nằm trong nửa trên
+      `InnerBlue` (470px cao), cách Title 13.5px, cách nhau 10px/2px — không đụng đáy box.
+- [x] Verify: `Resources.Load<Sprite>("Art/Characters/Heroes/hero_ember_knight/hero_ember_knight_v1_00")`
+      trả về sprite thật (không null) qua `execute_code`; `HeroDisplayUtil.FormatName("hero_ember_knight")`
+      → `"Ember Knight"` đúng. Đối chiếu ĐẦY ĐỦ path + đúng loại component (không chỉ `Find()!=null`
+      — đúng bài học §3.5 "vòng 3") cho cả `PortraitSprite`/`LeaderNameLabel`/`LeaderLevelLabel`/
+      `CloseButton`/`StatsText` — 5/5 khớp. `validate_script` 0 lỗi, `refresh_unity` force+compile
+      0 lỗi console, **632/632 test xanh**.
+
+Chưa làm (để dành, chưa yêu cầu thêm): 19/24 ô lưới vẫn chưa có `Icon` con (đã ghi ở §4.2, không
+phải regression của lượt này); icon thật theo từng loại vật phẩm (vẫn tô màu phẳng tạm).
