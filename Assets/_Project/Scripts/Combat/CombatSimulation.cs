@@ -592,6 +592,35 @@ namespace Game.Combat
                         intValue2: State.PerfectCount, result: result);
         }
 
+        /// <summary>plan.md §4.15 — màn Defeat, lựa chọn "Hồi sinh bằng Gem". Chỉ gọi được khi trận
+        /// đã chốt Defeat thật (AutoRevive nội bộ ở <see cref="CheckEnd"/> đã thử và không cứu được).
+        /// Hồi TOÀN BỘ hero về 40% MaxHP — ĐÚNG <c>RevivePercent</c> đã dùng cho Revive Feather
+        /// (task-consumable-items.md, <see cref="Systems.ItemResolver"/>), không bịa tỉ lệ mới. Trừ
+        /// Gem là việc của tầng Meta (Game.Combat không được tham chiếu Game.Services, xem
+        /// AssemblyRuleTests) — gọi hàm này SAU KHI đã trừ Gem thành công ở lớp gọi.
+        /// Đặt lại <see cref="BattleState.Result"/> về InProgress — vòng lặp <c>Update()</c> ở
+        /// BattleSceneInstaller tự nhận biết qua <see cref="IsFinished"/> mỗi frame (không cần gọi
+        /// resume riêng); <c>Phase</c> vẫn là Finished nhưng nhánh `default` của <c>Advance()</c> tự
+        /// đưa về TurnStart an toàn.</summary>
+        public bool TryReviveWithGem()
+        {
+            if (State.Result != BattleResult.Defeat) return false;
+
+            bool anyRevived = false;
+            for (int i = 0; i < State.Units.Count; i++)
+            {
+                var u = State.Units[i];
+                if (u.Side != TeamSide.Player || u.IsAlive) continue;
+                u.SetHp(Core.Maths.GameMath.Max(1, Core.Maths.GameMath.FloorToInt(u.MaxHp * 0.4f)));
+                Events.Emit(CombatEventType.UnitRevived, u.Id, u.Id, intValue: u.Hp);
+                anyRevived = true;
+            }
+            if (!anyRevived) return false;
+
+            State.Result = BattleResult.InProgress;
+            return true;
+        }
+
         /// <summary>Chạy trọn trận không cần input (dùng cho test, balance harness, auto-battle).</summary>
         public BattleResult RunToCompletion(System.Func<CombatSimulation, ActionIntent> playerPolicy = null)
         {

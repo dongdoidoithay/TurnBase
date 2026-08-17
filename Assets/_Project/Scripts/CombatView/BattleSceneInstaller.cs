@@ -15,6 +15,7 @@ using Game.Meta.Battle;
 using Game.Meta.Dungeon;
 using Game.Meta.Endgame;
 using Game.Meta.Equipment;
+using Game.Services.Economy;
 using Game.Services.Save;
 using Game.Services.Settings;
 using Game.UI.Battle;
@@ -71,6 +72,12 @@ namespace Game.CombatView
 
         private PendingBattle _pending;
         private bool _resultShown;
+        private GameObject _resultOverlayGo;
+
+        /// <summary>plan.md §4.15 Defeat — "Hồi sinh bằng Gem". Số tự thiết kế (plan.md không cho
+        /// số cụ thể) — chưa bằng 1 lượt gacha đơn (GachaSystem.SINGLE_PULL_COST=300), đủ để là
+        /// lựa chọn có cân nhắc thật chứ không phải "luôn đáng dùng" hay "không bao giờ đáng".</summary>
+        private const long REVIVE_GEM_COST = 100;
 
         // task-phase-5-gaps.md Phần B — null khi trận không phải tutorial (mọi trận khác không đổi
         // hành vi, mọi hook dưới đây đều null-conditional).
@@ -839,8 +846,21 @@ namespace Game.CombatView
         private void BuildResultOverlay(bool victory, bool displayAsSuccess, long gold, long exp,
                                          bool isTrialBoss, bool isDungeon, bool isTower, long totalPlayerDamage)
         {
+            // plan.md §4.15 — Defeat có 3 lựa chọn (Thử lại / Về map / Hồi sinh bằng Gem), NHƯNG
+            // chỉ áp dụng cho trận node-map THƯỜNG. Tower/TrialBoss/Dungeon có ngữ nghĩa "thua"
+            // khác hẳn (xem ShowResultOverlay: Tower luôn bank tầng, TrialBoss Timeout = bình
+            // thường, Dungeon thất bại chỉ cần thử lại từ Dungeon screen) — giữ nguyên 1 nút
+            // CONTINUE cho các trường hợp đó, không đổi hành vi đã hoạt động đúng.
+            bool isRegularDefeat = !victory && _pending != null && !_pending.SpecialMode.HasValue;
+
+            // sizeDelta panel: 200 cao cho 1 nút CONTINUE (giữ nguyên số cũ), 300 cao cho 3 nút.
+            float panelHeight = isRegularDefeat ? 300f : 200f;
+            float titleY = isRegularDefeat ? 105f : 55f;
+            float bodyY = isRegularDefeat ? 60f : 5f;
+
             var canvasGo = new GameObject("ResultOverlay");
             canvasGo.transform.SetParent(transform, false);
+            _resultOverlayGo = canvasGo;
             var canvas = canvasGo.AddComponent<Canvas>();
             canvas.renderMode = RenderMode.ScreenSpaceOverlay;
             canvas.sortingOrder = 300;
@@ -861,7 +881,7 @@ namespace Game.CombatView
             panelGo.transform.SetParent(canvasGo.transform, false);
             var panelRt = (RectTransform)panelGo.transform;
             panelRt.anchorMin = panelRt.anchorMax = new Vector2(0.5f, 0.5f);
-            panelRt.sizeDelta = new Vector2(320, 200);
+            panelRt.sizeDelta = new Vector2(320, panelHeight);
             panelGo.AddComponent<Image>().color = new Color(0.169f, 0.106f, 0.180f, 0.97f);
 
             string titleText = isTower
@@ -869,7 +889,7 @@ namespace Game.CombatView
                 : isTrialBoss
                     ? (displayAsSuccess ? "ATTEMPT RECORDED" : "DEFEATED")
                     : (victory ? "VICTORY!" : "DEFEAT");
-            var title = NewTmp(panelRt, titleText, 28, new Vector2(0, 55), new Vector2(300, 40));
+            var title = NewTmp(panelRt, titleText, 28, new Vector2(0, titleY), new Vector2(300, 40));
             title.color = displayAsSuccess ? new Color(1f, 0.820f, 0.400f) : new Color(0.902f, 0.224f, 0.275f);
 
             // Dungeon: thưởng thật cấp ở Meta (DungeonSystem.GrantFloorReward) sau khi trận này
@@ -880,21 +900,85 @@ namespace Game.CombatView
                     ? $"Damage dealt: {totalPlayerDamage:N0}"
                     : isDungeon
                         ? (victory ? "Floor cleared! Rewards granted." : "Floor failed — try again.")
-                        : (victory ? $"+{gold} Gold    +{exp} EXP" : "No reward");
-            NewTmp(panelRt, bodyText, 16, new Vector2(0, 5), new Vector2(300, 30));
+                        : (victory ? $"+{gold} Gold    +{exp} EXP" : "Your team has fallen.");
+            NewTmp(panelRt, bodyText, 16, new Vector2(0, bodyY), new Vector2(300, 30));
 
-            var btnGo = new GameObject("Continue", typeof(RectTransform));
-            btnGo.transform.SetParent(panelRt, false);
+            if (!isRegularDefeat)
+            {
+                NewOverlayButton(panelRt, "CONTINUE", new Vector2(0, -55), new Vector2(160, 40),
+                                 new Color(0.42f, 0.32f, 0.06f, 0.95f), true,
+                                 () => HandleContinue(victory, gold, exp, totalPlayerDamage));
+                return;
+            }
+
+            NewOverlayButton(panelRt, "RETRY — New Attempt", new Vector2(0, 15), new Vector2(240, 38),
+                             new Color(0.271f, 0.482f, 0.616f, 0.95f), true, HandleRetry);
+            NewOverlayButton(panelRt, "RETURN TO MAP", new Vector2(0, -28), new Vector2(240, 38),
+                             new Color(0.42f, 0.32f, 0.06f, 0.95f), true,
+                             () => HandleContinue(false, 0, 0, 0));
+
+            long gem = 0;
+            if (ServiceLocator.TryGet<IEconomyService>(out var economy))
+                gem = economy.Get(ProfileContext.Current.Wallet, CurrencyType.Gem);
+            bool canRevive = gem >= REVIVE_GEM_COST;
+            NewOverlayButton(panelRt, $"REVIVE — {REVIVE_GEM_COST} Gem", new Vector2(0, -71),
+                             new Vector2(240, 38), new Color(0.647f, 0.365f, 0.898f, 0.95f), canRevive,
+                             HandleRevive);
+        }
+
+        private static Button NewOverlayButton(RectTransform parent, string label, Vector2 pos, Vector2 size,
+                                                 Color color, bool interactable, UnityEngine.Events.UnityAction onClick)
+        {
+            var btnGo = new GameObject(label, typeof(RectTransform));
+            btnGo.transform.SetParent(parent, false);
             var btnRt = (RectTransform)btnGo.transform;
             btnRt.anchorMin = btnRt.anchorMax = new Vector2(0.5f, 0.5f);
-            btnRt.anchoredPosition = new Vector2(0, -55);
-            btnRt.sizeDelta = new Vector2(160, 40);
+            btnRt.anchoredPosition = pos;
+            btnRt.sizeDelta = size;
             var btnImg = btnGo.AddComponent<Image>();
-            btnImg.color = new Color(0.42f, 0.32f, 0.06f, 0.95f);
+            btnImg.color = interactable ? color : new Color(0.3f, 0.28f, 0.3f, 0.7f);
             var btn = btnGo.AddComponent<Button>();
             btn.targetGraphic = btnImg;
-            btn.onClick.AddListener(() => HandleContinue(victory, gold, exp, totalPlayerDamage));
-            NewTmp((RectTransform)btnGo.transform, "CONTINUE", 16, Vector2.zero, new Vector2(160, 40));
+            btn.interactable = interactable;
+            btn.onClick.AddListener(onClick);
+            NewTmp((RectTransform)btnGo.transform, label, 14, Vector2.zero, size);
+            return btn;
+        }
+
+        /// <summary>plan.md §4.15 Defeat — "Thử lại": trận MỚI cùng node/hero/địch/item/formation
+        /// (giữ nguyên toàn bộ <see cref="_pending"/> cũ) nhưng seed MỚI — đúng cách LaunchBattle
+        /// gốc sinh seed (task-phase-5-gaps.md, `System.DateTime.UtcNow.Ticks`), tránh replay y hệt
+        /// trận vừa thua (deterministic — replay cùng input sẽ ra cùng kết quả). Nạp lại scene
+        /// Battle từ đầu — tái dùng TOÀN BỘ pipeline khởi tạo có sẵn, không viết lại gì.</summary>
+        private void HandleRetry()
+        {
+            RunContext.QueueBattle(_pending.NodeId, _pending.HeroDefIds, _pending.EnemyDefIds,
+                                    System.DateTime.UtcNow.Ticks, _pending.ItemLoadout,
+                                    _pending.Formation, _pending.IsTutorial);
+            SceneManager.LoadScene("Battle");
+        }
+
+        /// <summary>plan.md §4.15 Defeat — "Hồi sinh bằng Gem": trừ Gem thật qua IEconomyService rồi
+        /// gọi <see cref="CombatSimulation.TryReviveWithGem"/> (hồi 40% MaxHP toàn đội, đặt lại
+        /// State.Result=InProgress). KHÔNG cần "resume" thủ công — vòng lặp Update() đã đọc
+        /// <c>Simulation.IsFinished</c> mỗi frame, tự chạy tiếp ngay khung hình kế tiếp.</summary>
+        private void HandleRevive()
+        {
+            if (!ServiceLocator.TryGet<IEconomyService>(out var economy)) return;
+            var profile = ProfileContext.Current;
+            if (!economy.TryConsume(profile.Wallet, CurrencyType.Gem, REVIVE_GEM_COST)) return;
+            if (!Simulation.TryReviveWithGem())
+            {
+                // An toàn cuối — không nên xảy ra (nút chỉ hiện khi Result==Defeat) nhưng nếu có,
+                // hoàn lại Gem đã trừ thay vì mất trắng không đổi lại gì.
+                economy.Grant(profile.Wallet, CurrencyType.Gem, REVIVE_GEM_COST);
+                return;
+            }
+
+            if (ServiceLocator.TryGet<IPlayerRepository>(out var repo)) repo.SaveAsync(profile);
+            Object.Destroy(_resultOverlayGo);
+            _resultOverlayGo = null;
+            _resultShown = false;
         }
 
         private static TextMeshProUGUI NewTmp(RectTransform parent, string text, float size, Vector2 pos, Vector2 dim)
