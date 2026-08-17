@@ -22,10 +22,11 @@ namespace Game.Meta
     /// hao + 5 vật liệu Ascend = 11 mục) hiển thị đồng thời.
     ///
     /// GHI CHÚ GIỚI HẠN THẬT (prefab đang xây dở, không phải lỗi code):
-    /// - CHỈ vài ô lưới đầu có sẵn con "Icon" (Image) — ô nào chưa có bị bỏ qua an toàn (không
-    ///   crash), tự động hiện thêm khi prefab có thêm Icon.
-    /// - Chưa có icon THẬT theo từng loại vật phẩm (chưa có asset) — tô màu phẳng phân biệt
-    ///   Item/Material tạm thời thay icon thật.
+    /// - Cả 24/24 ô lưới nay có con "Icon" (Image) — 11 ô đầu (Slot_0..10) gán SẴN sprite thật
+    ///   trong prefab, đúng khớp thứ tự cố định lúc biên dịch của <see cref="ItemCatalog.ALL"/> +
+    ///   <see cref="MATERIALS"/> (không cần tra cứu runtime — cả 2 mảng là hằng số, gán tĩnh 1 lần
+    ///   là đủ, giống mọi TopBar icon khác trong dự án). 13 ô còn lại (11-23) không có sprite, code
+    ///   chỉ ẩn/hiện theo <see cref="Refresh"/>, dự phòng khi danh sách item/material dài thêm.
     /// - <see cref="Close"/> nay có CloseButton thật trong `ActionBg` (trước đó trống — người chơi
     ///   không có cách nào tự đóng màn này, phát hiện qua audit "action không gắn chức năng nào").
     /// - `CharacterBox` nay hiện chân dung/tên/level hero đầu roster ("leader", cùng quy ước
@@ -41,10 +42,6 @@ namespace Game.Meta
             CurrencyType.EssenceI, CurrencyType.EssenceII, CurrencyType.EssenceIII,
             CurrencyType.Core, CurrencyType.EnhanceStone,
         };
-
-        private static readonly Color ITEM_TINT = new(0.271f, 0.482f, 0.616f, 1f);
-        private static readonly Color MATERIAL_TINT = new(0.647f, 0.365f, 0.898f, 1f);
-        private static readonly Color EMPTY_TINT = new(0.2f, 0.2f, 0.2f, 0.35f);
 
         private GameObject _root;
         private TextMeshProUGUI _statsText;
@@ -182,16 +179,16 @@ namespace Game.Meta
         {
             RefreshLeader();
 
-            var entries = new List<(string name, long count, Color tint)>();
+            var entries = new List<(string name, long count)>();
             foreach (var def in ItemCatalog.ALL)
             {
                 long count = _economy?.GetItemCount(_profile.Inventory, def.Type) ?? 0;
-                entries.Add((def.Name, count, ITEM_TINT));
+                entries.Add((def.Name, count));
             }
             foreach (var type in MATERIALS)
             {
                 long count = _economy?.Get(_profile.Wallet, type) ?? 0;
-                entries.Add((type.ToString(), count, MATERIAL_TINT));
+                entries.Add((type.ToString(), count));
             }
 
             // Danh sách đầy đủ tên+số lượng luôn hiện ở đây — lưới icon hiện chưa đủ ô có Icon
@@ -205,8 +202,9 @@ namespace Game.Meta
                 var icon = _slotIcons[i];
                 if (icon == null) continue; // ô chưa có Icon con — bỏ qua an toàn
 
-                icon.enabled = true;
-                icon.color = i < entries.Count ? entries[i].tint : EMPTY_TINT;
+                // 11 ô đầu đã gán sẵn sprite thật trong prefab (đúng thứ tự entries) — chỉ cần
+                // ẩn/hiện theo còn dữ liệu hay không, không tô màu đè lên sprite thật nữa.
+                icon.enabled = i < entries.Count && icon.sprite != null;
             }
         }
     }

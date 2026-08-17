@@ -104,7 +104,7 @@ namespace Game.Meta
         private Button _arenaButton;
         private Button _titleButton;
         private RectTransform _mapRoot;
-        private Text _titleLabel, _walletLabel, _toastLabel;
+        private Text _titleLabel, _goldLabel, _gemLabel, _toastLabel;
         private GameObject _toastPanel;
         private GameObject _mailBadge;
         private Text _mailBadgeLabel;
@@ -809,7 +809,7 @@ namespace Game.Meta
             // Enhance trang bị trừ Gold ngay trong TeamSelectScreen — TopBar là script khác,
             // không tự biết profile vừa đổi nên không refresh nếu không có callback này.
             _teamSelectScreen.OnProfileChanged += () =>
-                _walletLabel.text = $"Gold {_profile.Wallet.Gold}   Gem {_profile.Wallet.Gem}";
+                RefreshWallet();
 
             _settingsButton.onClick.AddListener(() =>
             {
@@ -823,7 +823,7 @@ namespace Game.Meta
                 _summonScreen.Open(_profile, () =>
                 {
                     SaveProfile();
-                    _walletLabel.text = $"Gold {_profile.Wallet.Gold}   Gem {_profile.Wallet.Gem}";
+                    RefreshWallet();
                 });
             });
 
@@ -833,7 +833,7 @@ namespace Game.Meta
                 _questScreen.Open(_profile, () =>
                 {
                     SaveProfile();
-                    _walletLabel.text = $"Gold {_profile.Wallet.Gold}   Gem {_profile.Wallet.Gem}";
+                    RefreshWallet();
                 });
             });
 
@@ -861,7 +861,7 @@ namespace Game.Meta
                 _mailScreen.Open(_profile, () =>
                 {
                     SaveProfile();
-                    _walletLabel.text = $"Gold {_profile.Wallet.Gold}   Gem {_profile.Wallet.Gem}";
+                    RefreshWallet();
                 });
             });
 
@@ -918,7 +918,8 @@ namespace Game.Meta
             _topBarBorder = topBar.GetComponent<Image>();
             _titleLabel = topBar.Find("TitleLabel").GetComponent<Text>();
             _titleButton = topBar.Find("TitleLabel").GetComponent<Button>();
-            _walletLabel = topBar.Find("WalletLabel").GetComponent<Text>();
+            _goldLabel = topBar.Find("GoldLabel").GetComponent<Text>();
+            _gemLabel = topBar.Find("GemLabel").GetComponent<Text>();
             _settingsButton = topBar.Find("SettingsButton").GetComponent<Button>();
             _summonButton = topBar.Find("SummonButton").GetComponent<Button>();
             _questButton = topBar.Find("QuestButton").GetComponent<Button>();
@@ -985,7 +986,7 @@ namespace Game.Meta
 
             var run = _profile.Run;
             _titleLabel.text = $"CHAPTER {run.ChapterId}   |   {_profile.Heroes.Count} heroes";
-            _walletLabel.text = $"Gold {_profile.Wallet.Gold}   Gem {_profile.Wallet.Gem}";
+            RefreshWallet();
             RefreshMailBadge();
 
             int maxRow = 0;
@@ -1215,6 +1216,14 @@ namespace Game.Meta
             NodeType.Mystery => "...",
             _ => ""
         };
+
+        // TopBar WalletLabel trước đây là 1 Text "Gold {N}   Gem {M}" — nay tách 2 nhãn riêng,
+        // mỗi nhãn có icon riêng (GoldIcon/GemIcon) dựng tĩnh trong Boot.unity ngay cạnh.
+        private void RefreshWallet()
+        {
+            _goldLabel.text = _profile.Wallet.Gold.ToString();
+            _gemLabel.text = _profile.Wallet.Gem.ToString();
+        }
 
         private void Toast(string message)
         {
