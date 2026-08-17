@@ -604,17 +604,17 @@ save.json ──▶ IPlayerRepository ──▶ PlayerProfileDto
 |---|---|---|---|
 | Scene | 4 | 3 (`Boot`,`Meta`,`Battle`; thiếu `Sandbox` — chưa từng cần) | 🟡 P0 |
 | Assembly definition | 11 | 11 (8 production + `Game.Tools` + 2 test) | 🟢 P0 |
-| Script `Game.Core` | 18 | 12 (tăng từ 9 — thêm `UI/LayoutProfile.cs`+`UI/LayoutProfileSwitcher.cs`+`UI/SafeAreaFitter.cs`, task-phase-5-gaps.md Phần E, cùng namespace `Game.Core.UI` với `IUiRootHost.cs` có sẵn) | 🟡 P0 |
+| Script `Game.Core` | 18 | 13 (tăng từ 12 — thêm `Scenes/ISceneTransitionService.cs`, task-splash-loading.md — mirror `IUiRootHost` để tránh circular assembly reference Bootstrap↔Meta/CombatView) | 🟡 P0 |
 | Script `Game.Data` | 55 | 5 (DTO/enum/struct thuần — phần lớn "data" thật nằm ở `Game.Meta/Content/*SO.cs`, xem §12.1) | 🟡 P0 |
 | Script `Game.Combat` | 42 | **17** (tăng từ 16 — thêm `Systems/ItemResolver.cs`, task-consumable-items.md; `CombatSimulation.OnEnemyWaveCleared` cho Tháp Vô Tận; `PassiveProcessor` thêm `SetBonus` slot + `RequiresCrit`/`RequiresPerfectGrade`/`TargetAllAllies`/`SpRefundPercent`/`HealPercentMaxHp`/`ShieldPercentMaxHp` cho Set Bonus — xem §12.1) | 🟡 P1/P3 |
 | Script `Game.CombatView` | 28 | **10** (tăng từ 8 — thêm `Tutorial/TutorialController.cs`+`Tutorial/TutorialOverlay.cs`, task-phase-5-gaps.md Phần B) | 🟡 P1/P2 |
-| Script `Game.Meta` | 45 | **44** (tăng từ 42 — thêm `Battle/FormationSystem.cs` + `Battle/SynergySystem.cs`, task-formation-synergy.md) | 🟡 P4 |
-| Script `Game.UI` | 60 | 2 | 🔴 P2–P6 — **hầu hết "màn hình" thực ra nằm trong `Game.Meta`** (ShopScreen/SummonScreen/QuestScreen/HeroDetailScreen/TeamSelectScreen/SettingsScreen/DungeonScreen/TrialBossScreen/TowerScreen/NodeChoiceScreen/MailScreen/CodexScreen), không tách sang `Game.UI` như kiến trúc gốc dự tính |
-| Script `Game.Services` | 32 | 7 (gồm `EconomyService`, `SettingsService`, save/profile) | 🟡 P0 |
+| Script `Game.Meta` | 45 | **46** (tăng từ 44 — thêm `HeroList/HeroListScreen.cs` [task-hero-list.md] + `ChapterProgressScreen.cs` [task-chapter-arena.md]; các task còn lại trong đợt này [`task-ui-vfx-polish.md`, `task-defeat-screen.md`, `task-splash-loading.md`] chỉ sửa file có sẵn, không thêm class mới) | 🟡 P4 |
+| Script `Game.UI` | 60 | 2 | 🔴 P2–P6 — **hầu hết "màn hình" thực ra nằm trong `Game.Meta`** (ShopScreen/SummonScreen/QuestScreen/HeroDetailScreen/TeamSelectScreen/SettingsScreen/DungeonScreen/TrialBossScreen/TowerScreen/NodeChoiceScreen/MailScreen/CodexScreen/InventoryScreen/HeroListScreen/ChapterProgressScreen), không tách sang `Game.UI` như kiến trúc gốc dự tính |
+| Script `Game.Services` | 32 | 9 (gồm `EconomyService`, `SettingsService`, save/profile, `Localization/LocalizationService.cs`, **`Audio/AudioService.cs`** — có từ commit đầu tiên nhưng CHƯA TỪNG được ghi vào bảng này trước đợt cập nhật 2026-08-18, xem §12.1) | 🟡 P0 |
 | `Game.Tools` (Editor) | — | 7 (tăng từ 6 — thêm `Localization/LocalizationKeyGenerator.cs`, task-phase-5-gaps.md Phần D: CSV importer 4 file + `BalanceHarness` + `ObjectMapValidator` + `LocalizationKeyGenerator`) | 🟢 (không nằm trong kế hoạch gốc, tự phát sinh khi cần) |
-| Prefab | ~70 | **13** (`UI_TeamSelect`, `UI_HeroCard`, `UI_GearSlotRow`, `UI_Shop` [10 row, tăng từ 4 — task-consumable-items.md], `UI_Summon`, `UI_Quest`, `UI_HeroDetail`, `UI_Dungeon`, `UI_TrialBoss`, `UI_Tower`, `UI_NodeChoice`, `UI_Mail`, `UI_Codex`) | 🔴 |
+| Prefab | ~70 | **16** (tăng từ 13 — thêm `UI_Inventory` [đã xây từ trước nhưng chưa từng đếm ở bảng này], `UI_HeroList` [task-hero-list.md], `UI_ChapterProgress` [task-chapter-arena.md]; danh sách đủ: `UI_TeamSelect`, `UI_HeroCard`, `UI_GearSlotRow`, `UI_Shop`, `UI_Summon`, `UI_Quest`, `UI_HeroDetail`, `UI_Dungeon`, `UI_TrialBoss`, `UI_Tower`, `UI_NodeChoice`, `UI_Mail`, `UI_Codex`, `UI_Inventory`, `UI_HeroList`, `UI_ChapterProgress`) | 🔴 |
 | ScriptableObject (data) | ~600 | **181** (24 hero · 65 skill · 14 equip · 66 enemy [+`boss_trial_champion`] · 12 loot table [tăng từ 2 — 5 chương × Treasure/Boss + 2 wildcard cũ, task-loottable-chapters.md] — Set Bonus KHÔNG cần asset riêng, `SetId` roll ở tầng instance lúc sinh trang bị, xem §12.1) | 🟡 P5 |
-| Test file | 28 | **40** (tăng từ 39 — thêm `UI/VietnameseFontTests.cs`, thư mục `UI/` mới trong `Assets/Tests/EditMode/` — cần thêm `Unity.TextMeshPro` vào `references` của `Game.Tests.EditMode.asmdef`) — Architecture 1, Combat 12, CombatView 1, Core 1, Meta 20, Services 3, UI 1 | 🟢 P0 (rủi ro R6) — **620/620 test xanh** ✓ (49 test mới: TMP font atlas mode/sourceFontFile + 44 ký tự tiếng Việt tự render+kiểm riêng lẻ, không phụ thuộc thứ tự chạy) |
+| Test file | 28 | **42** (tăng từ 40 — thêm `Combat/CombatSimulationReviveTests.cs` [task-defeat-screen.md] — HeroList/Splash-Loading/Arena-ChapterSelect không thêm test file mới, UI-orchestration thuần) | 🟢 P0 — **637/637 test xanh** ✓ đếm lại thật qua `run_tests` 2026-08-18 (con số tuyệt đối giữa các mốc không cộng dồn khớp 1-1 được nữa vì repo đã gộp lại thành 1 `Initial commit` ở đâu đó giữa chừng — che mất lịch sử test-theo-task trước điểm đó; **dùng số tuyệt đối đo trực tiếp mỗi lần, đừng cộng dồn theo delta cũ**) |
 
 ### 12.1. Ghi chú thực tế khác với thiết kế gốc (đọc TRƯỚC khi tra §3/§4/§6/§9)
 
@@ -1292,6 +1292,44 @@ liệt kê ở đây để không ai tìm nhầm class không tồn tại:
 > dựng+render+dọn độc lập, không phụ thuộc test khác) — thêm `Unity.TextMeshPro` vào
 > `Game.Tests.EditMode.asmdef`. **620/620 xanh** (571 cũ + 49 mới), xác nhận chạy độc lập lẫn sau
 > domain reload fresh (không phải may mắn nhờ state cũ).
+
+> **CẬP NHẬT 2026-08-18 — dọn nợ 5 task-*.md chưa từng ghi vào §12/§12.1** (roadmap.md/object-map.md
+> không được cập nhật từ commit đầu tiên tới giờ dù có sẵn quy tắc §11 yêu cầu, phát hiện qua audit
+> `git log -- roadmap.md object-map.md` chỉ ra đúng 1 commit — bản thân initial commit). Ghi bù, KHÔNG
+> đổi thực chất phần đã làm:
+> - **`task-ui-vfx-polish.md`** — bộ pixel-art UI kit dùng chung (`pixel_blue/green/bronze/metal
+>   panel`), TopBar redesign icon-only (nay 10→9→11 icon qua các đợt sau, xem dưới), Landscape
+>   (`LayoutProfileSwitcher`) phủ 11/12 màn Meta dạng modal + TeamSelect + 4 panel Battle HUD còn
+>   lại, verify bằng world-space geometry thật (không chỉ đọc field) sau khi phát hiện 1 lần đo giả
+>   (Portrait/Landscape đọc trùng nhau do chưa gọi `ApplyTo` tường minh). SkillGrid đổi từ Portrait
+>   giả (map 1-1 identity) sang thật qua field `LayoutProfile.Scale` (co đều, trước đó không ai
+>   dùng field này).
+> - **`task-hero-list.md`** — `HeroListScreen`/`UI_HeroList.prefab` mới, roster sở hữu có filter
+>   Class + sort Level/Rarity/Name, phân trang 6/trang, nút TopBar thứ 10.
+> - **`task-splash-loading.md`** — `SplashCanvas`/`LoadingCanvas` mới trong `Boot.unity`, tip xoay
+>   ngẫu nhiên mỗi lần đổi scene. Phát hiện + sửa 1 bug crash THẬT đang ngủ: `TitleCanvas` đã biến
+>   mất khỏi scene dù `GameBootstrap.ShowTitleScreen()` vẫn `.Find()` nó không điều kiện (chỉ chưa lộ
+>   vì `_autoAdvanceToMeta=true` bỏ qua nhánh đó — cờ này CỐ Ý không đổi, thuộc quyết định người
+>   dùng). Cũng gặp + sửa 1 lỗi circular assembly reference thật (Meta/CombatView gọi ngược
+>   `Game.Bootstrap` — chặn compile) bằng cách thêm `Game.Core.Scenes.ISceneTransitionService`,
+>   đúng mẫu `IUiRootHost` đã có.
+> - **`task-defeat-screen.md`** — màn Defeat trước đây chỉ có "CONTINUE" chung chung dù plan.md §4.15
+>   mô tả 3 lựa chọn — nay đủ Retry (trận lại, seed mới) / Return to map / Revive with Gem
+>   (`CombatSimulation.TryReviveWithGem`, hồi 40% MaxHp giống Revive Feather, resume CHÍNH
+>   `CombatSimulation` đang chạy qua `BattleResult.InProgress` thay vì tạo trận mới). 5 test mới.
+> - **`task-chapter-arena.md`** — Arena placeholder (icon thứ 11 trên TopBar, giữ 8 icon cũ resize
+>   44→38px, bấm ra Toast "Coming Soon", đúng scope v1.0 của plan.md) + `ChapterProgressScreen` (mở
+>   qua chạm `TitleLabel` có sẵn thay vì thêm nút, thuần đọc tiến trình 5 chương, không cho chọn lại
+>   chương vì `NodeMapGenerator` chỉ sinh theo `ChapterUnlocked` cao nhất — chọn lại cần rework riêng,
+>   để ngoài phạm vi).
+>
+> **Phát hiện phụ khi audit — không thuộc 5 task trên:** `Game.Services.Audio.AudioService.cs` (9
+> BGM + SFX thật, `.wav`) tồn tại từ commit đầu tiên nhưng CHƯA TỪNG xuất hiện trong bảng §12 hàng
+> `Game.Services` — thuần lỗi ghi chép, không phải việc mới; đã bổ sung vào bảng ở trên. `Landscape`
+> vẫn CHƯA phủ cho `Splash`/`Title`/`Loading`/`ChapterProgress`/`HeroList` (5 màn mới nhất) — ghi
+> nhận như 1 khoản còn thiếu thật, không phải bỏ sót tài liệu. **637/637 test xanh** (đo trực tiếp
+> qua `run_tests`, xem ghi chú ở hàng "Test file" phía trên về lý do không cộng dồn theo delta cũ
+> được nữa).
 
 ---
 
