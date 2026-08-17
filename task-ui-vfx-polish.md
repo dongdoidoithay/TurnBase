@@ -981,3 +981,26 @@ dùng khác kiểu anchor).
 chính.** Còn thiếu (chưa yêu cầu, để dành): số liệu Portrait/Landscape vẫn là PILOT tự thiết kế theo
 tính toán CanvasScaler, chưa qua playtest màn hình thật (giới hạn môi trường không chụp được
 Play-mode overlay UI); `SkillGrid` Portrait thật (cần giảm `cell`) vẫn để trống.
+
+## §8. Xác nhận Landscape "thật" cho HeroDetail — đo world-space thật sau layout, không chỉ tin field
+
+Người dùng yêu cầu xác nhận Landscape của `HeroDetailScreen` "thật" — nâng chuẩn verify lên 1 bậc so
+với §5/§7 (trước đó chỉ đọc field `_portrait`/`_landscape` serialize + `anchoredPosition` cục bộ,
+CHƯA từng đo `RectTransform.rect`/`GetWorldCorners()` sau khi Unity thật sự tính layout xong).
+
+- [x] Lần thử đầu dựng dưới 1 Canvas TƯỜNG MINH trong `execute_code` → `Panel.rect=(0,0,0,0)` — gặp
+      lại ĐÚNG artifact môi trường đã điều tra kỹ ở §5 ("Test 1" hồi đó): parent trực tiếp dưới
+      Canvas tường minh trong `execute_code` KHÔNG đại diện production (production =
+      `MetaSceneInstaller` là GameObject Transform thường, KHÔNG có Canvas tổ tiên nào — xem §5).
+      Không phải bug mới, dựng lại đúng kiểu thật ("Test 2" — bare Transform, không Canvas).
+- [x] Đo THẬT sau `Canvas.ForceUpdateCanvases()` (không tin field ngay sau `ApplyTo`, đợi Unity tính
+      lại layout): `Panel.rect` Portrait = 864×486, Landscape = **864×518** (cao hơn thật, đúng tỉ
+      lệ 0.96/0.90 thiết kế ở §5, không phải chỉ đổi con số serialize không tác dụng).
+- [x] Đo `GetWorldCorners()` của `StatsContainer`/`AscendButton` (2 khối từng cách nhau đúng 16px ở
+      Portrait, §4.5) SAU khi áp Landscape: gap = **67px** — không chỉ hết nguy cơ chồng lấn mà còn
+      RỘNG RàI hơn hẳn, đúng hệ quả tất yếu của "Panel cao hơn, con neo góc cố định không đổi vị
+      trí tương đối" (chứng minh bằng số thật, không chỉ suy luận toán học).
+
+**Kết luận: Landscape của HeroDetail hoạt động thật, đã verify bằng world-space geometry sau layout
+pass thật, không phải chỉ số liệu serialize.** Không cần sửa code (không phát hiện lỗi nào) — đây là
+lượt xác nhận sâu hơn, không phải lượt sửa bug.
