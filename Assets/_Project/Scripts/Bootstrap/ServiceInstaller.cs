@@ -47,6 +47,11 @@ namespace Game.Bootstrap
             var audioRoot = serviceRoot != null ? serviceRoot.Find("AudioRoot") : null;
             ServiceLocator.Register<IAudioService>(AudioService.Create(audioRoot != null ? audioRoot : serviceRoot));
 
+            // object-map.md §3 — 1 nguồn duy nhất phát sự kiện đổi hướng màn hình, thay N
+            // LayoutProfileSwitcher tự poll Screen.width/height riêng lẻ mỗi frame (xem
+            // ScreenOrientationService.cs).
+            ServiceLocator.Register<IScreenOrientationService>(ScreenOrientationService.Create(serviceRoot));
+
             WireSettingsToAudio();
             WireSettingsToLocalization();
         }

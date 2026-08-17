@@ -2,8 +2,8 @@
   <Project Path="Game.Tests.EditMode.csproj" />
   <Project Path="Game.Meta.csproj" />
   <Project Path="Game.Combat.csproj" />
-  <Project Path="Game.Tools.csproj" />
   <Project Path="Game.Core.csproj" />
+  <Project Path="Game.Tools.csproj" />
   <Project Path="Game.Bootstrap.csproj" />
   <Project Path="Game.Services.csproj" />
   <Project Path="Game.CombatView.csproj" />

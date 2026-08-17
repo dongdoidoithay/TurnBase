@@ -22,17 +22,41 @@ namespace Game.Core.UI
 
         private bool _hasApplied;
         private bool _lastIsLandscape;
+        private IScreenOrientationService _orientationService;
 
         private void Reset()
         {
             _target = GetComponent<RectTransform>();
         }
 
-        private void OnEnable() => Apply(force: true);
+        private void OnEnable()
+        {
+            // Play mode thật: nghe ScreenOrientationService (1 poll/frame dùng chung cho mọi
+            // panel) thay vì tự poll Screen.width/height riêng — xem ScreenOrientationService.cs.
+            // Application.isPlaying=false (Editor design-time, chưa Bootstrap chạy) vẫn tự poll ở
+            // Update() bên dưới, giữ đúng trải nghiệm "xem trước khi đổi Game View" đã có.
+            if (Application.isPlaying && ServiceLocator.TryGet(out _orientationService))
+                _orientationService.OnOrientationChanged += OnOrientationChanged;
+            Apply(force: true);
+        }
+
+        private void OnDisable()
+        {
+            if (_orientationService != null) _orientationService.OnOrientationChanged -= OnOrientationChanged;
+            _orientationService = null;
+        }
+
+        private void OnOrientationChanged(bool isLandscape) => Apply(force: true);
 
         // [ExecuteAlways] để nhà thiết kế thấy kết quả ngay khi đổi kích thước Game View trong
-        // Editor, không chỉ lúc Play — đúng scope E2 "xem trước trong Editor khi xoay".
-        private void Update() => Apply(force: false);
+        // Editor, không chỉ lúc Play. Khi ĐANG Play thật và đã có ScreenOrientationService, việc
+        // cập nhật đã chuyển hẳn sang OnOrientationChanged ở trên — Update() ở đây chỉ còn cần
+        // cho Editor design-time (chưa Play) hoặc fallback khi service chưa đăng ký.
+        private void Update()
+        {
+            if (Application.isPlaying && _orientationService != null) return;
+            Apply(force: false);
+        }
 
         /// <summary>Gán target + 2 profile thật từ code (màn code-dựng như BattleHudScreen/
         /// SettingsScreen). Với màn tĩnh (TitleCanvas), gán trực tiếp qua Inspector.</summary>
