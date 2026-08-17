@@ -675,8 +675,29 @@ liệt kê ở đây để không ai tìm nhầm class không tồn tại:
   tái dùng mạnh (6 rig thân × recolor theo element, không phải 24 thiết kế riêng, khớp cách
   task-hero-roster.md đã tái dùng stat/skill template). 65 skill chỉ 7 `element` × 4 `type`, 9 VFX
   asset có sẵn (`Art/VFX/vfx_*`) đã phủ gần hết lưới đó — gap thật chỉ ~2-3 archetype (Light/Wind/
-  neutral bolt), không phải 65 việc riêng. 66 enemy đa dạng hơn hero nhiều (field `archetype` 11
-  loại không chia đều) — cần điều tra thêm, chưa kết luận. **Giai đoạn 1 (hero pilot đủ 5 trạng
+  neutral bolt), không phải 65 việc riêng. 66 enemy đa dạng hơn hero nhiều (field `Archetype` 11/13
+  giá trị không chia đều) —
+
+> **KẾT LUẬN 2026-08-18 (điều tra xong, không còn "chưa kết luận"):** đo thật phân bố `Archetype`
+> trên cả 66 file `.asset` (`ArchetypeId`, plan.md 13 giá trị) — Skirmisher 15 · Tank 9 · Brute 9 ·
+> Grunt 8 · Boss 6 · Caster 6 · Debuffer 4 · Bomber 3 · Archer 3 · Healer 2 · Swarm 1 · **Buffer 0 ·
+> Elite 0** (2/13 giá trị hoàn toàn không dùng). Nhưng grep xác nhận `EnemyDefinitionSO.Archetype`
+> chỉ được ĐỌC ở ĐÚNG 1 chỗ logic thật trong toàn bộ codebase — loại Boss khỏi pool địch thường
+> (`MetaSceneInstaller.PickEnemies`/`BattleSceneInstaller`) — ngoài ra chỉ hiện text trong Codex
+> (`CodexScreen.cs:190`). **`Archetype` KHÔNG điều khiển hành vi AI dù tên gọi (Healer/Tank/
+> Debuffer...) gợi ý điều đó** — hành vi chiến đấu thật đến từ field RIÊNG `AiProfileId`
+> (`BattleSceneInstaller.BuildAi`), và ở đó phát hiện gap thật sự đáng kể hơn nhiều: chỉ 3 giá trị
+> `AiProfileId` tồn tại trong toàn bộ 66 enemy — `ai_boss` (6, đúng 6 boss, luân phiên 3 skill có
+> nhịp điệu riêng) · `ai_basic` (chỉ 4) · **`ai_special` (56/66 = 85%)**, và `ai_special` là ĐÚNG 1
+> bộ luật y hệt cho mọi enemy dùng nó — "55% dùng skill ô 1, 40% đánh thường, luôn luôn" — không
+> phân biệt enemy đó là Healer (nên ưu tiên hồi máu khi đồng minh yếu), Debuffer (nên ưu tiên gây
+> debuff sớm), hay Tank (nên ưu tiên giữ aggro) dù skill kit của từng con THẬT SỰ khác nhau (skill
+> ID khác nhau, stat khác nhau). **Tóm lại: đa dạng NỘI DUNG (stat/skill/element) là thật, nhưng đa
+> dạng HÀNH VI AI gần như không tồn tại** — 85% enemy "trông" khác nhau (tên, art, skill) nhưng
+> "chơi" giống hệt nhau. Đây là gap thiết kế/nội dung thật (không phải bug), quy mô sửa lớn hơn hẳn
+> phạm vi 1 audit (cần thiết kế lại `AIProfile` theo từng archetype — quyết định "Healer ưu tiên gì
+> khi nào", "Debuffer nhắm ai trước"... không thể tự suy ra, cần người dùng quyết định hướng) — để
+> dành làm task riêng nếu cần, không tự ý mở rộng ở đây. **Giai đoạn 1 (hero pilot đủ 5 trạng
   thái) ĐÃ XONG và ĐÃ ADOPT:** kỹ thuật "skeletal rig" mới (`Tools/pixel-art-pipeline/scripts/
   character_rig.py`, bộ phận đầu/thân/tay/chân/vũ khí tách rời + XOAY thật qua `PIL Image.rotate()`
   quanh pivot — khác hẳn khối chữ nhật tĩnh dịch theo tham số của `character_draw.py`) — port từ
