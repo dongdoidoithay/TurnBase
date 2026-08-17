@@ -55,6 +55,7 @@ namespace Game.Services.Localization
                 LocalizedNameKind.Hero => "hero_",
                 LocalizedNameKind.Enemy => "enemy_",
                 LocalizedNameKind.Skill => "skill_",
+                LocalizedNameKind.Boss => "boss_",
                 _ => "",
             };
             string keyPrefix = kind switch
@@ -62,6 +63,7 @@ namespace Game.Services.Localization
                 LocalizedNameKind.Hero => "hero.",
                 LocalizedNameKind.Enemy => "enemy.",
                 LocalizedNameKind.Skill => "skill.",
+                LocalizedNameKind.Boss => "boss.",
                 _ => "",
             };
 

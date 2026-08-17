@@ -3,9 +3,12 @@ using System;
 namespace Game.Services.Localization
 {
     /// <summary>task-phase-5-gaps.md Phần D — loại tên đọc qua <see cref="ILocalizationService.GetName"/>,
-    /// khớp đúng 3 prefix DefId/NameKey đã có sẵn trong data thật (<c>hero_</c>/<c>enemy_</c>/
-    /// <c>skill_</c>).</summary>
-    public enum LocalizedNameKind { Hero, Enemy, Skill }
+    /// khớp đúng 4 prefix DefId/NameKey đã có sẵn trong data thật (<c>hero_</c>/<c>enemy_</c>/
+    /// <c>skill_</c>/<c>boss_</c>). <c>Boss</c> thêm ở đợt localize tên unit trong Battle — 6 boss
+    /// dùng tiền tố <c>boss_</c> riêng (KHÔNG phải <c>enemy_</c>), key <c>boss.*.name</c> đã có sẵn
+    /// trong strings.csv (task-phase-5-gaps.md Phần D sinh ra) nhưng chưa từng có cách tra tới vì
+    /// enum này thiếu giá trị Boss.</summary>
+    public enum LocalizedNameKind { Hero, Enemy, Skill, Boss }
 
     /// <summary>task-localization-pilot.md — plan.md §11.7 "CSV key→value, VI/EN". Pilot hạ tầng:
     /// chỉ Title screen + SettingsScreen dùng key thật, phần còn lại của game vẫn hard-code chuỗi

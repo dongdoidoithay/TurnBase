@@ -7,6 +7,7 @@ using Game.Core;
 using Game.Core.UI;
 using Game.Data;
 using Game.Services.Audio;
+using Game.Services.Localization;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -110,6 +111,7 @@ namespace Game.UI.Battle
 
         private CombatSimulation _sim;
         private IAudioService _audio;
+        private ILocalizationService _loc;
         private int _selectedSlot = -1;
         private int _selectedItemSlot = -1;
         private bool _auto;
@@ -121,6 +123,7 @@ namespace Game.UI.Battle
         {
             _sim = sim;
             ServiceLocator.TryGet(out _audio);
+            ServiceLocator.TryGet(out _loc);
             BuildLayout();
             BuildEnemyRows();
         }
@@ -597,7 +600,7 @@ namespace Game.UI.Battle
                 if (actor == null) return;
             }
 
-            _heroName.text = $"{actor.DefId.ToUpperInvariant()}  Lv{actor.Level}";
+            _heroName.text = $"{DisplayName(actor).ToUpperInvariant()}  Lv{actor.Level}";
             var accent = ElementColor(actor.Element);
             _heroAvatarRing.color = accent;
 
@@ -636,7 +639,7 @@ namespace Game.UI.Battle
                 bool dead = u.IsDead;
 
                 r.Root.SetActive(true);
-                r.Name.text = dead ? $"{Short(u.DefId)} — DOWN" : Short(u.DefId);
+                r.Name.text = dead ? $"{ShortDisplayName(u)} — DOWN" : ShortDisplayName(u);
                 r.Name.color = dead ? DEAD_COLOR : TEXT;
 
                 if (dead)
@@ -676,7 +679,7 @@ namespace Game.UI.Battle
                 var u = _sim.State.GetUnit(_meterBuffer[i].Key);
                 var r = _meterRows[i];
                 r.Root.SetActive(true);
-                r.Name.text = u != null ? Short(u.DefId) : $"#{_meterBuffer[i].Key}";
+                r.Name.text = u != null ? ShortDisplayName(u) : $"#{_meterBuffer[i].Key}";
                 r.Name.color = u != null && u.Side == TeamSide.Player ? HERO_ACCENT : ENEMY_ACCENT;
                 r.Value.text = _meterBuffer[i].Value.ToString();
             }
@@ -698,7 +701,7 @@ namespace Game.UI.Battle
             var u = _sim.State.GetUnit(lastId);
             if (u == null) return;
 
-            _analyzeName.text  = $"{u.DefId.ToUpperInvariant()}  [{u.Element}]";
+            _analyzeName.text  = $"{DisplayName(u).ToUpperInvariant()}  [{u.Element}]";
             _analyzeHpSp.text  = $"HP {u.Hp}/{u.MaxHp}  SP {u.Sp}/{u.MaxSp}";
             var s = u.Stats;
             _analyzeStats.text = $"ATK {s.AtkPhys:0}  DEF {s.Def:0}  SPD {s.Spd:0}";
@@ -1055,6 +1058,25 @@ namespace Game.UI.Battle
         {
             string s = defId.Replace("enemy_", "").Replace("boss_", "");
             return s.Length > 14 ? s[..14] : s;
+        }
+
+        /// <summary>task-phase-5-gaps.md Phần D đã xây <see cref="ILocalizationService.GetName"/>
+        /// nhưng chỉ migrate 5 màn Meta — HUD trận vẫn hiện raw <c>DefId</c> tới giờ. <c>_loc==null</c>
+        /// (hiếm, chỉ khi service chưa đăng ký) → fallback nguyên hành vi cũ.</summary>
+        private string DisplayName(CombatUnit u)
+        {
+            if (_loc == null) return u.DefId.ToUpperInvariant();
+            var kind = u.Side == TeamSide.Player ? LocalizedNameKind.Hero
+                : u.DefId.StartsWith("boss_") ? LocalizedNameKind.Boss
+                : LocalizedNameKind.Enemy;
+            return _loc.GetName(u.DefId, kind);
+        }
+
+        private string ShortDisplayName(CombatUnit u)
+        {
+            if (_loc == null) return Short(u.DefId);
+            string name = DisplayName(u);
+            return name.Length > 14 ? name[..14] : name;
         }
 
         private CombatUnit FirstAlive(TeamSide side)
