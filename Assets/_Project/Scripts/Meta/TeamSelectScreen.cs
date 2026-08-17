@@ -117,7 +117,7 @@ namespace Game.Meta
 
         private void BuildShell()
         {
-            var prefab = Resources.Load<GameObject>(ShellPrefabPath);
+            var prefab = UnityEngine.AddressableAssets.Addressables.LoadAssetAsync<GameObject>(ShellPrefabPath).WaitForCompletion();
             _root = Instantiate(prefab, transform);
 
             var panel = _root.transform.Find("Panel");
@@ -259,7 +259,7 @@ namespace Game.Meta
         {
             foreach (Transform c in _heroListContainer) Destroy(c.gameObject);
 
-            var cardPrefab = Resources.Load<GameObject>(HeroCardPrefabPath);
+            var cardPrefab = UnityEngine.AddressableAssets.Addressables.LoadAssetAsync<GameObject>(HeroCardPrefabPath).WaitForCompletion();
             const float rowH = 70f;
 
             // ScrollRect cần content cao đúng số hero thật để tính vùng cuộn — khi roster
@@ -344,7 +344,7 @@ namespace Game.Meta
             _gearPortraitImg.sprite = Resources.Load<Sprite>($"Art/Characters/Heroes/{hero.DefId}/{hero.DefId}_v1_00");
             _gearPortraitImg.enabled = _gearPortraitImg.sprite != null;
 
-            var rowPrefab = Resources.Load<GameObject>(GearSlotRowPrefabPath);
+            var rowPrefab = UnityEngine.AddressableAssets.Addressables.LoadAssetAsync<GameObject>(GearSlotRowPrefabPath).WaitForCompletion();
             // 52 — đo lại thật qua execute_code (task-ui-vfx-polish.md, người dùng báo "gear bị xô
             // lệch"): ở kích thước Content SỐNG hiện tại (856×456, đã đổi so với lúc chốt 60 trước
             // đây), 6 dòng × 60 đã ĐÈ vào FormationRow tạo runtime 18px (content-top 392 > 374) —

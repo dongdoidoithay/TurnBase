@@ -53,7 +53,7 @@ namespace Game.Meta.Quest
 
         private void BuildShell()
         {
-            var prefab = Resources.Load<GameObject>(PrefabPath);
+            var prefab = UnityEngine.AddressableAssets.Addressables.LoadAssetAsync<GameObject>(PrefabPath).WaitForCompletion();
             _root = Instantiate(prefab, transform);
 
             var panel = _root.transform.Find("Panel");

@@ -25,6 +25,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 23592aae25f9b4a1aa2c5090a6764a19
+    m_Address: Prefabs/UI/Widgets/UI_GearSlotRow
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 37d4a703e063146ff9e690873f188501
     m_Address: Data/Heroes/hero_shadow_fang
     m_ReadOnly: 0
@@ -40,8 +45,28 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 48114db5ba6294714a78a79ba25b2563
+    m_Address: Prefabs/UI/Screens/UI_TrialBoss
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 484e05c96494249dfaef12e9b89066db
+    m_Address: Prefabs/UI/Screens/UI_HeroDetail
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4d770e899a801456b90cc19a9d20aefc
+    m_Address: Prefabs/UI/Screens/UI_NodeChoice
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5317f72cd9c9748f7890d347bafbe562
     m_Address: Data/Heroes/hero_moon_priestess
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 547c0869081634b8a852b07203eda21e
+    m_Address: Prefabs/UI/Screens/UI_HeroList
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -60,6 +85,21 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 84affffbbaa19477189ab9a8511299be
+    m_Address: Prefabs/UI/Screens/UI_Tower
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 906453512660d4550af67dec3b24fa63
+    m_Address: Prefabs/UI/Screens/UI_Mail
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 91d14dd7ae3414885a5eb2456a48db2c
+    m_Address: Prefabs/UI/Screens/UI_ChapterProgress
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 953995897577a4ba0bb5839bfe7072d2
     m_Address: Data/Heroes/hero_night_stalker
     m_ReadOnly: 0
@@ -67,6 +107,31 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 96e6b5e4f0e1346b58568e7426ba829f
     m_Address: Data/Heroes/hero_flame_binder
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a97073201ba8246c297da5d936e96848
+    m_Address: Prefabs/UI/Widgets/UI_HeroCard
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: adeeebafc59ca4bb38aa9d3eef36456f
+    m_Address: Prefabs/UI/Screens/UI_Inventory
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b2616c4821569444d91f97fde5c13cb8
+    m_Address: Prefabs/UI/Screens/UI_Dungeon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b70db6e7dc0e94dc183c9d473259df5d
+    m_Address: Prefabs/UI/Screens/UI_Shop
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: be95f3d5b6fc1462da7433dc4bcaf604
+    m_Address: Prefabs/UI/Screens/UI_Summon
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -105,6 +170,16 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dced2f59d756348aca3c9cdc0343d745
+    m_Address: Prefabs/UI/Screens/UI_Quest
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e73da9bbe858549278dd5a686215c02e
+    m_Address: Prefabs/UI/Screens/UI_TeamSelect
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e9cad14a2645d446d91a4d587d18663e
     m_Address: Data/Heroes/hero_void_scholar
     m_ReadOnly: 0
@@ -127,6 +202,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f7a543a6e4d994e81af77d7a1c87204f
     m_Address: Data/Heroes/hero_gale_thief
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f991187519ff24b38b09a3092f1ce0a8
+    m_Address: Prefabs/UI/Screens/UI_Codex
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
