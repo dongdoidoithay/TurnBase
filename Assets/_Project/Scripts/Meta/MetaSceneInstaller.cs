@@ -66,8 +66,13 @@ namespace Game.Meta
             new(0.647f, 0.298f, 0.808f),  // Ch5 Void — tím vực thẳm
         };
 
-        private static Color ChapterAccent(int chapterId)
+        // internal (không private) — ChapterProgressScreen (task-chapter-arena.md) tái dùng đúng
+        // bảng màu này, tránh bịa 1 bảng màu chương thứ 2 (cùng assembly Game.Meta).
+        internal static Color ChapterAccent(int chapterId)
             => CHAPTER_ACCENT[Mathf.Clamp(chapterId - 1, 0, CHAPTER_ACCENT.Length - 1)];
+
+        internal static readonly string[] CHAPTER_NAMES =
+            { "Meadow", "Swamp", "Crypt", "Volcano", "Void" };
 
         private PlayerProfileDto _profile;
         private IPlayerRepository _repo;
@@ -96,6 +101,8 @@ namespace Game.Meta
         private Button _codexButton;
         private Button _inventoryButton;
         private Button _heroListButton;
+        private Button _arenaButton;
+        private Button _titleButton;
         private RectTransform _mapRoot;
         private Text _titleLabel, _walletLabel, _toastLabel;
         private GameObject _toastPanel;
@@ -118,6 +125,7 @@ namespace Game.Meta
         private CodexScreen _codexScreen;
         private InventoryScreen _inventoryScreen;
         private Game.Meta.HeroList.HeroListScreen _heroListScreen;
+        private ChapterProgressScreen _chapterProgressScreen;
         private Color _chapterAccent = Color.white;
 
         private readonly struct PulseNode
@@ -791,6 +799,7 @@ namespace Game.Meta
             _codexScreen = gameObject.AddComponent<CodexScreen>();
             _inventoryScreen = gameObject.AddComponent<InventoryScreen>();
             _heroListScreen = gameObject.AddComponent<Game.Meta.HeroList.HeroListScreen>();
+            _chapterProgressScreen = gameObject.AddComponent<ChapterProgressScreen>();
             // task-mail-extras.md — MailScreen tự bắn OnMailChanged sau Claim/Claim-All/purge hết
             // hạn; TopBar là script độc lập (BindCanvasRefs comment ở trên) nên không tự biết,
             // cần nghe callback này để vẽ lại badge ngay cả khi modal Mail đang mở (không cần đợi
@@ -878,6 +887,21 @@ namespace Game.Meta
                 _audio?.PlaySfx("ui/sfx_ui_tick");
                 _heroListScreen.Open(_profile, null);
             });
+
+            // task-chapter-arena.md — plan.md v1.1 mới làm Arena thật, v1.0 chỉ cần placeholder.
+            _arenaButton.onClick.AddListener(() =>
+            {
+                _audio?.PlaySfx("ui/sfx_ui_tick");
+                Toast("Arena — Coming Soon...");
+            });
+
+            // TitleLabel ("CHAPTER N") — entry point ChapterProgressScreen, không thêm nút TopBar
+            // mới (đã khá đầy, xem doc-comment ChapterProgressScreen).
+            _titleButton.onClick.AddListener(() =>
+            {
+                _audio?.PlaySfx("ui/sfx_ui_tick");
+                _chapterProgressScreen.Open(_profile, null);
+            });
         }
 
         /// <summary>MetaCanvas nằm vật lý trong Boot.unity (GameBootstrap/__UI__/UIRoot/
@@ -893,6 +917,7 @@ namespace Game.Meta
             var topBar = _canvasRoot.Find("TopBar");
             _topBarBorder = topBar.GetComponent<Image>();
             _titleLabel = topBar.Find("TitleLabel").GetComponent<Text>();
+            _titleButton = topBar.Find("TitleLabel").GetComponent<Button>();
             _walletLabel = topBar.Find("WalletLabel").GetComponent<Text>();
             _settingsButton = topBar.Find("SettingsButton").GetComponent<Button>();
             _summonButton = topBar.Find("SummonButton").GetComponent<Button>();
@@ -904,6 +929,7 @@ namespace Game.Meta
             _codexButton = topBar.Find("CodexButton").GetComponent<Button>();
             _inventoryButton = topBar.Find("InventoryButton").GetComponent<Button>();
             _heroListButton = topBar.Find("HeroListButton").GetComponent<Button>();
+            _arenaButton = topBar.Find("ArenaButton").GetComponent<Button>();
             // task-mail-extras.md — MailBadge dựng tĩnh trong Boot.unity (không phải runtime),
             // mặc định inactive, chỉ RefreshMailBadge() mới bật lên khi có mail thật chưa claim.
             _mailBadge = _mailButton.transform.Find("MailBadge").gameObject;

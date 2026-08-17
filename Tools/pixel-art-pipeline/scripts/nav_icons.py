@@ -128,6 +128,20 @@ def icon_heroes():
     return img
 
 
+def icon_hourglass():
+    img = _new()
+    d = ImageDraw.Draw(img)
+    # Đồng hồ cát — "Coming Soon" cho Arena (plan.md: v1.1 mới làm thật, v1.0 chỉ cần placeholder).
+    # Khác icon_swords (Trial Boss đã dùng chéo kiếm) để không trùng ý nghĩa.
+    d.line([5, 4, 19, 4], fill=W, width=2)
+    d.line([5, 20, 19, 20], fill=W, width=2)
+    d.line([5, 4, 12, 12], fill=W, width=1)
+    d.line([19, 4, 12, 12], fill=W, width=1)
+    d.line([5, 20, 12, 12], fill=W, width=1)
+    d.line([19, 20, 12, 12], fill=W, width=1)
+    return img
+
+
 ICONS = {
     "icon_tower": icon_tower,
     "icon_trial": icon_swords,
@@ -139,6 +153,7 @@ ICONS = {
     "icon_gear": icon_gear,
     "icon_summon": icon_summon,
     "icon_heroes": icon_heroes,
+    "icon_hourglass": icon_hourglass,
 }
 
 
