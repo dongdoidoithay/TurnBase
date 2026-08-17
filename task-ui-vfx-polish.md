@@ -1004,3 +1004,36 @@ CHƯA từng đo `RectTransform.rect`/`GetWorldCorners()` sau khi Unity thật s
 **Kết luận: Landscape của HeroDetail hoạt động thật, đã verify bằng world-space geometry sau layout
 pass thật, không phải chỉ số liệu serialize.** Không cần sửa code (không phát hiện lỗi nào) — đây là
 lượt xác nhận sâu hơn, không phải lượt sửa bug.
+
+## §9. Xác nhận Landscape "thật" cho TOÀN BỘ màn còn lại (theo §8, cùng chuẩn world-space)
+
+Tiếp nối §8 — áp CHUẨN VERIFY ĐÓ (world-space thật sau `Canvas.ForceUpdateCanvases()`, đúng cấu
+trúc production) cho MỌI màn còn lại có Landscape. **Phát hiện + sửa 1 lỗi phương pháp verify khi
+làm hàng loạt**: batch đầu tiên đo "Portrait" NGAY SAU `Open()` mà không tự áp `portrait.ApplyTo()`
+trước — `LayoutProfileSwitcher.OnEnable()` đã TỰ áp Landscape ngay từ đầu (Editor Game View đang ở
+tỉ lệ ngang thật), nên "Portrait" đo được thực chất đã là Landscape (Portrait==Landscape trùng số).
+Sửa: áp tường minh `portrait.ApplyTo()` trước khi đo baseline, rồi mới áp `landscape.ApplyTo()`.
+
+- [x] **8 màn dùng chung `ApplyStretchPanelLandscape`** (Shop/Summon/Mail/Quest/Codex/Tower/Dungeon/
+      TrialBoss) — TẤT CẢ đều cho đúng `Portrait=864×486 → Landscape=864×518` (khớp chính xác
+      HeroDetail ở §8), width không đổi. 8/8 OK.
+- [x] **NodeChoice** — cùng `864×486→864×518`; đo thêm khoảng cách `Row_2` (dòng option cuối,
+      tint đỏ "risky") tới `CloseButton` (CONTINUE): Portrait=30px → Landscape=75px, dương cả 2.
+- [x] **TeamSelect** (kỹ thuật khác — cỡ cố định) — `880×480 → 920×480`, chỉ ĐỔI WIDTH đúng thiết
+      kế; đo khoảng cách `GearPanelContainer` tới `Footer`: **50px CẢ 2 CHẾ ĐỘ** (không đổi, đúng
+      chủ ý §5 — không đụng chiều cao nên bố cục dọc bên trong hoàn toàn không bị ảnh hưởng).
+- [x] **Inventory** (3 khối độc lập) — đo lại gap `InventoryGridBg`↔`StatsBg` bằng
+      `GetWorldCorners()` thật (§7 mới chỉ đo qua `anchorMin/anchorMax` cục bộ): **22.5px cả 2 chế
+      độ** — giữ nguyên gần như tuyệt đối (đúng thiết kế "chia lại theo tỉ lệ cũ", không phải trùng
+      hợp).
+- [x] **Battle HUD** (Canvas riêng, không dính artifact "no Canvas ancestor" vì tự tạo Canvas thật
+      trên chính nó) — áp PORTRAIT (chế độ hẹp nhất, rủi ro chồng lấn cao nhất nếu có) cho cả 5
+      panel cùng lúc, đo khoảng cách hàng trên (`HeroPanel`↔`EnemyPanel`) và hàng dưới
+      (`DamageMeterPanel`↔`AnalyzePanel`) bằng `GetWorldCorners()` — cả 2 gap dương RÕ RỆT (không
+      phải biên vài pixel dễ nhầm do sai số toạ độ Canvas-scale).
+
+**Kết luận: TOÀN BỘ 12 màn Meta + Battle HUD (17 panel/khối tổng cộng) đã xác nhận Landscape hoạt
+động thật bằng world-space geometry sau layout pass thật, không phải chỉ số liệu serialize hay suy
+luận toán học.** Không phát hiện lỗi nào cần sửa ở bất kỳ màn nào — 100% các phép đo đều dương/đúng
+thiết kế. Không cần sửa code sản phẩm (chỉ 1 lỗi TRONG chính kịch bản verify, đã tự phát hiện+sửa
+trước khi kết luận).
