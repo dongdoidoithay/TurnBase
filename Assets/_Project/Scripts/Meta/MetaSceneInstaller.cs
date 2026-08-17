@@ -174,7 +174,7 @@ namespace Game.Meta
 
             RunContext.QueueBattle(snap.NodeId, snap.HeroDefIds, snap.EnemyDefIds, snap.Seed, ComputeAutoItemLoadout());
             _canvasRoot.gameObject.SetActive(false);
-            SceneManager.LoadScene("Battle");
+            ServiceLocator.Get<Game.Core.Scenes.ISceneTransitionService>().LoadSceneWithOverlay("Battle");
             return true;
         }
 
@@ -491,7 +491,7 @@ namespace Game.Meta
             // không tự mất khi đổi scene như trước nữa, nên phải ẩn tay trước khi qua Battle,
             // kẻo đè lên HUD trận đấu. BindCanvasRefs() sẽ hiện lại khi quay về Meta.
             _canvasRoot.gameObject.SetActive(false);
-            SceneManager.LoadScene("Battle");
+            ServiceLocator.Get<Game.Core.Scenes.ISceneTransitionService>().LoadSceneWithOverlay("Battle");
         }
 
         private static string PickBoss(int chapterId)
@@ -564,7 +564,7 @@ namespace Game.Meta
             SaveProfile();
 
             _canvasRoot.gameObject.SetActive(false);
-            SceneManager.LoadScene("Battle");
+            ServiceLocator.Get<Game.Core.Scenes.ISceneTransitionService>().LoadSceneWithOverlay("Battle");
         }
 
         public void LaunchTrialBoss()
@@ -594,7 +594,7 @@ namespace Game.Meta
             SaveProfile();
 
             _canvasRoot.gameObject.SetActive(false);
-            SceneManager.LoadScene("Battle");
+            ServiceLocator.Get<Game.Core.Scenes.ISceneTransitionService>().LoadSceneWithOverlay("Battle");
         }
 
         /// <summary>Mỗi lượt leo Tháp Vô Tận LUÔN bắt đầu lại từ tầng 1 với HP đầy (đúng cách mọi
@@ -634,7 +634,7 @@ namespace Game.Meta
             SaveProfile();
 
             _canvasRoot.gameObject.SetActive(false);
-            SceneManager.LoadScene("Battle");
+            ServiceLocator.Get<Game.Core.Scenes.ISceneTransitionService>().LoadSceneWithOverlay("Battle");
         }
 
         /// <summary>task-eventrest.md — trước đây auto-heal + gold cố định, không có lựa chọn nào.

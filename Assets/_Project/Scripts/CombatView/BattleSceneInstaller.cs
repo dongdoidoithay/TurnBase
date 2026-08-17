@@ -955,7 +955,7 @@ namespace Game.CombatView
             RunContext.QueueBattle(_pending.NodeId, _pending.HeroDefIds, _pending.EnemyDefIds,
                                     System.DateTime.UtcNow.Ticks, _pending.ItemLoadout,
                                     _pending.Formation, _pending.IsTutorial);
-            SceneManager.LoadScene("Battle");
+            ServiceLocator.Get<Game.Core.Scenes.ISceneTransitionService>().LoadSceneWithOverlay("Battle");
         }
 
         /// <summary>plan.md §4.15 Defeat — "Hồi sinh bằng Gem": trừ Gem thật qua IEconomyService rồi
@@ -1013,7 +1013,7 @@ namespace Game.CombatView
                                          _pending.SpecialMode, reportedFloor, totalPlayerDamage,
                                          Simulation.State.ItemsUsed);
                 RunContext.ClearPending();
-                SceneManager.LoadScene("Meta");
+                ServiceLocator.Get<Game.Core.Scenes.ISceneTransitionService>().LoadSceneWithOverlay("Meta");
             }
             else
             {
