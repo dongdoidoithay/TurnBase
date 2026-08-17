@@ -3,6 +3,8 @@ using Game.Core.UI;
 using Game.Data;
 using Game.Data.Dto;
 using Game.Services.Audio;
+using Game.Services.Localization;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,13 +26,17 @@ namespace Game.Meta.Endgame
         private static readonly Color CARD_AVAILABLE = new(0.15f, 0.13f, 0.12f, 0.55f);
 
         private GameObject _root;
+        private TextMeshProUGUI _titleLabel;
         private Text[] _nameLabels;
         private Text[] _progressLabels;
         private Image[] _rowCards;
         private Button[] _enterButtons;
+        private Text[] _enterLabels;
         private Button _closeButton;
+        private Text _closeLabel;
 
         private IAudioService _audio;
+        private ILocalizationService _loc;
         private PlayerProfileDto _profile;
         private System.Action<DungeonKind> _onEnter;
         private System.Action _onClosed;
@@ -38,6 +44,7 @@ namespace Game.Meta.Endgame
         public void Open(PlayerProfileDto profile, System.Action<DungeonKind> onEnter, System.Action onClosed)
         {
             ServiceLocator.TryGet(out _audio);
+            ServiceLocator.TryGet(out _loc);
             if (_root == null) BuildShell();
 
             _profile = profile;
@@ -55,11 +62,13 @@ namespace Game.Meta.Endgame
 
             var panel = _root.transform.Find("Panel");
             LayoutProfileSwitcher.ApplyStretchPanelLandscape(panel.gameObject, "DungeonPanel");
+            _titleLabel = panel.Find("InnerBlue/TitleText").GetComponent<TextMeshProUGUI>();
             var list = panel.Find("RowListContainer");
             _nameLabels = new Text[KINDS.Length];
             _progressLabels = new Text[KINDS.Length];
             _rowCards = new Image[KINDS.Length];
             _enterButtons = new Button[KINDS.Length];
+            _enterLabels = new Text[KINDS.Length];
             for (int i = 0; i < KINDS.Length; i++)
             {
                 var row = list.Find($"Row_{i}");
@@ -68,13 +77,14 @@ namespace Game.Meta.Endgame
                 _rowCards[i] = row.GetComponent<Image>();
                 var btn = row.Find("ClaimButton");
                 _enterButtons[i] = btn.GetComponent<Button>();
-                btn.Find("Label").GetComponent<Text>().text = "ENTER";
+                _enterLabels[i] = btn.Find("Label").GetComponent<Text>();
 
                 var kind = KINDS[i]; // capture đúng giá trị cho closure
                 _enterButtons[i].onClick.AddListener(() => Enter(kind));
             }
 
             _closeButton = panel.Find("CloseButton").GetComponent<Button>();
+            _closeLabel = panel.Find("CloseButton/Label").GetComponent<Text>();
             _closeButton.onClick.AddListener(Close);
         }
 
@@ -94,6 +104,14 @@ namespace Game.Meta.Endgame
 
         private void Refresh()
         {
+            if (_loc != null)
+            {
+                _titleLabel.text = _loc.Get("dungeon.label.title");
+                _closeLabel.text = _loc.Get("dungeon.button.close");
+                string enterText = _loc.Get("dungeon.button.enter");
+                for (int i = 0; i < _enterLabels.Length; i++) _enterLabels[i].text = enterText;
+            }
+
             var now = System.DateTime.UtcNow;
             for (int i = 0; i < KINDS.Length; i++)
             {
@@ -104,10 +122,14 @@ namespace Game.Meta.Endgame
 
                 // NameLabel là ô Text hẹp cố định (150×26, kế thừa từ UI_Quest.prefab) — bỏ chữ
                 // "Dungeon" (Title modal đã ghi rõ) để tránh wrap dòng 2 bị Truncate mất số tầng.
-                _nameLabels[i].text = $"{kind} — Floor {next}/{DungeonSystem.MAX_FLOOR}";
+                _nameLabels[i].text = _loc != null
+                    ? _loc.Get("dungeon.label.floor_line", kind, next, DungeonSystem.MAX_FLOOR)
+                    : $"{kind} — Floor {next}/{DungeonSystem.MAX_FLOOR}";
                 _progressLabels[i].text = !availableToday
-                    ? "Not today"
-                    : floor >= DungeonSystem.MAX_FLOOR ? "Cleared today" : $"{floor}/{DungeonSystem.MAX_FLOOR} cleared";
+                    ? (_loc != null ? _loc.Get("dungeon.label.not_today") : "Not today")
+                    : floor >= DungeonSystem.MAX_FLOOR
+                        ? (_loc != null ? _loc.Get("dungeon.label.cleared_today") : "Cleared today")
+                        : (_loc != null ? _loc.Get("dungeon.label.cleared_progress", floor, DungeonSystem.MAX_FLOOR) : $"{floor}/{DungeonSystem.MAX_FLOOR} cleared");
                 _enterButtons[i].interactable = DungeonSystem.CanEnter(_profile, kind, now);
                 _rowCards[i].color = availableToday ? CARD_AVAILABLE : CARD_UNAVAILABLE;
             }

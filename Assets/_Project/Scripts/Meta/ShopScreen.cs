@@ -5,6 +5,8 @@ using Game.Data.Dto;
 using Game.Meta.Items;
 using Game.Services.Audio;
 using Game.Services.Economy;
+using Game.Services.Localization;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -65,14 +67,17 @@ namespace Game.Meta
         };
 
         private GameObject _root;
+        private TextMeshProUGUI _titleLabel;
         private Text _walletLabel;
         private Text[] _rowNameLabels;
         private Text[] _rowPriceLabels;
         private Button[] _buyButtons;
+        private Text _closeLabel;
         private Button _closeButton;
 
         private IAudioService _audio;
         private IEconomyService _economy;
+        private ILocalizationService _loc;
         private PlayerProfileDto _profile;
         private System.Action _onClosed;
 
@@ -80,6 +85,7 @@ namespace Game.Meta
         {
             ServiceLocator.TryGet(out _audio);
             ServiceLocator.TryGet(out _economy);
+            ServiceLocator.TryGet(out _loc);
             if (_root == null) BuildShell();
 
             _profile = profile;
@@ -95,6 +101,7 @@ namespace Game.Meta
 
             var panel = _root.transform.Find("Panel");
             LayoutProfileSwitcher.ApplyStretchPanelLandscape(panel.gameObject, "ShopPanel");
+            _titleLabel = panel.Find("InnerBlue/TitleText").GetComponent<TextMeshProUGUI>();
             _walletLabel = panel.Find("WalletLabel").GetComponent<Text>();
 
             var list = panel.Find("RowListContainer");
@@ -114,6 +121,7 @@ namespace Game.Meta
             }
 
             _closeButton = panel.Find("CloseButton").GetComponent<Button>();
+            _closeLabel = panel.Find("CloseButton/Label").GetComponent<Text>();
             _closeButton.onClick.AddListener(Close);
         }
 
@@ -142,9 +150,17 @@ namespace Game.Meta
 
         private void Refresh()
         {
+            if (_loc != null)
+            {
+                _titleLabel.text = _loc.Get("shop.label.title");
+                _closeLabel.text = _loc.Get("shop.button.close");
+            }
+
             long gold = _economy?.Get(_profile.Wallet, CurrencyType.Gold) ?? 0;
             long gem = _economy?.Get(_profile.Wallet, CurrencyType.Gem) ?? 0;
-            _walletLabel.text = $"Gold {gold}   Gem {gem}";
+            _walletLabel.text = _loc != null
+                ? _loc.Get("shop.label.wallet", gold, gem)
+                : $"Gold {gold}   Gem {gem}";
 
             for (int i = 0; i < CATALOG.Length; i++)
             {

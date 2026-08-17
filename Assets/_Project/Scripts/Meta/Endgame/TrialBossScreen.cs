@@ -2,6 +2,8 @@ using Game.Core;
 using Game.Core.UI;
 using Game.Data.Dto;
 using Game.Services.Audio;
+using Game.Services.Localization;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,14 +24,19 @@ namespace Game.Meta.Endgame
         private static readonly Color CARD_LOCKED = new(0.15f, 0.13f, 0.12f, 0.55f);
 
         private GameObject _root;
+        private TextMeshProUGUI _titleLabel;
         private Text _walletLabel;
+        private Text _promptLabel;
         private Text[] _nameLabels;
         private Text[] _progressLabels;
         private Image[] _rowCards;
         private Button _attackButton;
+        private Text _attackLabel;
         private Button _closeButton;
+        private Text _closeLabel;
 
         private IAudioService _audio;
+        private ILocalizationService _loc;
         private PlayerProfileDto _profile;
         private System.Action _onAttack;
         private System.Action _onClosed;
@@ -37,6 +44,7 @@ namespace Game.Meta.Endgame
         public void Open(PlayerProfileDto profile, System.Action onAttack, System.Action onClosed)
         {
             ServiceLocator.TryGet(out _audio);
+            ServiceLocator.TryGet(out _loc);
             if (_root == null) BuildShell();
 
             _profile = profile;
@@ -54,6 +62,7 @@ namespace Game.Meta.Endgame
 
             var panel = _root.transform.Find("Panel");
             LayoutProfileSwitcher.ApplyStretchPanelLandscape(panel.gameObject, "TrialBossPanel");
+            _titleLabel = panel.Find("InnerBlue/TitleText").GetComponent<TextMeshProUGUI>();
             _walletLabel = panel.Find("WalletLabel").GetComponent<Text>();
             // Box gốc (200×26, Wrap+Truncate) đủ cho "Gold 999999 Gem 999" của QuestScreen nhưng
             // không đủ cho "Best damage this week: N" — nới rộng để số không bị wrap-rồi-mất.
@@ -87,17 +96,17 @@ namespace Game.Meta.Endgame
             }
 
             var attackRow = list.Find($"Row_{TIER_ROW_COUNT}");
-            var attackNameLabel = attackRow.Find("NameLabel").GetComponent<Text>();
-            attackNameLabel.text = "Fight the Trial Champion for a Damage Meter score.";
-            attackNameLabel.GetComponent<RectTransform>().sizeDelta = new Vector2(240f, 44f);
-            attackNameLabel.horizontalOverflow = HorizontalWrapMode.Wrap;
-            attackNameLabel.verticalOverflow = VerticalWrapMode.Overflow;
+            _promptLabel = attackRow.Find("NameLabel").GetComponent<Text>();
+            _promptLabel.GetComponent<RectTransform>().sizeDelta = new Vector2(240f, 44f);
+            _promptLabel.horizontalOverflow = HorizontalWrapMode.Wrap;
+            _promptLabel.verticalOverflow = VerticalWrapMode.Overflow;
             attackRow.Find("ProgressLabel").gameObject.SetActive(false);
             _attackButton = attackRow.Find("ClaimButton").GetComponent<Button>();
-            attackRow.Find("ClaimButton/Label").GetComponent<Text>().text = "ATTACK";
+            _attackLabel = attackRow.Find("ClaimButton/Label").GetComponent<Text>();
             _attackButton.onClick.AddListener(Attack);
 
             _closeButton = panel.Find("CloseButton").GetComponent<Button>();
+            _closeLabel = panel.Find("CloseButton/Label").GetComponent<Text>();
             _closeButton.onClick.AddListener(Close);
         }
 
@@ -117,15 +126,33 @@ namespace Game.Meta.Endgame
 
         private void Refresh()
         {
-            _walletLabel.text = $"Best damage this week: {_profile.TrialBoss.BestDamageThisWeek:N0}";
+            if (_loc != null)
+            {
+                _titleLabel.text = _loc.Get("trialboss.label.title");
+                _closeLabel.text = _loc.Get("trialboss.button.close");
+                _attackLabel.text = _loc.Get("trialboss.button.attack");
+                _promptLabel.text = _loc.Get("trialboss.label.prompt");
+            }
+            else
+            {
+                _promptLabel.text = "Fight the Trial Champion for a Damage Meter score.";
+            }
 
+            _walletLabel.text = _loc != null
+                ? _loc.Get("trialboss.label.wallet", _profile.TrialBoss.BestDamageThisWeek.ToString("N0"))
+                : $"Best damage this week: {_profile.TrialBoss.BestDamageThisWeek:N0}";
+
+            string claimedText = _loc != null ? _loc.Get("trialboss.label.claimed") : "CLAIMED";
+            string lockedText = _loc != null ? _loc.Get("trialboss.label.locked") : "LOCKED";
             var tiers = TrialBossSystem.Tiers;
             for (int i = 0; i < tiers.Count; i++)
             {
                 var t = tiers[i];
                 bool claimed = _profile.TrialBoss.ClaimedTier > i;
-                _nameLabels[i].text = $"Tier {i + 1} — {t.DamageThreshold:N0} dmg · {t.Gem} Gem + {t.Shards} Shards";
-                _progressLabels[i].text = claimed ? "CLAIMED" : "LOCKED";
+                _nameLabels[i].text = _loc != null
+                    ? _loc.Get("trialboss.label.tier", i + 1, t.DamageThreshold.ToString("N0"), t.Gem, t.Shards)
+                    : $"Tier {i + 1} — {t.DamageThreshold:N0} dmg · {t.Gem} Gem + {t.Shards} Shards";
+                _progressLabels[i].text = claimed ? claimedText : lockedText;
                 _rowCards[i].color = claimed ? CARD_CLAIMED : CARD_LOCKED;
             }
         }

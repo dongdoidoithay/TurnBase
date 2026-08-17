@@ -5,6 +5,7 @@ using Game.Data.Dto;
 using Game.Meta.Dungeon;
 using Game.Services.Audio;
 using Game.Services.Economy;
+using Game.Services.Localization;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -33,9 +34,11 @@ namespace Game.Meta
         private Text[] _optionLabels;
         private Button[] _optionButtons;
         private Button _continueButton;
+        private Text _continueLabel;
 
         private IAudioService _audio;
         private IEconomyService _economy;
+        private ILocalizationService _loc;
         private IRandomSource _rng;
         private PlayerProfileDto _profile;
         private bool _isRest;
@@ -45,6 +48,7 @@ namespace Game.Meta
             IRandomSource rng, System.Action onClosed)
         {
             ServiceLocator.TryGet(out _audio);
+            ServiceLocator.TryGet(out _loc);
             if (_root == null) BuildShell();
 
             _profile = profile;
@@ -68,7 +72,7 @@ namespace Game.Meta
             _descriptionLabel = panel.Find("WalletLabel").GetComponent<Text>();
 
             _continueButton = panel.Find("CloseButton").GetComponent<Button>();
-            panel.Find("CloseButton/Label").GetComponent<Text>().text = "CONTINUE";
+            _continueLabel = panel.Find("CloseButton/Label").GetComponent<Text>();
             _continueButton.onClick.AddListener(Continue);
 
             var list = panel.Find("RowListContainer");
@@ -93,10 +97,20 @@ namespace Game.Meta
         private void ShowOptions()
         {
             var options = _isRest ? NodeChoiceSystem.RestOptions : NodeChoiceSystem.EventOptions;
-            _titleLabel.text = _isRest ? "REST" : "EVENT";
-            _descriptionLabel.text = _isRest
-                ? "Choose how to spend the night."
-                : "Something catches your eye. Choose your approach.";
+            if (_loc != null)
+            {
+                _titleLabel.text = _isRest ? _loc.Get("nodechoice.label.rest_title") : _loc.Get("nodechoice.label.event_title");
+                _descriptionLabel.text = _isRest ? _loc.Get("nodechoice.label.rest_desc") : _loc.Get("nodechoice.label.event_desc");
+                _continueLabel.text = _loc.Get("nodechoice.button.continue");
+            }
+            else
+            {
+                _titleLabel.text = _isRest ? "REST" : "EVENT";
+                _descriptionLabel.text = _isRest
+                    ? "Choose how to spend the night."
+                    : "Something catches your eye. Choose your approach.";
+                _continueLabel.text = "CONTINUE";
+            }
 
             for (int i = 0; i < MaxOptions; i++)
             {

@@ -44,8 +44,10 @@ namespace Game.Meta
         };
 
         private GameObject _root;
+        private TextMeshProUGUI _titleLabel;
         private TextMeshProUGUI _statsText;
         private Button _closeButton;
+        private Text _closeLabel;
         private Image _leaderPortrait;
         private Text _leaderNameLabel;
         private Text _leaderLevelLabel;
@@ -77,9 +79,8 @@ namespace Game.Meta
 
             ApplyLandscapePilot();
 
-            var titleLabel = _root.transform.Find("CharacterBox/InnerBlue/PlaceholderText")
+            _titleLabel = _root.transform.Find("CharacterBox/InnerBlue/PlaceholderText")
                 ?.GetComponent<TextMeshProUGUI>();
-            if (titleLabel != null) titleLabel.text = "INVENTORY";
 
             // Leader showcase — CharacterBox trước đây chỉ có chữ "INVENTORY" phủ kín, không có
             // chân dung/thông tin nào dù chiếm gần nửa màn hình. Dùng đúng hero đầu roster
@@ -101,6 +102,7 @@ namespace Game.Meta
             }
 
             _closeButton = _root.transform.Find("InventoryGridBg/Inner/ActionBg/CloseButton").GetComponent<Button>();
+            _closeLabel = _closeButton.transform.Find("Label").GetComponent<Text>();
             _closeButton.onClick.AddListener(Close);
         }
 
@@ -177,6 +179,11 @@ namespace Game.Meta
 
         private void Refresh()
         {
+            if (_titleLabel != null)
+                _titleLabel.text = _loc != null ? _loc.Get("inventory.label.title") : "INVENTORY";
+            if (_closeLabel != null)
+                _closeLabel.text = _loc != null ? _loc.Get("inventory.button.close") : "CLOSE";
+
             RefreshLeader();
 
             var entries = new List<(string name, long count)>();

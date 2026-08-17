@@ -5,6 +5,8 @@ using Game.Data;
 using Game.Data.Dto;
 using Game.Services.Audio;
 using Game.Services.Economy;
+using Game.Services.Localization;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,17 +27,22 @@ namespace Game.Meta.Mail
         private static readonly Color CARD_CLAIMED = new(0.15f, 0.13f, 0.12f, 0.25f);
 
         private GameObject _root;
+        private TextMeshProUGUI _titleLabel;
         private Text _walletLabel;
         private GameObject[] _rows;
         private Image[] _rowCards;
         private Text[] _nameLabels;
         private Text[] _progressLabels;
         private Button[] _claimButtons;
+        private Text[] _claimLabels;
         private Button _closeButton;
+        private Text _closeLabel;
         private Button _claimAllButton;
+        private Text _claimAllLabel;
 
         private IAudioService _audio;
         private IEconomyService _economy;
+        private ILocalizationService _loc;
         private PlayerProfileDto _profile;
         private System.Action _onClosed;
 
@@ -48,6 +55,7 @@ namespace Game.Meta.Mail
         {
             ServiceLocator.TryGet(out _audio);
             ServiceLocator.TryGet(out _economy);
+            ServiceLocator.TryGet(out _loc);
             if (_root == null) BuildShell();
 
             _profile = profile;
@@ -70,6 +78,7 @@ namespace Game.Meta.Mail
 
             var panel = _root.transform.Find("Panel");
             LayoutProfileSwitcher.ApplyStretchPanelLandscape(panel.gameObject, "MailPanel");
+            _titleLabel = panel.Find("InnerBlue/TitleText").GetComponent<TextMeshProUGUI>();
             _walletLabel = panel.Find("WalletLabel").GetComponent<Text>();
 
             var list = panel.Find("RowListContainer");
@@ -78,6 +87,7 @@ namespace Game.Meta.Mail
             _nameLabels = new Text[ROW_COUNT];
             _progressLabels = new Text[ROW_COUNT];
             _claimButtons = new Button[ROW_COUNT];
+            _claimLabels = new Text[ROW_COUNT];
             for (int i = 0; i < ROW_COUNT; i++)
             {
                 var row = list.Find($"Row_{i}");
@@ -87,15 +97,18 @@ namespace Game.Meta.Mail
                 _progressLabels[i] = row.Find("ProgressLabel").GetComponent<Text>();
                 var btn = row.Find("ClaimButton");
                 _claimButtons[i] = btn.GetComponent<Button>();
+                _claimLabels[i] = btn.Find("Label").GetComponent<Text>();
 
                 int index = i; // capture đúng giá trị cho closure
                 _claimButtons[i].onClick.AddListener(() => Claim(index));
             }
 
             _closeButton = panel.Find("CloseButton").GetComponent<Button>();
+            _closeLabel = panel.Find("CloseButton/Label").GetComponent<Text>();
             _closeButton.onClick.AddListener(Close);
 
             _claimAllButton = panel.Find("ClaimAllButton").GetComponent<Button>();
+            _claimAllLabel = panel.Find("ClaimAllButton/Label").GetComponent<Text>();
             _claimAllButton.onClick.AddListener(ClaimAll);
         }
 
@@ -133,10 +146,22 @@ namespace Game.Meta.Mail
 
         private void Refresh()
         {
+            if (_loc != null)
+            {
+                _titleLabel.text = _loc.Get("mail.label.title");
+                _closeLabel.text = _loc.Get("mail.button.close");
+                _claimAllLabel.text = _loc.Get("mail.button.claim_all");
+                string claimText = _loc.Get("mail.button.claim");
+                for (int i = 0; i < _claimLabels.Length; i++) _claimLabels[i].text = claimText;
+            }
+
             long gold = _economy?.Get(_profile.Wallet, CurrencyType.Gold) ?? 0;
             long gem = _economy?.Get(_profile.Wallet, CurrencyType.Gem) ?? 0;
-            _walletLabel.text = $"Gold {gold}   Gem {gem}";
+            _walletLabel.text = _loc != null
+                ? _loc.Get("mail.label.wallet", gold, gem)
+                : $"Gold {gold}   Gem {gem}";
 
+            string claimedText = _loc != null ? _loc.Get("mail.label.claimed") : "CLAIMED";
             var mail = SortedMail();
             for (int i = 0; i < ROW_COUNT; i++)
             {
@@ -146,7 +171,7 @@ namespace Game.Meta.Mail
 
                 var m = mail[i];
                 _nameLabels[i].text = m.Title;
-                _progressLabels[i].text = m.Claimed ? "CLAIMED" : FormatRewardLine(m);
+                _progressLabels[i].text = m.Claimed ? claimedText : FormatRewardLine(m);
                 _claimButtons[i].interactable = !m.Claimed;
                 // Thẻ mờ hơn khi đã nhận — phân biệt đã-đọc/chưa-đọc bằng mắt, không chỉ đọc chữ
                 // "CLAIMED" nhỏ trong ProgressLabel.
@@ -171,7 +196,10 @@ namespace Game.Meta.Mail
                 return rewards;
 
             int daysLeft = (int)System.Math.Ceiling((expiry - System.DateTime.UtcNow).TotalDays);
-            return daysLeft > 0 ? $"{rewards} · {daysLeft}d" : $"{rewards} · <1d";
+            string suffix = daysLeft > 0
+                ? (_loc != null ? _loc.Get("mail.label.days_suffix", daysLeft) : $"{daysLeft}d")
+                : (_loc != null ? _loc.Get("mail.label.less_than_one_day") : "<1d");
+            return $"{rewards} · {suffix}";
         }
     }
 }

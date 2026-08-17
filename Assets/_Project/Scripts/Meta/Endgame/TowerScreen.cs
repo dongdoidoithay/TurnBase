@@ -2,6 +2,8 @@ using Game.Core;
 using Game.Core.UI;
 using Game.Data.Dto;
 using Game.Services.Audio;
+using Game.Services.Localization;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,14 +24,19 @@ namespace Game.Meta.Endgame
         private static readonly Color CARD_LOCKED = new(0.15f, 0.13f, 0.12f, 0.55f);
 
         private GameObject _root;
+        private TextMeshProUGUI _titleLabel;
         private Text _walletLabel;
+        private Text _readyPromptLabel;
         private Text[] _nameLabels;
         private Text[] _progressLabels;
         private Image[] _rowCards;
         private Button _climbButton;
+        private Text _climbLabel;
         private Button _closeButton;
+        private Text _closeLabel;
 
         private IAudioService _audio;
+        private ILocalizationService _loc;
         private PlayerProfileDto _profile;
         private System.Action _onClimb;
         private System.Action _onClosed;
@@ -37,6 +44,7 @@ namespace Game.Meta.Endgame
         public void Open(PlayerProfileDto profile, System.Action onClimb, System.Action onClosed)
         {
             ServiceLocator.TryGet(out _audio);
+            ServiceLocator.TryGet(out _loc);
             if (_root == null) BuildShell();
 
             _profile = profile;
@@ -54,6 +62,7 @@ namespace Game.Meta.Endgame
 
             var panel = _root.transform.Find("Panel");
             LayoutProfileSwitcher.ApplyStretchPanelLandscape(panel.gameObject, "TowerPanel");
+            _titleLabel = panel.Find("InnerBlue/TitleText").GetComponent<TextMeshProUGUI>();
             _walletLabel = panel.Find("WalletLabel").GetComponent<Text>();
 
             var list = panel.Find("RowListContainer");
@@ -79,15 +88,15 @@ namespace Game.Meta.Endgame
             }
 
             var attackRow = list.Find($"Row_{TIER_ROW_COUNT}");
-            var attackNameLabel = attackRow.Find("NameLabel").GetComponent<Text>();
-            attackNameLabel.text = "Ready to climb?";
-            attackNameLabel.GetComponent<RectTransform>().sizeDelta = new Vector2(240f, attackNameLabel.GetComponent<RectTransform>().sizeDelta.y);
+            _readyPromptLabel = attackRow.Find("NameLabel").GetComponent<Text>();
+            _readyPromptLabel.GetComponent<RectTransform>().sizeDelta = new Vector2(240f, _readyPromptLabel.GetComponent<RectTransform>().sizeDelta.y);
             attackRow.Find("ProgressLabel").gameObject.SetActive(false);
             _climbButton = attackRow.Find("ClaimButton").GetComponent<Button>();
-            attackRow.Find("ClaimButton/Label").GetComponent<Text>().text = "CLIMB";
+            _climbLabel = attackRow.Find("ClaimButton/Label").GetComponent<Text>();
             _climbButton.onClick.AddListener(Climb);
 
             _closeButton = panel.Find("CloseButton").GetComponent<Button>();
+            _closeLabel = panel.Find("CloseButton/Label").GetComponent<Text>();
             _closeButton.onClick.AddListener(Close);
         }
 
@@ -107,8 +116,24 @@ namespace Game.Meta.Endgame
 
         private void Refresh()
         {
-            _walletLabel.text = $"This week: {_profile.Tower.BestFloorThisWeek}   ·   All-time: {_profile.Progress.TowerFloor}";
+            if (_loc != null)
+            {
+                _titleLabel.text = _loc.Get("tower.label.title");
+                _closeLabel.text = _loc.Get("tower.button.close");
+                _climbLabel.text = _loc.Get("tower.button.climb");
+                _readyPromptLabel.text = _loc.Get("tower.label.ready_prompt");
+            }
+            else
+            {
+                _readyPromptLabel.text = "Ready to climb?";
+            }
 
+            _walletLabel.text = _loc != null
+                ? _loc.Get("tower.label.wallet", _profile.Tower.BestFloorThisWeek, _profile.Progress.TowerFloor)
+                : $"This week: {_profile.Tower.BestFloorThisWeek}   ·   All-time: {_profile.Progress.TowerFloor}";
+
+            string claimedText = _loc != null ? _loc.Get("tower.label.claimed") : "CLAIMED";
+            string lockedText = _loc != null ? _loc.Get("tower.label.locked") : "LOCKED";
             var tiers = TowerSystem.Tiers;
             for (int i = 0; i < tiers.Count; i++)
             {
@@ -117,8 +142,10 @@ namespace Game.Meta.Endgame
                 string reward = t.MythicEquipment
                     ? $"{t.Gem:N0} Gem · {t.Core} Core · 1 Mythic gear"
                     : t.Core > 0 ? $"{t.Gem:N0} Gem · {t.Core} Core" : $"{t.Gem:N0} Gem";
-                _nameLabels[i].text = $"Floor {t.FloorThreshold} — {reward}";
-                _progressLabels[i].text = claimed ? "CLAIMED" : "LOCKED";
+                _nameLabels[i].text = _loc != null
+                    ? _loc.Get("tower.label.floor_reward", t.FloorThreshold, reward)
+                    : $"Floor {t.FloorThreshold} — {reward}";
+                _progressLabels[i].text = claimed ? claimedText : lockedText;
                 _rowCards[i].color = claimed ? CARD_CLAIMED : CARD_LOCKED;
             }
         }

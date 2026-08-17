@@ -4,6 +4,8 @@ using Game.Data;
 using Game.Data.Dto;
 using Game.Services.Audio;
 using Game.Services.Economy;
+using Game.Services.Localization;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,14 +22,18 @@ namespace Game.Meta.Quest
         private const int ROW_COUNT = 6; // 3 Daily + 3 Achievement, cố định V1
 
         private GameObject _root;
+        private TextMeshProUGUI _titleLabel;
         private Text _walletLabel;
         private Text[] _nameLabels;
         private Text[] _progressLabels;
         private Button[] _claimButtons;
+        private Text[] _claimLabels;
         private Button _closeButton;
+        private Text _closeLabel;
 
         private IAudioService _audio;
         private IEconomyService _economy;
+        private ILocalizationService _loc;
         private PlayerProfileDto _profile;
         private System.Action _onClosed;
 
@@ -35,6 +41,7 @@ namespace Game.Meta.Quest
         {
             ServiceLocator.TryGet(out _audio);
             ServiceLocator.TryGet(out _economy);
+            ServiceLocator.TryGet(out _loc);
             if (_root == null) BuildShell();
 
             _profile = profile;
@@ -51,12 +58,14 @@ namespace Game.Meta.Quest
 
             var panel = _root.transform.Find("Panel");
             LayoutProfileSwitcher.ApplyStretchPanelLandscape(panel.gameObject, "QuestPanel");
+            _titleLabel = panel.Find("InnerBlue/TitleText").GetComponent<TextMeshProUGUI>();
             _walletLabel = panel.Find("WalletLabel").GetComponent<Text>();
 
             var list = panel.Find("RowListContainer");
             _nameLabels = new Text[ROW_COUNT];
             _progressLabels = new Text[ROW_COUNT];
             _claimButtons = new Button[ROW_COUNT];
+            _claimLabels = new Text[ROW_COUNT];
             for (int i = 0; i < ROW_COUNT; i++)
             {
                 var row = list.Find($"Row_{i}");
@@ -64,12 +73,14 @@ namespace Game.Meta.Quest
                 _progressLabels[i] = row.Find("ProgressLabel").GetComponent<Text>();
                 var btn = row.Find("ClaimButton");
                 _claimButtons[i] = btn.GetComponent<Button>();
+                _claimLabels[i] = btn.Find("Label").GetComponent<Text>();
 
                 int index = i; // capture đúng giá trị cho closure
                 _claimButtons[i].onClick.AddListener(() => Claim(index));
             }
 
             _closeButton = panel.Find("CloseButton").GetComponent<Button>();
+            _closeLabel = panel.Find("CloseButton/Label").GetComponent<Text>();
             _closeButton.onClick.AddListener(Close);
         }
 
@@ -94,8 +105,22 @@ namespace Game.Meta.Quest
 
         private void Refresh()
         {
+            string dailyTag = _loc != null ? _loc.Get("quest.label.daily_tag") : "[Daily]";
+            string achvTag = _loc != null ? _loc.Get("quest.label.achv_tag") : "[Achv]";
+            string doneText = _loc != null ? _loc.Get("quest.label.done") : "DONE";
+            string readyText = _loc != null ? _loc.Get("quest.label.ready") : "READY";
+            string lockedText = _loc != null ? _loc.Get("quest.label.locked") : "LOCKED";
+
+            if (_loc != null)
+            {
+                _titleLabel.text = _loc.Get("quest.label.title");
+                _closeLabel.text = _loc.Get("quest.button.close");
+                string claimText = _loc.Get("quest.button.claim");
+                for (int i = 0; i < _claimLabels.Length; i++) _claimLabels[i].text = claimText;
+            }
+
             long gem = _economy?.Get(_profile.Wallet, CurrencyType.Gem) ?? 0;
-            _walletLabel.text = $"Gem {gem}";
+            _walletLabel.text = _loc != null ? _loc.Get("quest.label.wallet", gem) : $"Gem {gem}";
 
             var dailies = QuestSystem.DailyQuests;
             for (int i = 0; i < dailies.Count; i++)
@@ -103,9 +128,9 @@ namespace Game.Meta.Quest
                 var q = dailies[i];
                 int progress = QuestSystem.GetDailyProgress(_profile, q.Id);
                 bool claimed = _profile.Quests.ClaimedQuestIds.Contains(q.Id);
-                _nameLabels[i].text = $"[Daily] {FormatAchievementName(q.Condition.ToString())} · +{q.GemReward}";
+                _nameLabels[i].text = $"{dailyTag} {FormatAchievementName(q.Condition.ToString())} · +{q.GemReward}";
                 _progressLabels[i].text = claimed
-                    ? "DONE"
+                    ? doneText
                     : $"{System.Math.Min(progress, q.Target)}/{q.Target}";
                 _claimButtons[i].interactable = !claimed && progress >= q.Target;
             }
@@ -117,8 +142,8 @@ namespace Game.Meta.Quest
                 var a = achievements[i];
                 bool claimed = _profile.Quests.UnlockedAchievements.Contains(a.Id);
                 bool unlocked = a.IsUnlocked(_profile);
-                _nameLabels[slot].text = $"[Achv] {FormatAchievementName(a.NameKey)} · +{a.GemReward}";
-                _progressLabels[slot].text = claimed ? "DONE" : (unlocked ? "READY" : "LOCKED");
+                _nameLabels[slot].text = $"{achvTag} {FormatAchievementName(a.NameKey)} · +{a.GemReward}";
+                _progressLabels[slot].text = claimed ? doneText : (unlocked ? readyText : lockedText);
                 _claimButtons[slot].interactable = !claimed && unlocked;
             }
         }

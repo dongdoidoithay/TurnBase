@@ -164,3 +164,53 @@ skill.voidking_judgment.name,Voidking Judgment,Voidking Judgment
 skill.wild_stampede.name,Wild Stampede,Wild Stampede
 skill.wolf_howl.name,Wolf Howl,Wolf Howl
 skill.wolf_pounce.name,Wolf Pounce,Wolf Pounce
+shop.label.title,CỬA HÀNG,SHOP
+shop.button.close,ĐÓNG,CLOSE
+shop.label.wallet,{0} Vàng   {1} Đá Quý,{0} Gold   {1} Gem
+quest.label.title,NHIỆM VỤ,QUEST
+quest.button.close,ĐÓNG,CLOSE
+quest.button.claim,NHẬN,CLAIM
+quest.label.wallet,Đá Quý {0},Gem {0}
+quest.label.daily_tag,[Hằng ngày],[Daily]
+quest.label.achv_tag,[Thành tựu],[Achv]
+quest.label.done,XONG,DONE
+quest.label.ready,SẴN SÀNG,READY
+quest.label.locked,KHOÁ,LOCKED
+mail.label.title,THƯ,MAIL
+mail.button.close,ĐÓNG,CLOSE
+mail.button.claim,NHẬN,CLAIM
+mail.button.claim_all,NHẬN TẤT CẢ,CLAIM ALL
+mail.label.wallet,{0} Vàng   {1} Đá Quý,{0} Gold   {1} Gem
+mail.label.claimed,ĐÃ NHẬN,CLAIMED
+mail.label.days_suffix,{0} ngày,{0}d
+mail.label.less_than_one_day,<1 ngày,<1d
+dungeon.label.title,HẦM NGỤC,DUNGEON
+dungeon.button.close,ĐÓNG,CLOSE
+dungeon.button.enter,VÀO,ENTER
+dungeon.label.not_today,Hôm nay hết lượt,Not today
+dungeon.label.cleared_today,Đã xong hôm nay,Cleared today
+dungeon.label.cleared_progress,{0}/{1} đã xong,{0}/{1} cleared
+dungeon.label.floor_line,{0} — Tầng {1}/{2},{0} — Floor {1}/{2}
+tower.label.title,THÁP,TOWER
+tower.button.close,ĐÓNG,CLOSE
+tower.button.climb,LEO THÁP,CLIMB
+tower.label.ready_prompt,Sẵn sàng leo tháp?,Ready to climb?
+tower.label.wallet,Tuần này: {0}   ·   Cao nhất: {1},This week: {0}   ·   All-time: {1}
+tower.label.floor_reward,Tầng {0} — {1},Floor {0} — {1}
+tower.label.claimed,ĐÃ NHẬN,CLAIMED
+tower.label.locked,KHOÁ,LOCKED
+trialboss.label.title,BOSS THỬ THÁCH,Trial Boss
+trialboss.button.close,ĐÓNG,CLOSE
+trialboss.button.attack,TẤN CÔNG,ATTACK
+trialboss.label.prompt,Đấu với Nhà Vô Địch Thử Thách để ghi điểm Damage Meter.,Fight the Trial Champion for a Damage Meter score.
+trialboss.label.wallet,Sát thương cao nhất tuần này: {0},Best damage this week: {0}
+trialboss.label.tier,Bậc {0} — {1} dmg · {2} Đá Quý + {3} Mảnh,Tier {0} — {1} dmg · {2} Gem + {3} Shards
+trialboss.label.claimed,ĐÃ NHẬN,CLAIMED
+trialboss.label.locked,KHOÁ,LOCKED
+nodechoice.label.rest_title,NGHỈ NGƠI,REST
+nodechoice.label.event_title,SỰ KIỆN,EVENT
+nodechoice.label.rest_desc,Chọn cách nghỉ ngơi qua đêm.,Choose how to spend the night.
+nodechoice.label.event_desc,Có gì đó thu hút bạn. Chọn cách xử lý.,Something catches your eye. Choose your approach.
+nodechoice.button.continue,TIẾP TỤC,CONTINUE
+inventory.label.title,TÚI ĐỒ,INVENTORY
+inventory.button.close,ĐÓNG,CLOSE
