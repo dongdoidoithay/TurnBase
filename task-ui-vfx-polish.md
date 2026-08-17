@@ -1037,3 +1037,33 @@ Sửa: áp tường minh `portrait.ApplyTo()` trước khi đo baseline, rồi m
 luận toán học.** Không phát hiện lỗi nào cần sửa ở bất kỳ màn nào — 100% các phép đo đều dương/đúng
 thiết kế. Không cần sửa code sản phẩm (chỉ 1 lỗi TRONG chính kịch bản verify, đã tự phát hiện+sửa
 trước khi kết luận).
+
+## §10. SkillGrid Portrait — thay identity bằng số liệu thật (co qua `Scale`, không đổi `cell`)
+
+Trước đó (§7.2) cố ý để identity vì thu hẹp panel cần thu hẹp Ô KỸ NĂNG (mục tiêu chạm thật) — đổi
+`cell`/`gap` trong `BuildSkillGrid()` là viết lại logic tạo nút, rủi ro cao. Giải pháp: dùng field
+`Scale` có sẵn trong `LayoutProfile` (chưa ai dùng tới trong suốt pilot) — co ĐỀU cả khối qua
+`localScale` thay vì đổi kích thước từng nút. Unity tự xử lý input đúng theo RectTransform đã scale
+(không cần đụng `SkillSlotView`/logic tạo nút nào).
+
+- [x] **Tính constraint THẬT trước khi chọn số** (không đoán): `AutoSpeed` (phải-dưới, rộng 128) và
+      `EndTurn` (giữa-dưới, 160) chưa từng gắn `LayoutProfileSwitcher` — xác nhận qua grep — nên
+      giữ NGUYÊN kích thước ở mọi hướng màn hình, đây chính là ràng buộc cứng cho `SkillGrid` fit
+      vừa. Cùng `DamageMeterPanel` Portrait (đã có từ §7.2, rộng 120) tạo thành 2 "tường" 2 bên.
+- [x] Tính canvas portrait hẹp nhất hợp lý ≈480 đơn vị (công thức CanvasScaler match=0.5 đã dùng
+      xuyên suốt §5-§9, ứng với điện thoại ~19.5:9-20:9 phổ biến — kiểm thêm iPhone 1170×2532 →
+      canvasW≈489.5, an toàn hơn mốc 480 đã chọn).
+- [x] Hệ số co Portrait = **0.6** (296×182 → hiệu quả 177.6×109.2, cell hiệu quả 52×0.6≈31.2) —
+      chọn có biên dự phòng (~12px dưới ngưỡng an toàn tính được 190px), không bám sát giới hạn.
+      `SkillGrid` neo pivot=(0.5,0) (đáy-giữa, có sẵn từ `Panel()`) nên co qua Scale giữ nguyên điểm
+      neo đáy-giữa, không cần chỉnh `anchoredPosition`.
+- [x] Verify bằng số liệu THẬT (không đoán): dựng `BattleHudScreen` thật, đọc trực tiếp
+      `meterPanel.rect.width`(Portrait)=120, `meterPanel.anchoredPosition.x`=12,
+      `autoSpeed.rect.width`(cố định)=128, `autoSpeed.anchoredPosition.x`=−12,
+      `skillGrid.rect.width`=296 × `localScale.x`=0.6 → effectiveWidth=177.6 — tính tay cho canvas
+      giả định W=480: **gap trái = 19.2px, gap phải = 11.2px, cả 2 dương** (không chồng lấn). Biên
+      phải khá sát (an toàn tới canvasW≈458 theo tính thêm, dưới mốc đó mới âm — thấp hơn mọi tỉ lệ
+      điện thoại thật đã kiểm, chỉ rủi ro ở cửa sổ chia đôi màn hình/tỉ lệ cực đoan hiếm gặp).
+      `validate_script` 0 lỗi, `refresh_unity` force+compile 0 lỗi console, **632/632 test xanh**.
+
+**Toàn bộ Battle HUD (5/5 panel) nay đã có Landscape/Portrait THẬT** — không còn identity nào.

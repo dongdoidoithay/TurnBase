@@ -395,17 +395,28 @@ namespace Game.UI.Battle
             var panel = Panel("SkillGrid", new Vector2(0.5f, 0), new Vector2(0.5f, 0),
                               new Vector2(0, 58), new Vector2(w, h), GRID_ACCENT);
 
-            // task-ui-vfx-polish.md §7 — CHỦ Ý identity (Portrait=Landscape=số liệu hiện có), khác
-            // HeroPanel/EnemyPanel/DamageMeterPanel/AnalyzePanel: kích thước lưới suy từ `cell`
-            // (52px, mục tiêu chạm thật của người chơi) — thu hẹp panel này đồng nghĩa thu hẹp Ô
-            // KỸ NĂNG, ảnh hưởng thao tác chạm, khác các panel kia chỉ hiện thông tin đọc. Vẫn gắn
-            // switcher (không bỏ qua hẳn) để nhất quán hạ tầng, sẵn sàng tinh chỉnh khi có số liệu
-            // portrait thật (cần giảm `cell`, không chỉ đổi `sizeDelta` panel).
-            var gridProfile = LayoutProfile.CaptureFrom(panel, "SkillGrid_Portrait");
-            var gridProfileLandscape = gridProfile;
-            gridProfileLandscape.Name = "SkillGrid_Landscape";
+            // task-ui-vfx-polish.md §9 — Portrait THẬT (thay identity trước đó). Không đổi `cell`/
+            // `gap` (tránh viết lại logic tạo nút, rủi ro cao) — dùng field `Scale` sẵn có của
+            // `LayoutProfile` (chưa ai dùng tới) để co ĐỀU toàn bộ lưới qua `localScale`: mọi nút +
+            // khoảng cách + chữ thu nhỏ cùng tỉ lệ, raycast/click vẫn đúng vị trí thật (Unity tự xử
+            // lý input theo RectTransform đã scale). Panel neo pivot=(0.5,0) (đáy-giữa, xem `Panel()`)
+            // nên co theo Scale luôn giữ nguyên điểm neo đáy-giữa, chỉ thu nhỏ hướng lên/vào trong —
+            // không cần chỉnh lại vị trí.
+            //
+            // Số tính tay: constraint thật là `AutoSpeed` (phải-dưới, rộng 128, KHÔNG có Portrait
+            // riêng — cố định) và `DamageMeterPanel` Portrait (trái-dưới, rộng 120) — cả 2 đều neo
+            // góc với biên 12px cố định, không phụ thuộc canvas rộng bao nhiêu. Với canvas portrait
+            // thật hẹp nhất hợp lý (~480 đơn vị — tính từ CanvasScaler match=0.5, màn ngang 20:9 tới
+            // 21:9 xoay dọc, xem §5/§7 công thức) và biên an toàn 5px mỗi bên quanh SkillGrid:
+            // width tối đa an toàn ≈ 480/2 − (12+120+5) ≈ 190 → chọn hệ số co 0.6 (296×0.6≈178, dư
+            // ~12px so với ngưỡng 190 — có biên dự phòng thay vì bám sát giới hạn tính toán).
+            const float skillGridPortraitScale = 0.6f;
+            var gridLandscape = LayoutProfile.CaptureFrom(panel, "SkillGrid_Landscape");
+            var gridPortrait = gridLandscape;
+            gridPortrait.Name = "SkillGrid_Portrait";
+            gridPortrait.Scale = new Vector3(skillGridPortraitScale, skillGridPortraitScale, 1f);
             panel.gameObject.AddComponent<LayoutProfileSwitcher>()
-                 .SetProfiles(panel, gridProfile, gridProfileLandscape);
+                 .SetProfiles(panel, gridPortrait, gridLandscape);
 
             // Hàng 0: skill của hero đang tới lượt.
             for (int c = 0; c < GRID_COLS; c++)
