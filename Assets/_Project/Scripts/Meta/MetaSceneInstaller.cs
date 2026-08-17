@@ -95,6 +95,7 @@ namespace Game.Meta
         private Button _mailButton;
         private Button _codexButton;
         private Button _inventoryButton;
+        private Button _heroListButton;
         private RectTransform _mapRoot;
         private Text _titleLabel, _walletLabel, _toastLabel;
         private GameObject _toastPanel;
@@ -116,6 +117,7 @@ namespace Game.Meta
         private MailScreen _mailScreen;
         private CodexScreen _codexScreen;
         private InventoryScreen _inventoryScreen;
+        private Game.Meta.HeroList.HeroListScreen _heroListScreen;
         private Color _chapterAccent = Color.white;
 
         private readonly struct PulseNode
@@ -788,6 +790,7 @@ namespace Game.Meta
             _mailScreen = gameObject.AddComponent<MailScreen>();
             _codexScreen = gameObject.AddComponent<CodexScreen>();
             _inventoryScreen = gameObject.AddComponent<InventoryScreen>();
+            _heroListScreen = gameObject.AddComponent<Game.Meta.HeroList.HeroListScreen>();
             // task-mail-extras.md — MailScreen tự bắn OnMailChanged sau Claim/Claim-All/purge hết
             // hạn; TopBar là script độc lập (BindCanvasRefs comment ở trên) nên không tự biết,
             // cần nghe callback này để vẽ lại badge ngay cả khi modal Mail đang mở (không cần đợi
@@ -867,6 +870,14 @@ namespace Game.Meta
                 _audio?.PlaySfx("ui/sfx_ui_tick");
                 _inventoryScreen.Open(_profile, null);
             });
+
+            // HeroList (task-hero-list.md) — bấm 1 dòng mở HeroDetailScreen bên trong, có thể đổi
+            // Wallet (Ascend)/stat (skill level) nên refresh lại TopBar giống mọi màn có Ascend.
+            _heroListButton.onClick.AddListener(() =>
+            {
+                _audio?.PlaySfx("ui/sfx_ui_tick");
+                _heroListScreen.Open(_profile, null);
+            });
         }
 
         /// <summary>MetaCanvas nằm vật lý trong Boot.unity (GameBootstrap/__UI__/UIRoot/
@@ -892,6 +903,7 @@ namespace Game.Meta
             _mailButton = topBar.Find("MailButton").GetComponent<Button>();
             _codexButton = topBar.Find("CodexButton").GetComponent<Button>();
             _inventoryButton = topBar.Find("InventoryButton").GetComponent<Button>();
+            _heroListButton = topBar.Find("HeroListButton").GetComponent<Button>();
             // task-mail-extras.md — MailBadge dựng tĩnh trong Boot.unity (không phải runtime),
             // mặc định inactive, chỉ RefreshMailBadge() mới bật lên khi có mail thật chưa claim.
             _mailBadge = _mailButton.transform.Find("MailBadge").gameObject;

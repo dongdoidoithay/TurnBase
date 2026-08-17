@@ -118,6 +118,16 @@ def icon_summon():
     return img
 
 
+def icon_heroes():
+    img = _new()
+    d = ImageDraw.Draw(img)
+    # Đầu (vòng tròn viền) + vai (nửa cung phía dưới, hở đáy) — bust đơn giản, đại diện
+    # "roster nhân vật của tôi", khác hẳn icon_book (Codex = bách khoa toàn bộ hero/enemy/item).
+    d.ellipse([9, 4, 15, 10], outline=W, width=2)
+    d.arc([5, 12, 19, 26], 180, 360, fill=W, width=2)
+    return img
+
+
 ICONS = {
     "icon_tower": icon_tower,
     "icon_trial": icon_swords,
@@ -128,6 +138,7 @@ ICONS = {
     "icon_quest": icon_scroll,
     "icon_gear": icon_gear,
     "icon_summon": icon_summon,
+    "icon_heroes": icon_heroes,
 }
 
 
