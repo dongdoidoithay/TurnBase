@@ -777,8 +777,11 @@ namespace Game.CombatView
                 var boss = new AIProfile { Id = "ai_boss", Noise = 6f };
                 boss.Rules.Add(new AIRule
                 {
+                    // task-boss-phase-enrage.md, plan.md §4.13.3 — "chiêu đặc trưng" (ô 1) nay là
+                    // SignatureMove thật: thắng điểm không đánh ngay mà đếm ngược 3 lượt công khai
+                    // trước (AIController.Choose), Break huỷ ngay (counterplay bắt buộc).
                     When = new AICondition(AIConditionType.Always),
-                    SkillSlot = 1, Weight = 70f, RuleCooldown = 2
+                    SkillSlot = 1, Weight = 70f, RuleCooldown = 2, IsSignatureMove = true
                 });
                 boss.Rules.Add(new AIRule
                 {

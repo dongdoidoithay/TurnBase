@@ -194,10 +194,65 @@ namespace Game.Combat
         // PIPELINE MỘT LƯỢT — plan.md §4.3
         // =====================================================================
 
+        private static readonly float[] BOSS_PHASE_THRESHOLDS = { 0.60f, 0.30f }; // plan.md §4.13.3
+
+        /// <summary>plan.md §4.13.3 — boss đổi phase khi HP xuống dưới 60%/30%. CHỈ TĂNG, không bao
+        /// giờ giảm lại (kể cả được hồi máu) — tránh phase nhảy tới nhảy lui. Idempotent, gọi nhiều
+        /// lần trong 1 lượt không lặp event vì so sánh <see cref="CombatUnit.Phase"/> trước/sau. Gọi
+        /// sau MỌI lần HP boss có thể đổi (sau resolve skill) + đầu mỗi round (an toàn, bắt cả DoT
+        /// tự gây lên chính actor).</summary>
+        private void RefreshBossPhases()
+        {
+            for (int i = 0; i < State.Units.Count; i++)
+            {
+                var u = State.Units[i];
+                if (!u.IsBoss || !u.IsAlive || u.MaxHp <= 0) continue;
+
+                float pct = (float)u.Hp / u.MaxHp;
+                int newPhase = 1;
+                for (int t = 0; t < BOSS_PHASE_THRESHOLDS.Length; t++)
+                    if (pct < BOSS_PHASE_THRESHOLDS[t]) newPhase = t + 2;
+
+                if (newPhase <= u.Phase) continue;
+
+                u.Phase = newPhase;
+                _poise.ResetOnPhaseChange(u);
+                Events.Emit(CombatEventType.PhaseChanged, u.Id, intValue: newPhase);
+            }
+        }
+
+        /// <summary>plan.md §4.13.3 — sau <see cref="BattleState.EnrageRound"/> (mặc định 12),
+        /// +50% ATK/+30% SPD MỖI 3 lượt tiếp theo, cộng dồn qua <see cref="CombatUnit.PassiveModifiers"/>
+        /// (tái dùng pipeline ComputeStats có sẵn, không cần bước tính stat riêng). Gọi 1 lần mỗi
+        /// <see cref="BeginRound"/>.</summary>
+        private void RefreshBossEnrage()
+        {
+            if (State.RoundNumber < State.EnrageRound) return;
+            int stacksExpected = 1 + (State.RoundNumber - State.EnrageRound) / 3;
+
+            for (int i = 0; i < State.Units.Count; i++)
+            {
+                var u = State.Units[i];
+                if (!u.IsBoss || !u.IsAlive || u.EnrageStacks >= stacksExpected) continue;
+
+                int stacksToAdd = stacksExpected - u.EnrageStacks;
+                for (int s = 0; s < stacksToAdd; s++)
+                {
+                    u.PassiveModifiers.Add(new StatModifier(StatType.AtkPct, 50f, "enrage"));
+                    u.PassiveModifiers.Add(new StatModifier(StatType.SpdPct, 30f, "enrage"));
+                }
+                u.EnrageStacks = stacksExpected;
+                u.MarkStatsDirty();
+                Events.Emit(CombatEventType.Enraged, u.Id, intValue: stacksExpected);
+            }
+        }
+
         private void BeginRound()
         {
             State.RoundNumber++;
             Events.Emit(CombatEventType.RoundStarted, intValue: State.RoundNumber);
+            RefreshBossEnrage();
+            RefreshBossPhases();
 
             foreach (var kv in _aiProfiles) AIController.TickRuleCooldowns(kv.Value);
 
@@ -236,6 +291,7 @@ namespace Game.Combat
 
             // Bước 3–4: DoT tick, chết do DoT thì bỏ lượt
             bool died = _status.TickTurnStart(_currentActor);
+            RefreshBossPhases(); // plan.md §4.13.3 — bắt cả boss tự gây DoT lên chính mình
             if (died) { FinishTurnSkipped(); return false; }
 
             // Bước 5: control chặn hành động
@@ -385,6 +441,7 @@ namespace Game.Combat
             }
 
             _resolver.Execute(_currentActor, skill, intent.TargetId, intent.Grade, State.Rng);
+            RefreshBossPhases(); // plan.md §4.13.3 — bắt mọi lần HP boss đổi qua đòn/counter/reflect
 
             // Edge case E15 (plan.md §4.14): tiêu gauge Ultimate CHỈ khi actor còn sống sau khi
             // resolve — actor tự chết giữa lúc dùng Ultimate (VD phản đòn Counter/Reflect từ

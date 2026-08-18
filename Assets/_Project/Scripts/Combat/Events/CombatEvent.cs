@@ -3,7 +3,7 @@ using Game.Data;
 
 namespace Game.Combat.Events
 {
-    /// <summary>27 loại event — bảng đầy đủ ở plan.md §11.4 và object-map.md §5.1.</summary>
+    /// <summary>31 loại event — bảng đầy đủ ở plan.md §11.4 và object-map.md §5.1.</summary>
     public enum CombatEventType
     {
         BattleInitialized = 0,
@@ -34,7 +34,11 @@ namespace Game.Combat.Events
         IntentChanged = 25,
         TurnEnded = 26,
         BattleEnded = 27,
-        SpRestored = 28
+        SpRestored = 28,
+        /// <summary>task-boss-phase-enrage.md — boss vừa cộng thêm 1 nấc Enrage (round ≥ EnrageRound).</summary>
+        Enraged = 29,
+        /// <summary>task-boss-phase-enrage.md — boss bắt đầu đếm ngược SignatureMove 3 lượt.</summary>
+        SignatureMoveTelegraphed = 30
     }
 
     /// <summary>

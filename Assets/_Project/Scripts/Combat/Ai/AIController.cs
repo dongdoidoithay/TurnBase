@@ -92,6 +92,10 @@ namespace Game.Combat.Ai
         public int SkillSlot = -1;    // dùng khi SkillId rỗng
         public float Weight = 50f;
         public int RuleCooldown;      // số lượt không lặp lại rule này
+        /// <summary>task-boss-phase-enrage.md, plan.md §4.13.3 — nếu true, rule thắng điểm KHÔNG
+        /// thực thi ngay mà đếm ngược 3 lượt công khai (SignatureMove) rồi mới thực thi. Counterplay
+        /// bắt buộc: Break huỷ ngay (xem <see cref="AIController.Choose"/>).</summary>
+        public bool IsSignatureMove;
 
         [NonSerialized] public int CooldownLeft;
     }
@@ -108,6 +112,8 @@ namespace Game.Combat.Ai
     /// <summary>Utility AI — plan.md §4.13. Chấm điểm rule, chọn cao nhất.</summary>
     public sealed class AIController
     {
+        private const int SIGNATURE_MOVE_TELEGRAPH_TURNS = 3; // plan.md §4.13.3
+
         private readonly BattleState _state;
         private readonly TargetSelector _targeting;
 
@@ -133,10 +139,35 @@ namespace Game.Combat.Ai
         {
             var r = peek ? rng.Fork() : rng;
 
+            // task-boss-phase-enrage.md — SignatureMove đang đếm ngược: Break huỷ ngay (counterplay
+            // bắt buộc), ngược lại đếm tiếp/thực thi khi hết giờ. CHỈ mutate khi !peek — Intent
+            // Preview không được tiêu trạng thái thật, cùng nguyên tắc rng.Fork() ở trên.
+            if (!peek && self.SignatureMoveTurnsLeft > 0)
+            {
+                if (self.IsBroken)
+                {
+                    self.SignatureMoveTurnsLeft = 0;
+                    self.PendingSignatureMoveSkillId = null;
+                }
+                else
+                {
+                    self.SignatureMoveTurnsLeft--;
+                    if (self.SignatureMoveTurnsLeft <= 0)
+                    {
+                        var signatureSkill = self.FindSkill(self.PendingSignatureMoveSkillId);
+                        self.PendingSignatureMoveSkillId = null;
+                        if (signatureSkill != null && self.CanUseSkill(signatureSkill, _state.IsUltimateReady))
+                            return new Decision(signatureSkill, PickTarget(self, signatureSkill)?.Id ?? -1);
+                        // Skill không còn dùng được (VD hết SP) → rơi xuống scoring bình thường bên dưới.
+                    }
+                }
+            }
+
             if (profile == null || profile.Rules.Count == 0)
                 return FallbackBasicAttack(self);
 
             SkillRuntime bestSkill = null;
+            AIRule bestRule = null;
             float bestScore = float.MinValue;
 
             for (int i = 0; i < profile.Rules.Count; i++)
@@ -150,10 +181,15 @@ namespace Game.Combat.Ai
                 if (skill == null || !self.CanUseSkill(skill, _state.IsUltimateReady)) continue;
 
                 float score = rule.Weight + r.NextFloat(-profile.Noise, profile.Noise);
-                if (score > bestScore) { bestScore = score; bestSkill = skill; }
+                if (score > bestScore) { bestScore = score; bestSkill = skill; bestRule = rule; }
             }
 
             if (bestSkill == null) return FallbackBasicAttack(self);
+
+            // task-boss-phase-enrage.md — rule thắng là SignatureMove và chưa có cái nào đang đếm dở
+            // → KHÔNG thực thi ngay, bắt đầu đếm ngược 3 lượt, rơi về hành động tốt-thứ-nhì lượt này.
+            if (!peek && bestRule.IsSignatureMove && self.SignatureMoveTurnsLeft <= 0)
+                return BeginSignatureMoveTelegraph(self, profile, phase, r, bestSkill, bestRule);
 
             if (!peek)
             {
@@ -168,6 +204,32 @@ namespace Game.Combat.Ai
 
             var target = PickTarget(self, bestSkill);
             return new Decision(bestSkill, target?.Id ?? -1);
+        }
+
+        private Decision BeginSignatureMoveTelegraph(CombatUnit self, AIProfile profile, int phase,
+            IRandomSource r, SkillRuntime signatureSkill, AIRule signatureRule)
+        {
+            self.SignatureMoveTurnsLeft = SIGNATURE_MOVE_TELEGRAPH_TURNS;
+            self.PendingSignatureMoveSkillId = signatureSkill.Data.Id;
+            if (signatureRule.RuleCooldown > 0) signatureRule.CooldownLeft = signatureRule.RuleCooldown;
+
+            SkillRuntime fallbackSkill = null;
+            float fallbackScore = float.MinValue;
+            for (int i = 0; i < profile.Rules.Count; i++)
+            {
+                var rule = profile.Rules[i];
+                if (rule.IsSignatureMove || rule.CooldownLeft > 0) continue;
+                if (!rule.When.Evaluate(_state, self, phase)) continue;
+
+                var skill = ResolveSkill(self, rule);
+                if (skill == null || !self.CanUseSkill(skill, _state.IsUltimateReady)) continue;
+
+                float score = rule.Weight + r.NextFloat(-profile.Noise, profile.Noise);
+                if (score > fallbackScore) { fallbackScore = score; fallbackSkill = skill; }
+            }
+
+            if (fallbackSkill == null) return FallbackBasicAttack(self);
+            return new Decision(fallbackSkill, PickTarget(self, fallbackSkill)?.Id ?? -1);
         }
 
         private SkillRuntime ResolveSkill(CombatUnit self, AIRule rule)

@@ -70,6 +70,19 @@ namespace Game.Combat.Model
         /// <summary>task-tactic-row.md — đã dùng SwapRow lượt này; nút SWAP bị disable. Reset bởi BeginTurn().</summary>
         public bool HasSwappedRowThisTurn;
 
+        /// <summary>task-boss-phase-enrage.md, plan.md §4.13.3 — chỉ có ý nghĩa khi <see cref="IsBoss"/>.
+        /// Tăng khi HP xuống dưới 60%/30% (1→2→3), KHÔNG BAO GIỜ giảm lại (kể cả được hồi máu) —
+        /// tránh phase nhảy tới nhảy lui. Xem <c>CombatSimulation.RefreshBossPhases</c>.</summary>
+        public int Phase = 1;
+        /// <summary>Số nấc Enrage đã cộng (+50% ATK/+30% SPD/nấc, cộng dồn qua <see cref="PassiveModifiers"/>)
+        /// — xem <c>CombatSimulation.RefreshBossEnrage</c>.</summary>
+        public int EnrageStacks;
+        /// <summary>task-boss-phase-enrage.md — đếm ngược lượt của CHÍNH unit này (không phải round
+        /// toàn trận) trước khi <see cref="PendingSignatureMoveSkillId"/> thực thi. 0 = không đang
+        /// đếm. Break (<see cref="IsBroken"/>) huỷ ngay — counterplay bắt buộc theo plan.md.</summary>
+        public int SignatureMoveTurnsLeft;
+        public string PendingSignatureMoveSkillId;
+
         // ===== Cache stat =====
         private DerivedStats _cached;
         private bool _dirty = true;
