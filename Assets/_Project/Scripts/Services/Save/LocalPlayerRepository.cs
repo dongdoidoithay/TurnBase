@@ -221,6 +221,7 @@ namespace Game.Services.Save
             {
                 Id = "welcome",
                 Title = "Welcome, Commander!",
+                TitleKey = "mail.welcome.title",
                 Body = "A small gift to start your journey. Good luck out there.",
                 Rewards = new List<MailRewardDto>
                 {

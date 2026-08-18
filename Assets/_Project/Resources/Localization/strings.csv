@@ -169,6 +169,16 @@ skill.wolf_pounce.name,Wolf Pounce,Wolf Pounce
 shop.label.title,CỬA HÀNG,SHOP
 shop.button.close,ĐÓNG,CLOSE
 shop.label.wallet,{0} Vàng   {1} Đá Quý,{0} Gold   {1} Gem
+shop.item.essence1,5 Tinh Chất I,5 Essence I
+shop.item.essence2,5 Tinh Chất II,5 Essence II
+shop.item.essence3,5 Tinh Chất III,5 Essence III
+shop.item.core,3 Lõi,3 Core
+shop.item.potion,Bình Thuốc,Potion
+shop.item.ether,Bình Ether,Ether
+shop.item.antidote,Giải Độc,Antidote
+shop.item.smoke_bomb,Bom Khói,Smoke Bomb
+shop.item.revive_feather,Lông Vũ Hồi Sinh,Revive Feather
+shop.item.elemental_bomb,Bom Nguyên Tố,Elemental Bomb
 quest.label.title,NHIỆM VỤ,QUEST
 quest.button.close,ĐÓNG,CLOSE
 quest.button.claim,NHẬN,CLAIM
@@ -183,6 +193,7 @@ mail.button.close,ĐÓNG,CLOSE
 mail.button.claim,NHẬN,CLAIM
 mail.button.claim_all,NHẬN TẤT CẢ,CLAIM ALL
 mail.label.wallet,{0} Vàng   {1} Đá Quý,{0} Gold   {1} Gem
+mail.welcome.title,"Chào mừng, Chỉ huy!","Welcome, Commander!"
 mail.label.claimed,ĐÃ NHẬN,CLAIMED
 mail.label.days_suffix,{0} ngày,{0}d
 mail.label.less_than_one_day,<1 ngày,<1d
@@ -214,6 +225,24 @@ nodechoice.label.event_title,SỰ KIỆN,EVENT
 nodechoice.label.rest_desc,Chọn cách nghỉ ngơi qua đêm.,Choose how to spend the night.
 nodechoice.label.event_desc,Có gì đó thu hút bạn. Chọn cách xử lý.,Something catches your eye. Choose your approach.
 nodechoice.button.continue,TIẾP TỤC,CONTINUE
+nodechoice.rest.recover.label,Nghỉ ngơi,Recover
+nodechoice.rest.recover.flavor,Nghỉ ngơi an toàn. +50 vàng.,Rest safely. +50 gold.
+nodechoice.rest.train.label,Luyện tập,Train
+nodechoice.rest.train.flavor,Dành đêm luyện chiêu thức. +1 cấp kỹ năng cho 1 hero ngẫu nhiên.,Spend the night drilling forms. +1 skill level for a random hero.
+nodechoice.event.safe.label,Chơi an toàn,Play it safe
+nodechoice.event.safe.flavor,Một phát hiện nhỏ chắc chắn có.,A modest guaranteed find.
+nodechoice.event.chance.label,Thử vận may,Take a chance
+nodechoice.event.chance.flavor,Có thể thắng lớn — hoặc không.,Could pay off big — or not.
+nodechoice.event.allin.label,Tất tay,All in
+nodechoice.event.allin.flavor,Tỉ lệ thấp nhưng phần thưởng có thật.,Long odds but the prize is real.
+nodechoice.result.rest_recover,Bạn nghỉ ngơi tốt. +{0} vàng.,You rest well. +{0} gold.
+nodechoice.result.rest_train,{0} — kỹ năng {1} lên cấp!,{0} — skill {1} level up!
+nodechoice.result.rest_train_none,Không hero nào còn kỹ năng để luyện.,No hero has a skill left to train.
+nodechoice.result.event_safe,Một phát hiện nhỏ. +{0} vàng.,A quiet find. +{0} gold.
+nodechoice.result.event_chance_win,Thắng lớn! +{0} vàng.,It paid off! +{0} gold.
+nodechoice.result.event_chance_lose,Không may... {0} vàng.,Bad luck... {0} gold.
+nodechoice.result.event_allin_win,Trúng lớn! Bạn tìm thấy 1 trang bị Hiếm.,Jackpot! You found a rare piece of equipment.
+nodechoice.result.event_allin_lose,Lần này không may... {0} vàng.,No luck this time... {0} gold.
 inventory.label.title,TÚI ĐỒ,INVENTORY
 inventory.button.close,ĐÓNG,CLOSE
 arena.label.title,ĐẤU TRƯỜNG,ARENA

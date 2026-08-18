@@ -47,6 +47,10 @@ namespace Game.Data.Dto
         public string Id = "";
         public string Title = "";
         public string Body = "";
+        /// <summary>task-content-i18n.md — key strings.csv để tra bản dịch thật; rỗng = mail này
+        /// không có bản dịch (dùng nguyên <see cref="Title"/> tiếng Anh), giữ tương thích các mail
+        /// tạo trước khi có field này (JsonUtility điền "" mặc định, không cần migration).</summary>
+        public string TitleKey = "";
         public List<MailRewardDto> Rewards = new();
         public bool Claimed;
         public string CreatedAtUtc = "";

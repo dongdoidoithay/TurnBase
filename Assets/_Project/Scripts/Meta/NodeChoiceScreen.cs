@@ -118,8 +118,8 @@ namespace Game.Meta
                 _rows[i].SetActive(active);
                 if (!active) continue;
 
-                _rowFlavorLabels[i].text = options[i].Flavor;
-                _optionLabels[i].text = options[i].Label;
+                _rowFlavorLabels[i].text = _loc != null ? _loc.Get(options[i].FlavorKey) : options[i].Flavor;
+                _optionLabels[i].text = _loc != null ? _loc.Get(options[i].LabelKey) : options[i].Label;
                 // Mốc duy nhất hiện có thể chặn TRƯỚC khi chọn: Rest option 1 "Train" khi không
                 // hero nào đủ điều kiện — mọi lựa chọn khác luôn khả dụng (Gold Grant tự kẹp 0,
                 // không cần check số dư trước, xem task-eventrest.md §1).
@@ -138,7 +138,9 @@ namespace Game.Meta
 
             _audio?.PlaySfx("ui/sfx_ui_confirm");
             for (int i = 0; i < MaxOptions; i++) _rows[i].SetActive(false);
-            _descriptionLabel.text = result.ResultText;
+            _descriptionLabel.text = _loc != null && !string.IsNullOrEmpty(result.ResultKey)
+                ? _loc.Get(result.ResultKey, result.Args)
+                : result.ResultText;
             _continueButton.gameObject.SetActive(true);
         }
 

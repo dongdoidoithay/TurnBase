@@ -170,7 +170,9 @@ namespace Game.Meta.Mail
                 if (!active) continue;
 
                 var m = mail[i];
-                _nameLabels[i].text = m.Title;
+                _nameLabels[i].text = _loc != null && !string.IsNullOrEmpty(m.TitleKey)
+                    ? _loc.Get(m.TitleKey)
+                    : m.Title;
                 _progressLabels[i].text = m.Claimed ? claimedText : FormatRewardLine(m);
                 _claimButtons[i].interactable = !m.Claimed;
                 // Thẻ mờ hơn khi đã nhận — phân biệt đã-đọc/chưa-đọc bằng mắt, không chỉ đọc chữ

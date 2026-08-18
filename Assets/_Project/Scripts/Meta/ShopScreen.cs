@@ -25,6 +25,9 @@ namespace Game.Meta
         private readonly struct CatalogItem
         {
             public readonly string Label;
+            /// <summary>task-content-i18n.md — key thật để tra strings.csv; <see cref="Label"/> giữ
+            /// nguyên làm fallback tiếng Anh khi <c>ILocalizationService</c> chưa đăng ký.</summary>
+            public readonly string LabelKey;
             public readonly CurrencyType PriceCurrency;
             public readonly long Price;
             /// <summary>Vật liệu Ascend — null nếu dòng này bán vật phẩm tiêu hao (xem
@@ -35,16 +38,16 @@ namespace Game.Meta
             /// <c>profile.Inventory.Items</c> (khác Wallet của vật liệu Ascend).</summary>
             public readonly ItemType? ItemToGrant;
 
-            public CatalogItem(string label, CurrencyType priceCurrency, long price,
+            public CatalogItem(string label, string labelKey, CurrencyType priceCurrency, long price,
                 CurrencyType materialType, long materialAmount)
             {
-                Label = label; PriceCurrency = priceCurrency; Price = price;
+                Label = label; LabelKey = labelKey; PriceCurrency = priceCurrency; Price = price;
                 MaterialType = materialType; MaterialAmount = materialAmount; ItemToGrant = null;
             }
 
-            public CatalogItem(string label, CurrencyType priceCurrency, long price, ItemType itemToGrant)
+            public CatalogItem(string label, string labelKey, CurrencyType priceCurrency, long price, ItemType itemToGrant)
             {
-                Label = label; PriceCurrency = priceCurrency; Price = price;
+                Label = label; LabelKey = labelKey; PriceCurrency = priceCurrency; Price = price;
                 MaterialType = null; MaterialAmount = 0; ItemToGrant = itemToGrant;
             }
         }
@@ -54,16 +57,16 @@ namespace Game.Meta
         /// này (cần UI chọn hero) — gacha trùng hero đã cover phần đó (mục B).</summary>
         private static readonly CatalogItem[] CATALOG =
         {
-            new("5 Essence I", CurrencyType.Gem, 100, CurrencyType.EssenceI, 5),
-            new("5 Essence II", CurrencyType.Gem, 250, CurrencyType.EssenceII, 5),
-            new("5 Essence III", CurrencyType.Gem, 500, CurrencyType.EssenceIII, 5),
-            new("3 Core", CurrencyType.Gem, 400, CurrencyType.Core, 3),
-            new("Potion", CurrencyType.Gold, 200, ItemType.Potion),
-            new("Ether", CurrencyType.Gold, 300, ItemType.Ether),
-            new("Antidote", CurrencyType.Gold, 250, ItemType.Antidote),
-            new("Smoke Bomb", CurrencyType.Gold, 500, ItemType.SmokeBomb),
-            new("Revive Feather", CurrencyType.Gold, 1_500, ItemType.ReviveFeather),
-            new("Elemental Bomb", CurrencyType.Gold, 800, ItemType.ElementalBomb),
+            new("5 Essence I", "shop.item.essence1", CurrencyType.Gem, 100, CurrencyType.EssenceI, 5),
+            new("5 Essence II", "shop.item.essence2", CurrencyType.Gem, 250, CurrencyType.EssenceII, 5),
+            new("5 Essence III", "shop.item.essence3", CurrencyType.Gem, 500, CurrencyType.EssenceIII, 5),
+            new("3 Core", "shop.item.core", CurrencyType.Gem, 400, CurrencyType.Core, 3),
+            new("Potion", "shop.item.potion", CurrencyType.Gold, 200, ItemType.Potion),
+            new("Ether", "shop.item.ether", CurrencyType.Gold, 300, ItemType.Ether),
+            new("Antidote", "shop.item.antidote", CurrencyType.Gold, 250, ItemType.Antidote),
+            new("Smoke Bomb", "shop.item.smoke_bomb", CurrencyType.Gold, 500, ItemType.SmokeBomb),
+            new("Revive Feather", "shop.item.revive_feather", CurrencyType.Gold, 1_500, ItemType.ReviveFeather),
+            new("Elemental Bomb", "shop.item.elemental_bomb", CurrencyType.Gold, 800, ItemType.ElementalBomb),
         };
 
         private GameObject _root;
@@ -166,7 +169,7 @@ namespace Game.Meta
             {
                 var item = CATALOG[i];
                 long balance = _economy?.Get(_profile.Wallet, item.PriceCurrency) ?? 0;
-                _rowNameLabels[i].text = item.Label;
+                _rowNameLabels[i].text = _loc != null ? _loc.Get(item.LabelKey) : item.Label;
                 _rowPriceLabels[i].text = $"{item.Price} {item.PriceCurrency}";
                 _buyButtons[i].interactable = balance >= item.Price;
             }
