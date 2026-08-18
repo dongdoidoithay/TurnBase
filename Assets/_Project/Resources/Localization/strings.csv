@@ -9,6 +9,8 @@ settings.label.screen_shake,Rung màn hình,Screen Shake
 settings.label.action_command,Lệnh hành động,Action Command
 settings.label.language,Ngôn ngữ,Language
 settings.button.close,ĐÓNG,CLOSE
+settings.label.text_scale,Cỡ chữ,Text Size
+settings.label.colorblind,Chế độ mù màu,Colorblind Mode
 hero.beast_tamer.name,Beast Tamer,Beast Tamer
 hero.blade_dancer.name,Blade Dancer,Blade Dancer
 hero.bone_caller.name,Bone Caller,Bone Caller

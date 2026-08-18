@@ -54,6 +54,7 @@ namespace Game.Bootstrap
 
             WireSettingsToAudio();
             WireSettingsToLocalization();
+            WireSettingsToTextScale(uiRoot);
         }
 
         /// <summary>Cài đặt đổi → Audio tự cập nhật, không màn hình nào phải gọi tay.</summary>
@@ -76,6 +77,21 @@ namespace Game.Bootstrap
 
             settings.OnChanged += s => localization.SetLanguage(s.Language);
             localization.SetLanguage(settings.Current.Language);
+        }
+
+        /// <summary>task-accessibility.md — `SettingsDto.TextScale` đổi → quét lại TOÀN BỘ UI đang
+        /// dựng dưới `uiRoot` (mọi Canvas Meta/Battle/Title/Splash/Loading/Settings đều là con của
+        /// đây, xem <see cref="IUiRootHost"/>). Giới hạn đã biết: màn hình dựng-lười LẦN ĐẦU SAU
+        /// lần đổi setting gần nhất (VD mở Shop lần đầu sau khi đã chỉnh TextScale) chưa tự áp —
+        /// chỉ áp lại đúng khi setting đổi TIẾP theo hoặc khởi động lại app. Battle HUD tự áp thêm ở
+        /// <c>BattleHudScreen.Bind()</c> vì scene này dựng lại mỗi trận.</summary>
+        private static void WireSettingsToTextScale(Transform uiRoot)
+        {
+            if (uiRoot == null) return;
+            var settings = ServiceLocator.Get<ISettingsService>();
+
+            settings.OnChanged += s => Game.Meta.Accessibility.TextScaleApplier.Apply(uiRoot, s.TextScale);
+            Game.Meta.Accessibility.TextScaleApplier.Apply(uiRoot, settings.Current.TextScale);
         }
     }
 }

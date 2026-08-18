@@ -27,8 +27,11 @@ namespace Game.Meta
         private ILocalizationService _loc;
         private GameObject _root;
 
+        private static readonly float[] TEXT_SCALE_STEPS = { 1f, 1.25f, 1.5f };
+
         private Text _bgmValueLabel, _sfxValueLabel;
         private Text _titleLabel, _musicLabel, _sfxLabel, _shakeLabel, _acLabel, _langLabel, _langValueLabel, _closeLabel;
+        private Text _textScaleLabel, _textScaleValueLabel, _colorblindLabel;
 
         public void Open()
         {
@@ -70,7 +73,7 @@ namespace Game.Meta
             var panel = NewImage(canvasGo.transform, PANEL_BG);
             var panelRt = (RectTransform)panel.transform;
             panelRt.anchorMin = panelRt.anchorMax = new Vector2(0.5f, 0.5f);
-            panelRt.sizeDelta = new Vector2(360, 340);
+            panelRt.sizeDelta = new Vector2(360, 500);
 
             // task-phase-5-gaps.md Phần E — pilot LayoutProfileSwitcher: Portrait = chụp lại đúng
             // số liệu vừa gán ở trên (không đổi hành vi màn hình dọc hiện có); Landscape = rộng hơn/
@@ -80,7 +83,7 @@ namespace Game.Meta
             var portraitProfile = LayoutProfile.CaptureFrom(panelRt, "SettingsPanel_Portrait");
             var landscapeProfile = portraitProfile;
             landscapeProfile.Name = "SettingsPanel_Landscape";
-            landscapeProfile.SizeDelta = new Vector2(420, 300);
+            landscapeProfile.SizeDelta = new Vector2(420, 460);
             var layoutSwitcher = panel.gameObject.AddComponent<LayoutProfileSwitcher>();
             layoutSwitcher.SetProfiles(panelRt, portraitProfile, landscapeProfile);
 
@@ -131,11 +134,32 @@ namespace Game.Meta
             });
             _langValueLabel.raycastTarget = true;
 
+            // task-accessibility.md — plan.md §10.7. TextScale/ColorblindMode đã tồn tại sẵn trong
+            // SettingsDto từ đầu dự án (đúng mẫu "hạ tầng có sẵn, chưa dùng") — nay mới có UI thật.
+            _textScaleLabel = Label(panelRt, "Text Size", 14, TextAnchor.MiddleLeft, new Vector2(-150, -135), new Vector2(140, 24));
+            _textScaleValueLabel = Label(panelRt, "100%", 14, TextAnchor.MiddleCenter, new Vector2(130, -135), new Vector2(60, 24));
+            _textScaleValueLabel.color = ACCENT;
+            var textScaleBtn = _textScaleValueLabel.gameObject.AddComponent<Button>();
+            textScaleBtn.onClick.AddListener(() =>
+            {
+                _audio?.PlaySfx("ui/sfx_ui_tick");
+                float current = _settings?.Current.TextScale ?? 1f;
+                int idx = System.Array.IndexOf(TEXT_SCALE_STEPS, current);
+                float next = TEXT_SCALE_STEPS[(idx + 1 + TEXT_SCALE_STEPS.Length) % TEXT_SCALE_STEPS.Length];
+                _settings?.Modify(s => s.TextScale = next);
+                _textScaleValueLabel.text = $"{next * 100:0}%";
+            });
+            _textScaleValueLabel.raycastTarget = true;
+
+            Toggle colorblindToggle;
+            (colorblindToggle, _colorblindLabel) = NewToggleWithLabel(panelRt, new Vector2(0, -170), "Colorblind Mode");
+            colorblindToggle.onValueChanged.AddListener(v => _settings?.Modify(s => s.ColorblindMode = v));
+
             var closeGo = new GameObject("Close", typeof(RectTransform));
             closeGo.transform.SetParent(panelRt, false);
             var closeRt = (RectTransform)closeGo.transform;
             closeRt.anchorMin = closeRt.anchorMax = new Vector2(0.5f, 0.5f);
-            closeRt.anchoredPosition = new Vector2(0, -145);
+            closeRt.anchoredPosition = new Vector2(0, -215);
             closeRt.sizeDelta = new Vector2(120, 32);
             var closeImg = closeGo.AddComponent<Image>();
             closeImg.color = new Color(0.42f, 0.32f, 0.06f, 0.95f);
@@ -155,6 +179,8 @@ namespace Game.Meta
                 sfxSlider.SetValueWithoutNotify(_settings.Current.Sfx);
                 shakeToggle.SetIsOnWithoutNotify(_settings.Current.ScreenShake);
                 acToggle.SetIsOnWithoutNotify(_settings.Current.ActionCommandEnabled);
+                colorblindToggle.SetIsOnWithoutNotify(_settings.Current.ColorblindMode);
+                _textScaleValueLabel.text = $"{_settings.Current.TextScale * 100:0}%";
             }
 
             // Màn đang mở khi đổi ngôn ngữ (chỉ có thể đổi từ chính màn này) — tự làm mới label
@@ -181,6 +207,8 @@ namespace Game.Meta
             _acLabel.text = _loc.Get("settings.label.action_command");
             _langLabel.text = _loc.Get("settings.label.language");
             _langValueLabel.text = _loc.CurrentLanguage.ToUpperInvariant();
+            _textScaleLabel.text = _loc.Get("settings.label.text_scale");
+            _colorblindLabel.text = _loc.Get("settings.label.colorblind");
             _closeLabel.text = _loc.Get("settings.button.close");
         }
 

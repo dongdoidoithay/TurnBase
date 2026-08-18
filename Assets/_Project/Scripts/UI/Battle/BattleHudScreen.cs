@@ -9,6 +9,7 @@ using Game.Data;
 using Game.Services.Audio;
 using Game.Services.Localization;
 using TMPro;
+using UnityEngine.InputSystem;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -112,6 +113,7 @@ namespace Game.UI.Battle
         private CombatSimulation _sim;
         private IAudioService _audio;
         private ILocalizationService _loc;
+        private Game.Services.Settings.ISettingsService _settings;
         private int _selectedSlot = -1;
         private int _selectedItemSlot = -1;
         private bool _auto;
@@ -124,8 +126,16 @@ namespace Game.UI.Battle
             _sim = sim;
             ServiceLocator.TryGet(out _audio);
             ServiceLocator.TryGet(out _loc);
+            ServiceLocator.TryGet(out _settings);
             BuildLayout();
             BuildEnemyRows();
+
+            // task-accessibility.md — scene Battle dựng lại MỖI trận (khác Meta chỉ dựng 1 lần lúc
+            // đầu) nên áp TextScale ở đây thay vì chỉ dựa vào WireSettingsToTextScale phản ứng
+            // (ServiceInstaller) — đảm bảo HUD LUÔN đúng scale ngay từ trận đầu tiên, không cần đợi
+            // người chơi vào Settings đổi lại 1 lần sau khi đã vào trận.
+            if (_settings != null)
+                Game.Meta.Accessibility.TextScaleApplier.Apply(transform, _settings.Current.TextScale);
         }
 
         private void BuildLayout()
@@ -589,6 +599,35 @@ namespace Game.UI.Battle
             RefreshTacticRow(actor, playerTurn);
 
             _endTurnButton.interactable = playerTurn;
+
+            if (playerTurn) HandleHotkeys();
+        }
+
+        /// <summary>task-accessibility.md, plan.md §10.7 — phím tắt PC: 1-5 chọn ô skill/item,
+        /// Enter kết thúc lượt. Dùng Unity.InputSystem (Keyboard.current) — dự án chỉ bật Input
+        /// System mới (activeInputHandler=1, xem ActionCommandUI.cs cùng quy ước), KHÔNG dùng
+        /// UnityEngine.Input cũ. Tái dùng ĐÚNG đường xử lý click thật (`SkillSlotView.OnClicked`/
+        /// `Button.onClick`) thay vì viết logic chọn skill riêng — hotkey chỉ là lối tắt, không
+        /// phải luồng thứ 2.</summary>
+        private void HandleHotkeys()
+        {
+            var kb = Keyboard.current;
+            if (kb == null) return;
+
+            if (kb.digit1Key.wasPressedThisFrame) TrySelectSlot(0);
+            else if (kb.digit2Key.wasPressedThisFrame) TrySelectSlot(1);
+            else if (kb.digit3Key.wasPressedThisFrame) TrySelectSlot(2);
+            else if (kb.digit4Key.wasPressedThisFrame) TrySelectSlot(3);
+            else if (kb.digit5Key.wasPressedThisFrame) TrySelectSlot(4);
+            else if ((kb.enterKey.wasPressedThisFrame || kb.numpadEnterKey.wasPressedThisFrame) && _endTurnButton.interactable)
+                _endTurnButton.onClick.Invoke();
+        }
+
+        private void TrySelectSlot(int index)
+        {
+            if (index < 0 || index >= _slots.Count) return;
+            var slot = _slots[index];
+            if (slot.Interactable) slot.OnClicked?.Invoke(slot);
         }
 
         private void RefreshHeroPanel(CombatUnit actor)
@@ -1029,13 +1068,31 @@ namespace Game.UI.Battle
         }
 
         /// <summary>Xanh khi khoẻ → vàng cảnh báo → đỏ nguy hiểm, khớp cách image_UI.jpg
-        /// và các JRPG khác mã hoá % máu bằng màu thay vì luôn 1 màu cố định.</summary>
-        private static Color HpColor(float pct) => pct switch
+        /// và các JRPG khác mã hoá % máu bằng màu thay vì luôn 1 màu cố định.
+        /// task-accessibility.md — `SettingsDto.ColorblindMode` (tồn tại sẵn, chưa từng dùng) đổi
+        /// sang bộ màu xanh dương/cam/đỏ SẪM: xanh lá/đỏ tươi là cặp khó phân biệt nhất với
+        /// protanopia/deuteranopia (dạng mù màu phổ biến nhất) vì chỉ khác NHAU về hue; bộ thay thế
+        /// khác nhau CẢ hue lẫn ĐỘ SÁNG (đỏ sẫm gần đen ở mức nguy hiểm) để vẫn phân biệt được dù
+        /// mù màu loại nào.</summary>
+        private Color HpColor(float pct)
         {
-            > 0.6f => new Color(0.482f, 0.788f, 0.314f),
-            > 0.3f => new Color(1f, 0.820f, 0.400f),
-            _ => new Color(0.902f, 0.224f, 0.275f)
-        };
+            bool colorblind = _settings?.Current.ColorblindMode ?? false;
+            if (colorblind)
+            {
+                return pct switch
+                {
+                    > 0.6f => new Color(0.169f, 0.447f, 0.698f),
+                    > 0.3f => new Color(0.902f, 0.624f, 0.000f),
+                    _ => new Color(0.502f, 0.000f, 0.125f)
+                };
+            }
+            return pct switch
+            {
+                > 0.6f => new Color(0.482f, 0.788f, 0.314f),
+                > 0.3f => new Color(1f, 0.820f, 0.400f),
+                _ => new Color(0.902f, 0.224f, 0.275f)
+            };
+        }
 
         private static Color ElementColor(Element e) => e switch
         {

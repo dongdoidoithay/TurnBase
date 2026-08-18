@@ -1,7 +1,7 @@
 {
     "name": "Game.UI",
     "rootNamespace": "Game.UI",
-    "references": ["Game.Core", "Game.Data", "Game.Combat", "Game.Meta", "Game.Services", "Unity.TextMeshPro"],
+    "references": ["Game.Core", "Game.Data", "Game.Combat", "Game.Meta", "Game.Services", "Unity.TextMeshPro", "Unity.InputSystem"],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
