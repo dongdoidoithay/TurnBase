@@ -697,7 +697,18 @@ liệt kê ở đây để không ai tìm nhầm class không tồn tại:
 > "chơi" giống hệt nhau. Đây là gap thiết kế/nội dung thật (không phải bug), quy mô sửa lớn hơn hẳn
 > phạm vi 1 audit (cần thiết kế lại `AIProfile` theo từng archetype — quyết định "Healer ưu tiên gì
 > khi nào", "Debuffer nhắm ai trước"... không thể tự suy ra, cần người dùng quyết định hướng) — để
-> dành làm task riêng nếu cần, không tự ý mở rộng ở đây. **Giai đoạn 1 (hero pilot đủ 5 trạng
+> dành làm task riêng nếu cần, không tự ý mở rộng ở đây.
+>
+> **CẬP NHẬT 2026-08-18 — ĐÃ SỬA** (task-ai-diversity.md, người dùng chọn làm thật qua
+> AskUserQuestion): `BattleSceneInstaller.BuildAi` nay dispatch qua `BuildArchetypeAi(archetype)`
+> mới khi `profileId=="ai_special"` — Healer ưu tiên hồi đồng minh <50% HP, Debuffer áp debuff định
+> kỳ (cooldown 3), Caster/Bomber spam phép gần như luôn, Tank thiên đánh thường + skill riêng khi
+> tự thân <50% HP, Brute đòn nặng định kỳ (cooldown 2), Archer/Skirmisher ưu tiên hẳn khi mục tiêu
+> đã Break — dùng ĐÚNG `AIConditionType` có sẵn, không thêm condition mới, không đổi `ai_basic`/
+> `ai_boss`. Grunt/Swarm/Elite giữ nguyên hành vi cũ (lính thường không cần chiến thuật riêng).
+> Verify hành vi THẬT (không chỉ đọc rule): dựng `AIController` + `BattleState` tối giản, xác nhận
+> Healer AI chọn đúng skill hồi máu khi có đồng minh HP thấp, và tự rơi về đánh thường khi không ai
+> cần hồi. **647/647 test xanh.** **Giai đoạn 1 (hero pilot đủ 5 trạng
   thái) ĐÃ XONG và ĐÃ ADOPT:** kỹ thuật "skeletal rig" mới (`Tools/pixel-art-pipeline/scripts/
   character_rig.py`, bộ phận đầu/thân/tay/chân/vũ khí tách rời + XOAY thật qua `PIL Image.rotate()`
   quanh pivot — khác hẳn khối chữ nhật tĩnh dịch theo tham số của `character_draw.py`) — port từ

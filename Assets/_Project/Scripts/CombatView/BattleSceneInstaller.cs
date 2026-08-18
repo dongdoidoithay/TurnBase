@@ -468,6 +468,7 @@ namespace Game.CombatView
                 CombatUnit unit;
                 Sprite sprite;
                 string aiProfileId = "ai_basic";
+                ArchetypeId enemyArchetype = ArchetypeId.Grunt;
 
                 if (player)
                 {
@@ -527,9 +528,10 @@ namespace Game.CombatView
                                                    Game.Meta.Hero.AscendSystem.MAX_STAR);
                     sprite = Resources.Load<Sprite>($"Art/Characters/Enemies/{def.SpriteFolder}/{def.SpriteFolder}_v1_00");
                     aiProfileId = def.AiProfileId;
+                    enemyArchetype = def.Archetype;
                 }
 
-                Simulation.AddUnit(unit, side == TeamSide.Enemy ? BuildAi(aiProfileId) : null);
+                Simulation.AddUnit(unit, side == TeamSide.Enemy ? BuildAi(aiProfileId, enemyArchetype) : null);
 
                 var go = new GameObject($"Unit_{side}_{i}_{defId}");
                 go.transform.SetParent(transform, false);
@@ -768,7 +770,7 @@ namespace Game.CombatView
         /// "ai_boss" luân phiên chiêu đặc trưng (ô 1) / chiêu hỗ trợ (ô 2) / đánh thường (ô 0)
         /// thay vì chỉ spam đánh thường như lính thường, để trận boss có nhịp điệu riêng.
         /// </summary>
-        private static AIProfile BuildAi(string profileId = "ai_basic")
+        private static AIProfile BuildAi(string profileId = "ai_basic", ArchetypeId archetype = ArchetypeId.Grunt)
         {
             if (profileId == "ai_boss")
             {
@@ -791,24 +793,12 @@ namespace Game.CombatView
                 return boss;
             }
 
-            // Lính thường có ô 1 (skill riêng) nhưng nhẹ hơn boss — vẫn dùng đều,
-            // không độc chiếm lượt như ai_boss. plan.md Tuần 7 "enemy mới" cần dùng
-            // đúng skill của mình (Poison/Curse/Regen...) chứ không chỉ đánh thường.
-            if (profileId == "ai_special")
-            {
-                var special = new AIProfile { Id = "ai_special", Noise = 10f };
-                special.Rules.Add(new AIRule
-                {
-                    When = new AICondition(AIConditionType.Always),
-                    SkillSlot = 1, Weight = 55f, RuleCooldown = 1
-                });
-                special.Rules.Add(new AIRule
-                {
-                    When = new AICondition(AIConditionType.Always),
-                    SkillSlot = 0, Weight = 40f
-                });
-                return special;
-            }
+            // task-ai-diversity.md — trước đây "ai_special" (56/66 = 85% enemy, object-map.md §12.1
+            // "CẬP NHẬT 2026-08-18") là ĐÚNG 1 bộ luật y hệt cho MỌI archetype (Healer/Tank/Debuffer/
+            // Caster đều đánh giống hệt nhau dù skill kit khác nhau thật). Nay tách theo Archetype
+            // thật qua BuildArchetypeAi — dùng AIConditionType đã có sẵn (AllyHpBelow/SelfHpBelow/
+            // TargetIsBroken), KHÔNG đổi ai_basic/ai_boss.
+            if (profileId == "ai_special") return BuildArchetypeAi(archetype);
 
             var p = new AIProfile { Id = "ai_basic", Noise = 8f };
             p.Rules.Add(new AIRule
@@ -817,6 +807,67 @@ namespace Game.CombatView
                 SkillSlot = 0,
                 Weight = 50f
             });
+            return p;
+        }
+
+        /// <summary>task-ai-diversity.md — mỗi archetype ưu tiên khác nhau bằng đúng
+        /// <see cref="AIConditionType"/> đã có sẵn (không thêm condition mới). Grunt/Swarm/Elite +
+        /// mọi archetype không liệt kê riêng giữ NGUYÊN hành vi "ai_special" cũ (lính thường/số
+        /// đông không cần chiến thuật riêng, đúng vai trò thiết kế của chúng).</summary>
+        private static AIProfile BuildArchetypeAi(ArchetypeId archetype)
+        {
+            var p = new AIProfile { Id = "ai_special_" + archetype, Noise = 10f };
+            switch (archetype)
+            {
+                case ArchetypeId.Healer:
+                    // Ưu tiên hồi/cứu đồng minh khi có ai dưới 50% HP (PickTarget đã tự chọn đồng
+                    // minh HP% thấp nhất cho skill TargetsAllies) — còn lại đánh thường.
+                    p.Rules.Add(new AIRule { When = new AICondition(AIConditionType.AllyHpBelow, 50f), SkillSlot = 1, Weight = 90f });
+                    p.Rules.Add(new AIRule { When = new AICondition(AIConditionType.Always), SkillSlot = 0, Weight = 35f });
+                    break;
+
+                case ArchetypeId.Debuffer:
+                    // Áp debuff ĐỊNH KỲ (cooldown 3 lượt — skill riêng thường cũng có Cooldown data
+                    // sẵn) thay vì spam mỗi lượt như ai_special cũ.
+                    p.Rules.Add(new AIRule { When = new AICondition(AIConditionType.Always), SkillSlot = 1, Weight = 65f, RuleCooldown = 3 });
+                    p.Rules.Add(new AIRule { When = new AICondition(AIConditionType.Always), SkillSlot = 0, Weight = 40f });
+                    break;
+
+                case ArchetypeId.Caster:
+                case ArchetypeId.Bomber:
+                    // Ưu tiên phép/AoE gần như luôn luôn — "spam đòn mạnh nhất", ít quan tâm HP bản
+                    // thân (đúng vai trò tấn công thuần, khác Tank/Healer phòng thủ).
+                    p.Rules.Add(new AIRule { When = new AICondition(AIConditionType.Always), SkillSlot = 1, Weight = 65f, RuleCooldown = 1 });
+                    p.Rules.Add(new AIRule { When = new AICondition(AIConditionType.Always), SkillSlot = 0, Weight = 30f });
+                    break;
+
+                case ArchetypeId.Tank:
+                    // Thiên về đánh thường ổn định (weight cao hơn ai_special cũ) — chỉ dùng skill
+                    // riêng khi CHÍNH bản thân trúng đòn nặng, khác Healer (chăm đồng minh).
+                    p.Rules.Add(new AIRule { When = new AICondition(AIConditionType.SelfHpBelow, 50f), SkillSlot = 1, Weight = 70f, RuleCooldown = 2 });
+                    p.Rules.Add(new AIRule { When = new AICondition(AIConditionType.Always), SkillSlot = 0, Weight = 45f });
+                    break;
+
+                case ArchetypeId.Brute:
+                    // Đòn nặng ĐỊNH KỲ (cooldown 2 — "tích rồi nện") thay vì đều đặn mỗi lượt.
+                    p.Rules.Add(new AIRule { When = new AICondition(AIConditionType.Always), SkillSlot = 1, Weight = 75f, RuleCooldown = 2 });
+                    p.Rules.Add(new AIRule { When = new AICondition(AIConditionType.Always), SkillSlot = 0, Weight = 35f });
+                    break;
+
+                case ArchetypeId.Archer:
+                case ArchetypeId.Skirmisher:
+                    // Cơ hội chủ nghĩa — ưu tiên HẲN khi có mục tiêu đã Break (bonus damage đúng
+                    // luật Poise/Break sẵn có), còn lại đánh đều như ai_special cũ.
+                    p.Rules.Add(new AIRule { When = new AICondition(AIConditionType.TargetIsBroken), SkillSlot = 1, Weight = 85f });
+                    p.Rules.Add(new AIRule { When = new AICondition(AIConditionType.Always), SkillSlot = 1, Weight = 45f, RuleCooldown = 1 });
+                    p.Rules.Add(new AIRule { When = new AICondition(AIConditionType.Always), SkillSlot = 0, Weight = 30f });
+                    break;
+
+                default: // Grunt/Swarm/Elite/Boss (không xảy ra ở đây) — giữ nguyên ai_special cũ.
+                    p.Rules.Add(new AIRule { When = new AICondition(AIConditionType.Always), SkillSlot = 1, Weight = 55f, RuleCooldown = 1 });
+                    p.Rules.Add(new AIRule { When = new AICondition(AIConditionType.Always), SkillSlot = 0, Weight = 40f });
+                    break;
+            }
             return p;
         }
 
