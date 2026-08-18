@@ -140,6 +140,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c0550832803654a15b43487762ae7a32
+    m_Address: Prefabs/UI/Screens/UI_GachaInfo
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c6e941da1423e4bd9adefc90b10f523d
     m_Address: Data/Heroes/hero_pyromancer
     m_ReadOnly: 0

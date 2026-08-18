@@ -179,6 +179,12 @@ shop.item.antidote,Giải Độc,Antidote
 shop.item.smoke_bomb,Bom Khói,Smoke Bomb
 shop.item.revive_feather,Lông Vũ Hồi Sinh,Revive Feather
 shop.item.elemental_bomb,Bom Nguyên Tố,Elemental Bomb
+gachainfo.tab.rates,TỈ LỆ,RATES
+gachainfo.tab.history,LỊCH SỬ,HISTORY
+gachainfo.label.rates_title,TỈ LỆ RA,DROP RATES
+gachainfo.label.history_title,LỊCH SỬ QUAY,HISTORY
+gachainfo.rates.legendary_flavor,Tăng dần từ lần #{0} · đảm bảo ở lần #{1},Soft pity from #{0} · guaranteed at #{1}
+gachainfo.rates.epic_flavor,Đảm bảo mỗi #{0} lần,Guaranteed every #{0} pulls
 quest.label.title,NHIỆM VỤ,QUEST
 quest.button.close,ĐÓNG,CLOSE
 quest.button.claim,NHẬN,CLAIM

@@ -20,7 +20,18 @@ namespace Game.Meta.Gacha
         public const long SINGLE_PULL_COST = 300;
         public const long TEN_PULL_COST = 2_700; // −10% so với 10×300
 
-        private const int HISTORY_CAP = 100;
+        public const int HISTORY_CAP = 100;
+
+        /// <summary>task-gacha-disclosure.md, plan.md §9.3 "Bắt buộc: hiển thị tỉ lệ trong game" —
+        /// tách thành hằng số public để <c>RollRarity</c> VÀ màn hiển thị dùng CHUNG 1 nguồn, không
+        /// thể lệch nhau (trước đây là số ma thuật nội bộ, chỉ đúng cho logic roll).</summary>
+        public const float LEGENDARY_BASE_RATE = 0.015f;
+        public const int LEGENDARY_SOFT_PITY_START = 45; // lần pull thứ mấy bắt đầu tăng dần
+        public const float LEGENDARY_SOFT_PITY_STEP = 0.02f; // +%/lần từ mốc trên
+        public const int LEGENDARY_HARD_PITY = 60;
+        public const float EPIC_BASE_RATE = 0.12f;
+        public const int EPIC_HARD_PITY = 10;
+        public const float RARE_BASE_RATE = 0.365f;
 
         public readonly struct GachaPullResult
         {
@@ -48,17 +59,17 @@ namespace Game.Meta.Gacha
             state.PullsSinceLegendary++;
             state.PullsSinceEpic++;
 
-            if (state.PullsSinceLegendary >= 60) return ResetLegendary(state);
+            if (state.PullsSinceLegendary >= LEGENDARY_HARD_PITY) return ResetLegendary(state);
 
-            float legRate = 0.015f;
-            if (state.PullsSinceLegendary >= 45)
-                legRate += 0.02f * (state.PullsSinceLegendary - 44);
+            float legRate = LEGENDARY_BASE_RATE;
+            if (state.PullsSinceLegendary >= LEGENDARY_SOFT_PITY_START)
+                legRate += LEGENDARY_SOFT_PITY_STEP * (state.PullsSinceLegendary - (LEGENDARY_SOFT_PITY_START - 1));
 
             float r = rng.NextFloat();
             if (r < legRate) return ResetLegendary(state);
-            if (state.PullsSinceEpic >= 10) return ResetEpic(state);
-            if (r < legRate + 0.12f) return ResetEpic(state);
-            if (r < legRate + 0.12f + 0.365f) return Rarity.Rare;
+            if (state.PullsSinceEpic >= EPIC_HARD_PITY) return ResetEpic(state);
+            if (r < legRate + EPIC_BASE_RATE) return ResetEpic(state);
+            if (r < legRate + EPIC_BASE_RATE + RARE_BASE_RATE) return Rarity.Rare;
             return Rarity.Common;
         }
 

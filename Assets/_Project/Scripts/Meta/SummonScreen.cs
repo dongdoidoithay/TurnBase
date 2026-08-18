@@ -26,7 +26,8 @@ namespace Game.Meta
 
         private GameObject _root;
         private Text _walletLabel, _resultsLabel;
-        private Button _pullOneButton, _pullTenButton, _closeButton;
+        private Button _pullOneButton, _pullTenButton, _closeButton, _infoButton;
+        private GachaInfoScreen _infoScreen;
 
         private IAudioService _audio;
         private IEconomyService _economy;
@@ -73,6 +74,21 @@ namespace Game.Meta
 
             _closeButton = panel.Find("CloseButton").GetComponent<Button>();
             _closeButton.onClick.AddListener(Close);
+
+            // task-gacha-disclosure.md — nút góc trên-phải mới, mở màn RATES/HISTORY (plan.md §9.3
+            // "Bắt buộc: hiển thị tỉ lệ trong game, lưu lịch sử 100 lần gần nhất").
+            _infoButton = panel.Find("InfoButton").GetComponent<Button>();
+            _infoButton.onClick.AddListener(OpenInfo);
+        }
+
+        /// <summary>Cùng mẫu <c>TeamSelectScreen.EnsureDetailScreen</c> — sub-screen con lười khởi
+        /// tạo, gắn trực tiếp vào GameObject của chính SummonScreen thay vì để MetaSceneInstaller
+        /// quản lý (màn đọc thuần, không cần propagate <c>onProfileChanged</c> lên tầng trên).</summary>
+        private void OpenInfo()
+        {
+            _audio?.PlaySfx("ui/sfx_ui_tick");
+            _infoScreen = gameObject.GetComponent<GachaInfoScreen>() ?? gameObject.AddComponent<GachaInfoScreen>();
+            _infoScreen.Open(_profile, null);
         }
 
         private void Close()
