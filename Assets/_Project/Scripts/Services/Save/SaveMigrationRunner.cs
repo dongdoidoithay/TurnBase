@@ -100,6 +100,8 @@ namespace Game.Services.Save
             p.Settings ??= new SettingsDto();
             p.Stats ??= new LifetimeStatsDto();
             p.Mail ??= new List<MailDto>();
+            p.Arena ??= new ArenaProgressDto();
+            p.Arena.Opponents ??= new List<ArenaOpponentDto>();
         }
     }
 }

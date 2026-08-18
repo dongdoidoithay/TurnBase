@@ -48,7 +48,7 @@ namespace Game.Data
         GoldSpent = 8, LoginDays = 9
     }
 
-    public enum DungeonKind { Gold = 0, Exp = 1, Material = 2, Stone = 3, Tower = 4, TrialBoss = 5 }
+    public enum DungeonKind { Gold = 0, Exp = 1, Material = 2, Stone = 3, Tower = 4, TrialBoss = 5, Arena = 6 }
 
     /// <summary>Cờ tách bản Mobile F2P và bản PC premium — plan.md §9.5.</summary>
     public enum MonetizationProfile { MobileF2P = 0, PremiumPC = 1 }

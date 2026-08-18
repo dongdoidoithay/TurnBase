@@ -413,7 +413,7 @@ phải màn hình) vẫn là phần tụt lại xa nhất theo số liệu.
 
 | Bản | Nội dung | Ước lượng |
 |---|---|---|
-| **v1.1** | Arena async PvP (snapshot đội hình), leaderboard cục bộ | 4 tuần |
+| **v1.1** | ~~Arena async PvP (snapshot đội hình), leaderboard cục bộ~~ **CẬP NHẬT 2026-08-18: Arena kéo lên làm sớm** (task-arena.md) — `ArenaSystem`/`ArenaScreen` thật, 5 bậc đối thủ snapshot hero do RNG sinh (không backend nên không phải người chơi thật khác, đúng diễn giải trung thực của "PvP async...do AI điều khiển"), mùa 14 ngày, Honor (currency đã tồn tại từ đầu dự án nhưng chưa từng dùng). Leaderboard cục bộ nhiều người chơi VẪN chưa có (đúng — cần server thật). | 4 tuần |
 | **v1.2** | Backend thật: `RemotePlayerRepository`, tài khoản, cloud save, xác thực trận bằng replay seed | 8 tuần |
 | **v1.3** | Guild + Guild Boss + chat | 6 tuần |
 | **v1.4** | Chương 6–8, 8 hero mới, biome mới | 6 tuần |

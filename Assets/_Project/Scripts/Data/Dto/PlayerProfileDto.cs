@@ -32,6 +32,7 @@ namespace Game.Data.Dto
         public TrialBossProgressDto TrialBoss = new();
         public TowerProgressDto Tower = new();
         public List<MailDto> Mail = new();
+        public ArenaProgressDto Arena = new();
 
         public string Checksum = "";
     }
@@ -299,5 +300,35 @@ namespace Game.Data.Dto
         public int BestFloorThisWeek;
         /// <summary>Bậc thưởng cao nhất đã nhận trong tuần (0 = chưa nhận gì).</summary>
         public int ClaimedTier;
+    }
+
+    /// <summary>task-arena.md, plan.md v1.1 "Arena — Mùa 14 ngày, PvP async với snapshot đội hình
+    /// do AI điều khiển, Honor". KHÔNG có backend thật (dự án chỉ local-save) nên "đối thủ" là
+    /// snapshot hero THẬT nhưng do RNG sinh (ghost battle) — không giả vờ là dữ liệu người chơi
+    /// khác. Cùng khuôn <see cref="TrialBossProgressDto"/> nhưng theo MÙA (14 ngày) thay vì tuần.</summary>
+    [Serializable]
+    public class ArenaProgressDto
+    {
+        /// <summary>Số kỳ 14 ngày kể từ epoch — cùng kỹ thuật <see cref="TrialBossProgressDto.
+        /// LastWeekKey"/> (số nguyên, không phụ thuộc parse chuỗi ISO week/API .NET thiếu trên
+        /// runtime Unity).</summary>
+        public long LastSeasonKey = -1;
+        public List<ArenaOpponentDto> Opponents = new();
+        /// <summary>Số hiển thị kiểu ELO — CHỈ TĂNG khi thắng, KHÔNG giảm khi thua (đúng tinh thần
+        /// "không phạt nặng" đã dùng ở NodeChoice/Enhance — thua Arena không mất gì ngoài thời
+        /// gian).</summary>
+        public long Rating = 1000;
+    }
+
+    [Serializable]
+    public class ArenaOpponentDto
+    {
+        public string[] HeroDefIds = Array.Empty<string>();
+        public int Level = 1;
+        public int Star = 1;
+        public long HonorReward;
+        /// <summary>Đã nhận Honor bậc này trong MÙA hiện tại chưa — reset về false khi
+        /// <see cref="ArenaProgressDto.LastSeasonKey"/> đổi (đối thủ cũng sinh lại toàn bộ).</summary>
+        public bool Claimed;
     }
 }

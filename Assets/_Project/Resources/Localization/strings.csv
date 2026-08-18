@@ -214,3 +214,9 @@ nodechoice.label.event_desc,Có gì đó thu hút bạn. Chọn cách xử lý.,
 nodechoice.button.continue,TIẾP TỤC,CONTINUE
 inventory.label.title,TÚI ĐỒ,INVENTORY
 inventory.button.close,ĐÓNG,CLOSE
+arena.label.title,ĐẤU TRƯỜNG,ARENA
+arena.button.close,ĐÓNG,CLOSE
+arena.button.challenge,THÁCH ĐẤU,CHALLENGE
+arena.label.claimed,ĐÃ NHẬN,CLAIMED
+arena.label.rating,Điểm: {0},Rating: {0}
+arena.label.opponent,Bậc {0} — {1} · Lv.{2},Tier {0} — {1} · Lv.{2}

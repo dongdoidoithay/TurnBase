@@ -121,6 +121,7 @@ namespace Game.Meta
         private DungeonScreen _dungeonScreen;
         private TrialBossScreen _trialBossScreen;
         private TowerScreen _towerScreen;
+        private ArenaScreen _arenaScreen;
         private MailScreen _mailScreen;
         private CodexScreen _codexScreen;
         private InventoryScreen _inventoryScreen;
@@ -283,6 +284,25 @@ namespace Game.Meta
                 Toast(claimed
                     ? $"Trial Boss — {result.TotalPlayerDamage:N0} damage! Reward claimed."
                     : $"Trial Boss — {result.TotalPlayerDamage:N0} damage.");
+                return;
+            }
+
+            if (kind == DungeonKind.Arena)
+            {
+                // result.SpecialFloor tái dùng làm INDEX đối thủ (task-arena.md) — Arena không có
+                // khái niệm "tầng", mượn field có sẵn thay vì thêm field mới vào BattleOutcome.
+                int opponentIndex = result.SpecialFloor;
+                if (result.Victory)
+                {
+                    bool claimedArena = ArenaSystem.TryClaim(_profile, opponentIndex, _economy);
+                    Toast(claimedArena ? "Arena — Victory! Honor claimed." : "Arena — Victory!");
+                }
+                else
+                {
+                    // KHÔNG trừ Rating/mất gì khi thua — đúng tinh thần "không phạt nặng" đã dùng
+                    // ở NodeChoice/Enhance (task-arena.md §2).
+                    Toast("Arena — Defeated. No penalty, try again anytime.");
+                }
                 return;
             }
 
@@ -645,6 +665,87 @@ namespace Game.Meta
             ServiceLocator.Get<Game.Core.Scenes.ISceneTransitionService>().LoadSceneWithOverlay("Battle");
         }
 
+        // =====================================================================
+        // Arena PvP (task-arena.md, plan.md v1.1) — đối thủ là snapshot hero do RNG sinh
+        // (KHÔNG có backend thật), sinh lại mỗi mùa 14 ngày. Xem ArenaSystem.cs cho phần logic
+        // reset/nhận thưởng thuần; phần chọn hero ngẫu nhiên (impure, cần đọc catalog) nằm ở đây,
+        // đúng tách bạch đã dùng cho PickEnemies/PickBoss.
+        // =====================================================================
+
+        private void OpenArena()
+        {
+            if (ArenaSystem.EnsureSeasonReset(_profile, System.DateTime.UtcNow))
+            {
+                ArenaSystem.PopulateOpponents(_profile, PickArenaOpponents());
+                SaveProfile();
+            }
+
+            _arenaScreen.Open(_profile, LaunchArena, SaveProfile);
+        }
+
+        private void LaunchArena(int opponentIndex)
+        {
+            if (opponentIndex < 0 || opponentIndex >= _profile.Arena.Opponents.Count) return;
+            if (_profile.Heroes.Count == 0)
+            {
+                Toast("No heroes in your party!");
+                return;
+            }
+
+            _teamSelectScreen.Open(_profile, null, heroIds => LaunchArenaBattle(heroIds, opponentIndex));
+        }
+
+        private void LaunchArenaBattle(List<string> heroIds, int opponentIndex)
+        {
+            if (heroIds == null || heroIds.Count == 0)
+            {
+                Toast("No heroes in your party!");
+                return;
+            }
+
+            var opponent = _profile.Arena.Opponents[opponentIndex];
+            long seed = System.DateTime.UtcNow.Ticks;
+            RunContext.QueueSpecialBattle(DungeonKind.Arena, opponentIndex, heroIds, opponent.HeroDefIds, seed,
+                                         ComputeAutoItemLoadout(), _teamSelectScreen.SelectedFormation);
+            SaveProfile();
+
+            _canvasRoot.gameObject.SetActive(false);
+            ServiceLocator.Get<Game.Core.Scenes.ISceneTransitionService>().LoadSceneWithOverlay("Battle");
+        }
+
+        /// <summary>Sinh <see cref="ArenaSystem.OPPONENT_COUNT"/> đối thủ, mỗi đối thủ 3 hero ngẫu
+        /// nhiên từ TOÀN BỘ catalog (không chỉ hero người chơi sở hữu — đối thủ ảo, không phải đội
+        /// hình thật của ai cả). Level/Star SCALE theo cấp trung bình đội hình người chơi hiện tại
+        /// (không hardcode số tuyệt đối) — bậc 1 dễ hơn trung bình, bậc cuối khó hơn hẳn, tạo thang
+        /// độ khó thật thay vì cố định.</summary>
+        private List<ArenaOpponentDto> PickArenaOpponents()
+        {
+            var heroDefs = Resources.LoadAll<Game.Meta.Content.HeroDefinitionSO>("Data/Heroes");
+            var result = new List<ArenaOpponentDto>(ArenaSystem.OPPONENT_COUNT);
+            if (heroDefs.Length == 0) return result;
+
+            int avgLevel = _profile.Heroes.Count > 0
+                ? (int)_profile.Heroes.Average(h => h.Level)
+                : 1;
+
+            for (int tier = 0; tier < ArenaSystem.OPPONENT_COUNT; tier++)
+            {
+                var picks = new string[3];
+                for (int i = 0; i < 3; i++)
+                    picks[i] = heroDefs[Random.Range(0, heroDefs.Length)].DefId;
+
+                result.Add(new ArenaOpponentDto
+                {
+                    HeroDefIds = picks,
+                    Level = Mathf.Max(1, avgLevel - 5 + tier * 5),
+                    Star = Mathf.Clamp(tier + 1, 1, AscendSystem.MAX_STAR),
+                    HonorReward = 50 * (tier + 1),
+                    Claimed = false,
+                });
+            }
+            return result;
+        }
+
         /// <summary>task-eventrest.md — trước đây auto-heal + gold cố định, không có lựa chọn nào.
         /// Nay mở <see cref="NodeChoiceScreen"/> (giống <see cref="ResolveShop"/> đã mở
         /// <see cref="ShopScreen"/>) — CHỈ đánh dấu đã ghé/lưu/refresh map SAU khi đóng modal.</summary>
@@ -795,6 +896,7 @@ namespace Game.Meta
             _dungeonScreen = gameObject.AddComponent<DungeonScreen>();
             _trialBossScreen = gameObject.AddComponent<TrialBossScreen>();
             _towerScreen = gameObject.AddComponent<TowerScreen>();
+            _arenaScreen = gameObject.AddComponent<ArenaScreen>();
             _mailScreen = gameObject.AddComponent<MailScreen>();
             _codexScreen = gameObject.AddComponent<CodexScreen>();
             _inventoryScreen = gameObject.AddComponent<InventoryScreen>();
@@ -888,11 +990,12 @@ namespace Game.Meta
                 _heroListScreen.Open(_profile, null);
             });
 
-            // task-chapter-arena.md — plan.md v1.1 mới làm Arena thật, v1.0 chỉ cần placeholder.
+            // task-arena.md — Arena PvP thật (v1.1), thay placeholder "Coming Soon" của
+            // task-chapter-arena.md.
             _arenaButton.onClick.AddListener(() =>
             {
                 _audio?.PlaySfx("ui/sfx_ui_tick");
-                Toast("Arena — Coming Soon...");
+                OpenArena();
             });
 
             // TitleLabel ("CHAPTER N") — entry point ChapterProgressScreen, không thêm nút TopBar

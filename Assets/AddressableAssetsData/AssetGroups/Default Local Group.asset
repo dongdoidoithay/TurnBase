@@ -175,6 +175,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e0b63e435b15648d18423b8ed8126a9e
+    m_Address: Prefabs/UI/Screens/UI_Arena
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e73da9bbe858549278dd5a686215c02e
     m_Address: Prefabs/UI/Screens/UI_TeamSelect
     m_ReadOnly: 0

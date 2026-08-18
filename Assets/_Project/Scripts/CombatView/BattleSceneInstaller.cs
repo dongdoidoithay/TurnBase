@@ -122,7 +122,8 @@ namespace Game.CombatView
             if (_pending != null)
             {
                 SpawnTeamFromDefinitions(TeamSide.Player, _pending.HeroDefIds);
-                SpawnTeamFromDefinitions(TeamSide.Enemy, _pending.EnemyDefIds);
+                if (_pending.SpecialMode == DungeonKind.Arena) SpawnArenaOpponentTeam();
+                else SpawnTeamFromDefinitions(TeamSide.Enemy, _pending.EnemyDefIds);
             }
             else
             {
@@ -541,6 +542,50 @@ namespace Game.CombatView
             // task-formation-synergy.md — Synergy: áp dụng sau khi spawn hết hero, cần thấy đủ đội.
             if (player && spawnedPlayerUnits != null && spawnedPlayerUnits.Count > 0)
                 SynergySystem.Apply(spawnedPlayerUnits);
+        }
+
+        /// <summary>task-arena.md — spawn đội đối thủ Arena PHE ENEMY nhưng dùng HeroDefinitionSO
+        /// (không phải EnemyDefinitionSO như <see cref="SpawnTeamFromDefinitions"/>'s nhánh enemy).
+        /// Method MỚI HOÀN TOÀN thay vì sửa <see cref="SpawnTeamFromDefinitions"/> — tránh mọi rủi
+        /// ro hồi quy đường spawn nóng nhất của game (mọi trận thường/Dungeon/Tower/TrialBoss đều
+        /// qua đó). Đối thủ Arena KHÔNG có trang bị/HeroInstanceDto thật (là snapshot RNG sinh,
+        /// xem <see cref="ArenaOpponentDto"/>) — chỉ Level/Star snapshot, không
+        /// EquipmentModifiers/SetBonus/Formation (đối thủ ảo, không giả vờ có đội hình thật).</summary>
+        private void SpawnArenaOpponentTeam()
+        {
+            var profile = ProfileContext.Current;
+            int opponentIndex = _pending.SpecialFloor;
+            if (profile == null || opponentIndex < 0 || opponentIndex >= profile.Arena.Opponents.Count)
+            {
+                Debug.LogWarning("[Battle] Arena opponent snapshot không hợp lệ — bỏ qua spawn.");
+                return;
+            }
+
+            var opponent = profile.Arena.Opponents[opponentIndex];
+            int count = Mathf.Min(opponent.HeroDefIds.Length, ENEMY_SLOTS.Length);
+
+            for (int i = 0; i < count; i++)
+            {
+                string defId = opponent.HeroDefIds[i];
+                var def = UnityEngine.AddressableAssets.Addressables
+                    .LoadAssetAsync<HeroDefinitionSO>($"Data/Heroes/{defId}").WaitForCompletion();
+                if (def == null) { Debug.LogWarning($"[Battle] Arena: không tìm thấy hero '{defId}'"); continue; }
+
+                var primary = Game.Meta.Hero.HeroLevelSystem.EffectivePrimary(def.BasePrimary, opponent.Level);
+                var unit = BuildUnitFromDefinition(def.DefId, def.NameKey, TeamSide.Enemy, i, def.Element,
+                                                   def.Class, def.PoiseMax, primary, def.SkillIds, opponent.Level,
+                                                   null, opponent.Star);
+
+                Simulation.AddUnit(unit, BuildAi("ai_special"));
+
+                var sprite = Resources.Load<Sprite>($"Art/Characters/Heroes/{def.SpriteFolder}/{def.SpriteFolder}_v1_00");
+                var go = new GameObject($"Unit_Enemy_{i}_{defId}");
+                go.transform.SetParent(transform, false);
+                var view = go.AddComponent<UnitView>();
+                view.SetHome(ENEMY_SLOTS[i]);
+                view.Bind(unit, sprite);
+                _views.Add(view);
+            }
         }
 
         // =====================================================================
