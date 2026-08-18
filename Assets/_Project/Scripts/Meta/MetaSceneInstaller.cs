@@ -108,6 +108,9 @@ namespace Game.Meta
         private GameObject _toastPanel;
         private GameObject _mailBadge;
         private Text _mailBadgeLabel;
+        /// <summary>task-reddot.md — 4 chấm đỏ tĩnh dựng sẵn trong Boot.unity (mặc định inactive,
+        /// giống MailBadge), chỉ RefreshRedDots() mới bật lên khi có hành động miễn phí thật.</summary>
+        private GameObject _heroRedDot, _dungeonRedDot, _trialBossRedDot, _towerRedDot;
         private Image _leaderPortrait;
 
         private readonly Dictionary<int, Button> _nodeButtons = new();
@@ -1038,6 +1041,11 @@ namespace Game.Meta
             // mặc định inactive, chỉ RefreshMailBadge() mới bật lên khi có mail thật chưa claim.
             _mailBadge = _mailButton.transform.Find("MailBadge").gameObject;
             _mailBadgeLabel = _mailBadge.transform.Find("BadgeLabel").GetComponent<Text>();
+            // task-reddot.md — dựng tĩnh trong Boot.unity cạnh MailBadge, cùng quy ước.
+            _heroRedDot = _heroListButton.transform.Find("RedDot").gameObject;
+            _dungeonRedDot = _dungeonButton.transform.Find("RedDot").gameObject;
+            _trialBossRedDot = _trialBossButton.transform.Find("RedDot").gameObject;
+            _towerRedDot = _towerButton.transform.Find("RedDot").gameObject;
             // Icon nhân vật (leader — hero đầu tiên trong roster) trên TopBar, dựng tĩnh trong
             // Boot.unity cạnh TitleLabel — thuần hiển thị, không có hành động bấm.
             _leaderPortrait = topBar.Find("LeaderPortrait/PortraitMask/PortraitSprite").GetComponent<Image>();
@@ -1063,6 +1071,17 @@ namespace Game.Meta
             int count = MailSystem.UnclaimedCount(_profile);
             _mailBadge.SetActive(count > 0);
             if (count > 0) _mailBadgeLabel.text = count > 9 ? "9+" : count.ToString();
+        }
+
+        /// <summary>task-reddot.md — plan.md §10.6. Tính lại toàn bộ (pull model, xem doc-comment
+        /// <see cref="Game.Meta.Notifications.RedDotService"/> cho lý do đơn giản hoá).</summary>
+        private void RefreshRedDots()
+        {
+            var now = System.DateTime.UtcNow;
+            _heroRedDot.SetActive(Game.Meta.Notifications.RedDotService.IsHeroDirty(_profile, _economy));
+            _dungeonRedDot.SetActive(Game.Meta.Notifications.RedDotService.IsDungeonDirty(_profile, now));
+            _trialBossRedDot.SetActive(Game.Meta.Notifications.RedDotService.IsTrialBossDirty(_profile));
+            _towerRedDot.SetActive(Game.Meta.Notifications.RedDotService.IsTowerDirty(_profile));
         }
 
         /// <summary>Icon leader trên TopBar — hero đầu tiên trong roster (không phải "hero mạnh
@@ -1091,6 +1110,7 @@ namespace Game.Meta
             _titleLabel.text = $"CHAPTER {run.ChapterId}   |   {_profile.Heroes.Count} heroes";
             RefreshWallet();
             RefreshMailBadge();
+            RefreshRedDots();
 
             int maxRow = 0;
             foreach (var n in run.MapNodes) maxRow = System.Math.Max(maxRow, n.RowIndex);

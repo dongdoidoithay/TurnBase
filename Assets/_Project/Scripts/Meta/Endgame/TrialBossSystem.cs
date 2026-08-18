@@ -64,6 +64,16 @@ namespace Game.Meta.Endgame
                 profile.TrialBoss.BestDamageThisWeek = damageDealt;
         }
 
+        /// <summary>task-reddot.md — peek KHÔNG mutate, dùng cho RedDotService (chỉ hiện chấm đỏ khi
+        /// có thưởng thật đang chờ, không phải "có thể đánh boss").</summary>
+        public static bool HasClaimable(PlayerProfileDto profile)
+        {
+            int highestEligible = 0;
+            for (int i = 1; i <= TIERS.Length; i++)
+                if (profile.TrialBoss.BestDamageThisWeek >= TIERS[i - 1].DamageThreshold) highestEligible = i;
+            return highestEligible > profile.TrialBoss.ClaimedTier;
+        }
+
         /// <summary>Nhận thưởng TẤT CẢ bậc đã đủ điều kiện nhưng chưa nhận (không chỉ bậc cao
         /// nhất — nhảy thẳng lên bậc 3 vẫn phải được cả thưởng bậc 1+2, giống thang mốc
         /// (milestone) thông thường). Trả false nếu không có bậc mới nào để nhận.</summary>

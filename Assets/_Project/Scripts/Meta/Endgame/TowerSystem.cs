@@ -71,6 +71,15 @@ namespace Game.Meta.Endgame
                 profile.Progress.TowerFloor = floorReached;
         }
 
+        /// <summary>task-reddot.md — peek KHÔNG mutate, xem <see cref="TrialBossSystem.HasClaimable"/>.</summary>
+        public static bool HasClaimable(PlayerProfileDto profile)
+        {
+            int highestEligible = 0;
+            for (int i = 1; i <= TIERS.Length; i++)
+                if (profile.Tower.BestFloorThisWeek >= TIERS[i - 1].FloorThreshold) highestEligible = i;
+            return highestEligible > profile.Tower.ClaimedTier;
+        }
+
         /// <summary>Nhận thưởng TẤT CẢ bậc đã đủ điều kiện nhưng chưa nhận (cộng dồn, giống
         /// <see cref="TrialBossSystem.TryClaimRewards"/>). <paramref name="lootRng"/> chỉ dùng khi
         /// bậc cuối (Mythic equipment) được nhận — an toàn truyền RNG không xác định (Meta layer
