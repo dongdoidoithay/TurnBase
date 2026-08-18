@@ -78,6 +78,13 @@ namespace Game.CombatView.Effects
         public static readonly Color COLOR_BREAK  = new(1.000f, 1.000f, 1.000f);
 
         private const int PREWARM = 30;
+        private const float LARGE_NUMBERS_MULTIPLIER = 1.5f;
+
+        /// <summary>task-accessibility-part2.md, plan.md §10.7 "hiển thị số damage lớn" — set bởi
+        /// caller (BattleSceneInstaller) từ SettingsDto.ShowLargeDamageNumbers. Chỉ nhân thêm vào
+        /// scale của <see cref="ShowDamage"/>/<see cref="ShowHeal"/> (số damage/heal thật) — KHÔNG
+        /// áp cho Miss/Perfect/Break (đã là banner trạng thái to sẵn, không phải "số damage").</summary>
+        public bool LargeNumbers;
 
         private readonly List<FloatingText> _pool = new(PREWARM);
 
@@ -106,10 +113,10 @@ namespace Game.CombatView.Effects
         public void ShowDamage(Vector3 pos, int amount, bool isCrit)
             => Take().Show(pos, amount.ToString(),
                            isCrit ? COLOR_CRIT : COLOR_DAMAGE,
-                           isCrit ? 1.6f : 1f);
+                           (isCrit ? 1.6f : 1f) * (LargeNumbers ? LARGE_NUMBERS_MULTIPLIER : 1f));
 
         public void ShowHeal(Vector3 pos, int amount)
-            => Take().Show(pos, $"+{amount}", COLOR_HEAL);
+            => Take().Show(pos, $"+{amount}", COLOR_HEAL, LargeNumbers ? LARGE_NUMBERS_MULTIPLIER : 1f);
 
         public void ShowMiss(Vector3 pos) => Take().Show(pos, "MISS", COLOR_MISS, 0.9f);
 

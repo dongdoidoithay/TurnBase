@@ -246,6 +246,10 @@ namespace Game.Data.Dto
         public float TextScale = 1f;
         public bool ColorblindMode;
         public bool ShowEnemyIntent = true;
+        /// <summary>task-accessibility-part2.md, plan.md §10.7 — phóng to số damage/heal bay lên
+        /// (KHÔNG áp cho MISS/PERFECT/BREAK — những chữ đó vốn đã là banner trạng thái to sẵn,
+        /// không phải "số damage").</summary>
+        public bool ShowLargeDamageNumbers;
     }
 
     [Serializable]

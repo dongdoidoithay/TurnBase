@@ -1,5 +1,7 @@
 using Game.Combat.Model;
+using Game.Core;
 using Game.Data;
+using Game.Services.Settings;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -34,6 +36,12 @@ namespace Game.UI.Battle
         private TextMeshProUGUI _cost;
         private TextMeshProUGUI _cooldown;
         private Image _elementTint;
+        /// <summary>task-accessibility-part2.md, plan.md §10.7 — "icon nguyên tố có hình dạng khác
+        /// nhau, không chỉ khác màu" cho chế độ mù màu. KHÔNG có art sprite riêng theo nguyên tố
+        /// trong dự án (thư mục Art/UI/Icons/Elements rỗng) — dùng glyph ký tự hình khối phân biệt
+        /// rõ (● ▲ ▼ ■ ◆ ★ ✚) thay vì màu, chỉ hiện khi bật ColorblindMode.</summary>
+        private TextMeshProUGUI _elementGlyph;
+        private ISettingsService _settings;
 
         public int SlotIndex { get; private set; }
         public SkillRuntime Skill { get; private set; }
@@ -60,6 +68,7 @@ namespace Game.UI.Battle
 
         private void Build(RectTransform rt, float size)
         {
+            ServiceLocator.TryGet(out _settings);
             _border = gameObject.AddComponent<Image>();
             _border.color = BORDER_NORMAL;
 
@@ -99,6 +108,13 @@ namespace Game.UI.Battle
             _cooldown.rectTransform.offsetMin = _cooldown.rectTransform.offsetMax = Vector2.zero;
             _cooldown.color = TEXT_NORMAL;
             _cooldown.gameObject.SetActive(false);
+
+            // Glyph nguyên tố cho chế độ mù màu — góc dưới-phải, đối xứng Cost (dưới-trái).
+            _elementGlyph = NewText("ElementGlyph", rt, size * 0.2f, TextAlignmentOptions.BottomRight);
+            _elementGlyph.rectTransform.anchorMin = new Vector2(0.4f, 0.02f);
+            _elementGlyph.rectTransform.anchorMax = new Vector2(0.92f, 0.24f);
+            _elementGlyph.rectTransform.offsetMin = _elementGlyph.rectTransform.offsetMax = Vector2.zero;
+            _elementGlyph.gameObject.SetActive(false);
         }
 
         private static Image NewImage(string name, RectTransform parent, Color color, float inset)
@@ -142,6 +158,7 @@ namespace Game.UI.Battle
                 _label.text = "";
                 _cost.text = "";
                 _icon.enabled = false;
+                _elementGlyph.gameObject.SetActive(false);
                 SetState(SlotState.Empty);
                 return;
             }
@@ -149,6 +166,10 @@ namespace Game.UI.Battle
             _label.text = ShortName(skill.Data);
             _cost.text = skill.Data.SpCost > 0 ? skill.Data.SpCost.ToString() : "";
             _elementTint.color = ElementColor(skill.Data.Element);
+
+            bool colorblind = _settings != null && _settings.Current.ColorblindMode;
+            _elementGlyph.gameObject.SetActive(colorblind);
+            if (colorblind) _elementGlyph.text = ElementGlyph(skill.Data.Element);
 
             var sprite = LoadIcon(IconKeyFor(skill.Data, SlotIndex));
             _icon.sprite = sprite;
@@ -328,6 +349,18 @@ namespace Game.UI.Battle
             Element.Light => new Color(1.000f, 0.820f, 0.400f, 0.28f),
             Element.Dark  => new Color(0.608f, 0.365f, 0.898f, 0.28f),
             _ => new Color(1, 1, 1, 0f)
+        };
+
+        /// <summary>task-accessibility-part2.md — 7 hình khối phân biệt tối đa, không dựa vào màu.</summary>
+        private static string ElementGlyph(Element e) => e switch
+        {
+            Element.Fire  => "▲", // ▲
+            Element.Water => "▼", // ▼
+            Element.Earth => "■", // ■
+            Element.Wind  => "◆", // ◆
+            Element.Light => "★", // ★
+            Element.Dark  => "✚", // ✚
+            _ => "●"              // ● Neutral
         };
     }
 }

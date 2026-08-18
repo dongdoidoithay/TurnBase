@@ -185,6 +185,7 @@ gachainfo.label.rates_title,TỈ LỆ RA,DROP RATES
 gachainfo.label.history_title,LỊCH SỬ QUAY,HISTORY
 gachainfo.rates.legendary_flavor,Tăng dần từ lần #{0} · đảm bảo ở lần #{1},Soft pity from #{0} · guaranteed at #{1}
 gachainfo.rates.epic_flavor,Đảm bảo mỗi #{0} lần,Guaranteed every #{0} pulls
+settings.label.large_damage_numbers,Số Damage Lớn,Large Damage Numbers
 quest.label.title,NHIỆM VỤ,QUEST
 quest.button.close,ĐÓNG,CLOSE
 quest.button.claim,NHẬN,CLAIM

@@ -612,15 +612,32 @@ namespace Game.UI.Battle
         private void HandleHotkeys()
         {
             var kb = Keyboard.current;
-            if (kb == null) return;
+            if (kb != null)
+            {
+                if (kb.digit1Key.wasPressedThisFrame) TrySelectSlot(0);
+                else if (kb.digit2Key.wasPressedThisFrame) TrySelectSlot(1);
+                else if (kb.digit3Key.wasPressedThisFrame) TrySelectSlot(2);
+                else if (kb.digit4Key.wasPressedThisFrame) TrySelectSlot(3);
+                else if (kb.digit5Key.wasPressedThisFrame) TrySelectSlot(4);
+                else if ((kb.enterKey.wasPressedThisFrame || kb.numpadEnterKey.wasPressedThisFrame) && _endTurnButton.interactable)
+                    _endTurnButton.onClick.Invoke();
+            }
 
-            if (kb.digit1Key.wasPressedThisFrame) TrySelectSlot(0);
-            else if (kb.digit2Key.wasPressedThisFrame) TrySelectSlot(1);
-            else if (kb.digit3Key.wasPressedThisFrame) TrySelectSlot(2);
-            else if (kb.digit4Key.wasPressedThisFrame) TrySelectSlot(3);
-            else if (kb.digit5Key.wasPressedThisFrame) TrySelectSlot(4);
-            else if ((kb.enterKey.wasPressedThisFrame || kb.numpadEnterKey.wasPressedThisFrame) && _endTurnButton.interactable)
-                _endTurnButton.onClick.Invoke();
+            // task-accessibility-part2.md, plan.md §10.7 — gamepad hotkey: 4 nút mặt trước cho ô
+            // skill 0-3 (không đủ 5 nút mặt để khớp Ultimate ô 4 — dùng vai phải thay), Start = kết
+            // lượt. Tái dùng ĐÚNG TrySelectSlot/_endTurnButton.onClick, cùng nguyên tắc "hotkey chỉ
+            // là lối tắt" như nhánh bàn phím ở trên.
+            var gp = Gamepad.current;
+            if (gp != null)
+            {
+                if (gp.buttonWest.wasPressedThisFrame) TrySelectSlot(0);
+                else if (gp.buttonSouth.wasPressedThisFrame) TrySelectSlot(1);
+                else if (gp.buttonEast.wasPressedThisFrame) TrySelectSlot(2);
+                else if (gp.buttonNorth.wasPressedThisFrame) TrySelectSlot(3);
+                else if (gp.rightShoulder.wasPressedThisFrame) TrySelectSlot(4);
+                else if (gp.startButton.wasPressedThisFrame && _endTurnButton.interactable)
+                    _endTurnButton.onClick.Invoke();
+            }
         }
 
         private void TrySelectSlot(int index)

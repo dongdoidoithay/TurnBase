@@ -31,7 +31,7 @@ namespace Game.Meta
 
         private Text _bgmValueLabel, _sfxValueLabel;
         private Text _titleLabel, _musicLabel, _sfxLabel, _shakeLabel, _acLabel, _langLabel, _langValueLabel, _closeLabel;
-        private Text _textScaleLabel, _textScaleValueLabel, _colorblindLabel;
+        private Text _textScaleLabel, _textScaleValueLabel, _colorblindLabel, _largeDamageLabel;
 
         public void Open()
         {
@@ -73,7 +73,7 @@ namespace Game.Meta
             var panel = NewImage(canvasGo.transform, PANEL_BG);
             var panelRt = (RectTransform)panel.transform;
             panelRt.anchorMin = panelRt.anchorMax = new Vector2(0.5f, 0.5f);
-            panelRt.sizeDelta = new Vector2(360, 500);
+            panelRt.sizeDelta = new Vector2(360, 560); // +60 — task-accessibility-part2.md, thêm hàng Large Damage Numbers
 
             // task-phase-5-gaps.md Phần E — pilot LayoutProfileSwitcher: Portrait = chụp lại đúng
             // số liệu vừa gán ở trên (không đổi hành vi màn hình dọc hiện có); Landscape = rộng hơn/
@@ -83,7 +83,7 @@ namespace Game.Meta
             var portraitProfile = LayoutProfile.CaptureFrom(panelRt, "SettingsPanel_Portrait");
             var landscapeProfile = portraitProfile;
             landscapeProfile.Name = "SettingsPanel_Landscape";
-            landscapeProfile.SizeDelta = new Vector2(420, 460);
+            landscapeProfile.SizeDelta = new Vector2(420, 520); // +60, cùng lý do Portrait ở trên
             var layoutSwitcher = panel.gameObject.AddComponent<LayoutProfileSwitcher>();
             layoutSwitcher.SetProfiles(panelRt, portraitProfile, landscapeProfile);
 
@@ -155,11 +155,18 @@ namespace Game.Meta
             (colorblindToggle, _colorblindLabel) = NewToggleWithLabel(panelRt, new Vector2(0, -170), "Colorblind Mode");
             colorblindToggle.onValueChanged.AddListener(v => _settings?.Modify(s => s.ColorblindMode = v));
 
+            // task-accessibility-part2.md — plan.md §10.7 "hiển thị số damage lớn", nốt cuối của
+            // 6 mục §10.7 (3/6 đã xong ở task-accessibility.md, 2/6 khác là gamepad hotkey/icon
+            // hình dạng — không có UI Settings riêng cho 2 mục đó, xem task file).
+            Toggle largeDamageToggle;
+            (largeDamageToggle, _largeDamageLabel) = NewToggleWithLabel(panelRt, new Vector2(0, -205), "Large Damage Numbers");
+            largeDamageToggle.onValueChanged.AddListener(v => _settings?.Modify(s => s.ShowLargeDamageNumbers = v));
+
             var closeGo = new GameObject("Close", typeof(RectTransform));
             closeGo.transform.SetParent(panelRt, false);
             var closeRt = (RectTransform)closeGo.transform;
             closeRt.anchorMin = closeRt.anchorMax = new Vector2(0.5f, 0.5f);
-            closeRt.anchoredPosition = new Vector2(0, -215);
+            closeRt.anchoredPosition = new Vector2(0, -245);
             closeRt.sizeDelta = new Vector2(120, 32);
             var closeImg = closeGo.AddComponent<Image>();
             closeImg.color = new Color(0.42f, 0.32f, 0.06f, 0.95f);
@@ -180,6 +187,7 @@ namespace Game.Meta
                 shakeToggle.SetIsOnWithoutNotify(_settings.Current.ScreenShake);
                 acToggle.SetIsOnWithoutNotify(_settings.Current.ActionCommandEnabled);
                 colorblindToggle.SetIsOnWithoutNotify(_settings.Current.ColorblindMode);
+                largeDamageToggle.SetIsOnWithoutNotify(_settings.Current.ShowLargeDamageNumbers);
                 _textScaleValueLabel.text = $"{_settings.Current.TextScale * 100:0}%";
             }
 
@@ -209,6 +217,7 @@ namespace Game.Meta
             _langValueLabel.text = _loc.CurrentLanguage.ToUpperInvariant();
             _textScaleLabel.text = _loc.Get("settings.label.text_scale");
             _colorblindLabel.text = _loc.Get("settings.label.colorblind");
+            _largeDamageLabel.text = _loc.Get("settings.label.large_damage_numbers");
             _closeLabel.text = _loc.Get("settings.button.close");
         }
 

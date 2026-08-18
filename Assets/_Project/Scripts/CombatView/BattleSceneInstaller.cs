@@ -104,7 +104,12 @@ namespace Game.CombatView
         public void BuildBattle()
         {
             // task-auto-battle.md — khôi phục trạng thái Auto từ lần chơi trước.
-            if (ServiceLocator.TryGet<ISettingsService>(out var svc)) _autoPlay = svc.Current.AutoBattle;
+            if (ServiceLocator.TryGet<ISettingsService>(out var svc))
+            {
+                _autoPlay = svc.Current.AutoBattle;
+                // task-accessibility-part2.md — plan.md §10.7 "hiển thị số damage lớn".
+                if (_floating != null) _floating.LargeNumbers = svc.Current.ShowLargeDamageNumbers;
+            }
             _pending = RunContext.Pending;
             int turnLimit = _pending != null && _pending.SpecialMode == DungeonKind.TrialBoss
                 ? TRIAL_BOSS_TURN_LIMIT : _turnLimit;
