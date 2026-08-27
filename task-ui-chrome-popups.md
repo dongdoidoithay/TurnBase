@@ -429,6 +429,30 @@ và nằm ngoài `Resources/` nên `Resources.Load` không thấy được.
       icon sạch/không chồng lấn + badge viết tắt (PO/ET/AN/SB/RF) + số lượng (x3/x2/x1/x1/x1).
       668/668 test xanh.
 
+## §3.14. Cùng bug icon-2-vật-thể-chồng-lấn lộ ra ở màn Meta Inventory — "tiếp tục"
+
+Người dùng gõ "tiếp tục" không kèm chi tiết. Tự rà lại danh sách "chưa đụng" còn treo từ các đợt
+trước (memory `project_art_sample_ui_chrome.md`), thấy còn "24 ô `Grid/Slot_N` trong `UI_Inventory`
+(màn Meta) chưa có icon". Điều tra `InventoryScreen.cs` thấy code/comment nói 11/24 ô ĐÃ gán sẵn
+sprite thật tĩnh trong prefab (đúng thứ tự `ItemCatalog.ALL` 6 + `MATERIALS` 5 = 11) — kiểm tra qua
+`execute_code` xác nhận ĐÚNG là đã có sprite (không phải bug "chưa gán" như nghi ban đầu), 13 ô còn
+lại (11–23) cố tình để trống — dự phòng danh sách dài thêm sau này, không phải thiếu sót.
+
+Nhưng: 11 sprite đã gán đó trỏ THẲNG vào file gốc mập mờ ở `Assets/_Project/Art/UI/Icons/Items/`
+(chưa qua bước "chụp lại sub-rect sạch" đã làm cho Battle HUD ở §3.13) — screenshot Play mode thật
+xác nhận ĐÚNG 3 ô (`Slot_0` Potion/`Slot_1` Ether/`Slot_4` Revive Feather) bị lộ y hệt bug "2 vật thể
+chồng lấn trong 1 canvas 32×32" đã tìm ra ở §3.13, lần này còn RÕ hơn — `Slot_1` (Ether) không chỉ
+chồng 2 bản chai mà còn lộ 1 mảnh vỡ hình như PORTRAIT nhân vật không liên quan kẹt chung file gốc.
+
+- [x] `UI_Inventory.prefab` — `manage_prefabs modify_contents` đổi sprite của `Slot_0/Icon`,
+      `Slot_1/Icon`, `Slot_4/Icon` sang đúng 3 file sạch đã tạo sẵn ở §3.13
+      (`Resources/Art/UI/Icons/Items/icon_item_{potion,ether,revive_feather}.png`) — KHÔNG cần vẽ
+      lại gì mới, chỉ trỏ lại tham chiếu. 8 ô còn lại (Antidote/SmokeBomb/ElementalBomb + 5
+      Materials) vốn dùng file gốc SẠCH (chỉ 1 sub-rect/file, xác nhận qua đọc `.meta`) — không đụng.
+- [x] Verify Play mode thật (instantiate trực tiếp `UI_Inventory.prefab`, zoom crop từng ô đã sửa):
+      cả 3 ô hiện đúng 1 icon sạch duy nhất, không còn chồng lấn/mảnh vỡ lạ. 668/668 test xanh (chỉ
+      đổi tham chiếu sprite trong 1 prefab, không đụng code).
+
 ## §4. Ghi chú môi trường quan trọng (áp dụng cho MỌI việc UI sau này)
 
 - `manage_camera screenshot` (kể cả không truyền `camera`) LUÔN tự chọn 1 Camera cụ thể để render —
