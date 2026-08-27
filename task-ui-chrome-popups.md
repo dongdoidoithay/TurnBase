@@ -347,6 +347,35 @@ vẫn là tile gạch phẳng cũ. Equipment loadout row / bộ đếm SWAPS[3/3
 không có dữ liệu tương ứng trong `CombatUnit`/`BattleState`, người dùng đã tự chọn KHÔNG xây thêm hệ
 thống mới cho phần này (chọn nhánh "redesign dùng dữ liệu thật", không chọn nhánh "thêm dữ liệu mới").
 
+## §3.11. Nền khung cảnh trận đấu — "thêm nền khung cảnh cho battle screen"
+
+Phần duy nhất bị hoãn ở §3.10 (art world-space, không phải HUD code). Điều tra `Battle.unity` qua
+`manage_scene`/`execute_code` (không đoán) tìm ra: `BattleSceneInstaller/__Stage__/Background`
+(`SpriteRenderer`, sprite `battle_arena_ember`, world size 16×9, sorting order −100) — file thật ở
+`Assets/_Project/Resources/Art/Backgrounds/battle_arena_ember.png` (512×288, PPU 32). Đây chính là
+"tường gạch phẳng + trời xanh lơ" thấy ở mọi screenshot — không có khí quyển như ảnh mẫu.
+
+- [x] `Tools/pixel-art-pipeline/scripts/draw_battle_backdrop.py` (mới) — vẽ thủ tục bằng Pillow
+      (KHÔNG AI, KHÔNG crop ảnh mẫu — đúng [[feedback_no_jpeg_crop_sprites]]): bầu trời gradient
+      tím-mận tối có sao lấm tấm, 2 lớp núi/rặng cây silhouette ở chân trời (xa nhạt hơn, gần đậm
+      hơn — tạo chiều sâu), nền đất gradient ấm dần xuống dưới + 1 quầng sáng mềm giữa nơi 2 phe
+      đứng (thay campfire cứng cũ), vignette tối 4 góc.
+- [x] Ghi đè TRỰC TIẾP `battle_arena_ember.png` (giữ đúng path/kích thước 512×288/GUID — không cần
+      sửa `.meta` hay bất kỳ code C# nào, `SpriteRenderer` đã tham chiếu sẵn đúng sprite này).
+- [x] **Bug thật phát hiện ở bản vẽ đầu tiên, tự sửa trước khi báo xong:** đặt đường chân trời quá
+      thấp (row 168/288, gần đúng tỉ lệ ảnh cũ) khiến unit hero/enemy — tính ra qua
+      `execute_code` đọc `transform.position` thật (Y ≈ −1.0 đến −1.8, camera ortho tâm Y=−1.6
+      size 9 → quy đổi ra row ≈125–150) — LƠ LỬNG GIỮA BẦU TRỜI (rơi vào vùng row 0-168 = "trời")
+      thay vì đứng trên "đất". Ảnh cũ không lộ bug này vì texture gạch tường trông "đặc" đều từ
+      trên xuống, không có ranh giới trời/đất rõ như bản mới (sao + gradient) nên mắt không để ý.
+      Sửa: tính ngược từ vị trí unit THẬT, đặt `HORIZON=95` (bầu trời chỉ còn ~1/3 ảnh) + quầng
+      sáng dời tâm về đúng row 140 (giữa khoảng unit đứng) — verify lại qua screenshot Play mode
+      thật: unit đứng rõ trong vùng đất ấm, dưới rặng núi, không còn lơ lửng.
+- [x] Verify Play mode thật (queue battle 1 hero + 3 goblin, chụp ngay sau khi `LoadScene("Battle")`
+      — càng ít round-trip trước khi chụp càng đỡ bị auto-battle tự đánh xong-quay-về-Meta trước khi
+      kịp chụp, xem thêm ghi chú stale-frame ở §4). 668/668 test xanh (chỉ đổi 1 file PNG, không
+      đụng code).
+
 ## §4. Ghi chú môi trường quan trọng (áp dụng cho MỌI việc UI sau này)
 
 - `manage_camera screenshot` (kể cả không truyền `camera`) LUÔN tự chọn 1 Camera cụ thể để render —
