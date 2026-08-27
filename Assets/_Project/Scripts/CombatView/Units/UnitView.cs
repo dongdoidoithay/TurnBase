@@ -13,6 +13,7 @@ namespace Game.CombatView.Units
         [Header("Tham chiếu")]
         [SerializeField] private SpriteRenderer _sprite;
         [SerializeField] private Transform _visualRoot;
+        [SerializeField] private Animator _animator;
 
         [Header("Phản hồi")]
         [SerializeField] private float _hitFlashDuration = 0.06f;
@@ -30,24 +31,6 @@ namespace Game.CombatView.Units
         private bool _dying;
         private float _deathT;
 
-        // ---- Animation frame-sequence (pilot: chỉ hero có bộ frame mới dùng; các unit khác
-        // giữ nguyên hành vi sprite tĩnh cũ — xem task-animation-pilot.md §1/§4) ----
-        private enum AnimState { StaticSprite, Idle, Attack, Move, Damage, Die }
-        private const float IDLE_FPS = 8f;    // khớp bảng plan.md §2.2
-        private const float ATTACK_FPS = 14f;
-        private const float MOVE_FPS = 12f;
-        private const float DAMAGE_FPS = 16f;
-        private const float DIE_FPS = 10f;
-        private Sprite[] _idleFrames;
-        private Sprite[] _attackFrames;
-        private Sprite[] _moveFrames;   // nạp sẵn — CHƯA có điểm trigger gameplay thật (không có
-                                         // "đi bộ" trong trận lượt), dành cho lần dùng sau
-        private Sprite[] _damageFrames;
-        private Sprite[] _dieFrames;
-        private AnimState _animState = AnimState.StaticSprite;
-        private int _frameIndex;
-        private float _frameTimer;
-
         // =====================================================================
 
         public void Bind(CombatUnit unit, Sprite sprite)
@@ -58,22 +41,19 @@ namespace Game.CombatView.Units
 
             EnsureRefs();
 
-            _idleFrames = LoadFrames(unit.DefId, "idle");
-            _attackFrames = LoadFrames(unit.DefId, "attack");
-            _moveFrames = LoadFrames(unit.DefId, "move");
-            _damageFrames = LoadFrames(unit.DefId, "damage");
-            _dieFrames = LoadFrames(unit.DefId, "die");
-            _frameIndex = 0;
-            _frameTimer = 0f;
-
-            if (_idleFrames != null)
+            var controller = Resources.Load<RuntimeAnimatorController>(
+                $"Animations/Controllers/{unit.DefId}");
+            if (controller != null)
             {
-                _animState = AnimState.Idle;
-                _sprite.sprite = _idleFrames[0];
+                _animator.runtimeAnimatorController = controller;
+                _animator.enabled = true;
+                _animator.Rebind();
+                _animator.Update(0f);
             }
             else
             {
-                _animState = AnimState.StaticSprite;
+                // Không có AnimatorController cho defId này — dùng lại sprite tĩnh như cũ.
+                _animator.enabled = false;
                 if (sprite != null) _sprite.sprite = sprite;
             }
 
@@ -85,26 +65,6 @@ namespace Game.CombatView.Units
             _dying = false;
             _deathT = 0f;
             _sprite.enabled = true;
-        }
-
-        /// <summary>Nạp bộ frame Animations/{defId}_{state}_00.. nếu có — thử cả Heroes lẫn Enemies.
-        /// Không có thì trả null, unit dùng lại sprite tĩnh như cũ (fallback bắt buộc — chỉ
-        /// hero_ember_knight có bộ frame trong pilot này).</summary>
-        private static Sprite[] LoadFrames(string defId, string state)
-        {
-            foreach (var kind in new[] { "Heroes", "Enemies" })
-            {
-                var list = new System.Collections.Generic.List<Sprite>(4);
-                for (int i = 0; i < 8; i++)
-                {
-                    var s = Resources.Load<Sprite>(
-                        $"Art/Characters/{kind}/{defId}/Animations/{defId}_{state}_{i:00}");
-                    if (s == null) break;
-                    list.Add(s);
-                }
-                if (list.Count > 0) return list.ToArray();
-            }
-            return null;
         }
 
         private void EnsureRefs()
@@ -130,6 +90,13 @@ namespace Game.CombatView.Units
                 _sprite = sr;
                 _sprite.sortingOrder = 10;
             }
+
+            if (_animator == null)
+            {
+                var anim = _visualRoot.GetComponent<Animator>();
+                if (anim == null) anim = _visualRoot.gameObject.AddComponent<Animator>();
+                _animator = anim;
+            }
         }
 
         public void SetHome(Vector3 position)
@@ -142,18 +109,14 @@ namespace Game.CombatView.Units
         // Phản hồi trực quan — bảng juice plan.md §10.5
         // =====================================================================
 
-        /// <summary>Nhận sát thương: chớp trắng 2 frame + rung nhẹ (+ frame "damage" nếu có).</summary>
+        /// <summary>Nhận sát thương: chớp trắng 2 frame + rung nhẹ + frame "damage" (nếu có).</summary>
         public void PlayHit()
         {
             _flashUntil = Time.time + _hitFlashDuration;
             _shakeUntil = Time.time + _hitFlashDuration * 2f;
 
-            if (_damageFrames != null && _animState != AnimState.StaticSprite)
-            {
-                _animState = AnimState.Damage;
-                _frameIndex = 0;
-                _frameTimer = 0f;
-            }
+            if (_animator != null && _animator.enabled)
+                _animator.SetTrigger("Hit");
         }
 
         /// <summary>Né đòn: dịch ngang nhanh rồi về chỗ cũ — plan.md §10.5 "Miss / Né".</summary>
@@ -191,12 +154,8 @@ namespace Game.CombatView.Units
             StopAllCoroutines();
             StartCoroutine(LungeRoutine(distance, duration));
 
-            if (_attackFrames != null)
-            {
-                _animState = AnimState.Attack;
-                _frameIndex = 0;
-                _frameTimer = 0f;
-            }
+            if (_animator != null && _animator.enabled)
+                _animator.SetTrigger("Attack");
         }
 
         private System.Collections.IEnumerator LungeRoutine(float distance, float duration)
@@ -226,12 +185,8 @@ namespace Game.CombatView.Units
             _dying = true;
             _deathT = 0f;
 
-            if (_dieFrames != null && _animState != AnimState.StaticSprite)
-            {
-                _animState = AnimState.Die;
-                _frameIndex = 0;
-                _frameTimer = 0f;
-            }
+            if (_animator != null && _animator.enabled)
+                _animator.SetBool("isDead", true);
         }
 
         public void PlayRevive()
@@ -242,6 +197,9 @@ namespace Game.CombatView.Units
             c.a = 1f;
             _sprite.color = c;
             _sprite.enabled = true;
+
+            if (_animator != null && _animator.enabled)
+                _animator.SetBool("isDead", false);
         }
 
         // =====================================================================
@@ -252,7 +210,6 @@ namespace Game.CombatView.Units
 
             if (_dying)
             {
-                AdvanceAnimFrame(); // chạy frame "die" (nếu có) song song với fade — giữ nguyên fade
                 _deathT += Time.deltaTime;
                 float k = Mathf.Clamp01(_deathT / _deathFadeDuration);
                 var c = _baseColor;
@@ -263,8 +220,6 @@ namespace Game.CombatView.Units
                 if (k >= 1f) { _sprite.enabled = false; _dying = false; }
                 return;
             }
-
-            AdvanceAnimFrame();
 
             // Chớp trắng khi trúng đòn
             _sprite.color = Time.time < _flashUntil ? Color.white : _baseColor;
@@ -281,66 +236,6 @@ namespace Game.CombatView.Units
                 transform.position = Vector3.MoveTowards(transform.position, _homePosition,
                                                          6f * Time.deltaTime);
             }
-        }
-
-        private Sprite[] FramesFor(AnimState s) => s switch
-        {
-            AnimState.Idle => _idleFrames,
-            AnimState.Attack => _attackFrames,
-            AnimState.Move => _moveFrames,
-            AnimState.Damage => _damageFrames,
-            AnimState.Die => _dieFrames,
-            _ => null,
-        };
-
-        private float FpsFor(AnimState s) => s switch
-        {
-            AnimState.Attack => ATTACK_FPS,
-            AnimState.Move => MOVE_FPS,
-            AnimState.Damage => DAMAGE_FPS,
-            AnimState.Die => DIE_FPS,
-            _ => IDLE_FPS,
-        };
-
-        private static bool Loops(AnimState s) => s == AnimState.Idle || s == AnimState.Move;
-
-        /// <summary>Đổi sprite theo mảng frame của state hiện tại. Idle/Move lặp; Attack/Damage chạy
-        /// 1 lần rồi tự về Idle; Die chạy 1 lần rồi GIỮ NGUYÊN frame cuối (plan.md §2.2 "down" —
-        /// không quay về Idle vì unit đã chết).</summary>
-        private void AdvanceAnimFrame()
-        {
-            if (_animState == AnimState.StaticSprite) return;
-
-            Sprite[] frames = FramesFor(_animState);
-            if (frames == null || frames.Length == 0) return;
-
-            float frameDuration = 1f / FpsFor(_animState);
-            _frameTimer += Time.deltaTime;
-            while (_frameTimer >= frameDuration)
-            {
-                _frameTimer -= frameDuration;
-                _frameIndex++;
-                if (_frameIndex >= frames.Length)
-                {
-                    if (_animState == AnimState.Die)
-                    {
-                        _frameIndex = frames.Length - 1; // giữ frame cuối, không loop/không về Idle
-                        break;
-                    }
-                    if (Loops(_animState))
-                    {
-                        _frameIndex = 0;
-                    }
-                    else
-                    {
-                        _animState = AnimState.Idle;
-                        frames = _idleFrames;
-                        if (frames == null || frames.Length == 0) return;
-                        _frameIndex = 0;
-                    }
-                }
-            }
-            _sprite.sprite = frames[_frameIndex];
         }
     }
 }
