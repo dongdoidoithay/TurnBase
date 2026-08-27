@@ -397,6 +397,38 @@ thanh máu mỏng chữ nhật + số nhỏ xám mờ cạnh bên, khó đọc �
 - [x] Verify Play mode thật (zoom crop riêng Enemies panel): portrait quái + tên + thanh viên thuốc
       "146/146" rõ ràng dễ đọc, đồng bộ hoàn toàn phong cách Hero panel. 668/668 test xanh.
 
+## §3.13. Icon thật cho ô item trong INV. — "thêm avatar thật cho item slot trong INV."
+
+`ItemSlotView` từ trước tới giờ CHƯA BAO GIỜ có icon — chỉ hiện tên chữ đầy đủ ("Smoke Bomb"...)
+không vừa ô 30px vuông + số lượng, không có hình ảnh nào (đây là lý do cột INV. luôn trông trống
+trơn ở mọi screenshot trước đó, kể cả khi có dữ liệu item thật — không phải bug hiển thị, chỉ là
+chưa từng xây icon). Phát hiện có sẵn art thật ở `Assets/_Project/Art/UI/Icons/Items/prop_*/` (6
+loại khớp đúng 6 `ItemType`: potion_red/potion_blue/antidote/smoke_bomb/feather/elemental_bomb) —
+CHƯA từng được script nào tham chiếu tới (`grep` toàn bộ `Assets/_Project/Scripts/` ra 0 kết quả) —
+và nằm ngoài `Resources/` nên `Resources.Load` không thấy được.
+
+- [x] Copy 6 icon (`_00.png`, frame mặc định — `_01`/`_02` là frame "vỡ/tan" phụ, không dùng) sang
+      `Assets/_Project/Resources/Art/UI/Icons/Items/icon_item_{key}.png`, viết `.meta` MỚI hoàn
+      toàn (Single sprite sạch, PPU 32, Point filter) thay vì copy nguyên `.meta` gốc.
+- [x] **Bug thật phát hiện qua screenshot, tự sửa trước khi báo xong:** 3/6 icon gốc
+      (`potion_red`/`potion_blue`/`feather`) hiện ra 2 vật thể CHỒNG LẤN nhau trong cùng 1 ô — vì
+      `.meta` GỐC của 3 file này thật ra khai `spriteSheet` với 2 sub-rect khác nhau (dấu hiệu
+      pipeline cũ định dùng chế độ Multiple rồi bỏ dở, để lại metadata thừa) — nghĩa là bản thân
+      file PNG chứa 2 hoạ tiết đóng gói chung 1 canvas 32×32 (VD `prop_potion_red_00.png` có 1 chai
+      ở góc trên (rect `x12,y17,w8,h12`) VÀ 1 mảnh khác ở góc dưới (rect `x12,y0,w8,h11`)), copy cả
+      canvas như 3 icon còn lại (chỉ có 1 sub-rect, sạch) sẽ lộ CẢ HAI. Sửa: đọc đúng toạ độ sub-rect
+      `_0` từ `.meta` gốc (quy đổi Unity Y-gốc-dưới → PIL Y-gốc-trên), crop chính xác, dán lại giữa
+      canvas 32×32 mới sạch cho 3 file này.
+- [x] `ItemSlotView.cs` — thêm `_icon` (Image, chiếm phần lớn ô, giống cách `SkillSlotView` đã làm),
+      `IconKeyFor(ItemType)`/`LoadIcon(key)` (cache), gọi trong `Bind()`. Tên đầy đủ lùi thành badge
+      viết tắt 2 chữ cái dải trên (`ShortName()`, cùng kiểu SkillSlotView) thay vì chiếm hết ô như
+      trước — nhường chỗ cho icon. `SetState()` thêm tint xám mờ cho icon khi hết hàng/không dùng
+      được (trước đây chỉ tint border+label).
+- [x] Verify Play mode thật: queue trận có `itemLoadout` đủ 5 loại (mặc định `QueueBattle` không
+      gán item nào — phải truyền tay để có dữ liệu mà xem), zoom crop cột INV. — cả 5 ô hiện đúng 1
+      icon sạch/không chồng lấn + badge viết tắt (PO/ET/AN/SB/RF) + số lượng (x3/x2/x1/x1/x1).
+      668/668 test xanh.
+
 ## §4. Ghi chú môi trường quan trọng (áp dụng cho MỌI việc UI sau này)
 
 - `manage_camera screenshot` (kể cả không truyền `camera`) LUÔN tự chọn 1 Camera cụ thể để render —

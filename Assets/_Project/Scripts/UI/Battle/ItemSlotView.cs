@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Game.Data;
 using Game.Meta.Items;
 using TMPro;
@@ -22,6 +23,7 @@ namespace Game.UI.Battle
         private static Sprite _slotSprite;
 
         private Image _border;
+        private Image _icon;
         private TextMeshProUGUI _label;
         private TextMeshProUGUI _count;
 
@@ -53,12 +55,27 @@ namespace Game.UI.Battle
             _border.type = Image.Type.Sliced;
             _border.color = BORDER_NORMAL;
 
-            _label = NewText("Label", rt, TextAlignmentOptions.Center);
-            _label.rectTransform.anchorMin = new Vector2(0.06f, 0.28f);
-            _label.rectTransform.anchorMax = new Vector2(0.94f, 0.92f);
+            // task "thêm avatar thật cho item slot trong INV." — icon THẬT chiếm phần lớn ô, thay
+            // tên đầy đủ ("Smoke Bomb"...) không đọc nổi ở ô 30px vuông. Tên rút gọn lùi thành
+            // badge nhỏ dải trên, cùng cách SkillSlotView đã làm cho hàng skill.
+            var iconGo = new GameObject("Icon", typeof(RectTransform));
+            iconGo.transform.SetParent(rt, false);
+            var iconRt = (RectTransform)iconGo.transform;
+            iconRt.anchorMin = new Vector2(0.14f, 0.16f);
+            iconRt.anchorMax = new Vector2(0.86f, 0.82f);
+            iconRt.offsetMin = iconRt.offsetMax = Vector2.zero;
+            _icon = iconGo.AddComponent<Image>();
+            _icon.preserveAspect = true;
+            _icon.raycastTarget = false;
+            _icon.enabled = false;
+
+            _label = NewText("Label", rt, TextAlignmentOptions.Top);
+            _label.rectTransform.anchorMin = new Vector2(0f, 0.82f);
+            _label.rectTransform.anchorMax = new Vector2(1f, 1f);
             _label.rectTransform.offsetMin = _label.rectTransform.offsetMax = Vector2.zero;
-            _label.fontSize = rt.sizeDelta.x * 0.18f;
-            _label.enableWordWrapping = true;
+            _label.fontSize = rt.sizeDelta.x * 0.16f;
+            _label.enableWordWrapping = false;
+            _label.overflowMode = TextOverflowModes.Overflow;
 
             _count = NewText("Count", rt, TextAlignmentOptions.BottomRight);
             _count.rectTransform.anchorMin = new Vector2(0.4f, 0.02f);
@@ -89,14 +106,59 @@ namespace Game.UI.Battle
             {
                 _label.text = "";
                 _count.text = "";
+                _icon.enabled = false;
                 SetState(false, false);
                 return;
             }
 
             var def = ItemCatalog.Get(type.Value);
-            _label.text = def.Name;
+            _label.text = ShortName(def.Name);
             _count.text = remaining > 0 ? $"x{remaining}" : "";
+
+            var sprite = LoadIcon(IconKeyFor(type.Value));
+            _icon.sprite = sprite;
+            _icon.enabled = sprite != null;
+
             SetState(remaining > 0, isSelected);
+        }
+
+        // =====================================================================
+        // Icon thật cho từng loại item — task "thêm avatar thật cho item slot trong INV."
+        // (trước đây chỉ có tên chữ, không icon nào). Art có sẵn từ trước ở
+        // Assets/_Project/Art/UI/Icons/Items/prop_*/*_00.png (KHÔNG ở Resources/, không
+        // Resources.Load được trực tiếp) — copy 1 bản sang Resources/ với path/tên mới
+        // `icon_item_{key}`, viết lại `.meta` sạch (spriteMode Single đúng nghĩa — file gốc có
+        // `spriteSheet` 2 sub-rect thừa từ pipeline cũ, có thể khiến Resources.Load trả về đúng 1
+        // mảnh vỡ thay vì icon đầy đủ). Dùng frame `_00` của mỗi loại — `_01`/`_02` là frame
+        // "vỡ/tan" phụ, không phải icon tĩnh mặc định.
+        // =====================================================================
+
+        private static readonly Dictionary<string, Sprite> _iconCache = new();
+
+        private static string IconKeyFor(ItemType type) => type switch
+        {
+            ItemType.Potion        => "potion",
+            ItemType.Ether         => "ether",
+            ItemType.Antidote      => "antidote",
+            ItemType.SmokeBomb     => "smoke_bomb",
+            ItemType.ReviveFeather => "revive_feather",
+            ItemType.ElementalBomb => "elemental_bomb",
+            _ => "potion"
+        };
+
+        private static Sprite LoadIcon(string key)
+        {
+            if (_iconCache.TryGetValue(key, out var cached)) return cached;
+            var sprite = Resources.Load<Sprite>($"Art/UI/Icons/Items/icon_item_{key}");
+            _iconCache[key] = sprite;
+            return sprite;
+        }
+
+        private static string ShortName(string name)
+        {
+            var parts = name.Split(' ');
+            return parts.Length >= 2 ? (parts[0][..1] + parts[1][..1]).ToUpperInvariant()
+                                      : (name.Length >= 2 ? name[..2].ToUpperInvariant() : name.ToUpperInvariant());
         }
 
         private void SetState(bool available, bool selected)
@@ -104,6 +166,7 @@ namespace Game.UI.Battle
             Interactable = available;
             _border.color = selected ? BORDER_SELECTED : available ? BORDER_NORMAL : BORDER_DISABLED;
             _label.color = available ? TEXT_NORMAL : TEXT_DISABLED;
+            _icon.color = available ? Color.white : new Color(0.5f, 0.5f, 0.5f, 0.6f);
             transform.localScale = selected ? Vector3.one * 1.08f : Vector3.one;
         }
 
