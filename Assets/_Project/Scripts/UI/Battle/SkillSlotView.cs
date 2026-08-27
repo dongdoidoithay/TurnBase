@@ -107,10 +107,13 @@ namespace Game.UI.Battle
             _label.rectTransform.anchorMax = new Vector2(1, 1f);
             _label.rectTransform.offsetMin = _label.rectTransform.offsetMax = Vector2.zero;
 
-            // Badge chi phí SP ở góc dưới-trái
-            _cost = NewText("Cost", rt, size * 0.2f, TextAlignmentOptions.BottomLeft);
-            _cost.rectTransform.anchorMin = new Vector2(0.08f, 0.02f);
-            _cost.rectTransform.anchorMax = new Vector2(0.6f, 0.18f);
+            // Badge chi phí SP — góc trên-trái, đối xứng Label (trên-phải-ish/center). Trước đây
+            // đặt ở góc dưới-trái (anchor y 0.02-0.18) đè lên đúng dải tua rua (fringe) cong ở đáy
+            // card_gold, số bị cắt/khó đọc — task "UI Screen Battle chưa giống sample" phát hiện.
+            // Đưa lên góc trên, dưới vùng Label, tránh hẳn vùng fringe.
+            _cost = NewText("Cost", rt, size * 0.18f, TextAlignmentOptions.TopLeft);
+            _cost.rectTransform.anchorMin = new Vector2(0.06f, 0.74f);
+            _cost.rectTransform.anchorMax = new Vector2(0.5f, 0.90f);
             _cost.rectTransform.offsetMin = _cost.rectTransform.offsetMax = Vector2.zero;
 
             // Số cooldown — badge tròn nhỏ giữa ô (trước đây chữ to phủ HẾT ô, đè lên icon trông
@@ -136,10 +139,12 @@ namespace Game.UI.Battle
             _cooldown.color = TEXT_NORMAL;
             badgeGo.SetActive(false);
 
-            // Glyph nguyên tố cho chế độ mù màu — góc dưới-phải, đối xứng Cost (dưới-trái).
-            _elementGlyph = NewText("ElementGlyph", rt, size * 0.2f, TextAlignmentOptions.BottomRight);
-            _elementGlyph.rectTransform.anchorMin = new Vector2(0.4f, 0.02f);
-            _elementGlyph.rectTransform.anchorMax = new Vector2(0.92f, 0.18f);
+            // Glyph nguyên tố cho chế độ mù màu — góc trên-phải, đối xứng Cost (trên-trái). Cùng
+            // sửa như Cost ở trên: vùng dưới (anchor y 0.02-0.18) đè lên tua rua fringe của
+            // card_gold, đưa lên góc trên để tránh hẳn.
+            _elementGlyph = NewText("ElementGlyph", rt, size * 0.2f, TextAlignmentOptions.TopRight);
+            _elementGlyph.rectTransform.anchorMin = new Vector2(0.5f, 0.74f);
+            _elementGlyph.rectTransform.anchorMax = new Vector2(0.94f, 0.90f);
             _elementGlyph.rectTransform.offsetMin = _elementGlyph.rectTransform.offsetMax = Vector2.zero;
             _elementGlyph.gameObject.SetActive(false);
         }

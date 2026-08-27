@@ -27,9 +27,11 @@ namespace Game.UI.Battle
     public sealed class BattleHudScreen : MonoBehaviour
     {
         private const int GRID_COLS = 5;
-        // task-consumable-items.md — hàng 2 (ITEM) nay đã có hệ thống đứng sau.
-        // task-tactic-row.md — hàng 3 (TACTIC): Guard / ESC / SWAP / FOCUS.
-        private const int GRID_ROWS = 3;
+        // task-tactic-row.md — hàng 2 (TACTIC): Guard / ESC / SWAP / FOCUS / ANALYZE.
+        // Item tiêu hao (task-consumable-items.md) đã dời sang BuildItemColumn() (cột dọc rìa
+        // trái, xem task "UI Screen Battle chưa giống sample" đợt 2) — SkillGrid giờ chỉ còn
+        // 2 hàng (skill + tactic), không phải 3.
+        private const int GRID_ROWS = 2;
         private const int MAX_ENEMY_ROWS = 5;
         private const int MAX_METER_ROWS = 5;
 
@@ -72,6 +74,7 @@ namespace Game.UI.Battle
         private TextMeshProUGUI _analyzeName, _analyzeHpSp, _analyzeStats, _analyzeElem;
 
         private TextMeshProUGUI _heroName, _heroStats, _zoneLabel, _roundLabel, _heroInitial;
+        private TextMeshProUGUI _hpValueText, _spValueText;
         private Image _hpFill, _spFill, _ultFill, _heroAvatarRing, _heroPortrait;
         private static readonly Dictionary<string, Sprite> _portraitCache = new();
         private string _lastPortraitDefId;
@@ -156,6 +159,7 @@ namespace Game.UI.Battle
 
             BuildHeroPanel();
             BuildEnemyPanel();
+            BuildItemColumn();
             BuildDamageMeterPanel();
             BuildAnalyzePanel();
             BuildTurnOrderBar();
@@ -168,53 +172,60 @@ namespace Game.UI.Battle
 
         private void BuildHeroPanel()
         {
+            // task "UI Screen Battle chưa giống sample" (redesign đợt 2, theo
+            // _Reference/Art_Sample/Screen_combat.jpg): portrait vuông lớn + bảng tên riêng bên
+            // dưới (thay avatar tròn nhỏ cạnh chữ), HP/SP dạng thanh "viên thuốc" có số hiện NGAY
+            // TRÊN thanh (thay thanh mỏng + số gộp chung vào khối stats bên dưới) — panel cao hơn
+            // (158→190) để đủ chỗ cho bố cục mới.
             var panel = Panel("HeroPanel", new Vector2(0, 1), new Vector2(0, 1),
-                              new Vector2(12, -12), new Vector2(248, 158), HERO_ACCENT);
+                              new Vector2(12, -12), new Vector2(248, 190), HERO_ACCENT);
 
             // task-phase-5-gaps.md Phần E — pilot LayoutProfileSwitcher trên HUD trận: HeroPanel
             // neo góc trên-trái độc lập với mọi panel khác (không cascade), an toàn để thử co giãn.
-            // Landscape = chụp lại đúng số liệu vừa gán ở trên (canvas 960×540 vốn thiết kế cho
-            // landscape — không đổi hành vi hiện có); Portrait = thu hẹp width (màn dọc thật ít bề
-            // ngang hơn hẳn khung tham chiếu 960 khi CanvasScaler match=0.5) — số liệu tự thiết kế
-            // cho pilot, không phải bản responsive Battle HUD cuối cùng.
             var heroLandscape = LayoutProfile.CaptureFrom(panel, "HeroPanel_Landscape");
             var heroPortrait = heroLandscape;
             heroPortrait.Name = "HeroPanel_Portrait";
-            heroPortrait.SizeDelta = new Vector2(200, 158);
+            heroPortrait.SizeDelta = new Vector2(200, 190);
             panel.gameObject.AddComponent<LayoutProfileSwitcher>()
                  .SetProfiles(panel, heroPortrait, heroLandscape);
 
-            const float avatarSize = 52f;
-            BuildAvatar(panel, new Vector2(10, -10), avatarSize, HERO_ACCENT,
+            const float portraitSize = 64f;
+            BuildSquarePortrait(panel, new Vector2(10, -10), portraitSize,
                        out _heroAvatarRing, out _heroInitial, out _heroPortrait);
 
-            float textLeft = 10 + avatarSize + 8;
-            float textWidth = 248 - textLeft - 10;
-
-            _heroName = Label(panel, "NAME", 16, TextAlignmentOptions.TopLeft,
-                              new Vector2(textLeft, -10), new Vector2(textWidth, 22));
-            // Tên hero + "Lv10" ghép 1 dòng dễ dài hơn bề rộng cột (đã bị avatar tròn ăn bớt) —
-            // không co chữ thì nó tràn xuống đè lên thanh HP bên dưới. Co chữ tự động thay vì wrap.
+            _heroName = Label(panel, "NAME", 11, TextAlignmentOptions.Center,
+                              new Vector2(10, -10 - portraitSize - 2), new Vector2(portraitSize, 16));
             _heroName.enableAutoSizing = true;
-            _heroName.fontSizeMin = 9;
-            _heroName.fontSizeMax = 16;
+            _heroName.fontSizeMin = 7;
+            _heroName.fontSizeMax = 11;
             _heroName.enableWordWrapping = false;
             _heroName.overflowMode = TextOverflowModes.Ellipsis;
 
-            BarLabel(panel, "HP", new Vector2(textLeft, -34), textWidth);
-            _hpFill = Bar(panel, new Vector2(textLeft, -34), new Vector2(textWidth, 13), HERO_ACCENT);
+            float textLeft = 10 + portraitSize + 10;
+            float textWidth = 248 - textLeft - 10;
 
-            BarLabel(panel, "SP", new Vector2(textLeft, -52), textWidth);
-            _spFill = Bar(panel, new Vector2(textLeft, -52), new Vector2(textWidth, 13), SP_COLOR);
+            BarLabel(panel, "HP", new Vector2(textLeft, -2), textWidth);
+            _hpFill = Bar(panel, new Vector2(textLeft, -16), new Vector2(textWidth, 20), HERO_ACCENT,
+                         out _hpValueText);
+
+            BarLabel(panel, "SP", new Vector2(textLeft, -40), textWidth);
+            _spFill = Bar(panel, new Vector2(textLeft, -54), new Vector2(textWidth, 20), SP_COLOR,
+                         out _spValueText);
+
+            // Điểm bắt đầu khối bên dưới = dưới CẢ portrait+bảng tên LẪN 2 thanh HP/SP (2 cột
+            // cao thấp khác nhau — lấy cạnh dưới thấp hơn để không đè lên bên nào).
+            float belowPortrait = -10 - portraitSize - 2 - 16 - 6;
+            float belowBars = -54 - 20 - 6;
+            float statsY = Mathf.Min(belowPortrait, belowBars);
 
             _heroStats = Label(panel, "", 12, TextAlignmentOptions.TopLeft,
-                               new Vector2(10, -68), new Vector2(228, 46));
+                               new Vector2(10, statsY), new Vector2(228, 40));
 
-            BarLabel(panel, "ULT", new Vector2(10, -118));
-            _ultFill = Bar(panel, new Vector2(40, -118), new Vector2(198, 9), ULT_COLOR);
+            BarLabel(panel, "ULT", new Vector2(10, statsY - 46));
+            _ultFill = Bar(panel, new Vector2(40, statsY - 46), new Vector2(198, 14), ULT_COLOR);
 
             _zoneLabel = Label(panel, "MEADOW [1/3]", 12, TextAlignmentOptions.BottomLeft,
-                               new Vector2(10, -138), new Vector2(228, 18));
+                               new Vector2(10, statsY - 66), new Vector2(228, 18));
             _zoneLabel.color = GRID_ACCENT;
         }
 
@@ -283,6 +294,40 @@ namespace Game.UI.Battle
                 status.color = GRID_ACCENT;
 
                 _enemyRows.Add(new EnemyRow(row, name, hpFill, hpText, status));
+            }
+        }
+
+        // ---------- Item column (trái-giữa) — cột dọc kiểu "INV." theo Art_Sample ----------
+        //
+        // task "UI Screen Battle chưa giống sample" (redesign đợt 2) — trước đây 5 ô item nằm
+        // NGANG dưới hàng thẻ skill (hàng 1 của SkillGrid). Ảnh mẫu có 1 cột item DỌC riêng ở
+        // rìa trái màn hình ("INV."), tách khỏi cụm thẻ bài — dời sang đây, dữ liệu/logic
+        // (RefreshItemSlots, HandleItemSlotClicked) giữ nguyên hoàn toàn, chỉ đổi vị trí dựng.
+        // Nằm gọn trong khe hở giữa đáy HeroPanel (bottom ≈ 202 từ đỉnh canvas 540) và đỉnh
+        // DamageMeterPanel (top ≈ 408 từ đỉnh) — cell/gap chọn nhỏ (30/3) để vừa khít, không đè.
+
+        private void BuildItemColumn()
+        {
+            const float cell = 30f, gap = 3f;
+            float h = 18 + GRID_COLS * cell + (GRID_COLS - 1) * gap + 16;
+
+            var panel = Panel("ItemColumn", new Vector2(0, 1), new Vector2(0, 1),
+                              new Vector2(12, -210), new Vector2(cell + 16, h), GRID_ACCENT);
+
+            var title = Label(panel, "INV.", 10, TextAlignmentOptions.TopLeft,
+                              new Vector2(8, -6), new Vector2(cell, 14));
+            title.color = GRID_ACCENT;
+            title.fontStyle = FontStyles.Bold;
+
+            for (int i = 0; i < GRID_COLS; i++)
+            {
+                var slot = ItemSlotView.Create(panel, i, cell);
+                var rt = (RectTransform)slot.transform;
+                rt.anchorMin = rt.anchorMax = new Vector2(0, 1);
+                rt.pivot = new Vector2(0, 1);
+                rt.anchoredPosition = new Vector2(8, -24 - i * (cell + gap));
+                slot.OnClicked += HandleItemSlotClicked;
+                _itemSlots.Add(slot);
             }
         }
 
@@ -448,28 +493,20 @@ namespace Game.UI.Battle
                 _slots.Add(slot);
             }
 
-            // Hàng 1: vật phẩm tiêu hao (task-consumable-items.md) — tối đa 5 loại, khớp
-            // ĐÚNG GRID_COLS, không cần tính toán kích thước riêng. Dịch xuống thêm extraH vì
-            // hàng 0 giờ cao hơn (thẻ bài).
-            for (int c = 0; c < GRID_COLS; c++)
-            {
-                var slot = ItemSlotView.Create(panel, c, cell);
-                var rt = (RectTransform)slot.transform;
-                rt.anchorMin = rt.anchorMax = new Vector2(0, 1);
-                rt.pivot = new Vector2(0, 1);
-                rt.anchoredPosition = new Vector2(8 + c * (cell + gap), -8 - extraH - (cell + gap));
-                slot.OnClicked += HandleItemSlotClicked;
-                _itemSlots.Add(slot);
-            }
-
-            // Hàng 2: tactic (task-tactic-row.md) — Guard / ESC / SWAP / FOCUS
+            // Hàng 1: tactic (task-tactic-row.md) — Guard / ESC / SWAP / FOCUS / ANALYZE.
+            // Item tiêu hao (task-consumable-items.md) KHÔNG còn ở đây — đã dời sang
+            // BuildItemColumn() (cột dọc rìa trái, xem task "UI Screen Battle chưa giống
+            // sample" redesign đợt 2) để khớp bố cục Art_Sample; logic Bind/RefreshItemSlots/
+            // HandleItemSlotClicked giữ nguyên hoàn toàn, chỉ đổi nơi dựng UI.
             BuildTacticRow(panel, cell, gap, extraH);
         }
 
         /// <summary>task-tactic-row.md — 4 nút tactic + task-analyze-tactic.md — nút ANALYZE (col 4).</summary>
         private void BuildTacticRow(RectTransform panel, float cell, float gap, float extraH = 0f)
         {
-            float row2Y = -8 - extraH - 2 * (cell + gap);
+            // Chỉ còn 1 hàng lùi (skill) trước tactic — item đã dời sang BuildItemColumn(),
+            // không còn hàng item chen giữa như trước (trước đây nhân 2, xem git blame).
+            float row2Y = -8 - extraH - (cell + gap);
             var labels = new[] { "GUARD", "ESC", "SWAP", "FOCUS", "ANALYZE" };
             var colors = new[] {
                 new Color(0.2f, 0.8f, 0.7f),   // Guard — cyan
@@ -664,7 +701,11 @@ namespace Game.UI.Battle
                 if (actor == null) return;
             }
 
-            _heroName.text = $"{DisplayName(actor).ToUpperInvariant()}  Lv{actor.Level}";
+            // task "UI Screen Battle chưa giống sample" đợt 2 — bảng tên giờ nằm dưới portrait
+            // VUÔNG hẹp (64px) thay vì dòng chữ rộng cạnh avatar tròn cũ; bỏ "Lv{n}" khỏi đây
+            // (trước đây ghép chung 1 dòng) vì tên+Lv thường dài hơn 64px, luôn bị "..." cắt —
+            // Lv vẫn đọc được qua _heroStats/tooltip khác, không mất thông tin, chỉ đổi chỗ hiện.
+            _heroName.text = DisplayName(actor).ToUpperInvariant();
             var accent = ElementColor(actor.Element);
             _heroAvatarRing.color = accent;
 
@@ -681,13 +722,16 @@ namespace Game.UI.Battle
             float hpPct = actor.MaxHp > 0 ? (float)actor.Hp / actor.MaxHp : 0f;
             SetFill(_hpFill, actor.Hp, actor.MaxHp);
             _hpFill.color = HpColor(hpPct);
+            _hpValueText.text = $"{actor.Hp}/{actor.MaxHp}";
             SetFill(_spFill, actor.Sp, actor.MaxSp);
+            _spValueText.text = $"{actor.Sp}/{actor.MaxSp}";
             SetFill(_ultFill, _sim.State.UltimateGauge, BattleState.ULTIMATE_MAX);
 
+            // task "UI Screen Battle chưa giống sample" đợt 2 — HP/SP giờ hiện NGAY TRÊN thanh
+            // viên thuốc (_hpValueText/_spValueText ở trên) nên bỏ khỏi khối stats này, tránh lặp.
             var s = actor.Stats;
             _heroStats.text =
-                $"HP {actor.Hp}/{actor.MaxHp}   SP {actor.Sp}/{actor.MaxSp}\n" +
-                $"ATK {s.AtkPhys:0}  DEF {s.Def:0}  SPD {s.Spd:0}\n" +
+                $"Lv{actor.Level}  ATK {s.AtkPhys:0}  DEF {s.Def:0}  SPD {s.Spd:0}\n" +
                 $"CRIT {s.Crit * 100:0}%  {actor.Element}  {StatusSummary(actor)}";
         }
 
@@ -909,6 +953,27 @@ namespace Game.UI.Battle
             return _healthBarFrameSprite;
         }
 
+        private static Sprite _pillFrameSprite;
+
+        /// <summary>task "UI Screen Battle chưa giống sample" đợt 2 — thanh HP/SP hero dạng
+        /// "viên thuốc" 2 đầu bo tròn hoàn toàn (bar_pill_frame.png, vẽ tay qua draw_pill_bar.py),
+        /// khác healthbar_hp_frame.png (chữ nhật góc vuông) dùng cho ULT/enemy row.</summary>
+        private static Sprite PillFrameSprite()
+        {
+            if (_pillFrameSprite == null)
+                _pillFrameSprite = Resources.Load<Sprite>("Art/UI/Chrome/bar_pill_frame");
+            return _pillFrameSprite;
+        }
+
+        private static Sprite _pillFillSprite;
+
+        private static Sprite PillFillSprite()
+        {
+            if (_pillFillSprite == null)
+                _pillFillSprite = Resources.Load<Sprite>("Art/UI/Chrome/bar_pill_fill");
+            return _pillFillSprite;
+        }
+
         private static Sprite _circleSprite;
 
         private static Sprite CircleSprite()
@@ -977,48 +1042,64 @@ namespace Game.UI.Battle
             return rt;
         }
 
-        /// <summary>Avatar tròn: viền màu nguyên tố + ảnh nhân vật thật (crop tròn qua Mask),
-        /// chữ cái chỉ còn là fallback khi chưa nạp được sprite — trước đây LUÔN hiện chữ cái
-        /// dù đã có sẵn sprite battle của hero, không có icon nhân vật nào thật sự.</summary>
-        private static void BuildAvatar(RectTransform parent, Vector2 pos, float size, Color accent,
-                                        out Image ring, out TextMeshProUGUI initial, out Image portrait)
+        /// <summary>Portrait VUÔNG khung vàng (panel_gold, đồng bộ mọi chrome khác) + ảnh nhân vật
+        /// thật crop qua Mask, chữ cái là fallback khi chưa nạp được sprite — thay avatar tròn nhỏ
+        /// trước đây. task "UI Screen Battle chưa giống sample" đợt 2: ảnh mẫu dùng portrait vuông
+        /// lớn làm điểm nhấn, không phải viền tròn nhỏ cạnh dòng chữ. Nguyên tố giờ thể hiện qua 1
+        /// chấm tròn nhỏ góc dưới-phải khung (accentDot) thay vì cả viền — viền chính luôn vàng
+        /// đồng bộ panel_gold như mọi chrome khác trong HUD.</summary>
+        private static void BuildSquarePortrait(RectTransform parent, Vector2 pos, float size,
+                                                 out Image accentDot, out TextMeshProUGUI initial,
+                                                 out Image portrait)
         {
-            var ringGo = new GameObject("AvatarRing", typeof(RectTransform));
-            ringGo.transform.SetParent(parent, false);
-            var rrt = (RectTransform)ringGo.transform;
-            rrt.anchorMin = rrt.anchorMax = new Vector2(0, 1);
-            rrt.pivot = new Vector2(0, 1);
-            rrt.anchoredPosition = pos;
-            rrt.sizeDelta = new Vector2(size, size);
-            ring = ringGo.AddComponent<Image>();
-            ring.sprite = CircleSprite();
-            ring.color = accent;
-            ring.raycastTarget = false;
+            var frameGo = new GameObject("PortraitFrame", typeof(RectTransform));
+            frameGo.transform.SetParent(parent, false);
+            var frt = (RectTransform)frameGo.transform;
+            frt.anchorMin = frt.anchorMax = new Vector2(0, 1);
+            frt.pivot = new Vector2(0, 1);
+            frt.anchoredPosition = pos;
+            frt.sizeDelta = new Vector2(size, size);
+            var frameImg = frameGo.AddComponent<Image>();
+            frameImg.sprite = BronzeFrameSprite();
+            frameImg.type = Image.Type.Sliced;
+            frameImg.color = Color.white;
+            frameImg.raycastTarget = false;
 
-            var innerGo = new GameObject("AvatarFill", typeof(RectTransform));
-            innerGo.transform.SetParent(rrt, false);
-            var irt = (RectTransform)innerGo.transform;
-            irt.anchorMin = Vector2.zero; irt.anchorMax = Vector2.one;
-            irt.offsetMin = new Vector2(3, 3); irt.offsetMax = new Vector2(-3, -3);
-            var inner = innerGo.AddComponent<Image>();
-            inner.sprite = CircleSprite();
-            inner.color = new Color(0.169f, 0.106f, 0.180f, 1f);
-            inner.raycastTarget = false;
-            var mask = innerGo.AddComponent<Mask>();
+            var clipGo = new GameObject("Clip", typeof(RectTransform));
+            clipGo.transform.SetParent(frt, false);
+            var crt = (RectTransform)clipGo.transform;
+            crt.anchorMin = Vector2.zero; crt.anchorMax = Vector2.one;
+            crt.offsetMin = new Vector2(6, 6); crt.offsetMax = new Vector2(-6, -6);
+            var clipBg = clipGo.AddComponent<Image>();
+            clipBg.color = new Color(0.169f, 0.106f, 0.180f, 1f);
+            clipBg.raycastTarget = false;
+            var mask = clipGo.AddComponent<Mask>();
             mask.showMaskGraphic = true;
 
             var portraitGo = new GameObject("Portrait", typeof(RectTransform));
-            portraitGo.transform.SetParent(irt, false);
+            portraitGo.transform.SetParent(crt, false);
             var prt = (RectTransform)portraitGo.transform;
             prt.anchorMin = Vector2.zero; prt.anchorMax = Vector2.one;
-            prt.offsetMin = new Vector2(-4, -6); prt.offsetMax = new Vector2(4, 6);
+            prt.offsetMin = Vector2.zero; prt.offsetMax = Vector2.zero;
             portrait = portraitGo.AddComponent<Image>();
             portrait.preserveAspect = true;
             portrait.raycastTarget = false;
             portrait.enabled = false;
 
-            initial = Label(irt, "?", size * 0.4f, TextAlignmentOptions.Center, Vector2.zero, new Vector2(size, size));
+            initial = Label(crt, "?", size * 0.4f, TextAlignmentOptions.Center,
+                            Vector2.zero, new Vector2(size - 12, size - 12));
             initial.raycastTarget = false;
+
+            var dotGo = new GameObject("ElementDot", typeof(RectTransform));
+            dotGo.transform.SetParent(frt, false);
+            var drt = (RectTransform)dotGo.transform;
+            drt.anchorMin = drt.anchorMax = new Vector2(1, 0);
+            drt.pivot = new Vector2(1, 0);
+            drt.anchoredPosition = new Vector2(-3, 3);
+            drt.sizeDelta = new Vector2(14, 14);
+            accentDot = dotGo.AddComponent<Image>();
+            accentDot.sprite = CircleSprite();
+            accentDot.raycastTarget = false;
         }
 
         /// <summary>Nạp sprite battle sẵn có của hero làm avatar — SpriteFolder trùng DefId
@@ -1088,6 +1169,47 @@ namespace Game.UI.Battle
             fimg.type = Image.Type.Filled;
             fimg.fillMethod = Image.FillMethod.Horizontal;
             fimg.raycastTarget = false;
+            return fimg;
+        }
+
+        /// <summary>Thanh "viên thuốc" (bar_pill_*, 2 đầu bo tròn) có số hiện NGAY TRÊN thanh —
+        /// khớp _Reference/Art_Sample/Screen_combat.jpg (task "UI Screen Battle chưa giống sample"
+        /// đợt 2). Chỉ dùng cho HP/SP hero (bar quan trọng nhất, đáng có số lớn dễ đọc); ULT và
+        /// enemy row vẫn dùng overload cũ (khung chữ nhật, không số nhúng) — 2 chỗ đó không cần.</summary>
+        private static Image Bar(RectTransform parent, Vector2 pos, Vector2 size, Color color,
+                                 out TextMeshProUGUI valueText)
+        {
+            var bg = new GameObject("BarBg", typeof(RectTransform));
+            bg.transform.SetParent(parent, false);
+            var brt = (RectTransform)bg.transform;
+            brt.anchorMin = brt.anchorMax = new Vector2(0, 1);
+            brt.pivot = new Vector2(0, 1);
+            brt.anchoredPosition = pos;
+            brt.sizeDelta = size;
+            var bimg = bg.AddComponent<Image>();
+            bimg.sprite = PillFrameSprite();
+            bimg.type = Image.Type.Sliced;
+            bimg.color = Color.white;
+            bimg.raycastTarget = false;
+
+            var fill = new GameObject("Fill", typeof(RectTransform));
+            fill.transform.SetParent(brt, false);
+            var frt = (RectTransform)fill.transform;
+            frt.anchorMin = new Vector2(0, 0);
+            frt.anchorMax = new Vector2(1, 1);
+            frt.pivot = new Vector2(0, 0.5f);
+            frt.offsetMin = new Vector2(3, 3);
+            frt.offsetMax = new Vector2(-3, -3);
+            var fimg = fill.AddComponent<Image>();
+            fimg.sprite = PillFillSprite();
+            fimg.color = color;
+            fimg.type = Image.Type.Filled;
+            fimg.fillMethod = Image.FillMethod.Horizontal;
+            fimg.raycastTarget = false;
+
+            valueText = Label(brt, "", size.y * 0.55f, TextAlignmentOptions.Center, Vector2.zero, size);
+            valueText.fontStyle = FontStyles.Bold;
+            valueText.color = Color.white;
             return fimg;
         }
 

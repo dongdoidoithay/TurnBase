@@ -262,6 +262,91 @@ Inventory) chưa đụng tới.
     xác nhận qua code (`sprite`/`color` đúng) đây là layout có sẵn từ trước, không phải lỗi mới.
 - [x] `run_tests(mode:"EditMode")` sau toàn bộ đợt này: **668/668 xanh**.
 
+## §3.9. Icon skill thật + sửa vị trí badge SP đè lên fringe — "UI Screen Battle chưa giống sample"
+
+Người dùng phản hồi ngắn gọn sau khi xem lại Battle screen thật: "UI Screen Battle chưa giống
+sample". Vào Play mode thật, ép 1 lượt hero thật xảy ra (`_autoPlay=false` trên cả
+`BattleHudScreen`/`BattleSceneInstaller` qua reflection để dừng lại đúng lúc, không để AI tự chạy
+hết trận trước khi kịp chụp), zoom vào đúng vùng thẻ skill — phát hiện đúng gốc rễ: khung thẻ
+(`card_gold` 9-slice) đã lên màu vàng-mận đồng bộ từ §3.5, nhưng **icon BÊN TRONG khung vẫn là
+glyph trắng phẳng 1 màu** (`Art/UI/Icons/Skills/icon_skill_*.png`, 9 file dùng chung theo
+"archetype" từ `SkillSlotView.IconKeyFor()` — không phải icon riêng từng skill) — chưa từng có art
+thật từ lúc dựng hệ thống, đây chính là phần đã được liệt kê "chưa đụng" ở cuối §3.7 nhưng chưa
+làm. Đồng thời phát hiện thêm 1 bug thật qua zoom: badge số SP cost (`_cost`) đặt ở góc dưới-trái
+(anchor y 0.02–0.18) đè thẳng lên dải tua rua (fringe) cong ở đáy `card_gold` — số bị cắt/lẫn vào
+viền răng cưa, khó đọc.
+
+- [x] `Tools/pixel-art-pipeline/scripts/draw_skill_icons.py` (mới) — vẽ lại cả 9 icon
+      (`slash`/`power_strike`/`magic_bolt`/`heal`/`shield`/`haste`/`cleanse`/`aoe_burst`/`ultimate`)
+      bằng Pillow thuần (không AI/không crop), đúng phong cách phẳng+viền tối 1px đã dùng cho
+      `item_icons.py`/`nav_icons.py` — mỗi icon 1 tông màu riêng từ `Tools/palette.json` để vừa đẹp
+      vừa phân biệt nhanh (thép/thường, cam-đỏ/mạnh, lam/phép, lá/hồi máu, lam-bạc/khiên,
+      vàng/tốc độ, cyan/giải trừ, cam/diện rộng, vàng lớn+hào quang/ULT). Ghi đè trực tiếp lên 9 file
+      PNG cũ tại đúng path cũ (`Assets/_Project/Resources/Art/UI/Icons/Skills/`) — giữ nguyên GUID/
+      `.meta` (Point filter, Tight mesh, PPU 32 đã đúng sẵn từ trước), không cần sửa gì ở
+      `Resources.Load` call.
+- [x] `SkillSlotView.cs` — badge Cost (SP) chuyển từ góc dưới-trái (anchor y 0.02–0.18, đè lên
+      fringe) sang **góc trên-trái** (anchor y 0.74–0.90, dưới vùng Label, đè nhẹ lên góc icon —
+      kiểu "mana cost" quen thuộc trong game thẻ bài, không phải lỗi). `_elementGlyph` (glyph mù màu,
+      cùng lỗi hệt Cost vì đối xứng nhau) sửa tương tự sang góc trên-phải.
+- [x] Verify Play mode thật: zoom crop đúng vùng 5 thẻ skill sau khi ép 1 lượt hero thật — icon màu
+      hiện rõ đúng loại kỹ năng, số cost (8/14/10) nằm gọn góc trên không còn đè lên fringe, badge
+      cooldown tròn vẫn hoạt động bình thường. 668/668 test xanh (không đụng logic Combat, chỉ
+      icon asset + vị trí RectTransform).
+
+**Còn lại sau đợt này (art, không phải chrome, độ ưu tiên thấp hơn — không thuộc "UI"):** nền trận
+đấu vẫn là tile gạch phẳng, không có khung cảnh khí quyển (rừng/hang) như ảnh mẫu; item slot (5 ô
+nâu dưới hàng skill) vẫn trống khi hero test không có item — đây là dữ liệu, không phải bug hiển thị.
+
+## §3.10. Redesign layout đợt 2 — "thiết kế đúng như ví dụ mẫu tôi gửi"
+
+Sau §3.9, người dùng gửi lại đúng ảnh mẫu kèm yêu cầu thẳng: "thiết kế đúng như ví dụ mẫu tôi gửi".
+Trước khi làm, hỏi lại phạm vi qua AskUserQuestion (3 lựa chọn: chỉ nâng cấp phần trực quan nhất /
+redesign toàn bộ layout dùng dữ liệu thật / xây thêm dữ liệu game mới để khớp 100%) — vì ảnh mẫu là
+1 dungeon-crawler khác hẳn gameplay turn-based JRPG của dự án (có Equipment loadout, bộ đếm
+"SWAPS[3/3]", dải "STATS/DAMAGE 4-6" — data không tồn tại trong `CombatUnit`/`BattleState` hiện có).
+**Người dùng chọn "Redesign toàn bộ layout"** — dùng dữ liệu thật sẵn có, KHÔNG bịa hệ thống mới,
+KHÔNG crop ảnh mẫu (đúng [[feedback_no_jpeg_crop_sprites]] — luôn vẽ tay/procedural).
+
+- [x] `Tools/pixel-art-pipeline/scripts/draw_pill_bar.py` (mới) — khung+fill thanh "viên thuốc"
+      (`bar_pill_frame.png`/`bar_pill_fill.png`, 64×24, bán kính 12 = nửa chiều cao → 2 đầu bo tròn
+      hoàn toàn khi 9-slice với border trái/phải = 12) thay khung chữ nhật `healthbar_hp_frame.png`
+      cũ — đúng silhouette thanh HP/SP trong ảnh mẫu.
+- [x] `BattleHudScreen.Bar()` — thêm overload MỚI `Bar(..., out TextMeshProUGUI valueText)` dùng
+      sprite viên thuốc + text "cur/max" hiện NGAY GIỮA thanh (trắng, đậm) — chỉ dùng cho HP/SP hero
+      (2 thanh quan trọng nhất, đáng có số lớn dễ đọc); overload CŨ (không số, khung chữ nhật) vẫn
+      giữ nguyên cho ULT + 5 dòng HP địch (thanh nhỏ 150×7, viên thuốc bo tròn 12px sẽ méo/không
+      còn đọc được ở kích thước đó — cố tình KHÔNG đổi 2 chỗ này).
+- [x] `BuildHeroPanel()` viết lại: portrait TRÒN nhỏ (`BuildAvatar`, đã xoá) → portrait **VUÔNG**
+      64×64 khung `panel_gold` (`BuildSquarePortrait`, mới) + bảng tên riêng ngay dưới portrait —
+      đúng bố cục ảnh mẫu (portrait vuông là điểm nhấn chính, không phải viền tròn nhỏ cạnh chữ).
+      Nguyên tố hero giờ hiện qua 1 chấm tròn nhỏ góc dưới-phải khung portrait (`CircleSprite()` cũ
+      tái dùng, đổi mục đích) thay vì cả viền tròn đổi màu. HP/SP chuyển hẳn sang 2 thanh viên
+      thuốc có số nhúng; `_heroStats` bỏ dòng "HP x/y SP x/y" (đã có trên thanh, tránh lặp), thêm
+      "Lv{n}" vào đầu dòng ATK/DEF/SPD thay cho việc từng ghép vào tên (tên+Lv thường dài hơn bảng
+      tên rộng 64px, luôn bị "..." cắt — xác nhận qua screenshot, sửa bằng cách tách Lv ra khỏi
+      plaque tên). Panel cao 158→190 cho đủ chỗ bố cục mới.
+- [x] `BuildItemColumn()` (mới) — 5 ô item tiêu hao dời từ hàng NGANG dưới thẻ skill (bên trong
+      `SkillGrid`, hàng 1/3 cũ) sang **cột DỌC** riêng ở rìa trái màn hình, có tiêu đề "INV." —
+      đúng cụm "INV." trong ảnh mẫu. Đặt vừa khít khe hở có sẵn giữa đáy `HeroPanel` (mới, cao hơn)
+      và đỉnh `DamageMeterPanel` (cell=30/gap=3 để vừa đúng ~196px khe hở, tính tay từ 2 panel neo
+      góc cố định). Logic Bind/Refresh/click (`RefreshItemSlots`, `HandleItemSlotClicked`) giữ
+      NGUYÊN 100% — chỉ đổi nơi dựng UI, không đổi hành vi/dữ liệu.
+- [x] `SkillGrid` rút từ 3 hàng (skill/item/tactic) xuống **2 hàng** (skill/tactic) sau khi item dời
+      đi — `GRID_ROWS` 3→2, `BuildTacticRow()` bớt 1 hệ số nhân trong công thức `row2Y` (không còn
+      hàng item chen giữa skill và tactic).
+- [x] Verify Play mode thật (ép 1 lượt hero thật như §3.9): screenshot xác nhận cả 3 thay đổi hiển
+      thị đúng — thanh HP/SP viên thuốc có số "753/828"/"86/86" rõ giữa thanh, portrait vuông khung
+      vàng + chấm nguyên tố góc + bảng tên đầy đủ không bị cắt, cột "INV." dọc nằm gọn giữa 2 panel
+      không đè lên bên nào, SkillGrid 2 hàng liền mạch. 668/668 test xanh.
+
+**Cố tình CHƯA làm (đã báo người dùng trước khi bắt tay vào, qua AskUserQuestion):** nền trận đấu
+(khung cảnh khí quyển như ảnh mẫu) — đây là art world-space/scene-authored (Battle.unity), không
+phải HUD code, cần điều tra riêng an toàn hơn (tránh phá render pipeline scene) — CHƯA đụng tới,
+vẫn là tile gạch phẳng cũ. Equipment loadout row / bộ đếm SWAPS[3/3] / dải STATS-DAMAGE range —
+không có dữ liệu tương ứng trong `CombatUnit`/`BattleState`, người dùng đã tự chọn KHÔNG xây thêm hệ
+thống mới cho phần này (chọn nhánh "redesign dùng dữ liệu thật", không chọn nhánh "thêm dữ liệu mới").
+
 ## §4. Ghi chú môi trường quan trọng (áp dụng cho MỌI việc UI sau này)
 
 - `manage_camera screenshot` (kể cả không truyền `camera`) LUÔN tự chọn 1 Camera cụ thể để render —
