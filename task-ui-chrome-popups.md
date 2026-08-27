@@ -376,6 +376,27 @@ Phần duy nhất bị hoãn ở §3.10 (art world-space, không phải HUD code
       kịp chụp, xem thêm ghi chú stale-frame ở §4). 668/668 test xanh (chỉ đổi 1 file PNG, không
       đụng code).
 
+## §3.12. Enemies panel khớp phong cách Hero panel — "sửa tiếp info player và enemies"
+
+Sau §3.11, người dùng tự chụp Game view thật trong Editor của họ (không qua `manage_camera` — xem
+§4 ghi chú "screenshot tool tạm thời không chụp được Overlay" bên dưới) gửi lại, thấy rõ HUD vẫn
+hoạt động tốt (bác bỏ nghi ngờ trước đó là do code), nhưng lộ ra 1 sự lệch tông thật: Hero panel đã
+có portrait vuông + thanh HP/SP viên thuốc từ §3.10, còn Enemies panel vẫn kiểu CŨ (chỉ tên chữ +
+thanh máu mỏng chữ nhật + số nhỏ xám mờ cạnh bên, khó đọc — "9/146" gần như không thấy).
+
+- [x] `EnemyRow` struct — thêm field `Portrait` (Image).
+- [x] `BuildEnemyRows()` — mỗi dòng giờ có: portrait vuông 24×24 (nạp qua `LoadEnemyPortrait()` mới,
+      cùng quy ước `_v1_00` như hero) bên trái, tên+thanh HP viên thuốc CÓ SỐ NHÚNG (dùng lại
+      overload `Bar(..., out valueText)` đã xây cho Hero panel ở §3.10) bên phải, dòng trạng thái
+      (BREAK/status) full-width bên dưới. `rowH` 25→42 để đủ chỗ; `EnemyPanel` cao 158→250.
+- [x] `RefreshEnemyPanel()` — nạp portrait theo `u.DefId` (cache riêng `_enemyPortraitCache`), dim
+      portrait khi unit chết (cùng `DEAD_COLOR` đã dùng cho tên).
+- [x] Tiện thể nhất quán luôn: thanh ULT (Hero panel) đổi từ khung chữ nhật cũ sang khung viên
+      thuốc (không cần số nhúng — ULT là % không có "cur/max" tự nhiên) — trước đó vẫn lạc tông
+      dưới 2 thanh HP/SP đã đổi.
+- [x] Verify Play mode thật (zoom crop riêng Enemies panel): portrait quái + tên + thanh viên thuốc
+      "146/146" rõ ràng dễ đọc, đồng bộ hoàn toàn phong cách Hero panel. 668/668 test xanh.
+
 ## §4. Ghi chú môi trường quan trọng (áp dụng cho MỌI việc UI sau này)
 
 - `manage_camera screenshot` (kể cả không truyền `camera`) LUÔN tự chọn 1 Camera cụ thể để render —
@@ -389,3 +410,16 @@ Phần duy nhất bị hoãn ở §3.10 (art world-space, không phải HUD code
   nhiều lần, không phải bug.
 - `manage_prefabs modify_contents` gọi dồn dập nhiều lệnh liên tiếp trong 1 message thỉnh thoảng gặp
   lỗi tạm thời "does not exist" (đụng độ ghi file) — gọi lại riêng lẻ là qua, không phải lỗi logic.
+- **`manage_camera` screenshot đôi khi tạm thời "quên" cả HUD Overlay dù world (background+unit)
+  vẫn render đúng (2026-08-28):** giữa lúc làm §3.11/§3.12, nhiều lần liên tiếp screenshot chỉ ra
+  đúng cảnh nền+unit, HOÀN TOÀN không có bất kỳ Canvas Overlay nào (HUD/ActionCommandUI/Tutorial),
+  dù `execute_code` xác nhận Canvas vẫn `active=true enabled=true` với đủ children đã dựng. Phát
+  hiện `Screen.width/height` từng tụt xuống mức dị dạng (1612×36 — cửa sổ Game view trong Editor bị
+  thu nhỏ bất thường, khả năng do phiên Editor dùng chung với người dùng thật thao tác), nhưng
+  ngay cả sau khi chỉnh lại kích thước cửa sổ về bình thường (960×600) qua `EditorWindow.position`,
+  Overlay vẫn không lên vài lượt liền — rồi tự hết sau khi thoát/vào lại Play mode + chờ thêm. Người
+  dùng tự chụp Game view thật trong Editor của họ (không qua tool) xác nhận HUD vẫn hiển thị đúng —
+  chứng minh đây là hiện tượng CỦA RIÊNG pipeline chụp ảnh tự động (`manage_camera`), không phải bug
+  render thật. Không có cách sửa triệt để xác định được — nếu gặp lại: kiểm `Screen.width/height`
+  qua `execute_code` trước khi nghi ngờ code, thử lại vài lần, và nếu người dùng đang cùng thao tác
+  Editor thì ưu tiên xin ảnh chụp thật từ họ thay vì cố chụp tự động.

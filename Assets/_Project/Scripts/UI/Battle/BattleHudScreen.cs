@@ -86,14 +86,19 @@ namespace Game.UI.Battle
         {
             public readonly TextMeshProUGUI Name;
             public readonly Image HpFill;
+            /// <summary>task "sửa tiếp info player và enemies" — trước đây là label RIÊNG cạnh
+            /// thanh máu mỏng ("9/146" chữ nhỏ xám mờ, khó đọc); giờ là text NHÚNG NGAY GIỮA
+            /// thanh viên thuốc (giống HP/SP hero), field giữ nguyên tên để đỡ đổi chỗ khác.</summary>
             public readonly TextMeshProUGUI HpText;
             public readonly TextMeshProUGUI StatusText;
+            public readonly Image Portrait;
             public readonly GameObject Root;
 
             public EnemyRow(GameObject root, TextMeshProUGUI name, Image hpFill,
-                             TextMeshProUGUI hpText, TextMeshProUGUI statusText)
+                             TextMeshProUGUI hpText, TextMeshProUGUI statusText, Image portrait)
             {
-                Root = root; Name = name; HpFill = hpFill; HpText = hpText; StatusText = statusText;
+                Root = root; Name = name; HpFill = hpFill; HpText = hpText;
+                StatusText = statusText; Portrait = portrait;
             }
         }
 
@@ -221,8 +226,13 @@ namespace Game.UI.Battle
             _heroStats = Label(panel, "", 12, TextAlignmentOptions.TopLeft,
                                new Vector2(10, statsY), new Vector2(228, 40));
 
+            // task "sửa tiếp info player và enemies" — đổi sang khung viên thuốc cho khớp HP/SP
+            // (trước đây vẫn dùng khung chữ nhật cũ, lạc tông ngay dưới 2 thanh vừa đổi). Không
+            // cần số nhúng (ULT là thang đo %, không có "cur/max" tự nhiên như HP/SP) nên bỏ qua
+            // out param.
             BarLabel(panel, "ULT", new Vector2(10, statsY - 46));
-            _ultFill = Bar(panel, new Vector2(40, statsY - 46), new Vector2(198, 14), ULT_COLOR);
+            _ultFill = Bar(panel, new Vector2(40, statsY - 46), new Vector2(198, 14), ULT_COLOR,
+                          out _);
 
             _zoneLabel = Label(panel, "MEADOW [1/3]", 12, TextAlignmentOptions.BottomLeft,
                                new Vector2(10, statsY - 66), new Vector2(228, 18));
@@ -233,17 +243,17 @@ namespace Game.UI.Battle
 
         private void BuildEnemyPanel()
         {
+            // task "sửa tiếp info player và enemies" — mỗi dòng địch giờ có thêm portrait vuông
+            // nhỏ + thanh máu dạng "viên thuốc" có số nhúng (khớp kiểu Hero panel đã làm ở đợt
+            // redesign trước) thay vì chỉ tên + thanh mỏng + số nhỏ xám mờ cạnh bên — panel cao
+            // hơn hẳn (158→250) để đủ chỗ.
             var panel = Panel("EnemyPanel", new Vector2(1, 1), new Vector2(1, 1),
-                              new Vector2(-12, -12), new Vector2(226, 158), ENEMY_ACCENT);
+                              new Vector2(-12, -12), new Vector2(226, 250), ENEMY_ACCENT);
 
-            // task-ui-vfx-polish.md §7 — cùng kỹ thuật pilot đã có ở HeroPanel: Landscape = chụp
-            // đúng số liệu hiện có (canvas 960×540 vốn thiết kế cho landscape), Portrait = thu hẹp
-            // width ~19% (khớp tỉ lệ HeroPanel 248→200 đã chọn trước) — neo góc phải nên chỉ kéo
-            // cạnh trái vào gần tâm hơn, không bao giờ tạo chồng lấn mới (chỉ giảm diện tích chiếm).
             var enemyLandscape = LayoutProfile.CaptureFrom(panel, "EnemyPanel_Landscape");
             var enemyPortrait = enemyLandscape;
             enemyPortrait.Name = "EnemyPanel_Portrait";
-            enemyPortrait.SizeDelta = new Vector2(182, 158);
+            enemyPortrait.SizeDelta = new Vector2(182, 250);
             panel.gameObject.AddComponent<LayoutProfileSwitcher>()
                  .SetProfiles(panel, enemyPortrait, enemyLandscape);
 
@@ -258,7 +268,7 @@ namespace Game.UI.Battle
             _enemyRowsRoot.anchorMax = new Vector2(1, 1);
             _enemyRowsRoot.pivot = new Vector2(0.5f, 1);
             _enemyRowsRoot.anchoredPosition = new Vector2(0, -26);
-            _enemyRowsRoot.sizeDelta = new Vector2(-16, 128);
+            _enemyRowsRoot.sizeDelta = new Vector2(-16, 210);
         }
 
         private void BuildEnemyRows()
@@ -269,7 +279,8 @@ namespace Game.UI.Battle
             for (int i = 0; i < _sim.State.Units.Count && count < MAX_ENEMY_ROWS; i++)
                 if (_sim.State.Units[i].Side == TeamSide.Enemy) count++;
 
-            const float rowH = 25f;
+            const float rowH = 42f;
+            const float portraitSize = 24f;
             for (int i = 0; i < count; i++)
             {
                 var row = new GameObject($"EnemyRow_{i}", typeof(RectTransform));
@@ -281,19 +292,32 @@ namespace Game.UI.Battle
                 rt.anchoredPosition = new Vector2(0, -i * rowH);
                 rt.sizeDelta = new Vector2(0, rowH - 3);
 
-                var name = Label(rt, "", 11, TextAlignmentOptions.TopLeft,
-                                 new Vector2(0, 0), new Vector2(200, 13));
+                var portraitGo = new GameObject("Portrait", typeof(RectTransform));
+                portraitGo.transform.SetParent(rt, false);
+                var prt = (RectTransform)portraitGo.transform;
+                prt.anchorMin = prt.anchorMax = new Vector2(0, 1);
+                prt.pivot = new Vector2(0, 1);
+                prt.anchoredPosition = Vector2.zero;
+                prt.sizeDelta = new Vector2(portraitSize, portraitSize);
+                var portrait = portraitGo.AddComponent<Image>();
+                portrait.preserveAspect = true;
+                portrait.raycastTarget = false;
+                portrait.enabled = false;
 
-                var hpFill = Bar(rt, new Vector2(0, -13), new Vector2(150, 7), ENEMY_ACCENT);
-                var hpText = Label(rt, "", 9, TextAlignmentOptions.MidlineLeft,
-                                   new Vector2(154, -13), new Vector2(46, 9));
-                hpText.color = TEXT_DIM;
+                float textLeft = portraitSize + 6;
+                float textWidth = 204 - textLeft;
+
+                var name = Label(rt, "", 11, TextAlignmentOptions.TopLeft,
+                                 new Vector2(textLeft, 0), new Vector2(textWidth, 13));
+
+                var hpFill = Bar(rt, new Vector2(textLeft, -13), new Vector2(textWidth, 16),
+                                ENEMY_ACCENT, out var hpText);
 
                 var status = Label(rt, "", 9, TextAlignmentOptions.TopLeft,
-                                   new Vector2(0, -21), new Vector2(204, 10));
+                                   new Vector2(0, -31), new Vector2(204, 10));
                 status.color = GRID_ACCENT;
 
-                _enemyRows.Add(new EnemyRow(row, name, hpFill, hpText, status));
+                _enemyRows.Add(new EnemyRow(row, name, hpFill, hpText, status, portrait));
             }
         }
 
@@ -750,6 +774,11 @@ namespace Game.UI.Battle
                 r.Name.text = dead ? $"{ShortDisplayName(u)} — DOWN" : ShortDisplayName(u);
                 r.Name.color = dead ? DEAD_COLOR : TEXT;
 
+                var portraitSprite = LoadEnemyPortrait(u.DefId);
+                r.Portrait.sprite = portraitSprite;
+                r.Portrait.enabled = portraitSprite != null;
+                r.Portrait.color = dead ? DEAD_COLOR : Color.white;
+
                 if (dead)
                 {
                     r.HpFill.gameObject.transform.parent.gameObject.SetActive(false);
@@ -1109,6 +1138,19 @@ namespace Game.UI.Battle
             if (_portraitCache.TryGetValue(defId, out var cached)) return cached;
             var sprite = Resources.Load<Sprite>($"Art/Characters/Heroes/{defId}/{defId}_v1_00");
             _portraitCache[defId] = sprite;
+            return sprite;
+        }
+
+        private static readonly Dictionary<string, Sprite> _enemyPortraitCache = new();
+
+        /// <summary>task "sửa tiếp info player và enemies" — cùng quy ước `_v1_00` như hero,
+        /// enemy nào cũng có sẵn (xem Art/Characters/Enemies/{defId}/), chỉ chưa từng dùng cho
+        /// Enemies panel (trước đây chỉ có tên chữ + thanh máu, không portrait).</summary>
+        private static Sprite LoadEnemyPortrait(string defId)
+        {
+            if (_enemyPortraitCache.TryGetValue(defId, out var cached)) return cached;
+            var sprite = Resources.Load<Sprite>($"Art/Characters/Enemies/{defId}/{defId}_v1_00");
+            _enemyPortraitCache[defId] = sprite;
             return sprite;
         }
 
