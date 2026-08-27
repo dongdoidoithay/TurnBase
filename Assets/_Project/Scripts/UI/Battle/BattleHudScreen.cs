@@ -402,8 +402,13 @@ namespace Game.UI.Battle
         private void BuildSkillGrid()
         {
             const float cell = 52f, gap = 5f;
+            // task-ui-chrome-popups.md — hàng skill dùng thẻ bài (card_gold, cao hơn ô vuông) theo
+            // Art_Sample; 2 hàng dưới (item/tactic) giữ nguyên ô vuông cũ, chỉ dịch xuống đúng phần
+            // dư chiều cao (cardH - cell) để không đè lên hàng thẻ.
+            const float cardH = 75f;
+            float extraH = cardH - cell;
             float w = GRID_COLS * cell + (GRID_COLS - 1) * gap + 16;
-            float h = GRID_ROWS * cell + (GRID_ROWS - 1) * gap + 16;
+            float h = GRID_ROWS * cell + (GRID_ROWS - 1) * gap + 16 + extraH;
 
             var panel = Panel("SkillGrid", new Vector2(0.5f, 0), new Vector2(0.5f, 0),
                               new Vector2(0, 58), new Vector2(w, h), GRID_ACCENT);
@@ -431,10 +436,10 @@ namespace Game.UI.Battle
             panel.gameObject.AddComponent<LayoutProfileSwitcher>()
                  .SetProfiles(panel, gridPortrait, gridLandscape);
 
-            // Hàng 0: skill của hero đang tới lượt.
+            // Hàng 0: skill của hero đang tới lượt — thẻ bài cao hơn ô vuông (cardH).
             for (int c = 0; c < GRID_COLS; c++)
             {
-                var slot = SkillSlotView.Create(panel, c, cell);
+                var slot = SkillSlotView.Create(panel, c, cell, cardH);
                 var rt = (RectTransform)slot.transform;
                 rt.anchorMin = rt.anchorMax = new Vector2(0, 1);
                 rt.pivot = new Vector2(0, 1);
@@ -444,26 +449,27 @@ namespace Game.UI.Battle
             }
 
             // Hàng 1: vật phẩm tiêu hao (task-consumable-items.md) — tối đa 5 loại, khớp
-            // ĐÚNG GRID_COLS, không cần tính toán kích thước riêng.
+            // ĐÚNG GRID_COLS, không cần tính toán kích thước riêng. Dịch xuống thêm extraH vì
+            // hàng 0 giờ cao hơn (thẻ bài).
             for (int c = 0; c < GRID_COLS; c++)
             {
                 var slot = ItemSlotView.Create(panel, c, cell);
                 var rt = (RectTransform)slot.transform;
                 rt.anchorMin = rt.anchorMax = new Vector2(0, 1);
                 rt.pivot = new Vector2(0, 1);
-                rt.anchoredPosition = new Vector2(8 + c * (cell + gap), -8 - (cell + gap));
+                rt.anchoredPosition = new Vector2(8 + c * (cell + gap), -8 - extraH - (cell + gap));
                 slot.OnClicked += HandleItemSlotClicked;
                 _itemSlots.Add(slot);
             }
 
             // Hàng 2: tactic (task-tactic-row.md) — Guard / ESC / SWAP / FOCUS
-            BuildTacticRow(panel, cell, gap);
+            BuildTacticRow(panel, cell, gap, extraH);
         }
 
         /// <summary>task-tactic-row.md — 4 nút tactic + task-analyze-tactic.md — nút ANALYZE (col 4).</summary>
-        private void BuildTacticRow(RectTransform panel, float cell, float gap)
+        private void BuildTacticRow(RectTransform panel, float cell, float gap, float extraH = 0f)
         {
-            float row2Y = -8 - 2 * (cell + gap);
+            float row2Y = -8 - extraH - 2 * (cell + gap);
             var labels = new[] { "GUARD", "ESC", "SWAP", "FOCUS", "ANALYZE" };
             var colors = new[] {
                 new Color(0.2f, 0.8f, 0.7f),   // Guard — cyan
@@ -485,11 +491,13 @@ namespace Game.UI.Battle
                 rt.anchoredPosition = new Vector2(8 + col * (cell + gap), row2Y);
                 rt.sizeDelta = new Vector2(cell, cell);
 
+                // task-ui-chrome-popups.md — đổi sang khung nút vàng mới thay pixel_metal_panel
+                // phẳng cũ; blend nhẹ về màu accent (thay vì nhân tối 25% như cũ, làm mất hẳn màu
+                // vàng của sprite mới) để vẫn phân biệt 5 nút bằng màu mà không mất khung.
                 var bg = go.AddComponent<Image>();
-                bg.sprite = MetalPanelSprite();
+                bg.sprite = Resources.Load<Sprite>("Art/UI/Chrome/button_gold_normal");
                 bg.type = Image.Type.Sliced;
-                bg.color = new Color(colors[col].r * 0.25f, colors[col].g * 0.25f,
-                                     colors[col].b * 0.25f, 0.92f);
+                bg.color = Color.Lerp(Color.white, colors[col], 0.5f);
 
                 var btn = go.AddComponent<Button>();
                 btn.targetGraphic = bg;
@@ -885,9 +893,20 @@ namespace Game.UI.Battle
 
         private static Sprite BronzeFrameSprite()
         {
+            // task-ui-chrome-popups.md — đổi sang khung vàng vẽ tay (Art_Sample), thay khung nâu
+            // cũ. Áp dụng qua Panel() nên MỌI panel dùng chung hàm này tự động đổi theo.
             if (_bronzeFrameSprite == null)
-                _bronzeFrameSprite = Resources.Load<Sprite>("Art/UI/Frames/pixel_bronze_frame");
+                _bronzeFrameSprite = Resources.Load<Sprite>("Art/UI/Chrome/panel_gold");
             return _bronzeFrameSprite;
+        }
+
+        private static Sprite _healthBarFrameSprite;
+
+        private static Sprite HealthBarFrameSprite()
+        {
+            if (_healthBarFrameSprite == null)
+                _healthBarFrameSprite = Resources.Load<Sprite>("Art/UI/Chrome/healthbar_hp_frame");
+            return _healthBarFrameSprite;
         }
 
         private static Sprite _circleSprite;
@@ -938,13 +957,17 @@ namespace Game.UI.Battle
             var border = go.AddComponent<Image>();
             border.sprite = BronzeFrameSprite();
             border.type = Image.Type.Sliced;
-            border.color = accent;
+            // task-ui-chrome-popups.md — khung vàng mới đã có màu sẵn trong sprite (không như
+            // pixel_bronze_frame cũ vốn trắng, cần accent tint để phân biệt Hero/Enemy/Grid).
+            // Giữ nguyên màu vàng thật cho MỌI panel (đúng ảnh mẫu — không phân biệt màu theo vai
+            // trò panel nữa); accent giờ chỉ còn dùng cho avatar ring/dấu hiệu phụ bên trong panel.
+            border.color = Color.white;
 
             var fillGo = new GameObject("Fill", typeof(RectTransform));
             fillGo.transform.SetParent(rt, false);
             var frt = (RectTransform)fillGo.transform;
             frt.anchorMin = Vector2.zero; frt.anchorMax = Vector2.one;
-            frt.offsetMin = new Vector2(3, 3); frt.offsetMax = new Vector2(-3, -3);
+            frt.offsetMin = new Vector2(6, 6); frt.offsetMax = new Vector2(-6, -6);
             var fill = fillGo.AddComponent<Image>();
             fill.sprite = MetalPanelSprite();
             fill.type = Image.Type.Sliced;
@@ -1044,10 +1067,12 @@ namespace Game.UI.Battle
             brt.pivot = new Vector2(0, 1);
             brt.anchoredPosition = pos;
             brt.sizeDelta = size;
+            // task-ui-chrome-popups.md — khung thanh máu vàng vẽ tay (đã sinh sẵn từ đợt chrome
+            // đầu nhưng chưa lắp vào đâu) thay pixel_metal_panel phẳng cũ.
             var bimg = bg.AddComponent<Image>();
-            bimg.sprite = MetalPanelSprite();
+            bimg.sprite = HealthBarFrameSprite();
             bimg.type = Image.Type.Sliced;
-            bimg.color = new Color(0.08f, 0.06f, 0.09f, 0.95f);
+            bimg.color = Color.white;
             bimg.raycastTarget = false;
 
             var fill = new GameObject("Fill", typeof(RectTransform));
@@ -1056,8 +1081,8 @@ namespace Game.UI.Battle
             frt.anchorMin = new Vector2(0, 0);
             frt.anchorMax = new Vector2(1, 1);
             frt.pivot = new Vector2(0, 0.5f);
-            frt.offsetMin = new Vector2(1, 1);
-            frt.offsetMax = new Vector2(-1, -1);
+            frt.offsetMin = new Vector2(2, 2);
+            frt.offsetMax = new Vector2(-2, -2);
             var fimg = fill.AddComponent<Image>();
             fimg.color = color;
             fimg.type = Image.Type.Filled;

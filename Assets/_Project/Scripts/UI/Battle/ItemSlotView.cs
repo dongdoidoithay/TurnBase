@@ -12,16 +12,16 @@ namespace Game.UI.Battle
     /// cooldown/element, chỉ cần tên + số lượng còn lại.</summary>
     public sealed class ItemSlotView : MonoBehaviour, IPointerClickHandler
     {
-        private static readonly Color BORDER_NORMAL = new(0.357f, 0.290f, 0.365f);
-        private static readonly Color BORDER_SELECTED = new(0.949f, 0.910f, 0.810f);
-        private static readonly Color FILL_NORMAL = new(0.169f, 0.106f, 0.180f, 0.95f);
-        private static readonly Color FILL_DISABLED = new(0.05f, 0.03f, 0.05f, 0.95f);
+        private static readonly Color BORDER_NORMAL = Color.white;
+        private static readonly Color BORDER_SELECTED = new(1.15f, 1.1f, 1f);
+        private static readonly Color BORDER_DISABLED = new(0.45f, 0.45f, 0.45f);
         private static readonly Color TEXT_NORMAL = new(0.949f, 0.910f, 0.810f);
         private static readonly Color TEXT_DISABLED = new(0.36f, 0.33f, 0.38f);
         private static readonly Color COUNT_COLOR = new(1f, 0.820f, 0.400f);
 
+        private static Sprite _slotSprite;
+
         private Image _border;
-        private Image _fill;
         private TextMeshProUGUI _label;
         private TextMeshProUGUI _count;
 
@@ -46,17 +46,12 @@ namespace Game.UI.Battle
 
         private void Build(RectTransform rt)
         {
-            _border = gameObject.AddComponent<Image>();
-            _border.color = BORDER_NORMAL;
+            if (_slotSprite == null) _slotSprite = Resources.Load<Sprite>("Art/UI/Chrome/icon_slot_brown");
 
-            var fillGo = new GameObject("Fill", typeof(RectTransform));
-            fillGo.transform.SetParent(rt, false);
-            var frt = (RectTransform)fillGo.transform;
-            frt.anchorMin = Vector2.zero; frt.anchorMax = Vector2.one;
-            frt.offsetMin = new Vector2(3, 3); frt.offsetMax = new Vector2(-3, -3);
-            _fill = fillGo.AddComponent<Image>();
-            _fill.color = FILL_NORMAL;
-            _fill.raycastTarget = false;
+            _border = gameObject.AddComponent<Image>();
+            _border.sprite = _slotSprite;
+            _border.type = Image.Type.Sliced;
+            _border.color = BORDER_NORMAL;
 
             _label = NewText("Label", rt, TextAlignmentOptions.Center);
             _label.rectTransform.anchorMin = new Vector2(0.06f, 0.28f);
@@ -107,8 +102,7 @@ namespace Game.UI.Battle
         private void SetState(bool available, bool selected)
         {
             Interactable = available;
-            _border.color = selected ? BORDER_SELECTED : BORDER_NORMAL;
-            _fill.color = available ? FILL_NORMAL : FILL_DISABLED;
+            _border.color = selected ? BORDER_SELECTED : available ? BORDER_NORMAL : BORDER_DISABLED;
             _label.color = available ? TEXT_NORMAL : TEXT_DISABLED;
             transform.localScale = selected ? Vector3.one * 1.08f : Vector3.one;
         }

@@ -1,7 +1,7 @@
 {
     "name": "Game.Core",
     "rootNamespace": "Game.Core",
-    "references": [],
+    "references": ["Unity.TextMeshPro"],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

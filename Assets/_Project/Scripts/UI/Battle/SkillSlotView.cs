@@ -19,22 +19,31 @@ namespace Game.UI.Battle
         }
 
         // Màu theo references/palette.md
-        private static readonly Color BORDER_NORMAL = new(0.357f, 0.290f, 0.365f);
-        private static readonly Color BORDER_SELECTED = new(0.949f, 0.910f, 0.810f);
+        private static readonly Color BORDER_NORMAL = Color.white;
         private static readonly Color BORDER_ULTIMATE = new(1f, 0.820f, 0.400f);
-        private static readonly Color FILL_NORMAL = new(0.169f, 0.106f, 0.180f, 0.95f);
-        private static readonly Color FILL_DISABLED = new(0.05f, 0.03f, 0.05f, 0.95f);
         private static readonly Color TEXT_NORMAL = new(0.949f, 0.910f, 0.810f);
         private static readonly Color TEXT_DISABLED = new(0.36f, 0.33f, 0.38f);
         private static readonly Color SP_ENOUGH = new(0.271f, 0.482f, 0.616f);
         private static readonly Color SP_SHORT = new(0.902f, 0.224f, 0.275f);
 
+        // Thẻ bài kiểu Art_Sample (task-ui-chrome-popups.md) — 3 sprite thay cho khối màu phẳng
+        // trước đây, tự chứa cả border+fill nên không cần lớp "_fill" riêng nữa.
+        private static Sprite _cardNormal, _cardSelected, _cardDisabled, _cooldownBadgeSprite;
+        private static void LoadCardSprites()
+        {
+            if (_cardNormal != null) return;
+            _cardNormal = Resources.Load<Sprite>("Art/UI/Chrome/card_gold");
+            _cardSelected = Resources.Load<Sprite>("Art/UI/Chrome/card_gold_selected");
+            _cardDisabled = Resources.Load<Sprite>("Art/UI/Chrome/card_gold_disabled");
+            _cooldownBadgeSprite = Resources.Load<Sprite>("Art/UI/Chrome/cooldown_badge");
+        }
+
         private Image _border;
-        private Image _fill;
         private Image _icon;
         private TextMeshProUGUI _label;
         private TextMeshProUGUI _cost;
         private TextMeshProUGUI _cooldown;
+        private GameObject _cooldownBadge;
         private Image _elementTint;
         /// <summary>task-accessibility-part2.md, plan.md §10.7 — "icon nguyên tố có hình dạng khác
         /// nhau, không chỉ khác màu" cho chế độ mù màu. KHÔNG có art sprite riêng theo nguyên tố
@@ -53,35 +62,38 @@ namespace Game.UI.Battle
 
         // =====================================================================
 
-        public static SkillSlotView Create(Transform parent, int index, float size)
+        public static SkillSlotView Create(Transform parent, int index, float width, float height)
         {
             var go = new GameObject($"SkillSlot_{index}", typeof(RectTransform));
             go.transform.SetParent(parent, false);
             var rt = (RectTransform)go.transform;
-            rt.sizeDelta = new Vector2(size, size);
+            rt.sizeDelta = new Vector2(width, height);
 
             var slot = go.AddComponent<SkillSlotView>();
             slot.SlotIndex = index;
-            slot.Build(rt, size);
+            slot.Build(rt, Mathf.Min(width, height));
             return slot;
         }
 
         private void Build(RectTransform rt, float size)
         {
             ServiceLocator.TryGet(out _settings);
+            LoadCardSprites();
+
             _border = gameObject.AddComponent<Image>();
+            _border.sprite = _cardNormal;
+            _border.type = Image.Type.Sliced;
             _border.color = BORDER_NORMAL;
 
-            _fill = NewImage("Fill", rt, FILL_NORMAL, 3f);
-            _elementTint = NewImage("ElementTint", rt, new Color(1, 1, 1, 0f), 3f);
+            _elementTint = NewImage("ElementTint", rt, new Color(1, 1, 1, 0f), 6f);
 
             // Icon hành động chiếm phần lớn ô — trước đây ô chỉ có 2 chữ cái viết tắt
             // (VD "BA","FC"), không đọc được skill là loại gì (đánh/heal/buff/AoE...).
             var iconGo = new GameObject("Icon", typeof(RectTransform));
             iconGo.transform.SetParent(rt, false);
             var iconRt = (RectTransform)iconGo.transform;
-            iconRt.anchorMin = new Vector2(0.14f, 0.22f);
-            iconRt.anchorMax = new Vector2(0.86f, 0.94f);
+            iconRt.anchorMin = new Vector2(0.12f, 0.30f);
+            iconRt.anchorMax = new Vector2(0.88f, 0.92f);
             iconRt.offsetMin = iconRt.offsetMax = Vector2.zero;
             _icon = iconGo.AddComponent<Image>();
             _icon.preserveAspect = true;
@@ -91,28 +103,43 @@ namespace Game.UI.Battle
             // Chữ viết tắt lùi thành badge nhỏ góc trên — phụ trợ debug/phân biệt, icon mới
             // là yếu tố đọc chính.
             _label = NewText("Label", rt, size * 0.16f, TextAlignmentOptions.Top);
-            _label.rectTransform.anchorMin = new Vector2(0, 0.84f);
+            _label.rectTransform.anchorMin = new Vector2(0, 0.90f);
             _label.rectTransform.anchorMax = new Vector2(1, 1f);
             _label.rectTransform.offsetMin = _label.rectTransform.offsetMax = Vector2.zero;
 
             // Badge chi phí SP ở góc dưới-trái
             _cost = NewText("Cost", rt, size * 0.2f, TextAlignmentOptions.BottomLeft);
             _cost.rectTransform.anchorMin = new Vector2(0.08f, 0.02f);
-            _cost.rectTransform.anchorMax = new Vector2(0.6f, 0.24f);
+            _cost.rectTransform.anchorMax = new Vector2(0.6f, 0.18f);
             _cost.rectTransform.offsetMin = _cost.rectTransform.offsetMax = Vector2.zero;
 
-            // Số cooldown to đè giữa ô
-            _cooldown = NewText("Cooldown", rt, size * 0.5f, TextAlignmentOptions.Center);
+            // Số cooldown — badge tròn nhỏ giữa ô (trước đây chữ to phủ HẾT ô, đè lên icon trông
+            // rất thô — task-ui-chrome-popups.md phản hồi "siêu xấu"). Badge tròn tối + số vừa
+            // phải giữ được độ dễ đọc mà không che icon.
+            var badgeGo = new GameObject("CooldownBadge", typeof(RectTransform));
+            badgeGo.transform.SetParent(rt, false);
+            var badgeRt = (RectTransform)badgeGo.transform;
+            badgeRt.anchorMin = new Vector2(0.5f, 0.5f);
+            badgeRt.anchorMax = new Vector2(0.5f, 0.5f);
+            badgeRt.sizeDelta = new Vector2(size * 0.5f, size * 0.5f);
+            var badgeImg = badgeGo.AddComponent<Image>();
+            badgeImg.sprite = _cooldownBadgeSprite;
+            badgeImg.type = Image.Type.Sliced;
+            badgeImg.color = Color.white;
+            badgeImg.raycastTarget = false;
+            _cooldownBadge = badgeGo;
+
+            _cooldown = NewText("Cooldown", badgeRt, size * 0.28f, TextAlignmentOptions.Center);
             _cooldown.rectTransform.anchorMin = Vector2.zero;
             _cooldown.rectTransform.anchorMax = Vector2.one;
             _cooldown.rectTransform.offsetMin = _cooldown.rectTransform.offsetMax = Vector2.zero;
             _cooldown.color = TEXT_NORMAL;
-            _cooldown.gameObject.SetActive(false);
+            badgeGo.SetActive(false);
 
             // Glyph nguyên tố cho chế độ mù màu — góc dưới-phải, đối xứng Cost (dưới-trái).
             _elementGlyph = NewText("ElementGlyph", rt, size * 0.2f, TextAlignmentOptions.BottomRight);
             _elementGlyph.rectTransform.anchorMin = new Vector2(0.4f, 0.02f);
-            _elementGlyph.rectTransform.anchorMax = new Vector2(0.92f, 0.24f);
+            _elementGlyph.rectTransform.anchorMax = new Vector2(0.92f, 0.18f);
             _elementGlyph.rectTransform.offsetMin = _elementGlyph.rectTransform.offsetMax = Vector2.zero;
             _elementGlyph.gameObject.SetActive(false);
         }
@@ -235,14 +262,14 @@ namespace Game.UI.Battle
             State = state;
 
             bool showCooldown = state == SlotState.OnCooldown;
-            _cooldown.gameObject.SetActive(showCooldown);
+            _cooldownBadge.SetActive(showCooldown);
             if (showCooldown) _cooldown.text = Skill.CooldownLeft.ToString();
 
             switch (state)
             {
                 case SlotState.Available:
+                    _border.sprite = _cardNormal;
                     _border.color = BORDER_NORMAL;
-                    _fill.color = FILL_NORMAL;
                     _label.color = TEXT_NORMAL;
                     _icon.color = TEXT_NORMAL;
                     _cost.color = SP_ENOUGH;
@@ -250,8 +277,8 @@ namespace Game.UI.Battle
                     break;
 
                 case SlotState.Selected:
-                    _border.color = BORDER_SELECTED;
-                    _fill.color = FILL_NORMAL;
+                    _border.sprite = _cardSelected;
+                    _border.color = BORDER_NORMAL;
                     _label.color = TEXT_NORMAL;
                     _icon.color = TEXT_NORMAL;
                     _cost.color = SP_ENOUGH;
@@ -259,8 +286,8 @@ namespace Game.UI.Battle
                     break;
 
                 case SlotState.OnCooldown:
+                    _border.sprite = _cardDisabled;
                     _border.color = BORDER_NORMAL;
-                    _fill.color = FILL_DISABLED;
                     _label.color = TEXT_DISABLED;
                     _icon.color = TEXT_DISABLED;
                     _cost.color = TEXT_DISABLED;
@@ -268,8 +295,8 @@ namespace Game.UI.Battle
                     break;
 
                 case SlotState.NotEnoughSp:
+                    _border.sprite = _cardDisabled;
                     _border.color = BORDER_NORMAL;
-                    _fill.color = FILL_DISABLED;
                     _label.color = TEXT_DISABLED;
                     _icon.color = TEXT_DISABLED;
                     _cost.color = SP_SHORT;      // badge SP đỏ = thiếu SP
@@ -277,20 +304,20 @@ namespace Game.UI.Battle
                     break;
 
                 case SlotState.Silenced:
-                    _border.color = new Color(0.6f, 0.2f, 0.25f);
-                    _fill.color = FILL_DISABLED;
+                    _border.sprite = _cardDisabled;
+                    _border.color = new Color(1f, 0.65f, 0.7f);
                     _label.color = TEXT_DISABLED;
                     _icon.color = TEXT_DISABLED;
                     transform.localScale = Vector3.one;
                     break;
 
                 case SlotState.UltimateCharging:
-                    _border.color = BORDER_NORMAL;
-                    _fill.color = FILL_DISABLED;
+                    _border.sprite = _cardNormal;
                     // Không dùng TEXT_DISABLED ở đây — nền tối + tint nguyên tố (VD Dark, alpha
                     // 0.28) đã rất tối, chữ/icon mờ theo TEXT_DISABLED gần như biến mất (slot
                     // Ultimate trông trống trơn dù có skill). Đây là slot quan trọng nhất trên
                     // HUD nên phải luôn đọc được, kể cả khi chưa sẵn sàng.
+                    _border.color = BORDER_NORMAL;
                     _label.color = TEXT_NORMAL;
                     _icon.color = TEXT_NORMAL;
                     transform.localScale = Vector3.one;
@@ -299,16 +326,16 @@ namespace Game.UI.Battle
                 case SlotState.UltimateReady:
                     // Nhấp nháy 1 Hz — dấu hiệu quan trọng nhất trên HUD
                     float pulse = Mathf.PingPong(Time.time, 0.5f) / 0.5f;
+                    _border.sprite = _cardSelected;
                     _border.color = Color.Lerp(BORDER_ULTIMATE, Color.white, pulse);
-                    _fill.color = FILL_NORMAL;
                     _label.color = BORDER_ULTIMATE;
                     _icon.color = Color.Lerp(BORDER_ULTIMATE, Color.white, pulse);
                     transform.localScale = Vector3.one;
                     break;
 
                 case SlotState.Empty:
-                    _border.color = new Color(0.15f, 0.12f, 0.16f);
-                    _fill.color = FILL_DISABLED;
+                    _border.sprite = _cardDisabled;
+                    _border.color = new Color(0.6f, 0.6f, 0.6f);
                     _label.color = TEXT_DISABLED;
                     _icon.color = TEXT_DISABLED;
                     _elementTint.color = new Color(1, 1, 1, 0f);
@@ -340,14 +367,18 @@ namespace Game.UI.Battle
             return parts[0].Length >= 2 ? parts[0][..2].ToUpperInvariant() : parts[0].ToUpperInvariant();
         }
 
+        // task-ui-chrome-popups.md — hạ alpha (0.28→0.16) so với bản cũ: nền thẻ giờ có texture
+        // thật (viền răng cưa) thay vì màu phẳng, tint đậm che mất chi tiết + tạo cảm giác "vá lỗi"
+        // khi 1 thẻ Fire đỏ chóe cạnh 1 thẻ tím bình thường. Glyph mù màu (§accessibility) vẫn còn
+        // nguyên nên KHÔNG mất khả năng phân biệt nguyên tố khi tắt tint mạnh.
         private static Color ElementColor(Element e) => e switch
         {
-            Element.Fire  => new Color(0.902f, 0.224f, 0.275f, 0.28f),
-            Element.Water => new Color(0.271f, 0.482f, 0.616f, 0.28f),
-            Element.Earth => new Color(0.651f, 0.443f, 0.259f, 0.28f),
-            Element.Wind  => new Color(0.482f, 0.788f, 0.314f, 0.28f),
-            Element.Light => new Color(1.000f, 0.820f, 0.400f, 0.28f),
-            Element.Dark  => new Color(0.608f, 0.365f, 0.898f, 0.28f),
+            Element.Fire  => new Color(0.902f, 0.224f, 0.275f, 0.16f),
+            Element.Water => new Color(0.271f, 0.482f, 0.616f, 0.16f),
+            Element.Earth => new Color(0.651f, 0.443f, 0.259f, 0.16f),
+            Element.Wind  => new Color(0.482f, 0.788f, 0.314f, 0.16f),
+            Element.Light => new Color(1.000f, 0.820f, 0.400f, 0.16f),
+            Element.Dark  => new Color(0.608f, 0.365f, 0.898f, 0.16f),
             _ => new Color(1, 1, 1, 0f)
         };
 

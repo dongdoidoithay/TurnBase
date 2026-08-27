@@ -302,13 +302,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Game.Meta::Game.Meta.MetaSceneInstaller
   _metaCamera: {fileID: 88520124}
-  _canvasRoot: {fileID: 0}
-  _topBarBorder: {fileID: 0}
-  _settingsButton: {fileID: 0}
-  _mapRoot: {fileID: 0}
-  _titleLabel: {fileID: 0}
-  _walletLabel: {fileID: 0}
-  _toastLabel: {fileID: 0}
 --- !u!4 &2141057410
 Transform:
   m_ObjectHideFlags: 0

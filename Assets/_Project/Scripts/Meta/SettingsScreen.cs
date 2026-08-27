@@ -70,7 +70,12 @@ namespace Game.Meta
             dimRt.anchorMin = Vector2.zero; dimRt.anchorMax = Vector2.one;
             dimRt.offsetMin = dimRt.offsetMax = Vector2.zero;
 
-            var panel = NewImage(canvasGo.transform, PANEL_BG);
+            var panel = NewImage(canvasGo.transform, Color.white);
+            // task-ui-chrome-popups.md — khung vàng vẽ tay thay panel màu phẳng cũ, đồng bộ với
+            // toàn bộ màn Meta khác đã đổi (Shop/Inventory/TeamSelect/HeroDetail/Summon/
+            // ChapterProgress/NodeChoice).
+            panel.sprite = Resources.Load<Sprite>("Art/UI/Chrome/panel_gold");
+            panel.type = Image.Type.Sliced;
             var panelRt = (RectTransform)panel.transform;
             panelRt.anchorMin = panelRt.anchorMax = new Vector2(0.5f, 0.5f);
             panelRt.sizeDelta = new Vector2(360, 560); // +60 — task-accessibility-part2.md, thêm hàng Large Damage Numbers

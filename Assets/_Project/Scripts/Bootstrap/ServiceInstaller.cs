@@ -2,6 +2,7 @@ using Game.Core;
 using Game.Core.Events;
 using Game.Core.Times;
 using Game.Core.UI;
+using Game.Core.UI.Popups;
 using Game.Services.Audio;
 using Game.Services.Economy;
 using Game.Services.Localization;
@@ -51,6 +52,10 @@ namespace Game.Bootstrap
             // LayoutProfileSwitcher tự poll Screen.width/height riêng lẻ mỗi frame (xem
             // ScreenOrientationService.cs).
             ServiceLocator.Register<IScreenOrientationService>(ScreenOrientationService.Create(serviceRoot));
+
+            // Popup/thông báo dùng chung toàn game (Toast/ConfirmDialog/RewardPopup) — dựng
+            // trên PopupLayer con của uiRoot nên sống xuyên suốt mọi scene, luôn nổi trên cùng.
+            ServiceLocator.Register<IPopupService>(PopupService.Create(uiRoot));
 
             WireSettingsToAudio();
             WireSettingsToLocalization();
