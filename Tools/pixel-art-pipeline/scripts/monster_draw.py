@@ -157,17 +157,36 @@ ATTACK_POSES = [
     {"head_bob": 0, "arm_swing": 0.3, "lean": 0},    # thu về
 ]
 
+# task "hoàn thiện enemy_goblin_v2 vào game" — pilot ban đầu (task-combat-dungeon-redesign.md
+# Phase A) chỉ vẽ idle/attack, thiếu 2 state còn lại để khớp đủ 5 state như 90 nhân vật kia
+# (task-animator-migration.md). "Run" KHÔNG cần vẽ riêng — trận đấu trong game không có bước "đi
+# bộ" thật (xem UnitView.cs/task-animator-migration.md §0), state Run dùng lại clip Idle.
+DAMAGE_POSES = [
+    {"head_bob": 3, "arm_swing": 0.3, "lean": -3},   # bật ngửa lúc trúng đòn
+    {"head_bob": 1, "arm_swing": 0.15, "lean": -1},  # gượng lại
+]
+
+DIE_POSES = [
+    {"head_bob": 2, "arm_swing": 0.1, "lean": 1},
+    {"head_bob": 4, "arm_swing": 0.05, "lean": 3},
+    {"head_bob": 6, "arm_swing": 0, "lean": 5},
+    {"head_bob": 8, "arm_swing": 0, "lean": 7},      # đổ gục hẳn về trước
+]
+
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--monster", required=True)
-    ap.add_argument("--state", required=True, choices=["idle", "attack"])
+    ap.add_argument("--state", required=True, choices=["idle", "attack", "damage", "die"])
     ap.add_argument("--frames", type=int, default=4)
     ap.add_argument("--out", required=True)
     args = ap.parse_args()
 
-    poses = IDLE_POSES if args.state == "idle" else ATTACK_POSES
-    poses = poses[: args.frames]
+    poses_by_state = {
+        "idle": IDLE_POSES, "attack": ATTACK_POSES,
+        "damage": DAMAGE_POSES, "die": DIE_POSES,
+    }
+    poses = poses_by_state[args.state][: args.frames]
 
     out_dir = Path(args.out)
     out_dir.mkdir(parents=True, exist_ok=True)

@@ -1,5 +1,6 @@
 id,nameKey,element,archetype,poiseMax,str,con,int,dex,aur,luk,skillIds,aiProfileId,chapter,spriteFolder
 enemy_goblin,enemy.goblin.name,Neutral,Grunt,25,10,8,6,10,6,8,skill_basic_attack,ai_basic,1,enemy_goblin
+enemy_goblin_v2,enemy.goblin_v2.name,Neutral,Grunt,25,10,8,6,10,6,8,skill_basic_attack,ai_basic,1,enemy_goblin_v2
 enemy_goblin_archer,enemy.goblin_archer.name,Wind,Archer,22,8,7,6,14,6,8,skill_basic_attack,ai_basic,1,enemy_goblin_archer
 enemy_goblin_shaman,enemy.goblin_shaman.name,Dark,Caster,24,6,8,14,8,10,8,skill_elemental_strike,ai_basic,1,enemy_goblin_shaman
 enemy_slime,enemy.slime.name,Water,Grunt,20,6,10,6,6,6,6,skill_basic_attack,ai_basic,1,enemy_slime

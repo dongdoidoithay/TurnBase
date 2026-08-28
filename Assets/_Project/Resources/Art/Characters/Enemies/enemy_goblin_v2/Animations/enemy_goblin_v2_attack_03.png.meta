@@ -3,7 +3,7 @@ guid: c525014b96b24da88085502d3c3ae0db
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 18488742960682965
+      213: -1
     second: enemy_goblin_v2_attack_03_0
   externalObjects: {}
   serializedVersion: 13
@@ -29,21 +29,53 @@ TextureImporter:
   streamingMipmapsPriority: 0
   vTOnly: 0
   ignoreMipmapLimit: 0
-  enableMipMap: 0
-  sRGBTexture: 1
-  alphaSource: 1
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 7
+  spritePivot: {x: 0.5, y: 0}
+  spritePixelsToUnits: 48
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
   alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
   swizzle: 50462976
   cookieLightType: 0
   platformSettings:
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 64
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -60,23 +92,18 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 32
+        width: 48
+        height: 48
       alignment: 7
-      pivot:
-        x: 0.5
-        y: 0
-      border:
-        x: 0
-        y: 0
-        z: 0
-        w: 0
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 3a31b4dd04334a0ab96c97a4607199f4
-      internalID: 18488742960682965
+      spriteID: 9364e2964f5445aab008e0aa20265956
+      internalID: -1
       vertices: []
       indices:
       edges: []
@@ -85,7 +112,7 @@ TextureImporter:
     customData:
     physicsShape: []
     bones: []
-    spriteID: 5f6219bd28194a8084e7e96af4d96ee4
+    spriteID: a83dc994d25e40c4a90a6c82c7fa8f20
     internalID: 0
     vertices: []
     indices:
@@ -95,46 +122,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      enemy_goblin_v2_attack_03_0: 18488742960682965
+      enemy_goblin_v2_attack_03_0: -1
   mipmapLimitGroupName:
   pSDRemoveMatte: 0
   userData:
   assetBundleName:
   assetBundleVariant:
-  filterMode: 0
-  aniso: 1
-  mipBias: 0
-  wrapU: 1
-  wrapV: 1
-  wrapW: 1
-  nPOTScale: 0
-  lightmap: 0
-  compressionQuality: 50
-  spriteMode: 1
-  spriteExtrude: 1
-  spriteMeshType: 1
-  alignment: 7
-  spritePivot:
-    x: 0.5
-    y: 0
-  spritePixelsToUnits: 32
-  spriteBorder:
-    x: 0
-    y: 0
-    z: 0
-    w: 0
-  spriteGenerateFallbackPhysicsShape: 1
-  alphaUsage: 1
-  alphaIsTransparency: 1
-  spriteTessellationDetail: -1
-  textureType: 8
-  textureShape: 1
-  singleChannelComponent: 0
-  flipbookRows: 1
-  flipbookColumns: 1
-  maxTextureSizeSet: 0
-  compressionQualitySet: 0
-  textureFormatSet: 0
-  ignorePngGamma: 0
-  applyGammaDecoding: 0
-  cookieLightType: 0

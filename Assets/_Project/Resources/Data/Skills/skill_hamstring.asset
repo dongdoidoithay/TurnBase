@@ -44,6 +44,7 @@ MonoBehaviour:
       Duration: 2
       Stacks: 1
       TargetSelf: 0
+      TargetAllAllies: 0
     CleanseCount: 0
     DispelCount: 0
     StealsDispelled: 0
